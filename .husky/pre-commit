@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "✨ Checking modified files with lint-staged..."
+bunx lint-staged

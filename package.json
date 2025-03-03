@@ -1,12 +1,15 @@
 {
-  "name": "front-end yello berry",
+  "name": "front-end-yellow-berry",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open --port 3000",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "lint": "echo '🔍 Exécution de Biome...' && bunx biome lint --write ./src",
+    "format": "echo '✨ Formatage du code avec Biome...' && bunx biome format --write ./src",
+    "check": "bunx biome check --write ./src",
+    "prepare": "echo '🚀 Préparation des hooks Husky...' && husky install"
   },
   "private": true,
   "dependencies": {
@@ -26,13 +29,26 @@
     "@angular-devkit/build-angular": "^18.2.12",
     "@angular/cli": "^18.2.12",
     "@angular/compiler-cli": "^18.2.0",
+    "@biomejs/biome": "1.9.4",
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
     "@types/jasmine": "~5.1.0",
+    "husky": "^9.1.7",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^15.4.3",
     "typescript": "~5.5.2"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "echo '🔧 Linting modified files...'",
+      "bunx biome lint --write ./src",
+      "echo '✨ Format modified files...'",
+      "bunx biome format --write ./src"
+    ]
   }
 }
