@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HelloComponent } from './components/hello/hello.component';
+import { HelloComponent } from '@components/hello/hello.component';
 
 @Component({
 	standalone: true,
