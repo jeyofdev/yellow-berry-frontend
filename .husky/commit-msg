@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "🔍 Validating the commit message..."
+bunx --no-install commitlint --edit "$1"
