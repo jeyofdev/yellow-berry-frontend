@@ -20,7 +20,7 @@
 		"module": "ES2022",
 		"lib": ["ES2022", "dom"],
 		"paths": {
-			"@components/*": ["app/components/*"]
+			"@components/*": ["app/features/*"]
 		}
 	},
 	"angularCompilerOptions": {
