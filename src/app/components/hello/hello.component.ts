@@ -7,8 +7,4 @@ import { Component } from '@angular/core';
 	templateUrl: './hello.component.html',
 	styleUrl: './hello.component.scss',
 })
-export class HelloComponent {
-	constructor() {
-		console.log('hello');
-	}
-}
+export class HelloComponent {}
