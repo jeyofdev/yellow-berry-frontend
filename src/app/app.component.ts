@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { HelloComponent } from '@components/hello/hello.component';
+import { HomePageComponent } from '@features/home/pages/home-page/home-page.component';
 
 @Component({
 	standalone: true,
 	selector: 'app-root',
-	imports: [HelloComponent],
+	imports: [HomePageComponent],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
 })
