@@ -1,0 +1,19 @@
+<div class="flex justify-between items-center w-full">
+  <p
+    class="text-sm text-white leading-7 tracking-[.03rem] font-poppins font-light"
+  >
+    Flat 50% off on Grocery Shop
+  </p>
+
+  <ul class="flex gap-x-8">
+    @for (headerTopbarLinks of headerTopbarLinks(); track $index) {
+    <li>
+      <a
+        [routerLink]="headerTopbarLinks.link"
+        class="text-sm text-white leading-7 tracking-[.03rem] font-poppins font-light"
+        >{{ headerTopbarLinks.label }}</a
+      >
+    </li>
+    }
+  </ul>
+</div>
