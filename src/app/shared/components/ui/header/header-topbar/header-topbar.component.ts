@@ -1,12 +1,6 @@
-import {
-	Component,
-	InputSignal,
-	OnInit,
-	WritableSignal,
-	input,
-} from '@angular/core';
+import { Component, OnInit, WritableSignal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HeaderTopBarLink } from '@models/HeaderTopbarLink.model';
+import { HeaderTopBarLink } from '@models/header-topbar-link.model';
 import { HeaderTopbarLinkService } from '@services/header-topbar-links.service';
 
 @Component({
@@ -20,6 +14,7 @@ export class HeaderTopbarComponent implements OnInit {
 	constructor(private _headerTopbarLinkService: HeaderTopbarLinkService) {}
 
 	ngOnInit(): void {
-		this.headerTopbarLinks = this._headerTopbarLinkService.getTopBarLinks();
+		this.headerTopbarLinks =
+			this._headerTopbarLinkService.getHeaderTopBarLinks();
 	}
 }

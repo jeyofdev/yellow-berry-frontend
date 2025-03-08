@@ -1,5 +1,15 @@
-<div>
+<div class="flex justify-between items-center w-full p-1">
   <app-logo textPosition="left"></app-logo>
+
   <div></div>
-  <div></div>
+
+  <div class="flex gap-x-2">
+    @for (headerAccountLink of headerAccountLinks(); track $index) {
+    <app-button-header-account
+      [label]="headerAccountLink.label"
+      [sublabel]="headerAccountLink.sublabel"
+      [imgNameFile]="headerAccountLink.icon"
+    ></app-button-header-account>
+    }
+  </div>
 </div>
