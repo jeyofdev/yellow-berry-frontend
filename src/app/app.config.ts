@@ -1,7 +1,4 @@
-import {
-	type ApplicationConfig,
-	provideZoneChangeDetection,
-} from '@angular/core';
+import { type ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 

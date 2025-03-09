@@ -14,7 +14,6 @@ export class HeaderTopbarComponent implements OnInit {
 	constructor(private _headerTopbarLinkService: HeaderTopbarLinkService) {}
 
 	ngOnInit(): void {
-		this.headerTopbarLinks =
-			this._headerTopbarLinkService.getHeaderTopBarLinks();
+		this.headerTopbarLinks = this._headerTopbarLinkService.getHeaderTopBarLinks();
 	}
 }

@@ -6,9 +6,7 @@ import { HeaderTopBarLink } from '@models/header-topbar-link.model';
 	providedIn: 'root',
 })
 export class HeaderTopbarLinkService {
-	private headerTopBarLinks: WritableSignal<HeaderTopBarLink[]> = signal<
-		HeaderTopBarLink[]
-	>([
+	private headerTopBarLinks: WritableSignal<HeaderTopBarLink[]> = signal<HeaderTopBarLink[]>([
 		{
 			label: 'Help?',
 			link: '/',

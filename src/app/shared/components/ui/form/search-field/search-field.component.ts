@@ -13,14 +13,7 @@ interface City {
 
 @Component({
 	selector: 'app-search-field',
-	imports: [
-		FormsModule,
-		InputTextModule,
-		IconFieldModule,
-		InputIconModule,
-		ImageModule,
-		SelectModule,
-	],
+	imports: [FormsModule, InputTextModule, IconFieldModule, InputIconModule, ImageModule, SelectModule],
 	templateUrl: './search-field.component.html',
 	styleUrl: './search-field.component.scss',
 })

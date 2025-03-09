@@ -17,6 +17,5 @@ export class ButtonHeaderAccountComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.imgSrc = 'images/' + this.imgNameFile() + '.svg';
-		console.log(this.imgSrc);
 	}
 }

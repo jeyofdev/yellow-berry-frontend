@@ -16,7 +16,7 @@
   @apply transform translate-y-2;
 
   .p-select-overlay {
-    @apply min-w-[130%] rounded-[0.625rem] overflow-hidden;
+    @apply min-w-[130%] rounded-[0.625rem] overflow-hidden border border-primary-200 shadow-md;
   }
 
   .p-select-list {
@@ -46,12 +46,4 @@
       @apply bg-transparent text-primary-500;
     }
   }
-}
-
-:host::ng-deep p-inputicon {
-  color: red; /* Applique la couleur à l'icône */
-}
-
-img {
-  color: red; /* Couleur Dill */
 }
