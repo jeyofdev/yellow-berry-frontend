@@ -5,9 +5,9 @@ import {
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 
+import ThemePreset from '@theme/theme-preset';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
-import ThemePreset from './theme/theme-preset';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
 				options: {
 					cssLayer: {
 						name: 'primeng',
-						order: 'base, components, primeng, utilities',
+						order: 'tailwind-base, primeng, tailwind-utilities',
 					},
 				},
 			},
