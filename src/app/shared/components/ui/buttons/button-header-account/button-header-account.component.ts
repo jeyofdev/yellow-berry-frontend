@@ -6,7 +6,6 @@ import { ImageModule } from 'primeng/image';
 	selector: 'app-button-header-account',
 	imports: [ButtonModule, ImageModule],
 	templateUrl: './button-header-account.component.html',
-	styleUrl: './button-header-account.component.scss',
 })
 export class ButtonHeaderAccountComponent implements OnInit {
 	public label: InputSignal<string> = input.required<string>();
@@ -17,6 +16,5 @@ export class ButtonHeaderAccountComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.imgSrc = 'images/' + this.imgNameFile() + '.svg';
-		console.log(this.imgSrc);
 	}
 }

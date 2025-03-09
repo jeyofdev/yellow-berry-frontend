@@ -1,7 +1,4 @@
-import { definePreset } from '@primeng/themes';
-import Material from '@primeng/themes/material';
-
-const ThemePrimitive = {
+export const themePrimitive = {
 	emerald: {
 		50: '#E6FAF3',
 		100: '#C3F3E0',
@@ -289,5 +286,3 @@ const ThemePrimitive = {
 		950: '#1f1916',
 	},
 };
-
-export default ThemePrimitive;

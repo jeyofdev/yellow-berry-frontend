@@ -1,0 +1,29 @@
+:host::ng-deep p-menu .p-menu {
+  @apply rounded-[0.625rem] border border-primary-200 overflow-hidden shadow-md;
+
+  .p-menu-list {
+    @apply p-0;
+
+    .p-menu-submenu-label {
+      @apply hidden;
+    }
+
+    .p-menu-item {
+      .p-menu-item-link {
+        @apply py-2.5;
+      }
+
+      .p-menu-item-label {
+        @apply text-sm text-gray-700 tracking-[0.03125rem] font-poppins font-normal;
+      }
+
+      &:not(.p-disabled) .p-menu-item-content:hover {
+        @apply bg-primary-100;
+
+        .p-menu-item-label {
+          @apply text-primary-500;
+        }
+      }
+    }
+  }
+}
