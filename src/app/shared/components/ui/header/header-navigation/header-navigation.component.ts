@@ -6,11 +6,21 @@ import { SearchFieldComponent } from '@shared/components/ui/form/search-field/se
 import { LogoComponent } from '@shared/components/ui/logo/logo.component';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { ImageModule } from 'primeng/image';
 import { Menu, MenuModule } from 'primeng/menu';
+import { NavComponent } from '../../nav/nav.component';
 
 @Component({
 	selector: 'app-header-navigation',
-	imports: [LogoComponent, ButtonHeaderAccountComponent, SearchFieldComponent, MenuModule, ButtonModule],
+	imports: [
+		LogoComponent,
+		ButtonHeaderAccountComponent,
+		SearchFieldComponent,
+		MenuModule,
+		ButtonModule,
+		ImageModule,
+		NavComponent,
+	],
 	templateUrl: './header-navigation.component.html',
 	styleUrl: './header-navigation.component.scss',
 })

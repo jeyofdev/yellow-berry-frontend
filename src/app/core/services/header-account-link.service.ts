@@ -6,7 +6,7 @@ import { HeaderAccountLink } from '@models/header-account-link.model';
 	providedIn: 'root',
 })
 export class HeaderAccountLinkService {
-	private headerAccountLinks: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
+	private _headerAccountLinks: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
 		{
 			label: 'Login',
 			sublabel: 'Account',
@@ -27,7 +27,7 @@ export class HeaderAccountLinkService {
 		},
 	]);
 
-	private noAuthAccountLinksChildren: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
+	private _noAuthAccountLinksChildren: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
 		{
 			label: 'Register',
 			sublabel: '',
@@ -42,7 +42,7 @@ export class HeaderAccountLinkService {
 		},
 	]);
 
-	private authAccountLinksChildren: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
+	private _authAccountLinksChildren: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
 		{
 			label: 'Profile',
 			sublabel: '',
@@ -58,14 +58,14 @@ export class HeaderAccountLinkService {
 	]);
 
 	public getHeaderAccountLinks() {
-		return this.headerAccountLinks;
+		return this._headerAccountLinks;
 	}
 
 	public getNoAuthAccountLinksChildren() {
-		return this.noAuthAccountLinksChildren;
+		return this._noAuthAccountLinksChildren;
 	}
 
 	public getAuthAccountLinksChildren() {
-		return this.authAccountLinksChildren;
+		return this._authAccountLinksChildren;
 	}
 }
