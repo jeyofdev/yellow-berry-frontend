@@ -1,9 +1,10 @@
-<p-button
-  [outlined]="true"
-  severity="secondary"
-  styleClass="btn bg-transparent border-gray-200 rounded-[0.625rem] p-2.5 w-auto"
->
+<p-button [outlined]="true" severity="secondary" [styleClass]="styleClass">
   <ng-template #icon>
-    <p-image src="images/grid.svg" alt="icon cart" width="20" height="20" />
+    <p-image
+      src="images/grid.svg"
+      alt="icon cart"
+      [width]="width()"
+      [height]="height()"
+    />
   </ng-template>
 </p-button>

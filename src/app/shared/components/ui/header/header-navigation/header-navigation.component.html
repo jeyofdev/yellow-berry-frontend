@@ -1,27 +1,31 @@
 <div class="flex justify-between items-center w-full p-1">
   <app-logo textPosition="left"></app-logo>
 
-  <div class="w-2/4 max-w-[43.75rem]">
-    <app-search-field></app-search-field>
+  <div class="hidden lg:flex md:w-2/5 lg:2/4 max-w-[43.75rem]">
+    <app-search-field class="w-full"></app-search-field>
   </div>
 
-  <div class="flex gap-x-2">
+  <div class="flex gap-x-1 sm:gap-x-2">
     @for (headerAccountLink of headerAccountLinks(); track $index; let i =
-    $index) { @if (i === 0) {
-    <app-button-header-account
-      [label]="headerAccountLink.label"
-      [sublabel]="headerAccountLink.sublabel"
-      [imgNameFile]="headerAccountLink.icon"
-      (mouseenter)="onMouseEnter($event, headerAccountLink.sublabel)"
-      (mouseleave)="onMouseLeave()"
-    ></app-button-header-account>
-    } @else {
-    <app-button-header-account
-      [label]="headerAccountLink.label"
-      [sublabel]="headerAccountLink.sublabel"
-      [imgNameFile]="headerAccountLink.icon"
-    ></app-button-header-account>
-    }}
+    $index) {
+    <div class="px-1 lg:px-2.5 xl:3">
+      @if (i === 0) {
+      <app-button-header-account
+        [label]="headerAccountLink.label"
+        [sublabel]="headerAccountLink.sublabel"
+        [imgNameFile]="headerAccountLink.icon"
+        (mouseenter)="onMouseEnter($event, headerAccountLink.sublabel)"
+        (mouseleave)="onMouseLeave()"
+      ></app-button-header-account>
+      } @else {
+      <app-button-header-account
+        [label]="headerAccountLink.label"
+        [sublabel]="headerAccountLink.sublabel"
+        [imgNameFile]="headerAccountLink.icon"
+      ></app-button-header-account>
+      }
+    </div>
+    }
 
     <p-menu
       #accountMenu
@@ -30,5 +34,13 @@
       (mouseenter)="cancelHideMenu()"
       (mouseleave)="hideMenuWithDelay()"
     />
+
+    <app-button-cta-search
+      hasNoPadding
+      width="30"
+      height="30"
+      class="lg:hidden"
+    ></app-button-cta-search>
+    <app-nav class="lg:hidden"></app-nav>
   </div>
 </div>

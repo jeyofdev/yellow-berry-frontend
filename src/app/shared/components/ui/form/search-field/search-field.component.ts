@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IconFieldModule } from 'primeng/iconfield';
 import { ImageModule } from 'primeng/image';

@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, WritableSignal } from '@angular/core';
 import { HeaderAccountLink } from '@models/header-account-link.model';
 import { HeaderAccountLinkService } from '@services/header-account-link.service';
+import { ButtonCtaSearchComponent } from '@shared/components/ui/buttons/button-cta-search/button-cta-search.component';
 import { ButtonHeaderAccountComponent } from '@shared/components/ui/buttons/button-header-account/button-header-account.component';
 import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';
 import { LogoComponent } from '@shared/components/ui/logo/logo.component';
+import { NavComponent } from '@shared/components/ui/nav/nav.component';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
@@ -11,7 +13,16 @@ import { Menu, MenuModule } from 'primeng/menu';
 
 @Component({
 	selector: 'app-header-navigation',
-	imports: [LogoComponent, ButtonHeaderAccountComponent, SearchFieldComponent, MenuModule, ButtonModule, ImageModule],
+	imports: [
+		LogoComponent,
+		ButtonHeaderAccountComponent,
+		SearchFieldComponent,
+		MenuModule,
+		ButtonModule,
+		ImageModule,
+		NavComponent,
+		ButtonCtaSearchComponent,
+	],
 	templateUrl: './header-navigation.component.html',
 	styleUrl: './header-navigation.component.scss',
 })
