@@ -1,12 +1,12 @@
 import { Injectable, WritableSignal } from '@angular/core';
 import { signal } from '@angular/core';
-import { HeaderTopBarLink } from '@models/HeaderTopbarLink.model';
+import { HeaderTopBarLink } from '@models/header-topbar-link.model';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class HeaderTopbarLinkService {
-	private topBarLinks: WritableSignal<HeaderTopBarLink[]> = signal<
+	private headerTopBarLinks: WritableSignal<HeaderTopBarLink[]> = signal<
 		HeaderTopBarLink[]
 	>([
 		{
@@ -27,7 +27,7 @@ export class HeaderTopbarLinkService {
 		},
 	]);
 
-	public getTopBarLinks() {
-		return this.topBarLinks;
+	public getHeaderTopBarLinks() {
+		return this.headerTopBarLinks;
 	}
 }

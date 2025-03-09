@@ -1,0 +1,28 @@
+<p-button
+  [label]="label()"
+  iconPos="left"
+  styleClass="bg-transparent flex justify-center gap-3 border-0"
+>
+  <ng-template #content>
+    <span
+      class="p-button-label flex flex-col items-start gap-y-0.75"
+      aria-hidden="false"
+      data-pc-section="label"
+    >
+      <p
+        class="text-xs text-gray-700 leading-3 tracking-[.0.0375rem] font-poppins font-medium uppercase"
+      >
+        {{ sublabel() }}
+      </p>
+      <p
+        class="text-sm text-gray-700 leading-4 tracking-[.0.03rem] font-poppins font-semibold uppercase"
+      >
+        {{ label() }}
+      </p>
+    </span>
+  </ng-template>
+
+  <ng-template #icon>
+    <p-image [src]="imgSrc" alt="icon cart" width="30" />
+  </ng-template>
+</p-button>
