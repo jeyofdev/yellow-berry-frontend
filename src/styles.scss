@@ -1,22 +1,12 @@
 @use "primeicons/primeicons.css";
-@use "tailwindcss";
-@plugin "tailwindcss-primeui";
 
-@layer base, components, primeng, utilities;
+@layer tailwind-base, primeng, tailwind-utilities;
 
-@theme {
-  // breakpoints
-  --breakpoint-sm: 40rem; // 640px
-  --breakpoint-md: 48rem; // 768px
-  --breakpoint-lg: 60rem; // 960 px
-  --breakpoint-xl: 80rem; // 1280px
-  --breakpoint-2xl: 96rem; // 1536px
-  --breakpoint-3xl: 120rem; // 1920px
+@layer tailwind-base {
+  @tailwind base;
+}
 
-  // font family
-  --font-poppins: "Poppins", sans-serif;
-
-  // colors
-  --color-gray-200: var(--p-gray-200);
-  --color-gray-700: var(--p-gray-700);
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
 }
