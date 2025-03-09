@@ -1,0 +1,57 @@
+:host::ng-deep p-select {
+  .p-select-label {
+    @apply text-sm text-zinc-700 tracking-[0.03125rem] font-poppins font-normal;
+
+    &.p-placeholder {
+      @apply text-stone-300;
+    }
+  }
+
+  .p-select-dropdown {
+    @apply hidden;
+  }
+}
+
+:host::ng-deep p-select p-overlay .p-overlay {
+  @apply transform translate-y-2;
+
+  .p-select-overlay {
+    @apply min-w-[130%] rounded-[0.625rem] overflow-hidden;
+  }
+
+  .p-select-list {
+    @apply p-0;
+  }
+}
+
+:host::ng-deep
+  p-select
+  p-overlay
+  .p-overlay
+  .p-select-list
+  p-selectitem
+  .p-select-option {
+  @apply cursor-pointer;
+
+  &.p-select-option-selected {
+    @apply bg-primary-50 text-primary-500 cursor-default;
+  }
+
+  &:not(.p-select-option-selected):not(.p-disabled) {
+    &.p-focus {
+      @apply bg-transparent text-primary-500;
+    }
+
+    &:hover {
+      @apply bg-transparent text-primary-500;
+    }
+  }
+}
+
+:host::ng-deep p-inputicon {
+  color: red; /* Applique la couleur à l'icône */
+}
+
+img {
+  color: red; /* Couleur Dill */
+}

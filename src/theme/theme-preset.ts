@@ -1,7 +1,7 @@
 import { definePreset } from '@primeng/themes';
 import Material from '@primeng/themes/material';
 import { MaterialBaseDesignTokens } from '@primeng/themes/material/base';
-import themePrimitive from './theme-primitive';
+import { themePrimitive } from './theme-primitive';
 
 const ThemePreset: MaterialBaseDesignTokens = definePreset(Material, {
 	primitive: themePrimitive,

@@ -1,0 +1,29 @@
+<div
+  class="flex rounded-[0.625rem] border border-gray-200 w-full outline-2 focus-within:outline focus-within:outline-3 focus-within:outline-primary-500 -focus-within:outline-offset-1"
+>
+  <p-select
+    [options]="cities"
+    [(ngModel)]="selectedCity"
+    optionLabel="name"
+    placeholder="Select a City"
+    class="w-full md:w-1/4 border-0 border-r border-gray-200 rounded-l-[0.625rem] rounded-r-none outline-0"
+    scrollHeight="300px"
+  />
+
+  <p-iconfield class="w-3/4 outline-none focus:outline-none">
+    <input
+      type="text"
+      pInputText
+      placeholder="Search products..."
+      class="w-full border-0 rounded-r-[0.625rem] rounded-l-none focus:border-0 focus:outline-none text-sm text-zinc-700 tracking-[0.03125rem] font-poppins font-normal placeholder-stone-300"
+    />
+    <p-inputicon>
+      <p-image
+        src="images/search.svg"
+        alt="icon search"
+        width="18.33"
+        height="18"
+      />
+    </p-inputicon>
+  </p-iconfield>
+</div>

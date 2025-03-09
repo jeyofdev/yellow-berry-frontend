@@ -2,11 +2,12 @@ import { Component, OnInit, WritableSignal } from '@angular/core';
 import { HeaderAccountLink } from '@models/header-account-link.model';
 import { HeaderAccountLinkService } from '@services/header-account-link.service';
 import { ButtonHeaderAccountComponent } from '@shared/components/ui/buttons/button-header-account/button-header-account.component';
+import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';
 import { LogoComponent } from '@shared/components/ui/logo/logo.component';
 
 @Component({
 	selector: 'app-header-navigation',
-	imports: [LogoComponent, ButtonHeaderAccountComponent],
+	imports: [LogoComponent, ButtonHeaderAccountComponent, SearchFieldComponent],
 	templateUrl: './header-navigation.component.html',
 	styleUrl: './header-navigation.component.scss',
 })

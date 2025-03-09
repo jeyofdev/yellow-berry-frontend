@@ -1,7 +1,9 @@
 <div class="flex justify-between items-center w-full p-1">
   <app-logo textPosition="left"></app-logo>
 
-  <div></div>
+  <div class="w-2/4 max-w-[43.75rem]">
+    <app-search-field></app-search-field>
+  </div>
 
   <div class="flex gap-x-2">
     @for (headerAccountLink of headerAccountLinks(); track $index) {
