@@ -6,9 +6,8 @@ import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 
-interface City {
+interface Category {
 	name: string;
-	code: string;
 }
 
 @Component({
@@ -18,17 +17,11 @@ interface City {
 	styleUrl: './search-field.component.scss',
 })
 export class SearchFieldComponent implements OnInit {
-	cities: City[] | undefined;
+	categories: Category[] | undefined;
 
-	selectedCity: City | undefined;
+	selectedCategory: Category | undefined;
 
 	ngOnInit() {
-		this.cities = [
-			{ name: 'New York', code: 'NY' },
-			{ name: 'Rome', code: 'RM' },
-			{ name: 'London', code: 'LDN' },
-			{ name: 'Istanbul', code: 'IST' },
-			{ name: 'Paris', code: 'PRS' },
-		];
+		this.categories = [{ name: 'Fruits' }, { name: 'Bakery' }, { name: 'Cold Drinks' }, { name: 'Vegetables' }];
 	}
 }

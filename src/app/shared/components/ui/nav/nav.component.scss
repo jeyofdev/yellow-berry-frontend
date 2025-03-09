@@ -1,11 +1,16 @@
 :host ::ng-deep p-menubar .p-menubar {
   @apply border-none p-0;
 
-  .p-menubar-item-link:hover {
-    @apply bg-primary-100 rounded-lg;
+  .p-menubar-item-link {
+    @apply py-1.5 px-4;
 
-    .p-menubar-item-label {
-      @apply text-primary-500;
+    &:hover {
+      @apply bg-primary-100 rounded-[0.625rem];
+
+      .p-menubar-item-label,
+      .p-menubar-item-icon {
+        @apply text-primary-500;
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center w-full p-1 border-b">
+<div class="flex justify-between items-center w-full p-1">
   <app-logo textPosition="left"></app-logo>
 
   <div class="w-2/4 max-w-[43.75rem]">
@@ -31,18 +31,4 @@
       (mouseleave)="hideMenuWithDelay()"
     />
   </div>
-</div>
-
-<div class="flex justify-start items-center w-full p-1 py-2 gap-x-4">
-  <p-button
-    [outlined]="true"
-    severity="secondary"
-    styleClass="btn bg-transparent border-gray-200 rounded-[0.625rem] p-2.5 w-auto"
-  >
-    <ng-template #icon>
-      <p-image src="images/grid.svg" alt="icon cart" width="20" height="20" />
-    </ng-template>
-  </p-button>
-
-  <app-nav></app-nav>
 </div>

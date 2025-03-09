@@ -8,19 +8,10 @@ import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
 import { Menu, MenuModule } from 'primeng/menu';
-import { NavComponent } from '../../nav/nav.component';
 
 @Component({
 	selector: 'app-header-navigation',
-	imports: [
-		LogoComponent,
-		ButtonHeaderAccountComponent,
-		SearchFieldComponent,
-		MenuModule,
-		ButtonModule,
-		ImageModule,
-		NavComponent,
-	],
+	imports: [LogoComponent, ButtonHeaderAccountComponent, SearchFieldComponent, MenuModule, ButtonModule, ImageModule],
 	templateUrl: './header-navigation.component.html',
 	styleUrl: './header-navigation.component.scss',
 })
