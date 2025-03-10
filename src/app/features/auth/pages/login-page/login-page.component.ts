@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormAuthLogin } from '@models/form/form-auth-login.model';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
+import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
 import { PasswordFieldComponent } from '@shared/components/ui/form/password-field/password-field.component';
 import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';
 import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-field.component';
@@ -9,6 +10,7 @@ import { HeaderNavigationComponent } from '@shared/components/ui/header/header-n
 import { HeaderPrimaryNavigationComponent } from '@shared/components/ui/header/header-primary-navigation/header-primary-navigation.component';
 import { HeaderTopbarComponent } from '@shared/components/ui/header/header-topbar/header-topbar.component';
 import { LayoutComponent } from '@shared/components/ui/layout/layout.component';
+import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-form.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -29,15 +31,17 @@ import { PasswordModule } from 'primeng/password';
 		ButtonModule,
 		TextFieldComponent,
 		PasswordFieldComponent,
+		ButtonFormComponent,
+		LinkFormComponent,
 	],
 	templateUrl: './login-page.component.html',
 	styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent implements OnInit {
-	mainForm!: FormGroup<FormAuthLogin>;
+	public mainForm!: FormGroup<FormAuthLogin>;
 
-	emailCtrl!: FormControl<string | null>;
-	passwordCtrl!: FormControl<string | null>;
+	public emailCtrl!: FormControl<string | null>;
+	public passwordCtrl!: FormControl<string | null>;
 
 	constructor(private _formBuilder: FormBuilder) {}
 
