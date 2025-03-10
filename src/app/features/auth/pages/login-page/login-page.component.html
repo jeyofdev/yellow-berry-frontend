@@ -25,3 +25,87 @@
 </header>
 
 <app-breadcrumb></app-breadcrumb>
+
+<div class="flex flex-col justify-center">
+  <app-layout justifyContent="justify-center" alignItems="items-center">
+    <div
+      class="py-8 flex flex-col justify-center items-center gap-3 w-full max-w-[31.25rem]"
+    >
+      <h1>
+        <span
+          class="text-[1.5625rem] text-gray-700 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
+          >Log</span
+        >
+        <span
+          class="text-[1.5625rem] text-primary-500 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize ml-1.5"
+          >In</span
+        >
+      </h1>
+
+      <p
+        class="text-sm text-gray-700 leading-[1.125rem] tracking-[0.03rem] font-poppins font-light text-center"
+      >
+        Best place to buy and sell digital products
+      </p>
+
+      <form
+        #loginForm="ngForm"
+        [formGroup]="mainForm"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
+      >
+        <div class="flex flex-col w-full">
+          <label
+            for="email"
+            class="text-[0.9375rem] text-gray-500 leading-[1.625rem] tracking-[0.02rem] font-poppins font-normal mb-0.5"
+            >Email*</label
+          >
+          <input
+            type="text"
+            pInputText
+            placeholder="Enter your email"
+            formControlName="email"
+            class="input-control"
+          />
+        </div>
+
+        <div class="flex flex-col w-full">
+          <label
+            for="password"
+            class="text-[0.9375rem] text-gray-500 leading-[1.625rem] tracking-[0.02rem] font-poppins font-normal mb-0.5"
+            >password*</label
+          >
+          <p-password
+            formControlName="password"
+            [feedback]="false"
+            [toggleMask]="true"
+            placeholder="Enter your password"
+          />
+        </div>
+
+        <p-button
+          variant="text"
+          severity="secondary"
+          label="Forgot password ?"
+          class="p-0 text-sm text-zinc-700 leading-7 tracking-[0.03rem] font-poppins font-medium capitalize"
+          styleClass="forgot-password-btn"
+        />
+
+        <div class="flex justify-between">
+          <p-button
+            type="submit"
+            label="Login"
+            styleClass="rounded-[0.625rem] px-5 py-1.5 text-sm text-white leading-7 tracking-[0.03rem] font-poppins font-normal"
+          />
+          <p-button
+            variant="text"
+            severity="secondary"
+            label="register"
+            class="p-0 text-[0.9375rem] text-white leading-7 tracking-[0.03rem] font-poppins font-extralight"
+            styleClass="register-btn"
+          />
+        </div>
+      </form>
+    </div>
+  </app-layout>
+</div>
