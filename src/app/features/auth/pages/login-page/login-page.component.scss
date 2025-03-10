@@ -1,0 +1,31 @@
+:host ::ng-deep p-password {
+  @apply border-0;
+
+  .p-password {
+    @apply w-full;
+
+    .p-password-mask-icon {
+      @apply text-gray-500;
+    }
+  }
+}
+
+:host ::ng-deep p-password .p-password .p-inputtext,
+:host ::ng-deep .input-control {
+  @apply w-full rounded-[0.625rem] border border-gray-200 h-12 text-sm text-gray-500 tracking-[0.03125rem] font-poppins font-normal placeholder-stone-300;
+}
+
+:host ::ng-deep .register-btn {
+  .p-button-label {
+    @apply font-light;
+  }
+}
+
+:host ::ng-deep .forgot-password-btn,
+:host ::ng-deep .register-btn {
+  @apply p-0;
+
+  &:hover {
+    @apply bg-transparent;
+  }
+}
