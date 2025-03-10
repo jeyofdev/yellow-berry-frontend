@@ -54,56 +54,40 @@
         (ngSubmit)="onSubmit()"
         class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
       >
-        <div class="flex flex-col w-full">
-          <label
-            for="email"
-            class="text-[0.9375rem] text-gray-500 leading-[1.625rem] tracking-[0.02rem] font-poppins font-normal mb-0.5"
-            >Email*</label
-          >
-          <input
-            type="text"
-            pInputText
-            placeholder="Enter your email"
-            formControlName="email"
-            class="input-control"
-          />
-        </div>
+        <app-text-field
+          labelFor="email"
+          label="Email"
+          isRequired
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          [parentForm]="mainForm"
+          formControlName="email"
+          controlName="email"
+        ></app-text-field>
 
-        <div class="flex flex-col w-full">
-          <label
-            for="password"
-            class="text-[0.9375rem] text-gray-500 leading-[1.625rem] tracking-[0.02rem] font-poppins font-normal mb-0.5"
-            >password*</label
-          >
-          <p-password
-            formControlName="password"
-            [feedback]="false"
-            [toggleMask]="true"
-            placeholder="Enter your password"
-          />
-        </div>
+        <app-password-field
+          labelFor="password"
+          label="Password"
+          isRequired
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          [feedback]="false"
+          [toggleMask]="true"
+          [parentForm]="mainForm"
+          formControlName="password"
+          controlName="password"
+        ></app-password-field>
 
-        <p-button
-          variant="text"
-          severity="secondary"
+        <app-link-form
           label="Forgot password ?"
-          class="p-0 text-sm text-zinc-700 leading-7 tracking-[0.03rem] font-poppins font-medium capitalize"
-          styleClass="forgot-password-btn"
-        />
+          styleClass="info"
+        ></app-link-form>
 
-        <div class="flex justify-between">
-          <p-button
-            type="submit"
-            label="Login"
-            styleClass="rounded-[0.625rem] px-5 py-1.5 text-sm text-white leading-7 tracking-[0.03rem] font-poppins font-normal"
-          />
-          <p-button
-            variant="text"
-            severity="secondary"
-            label="register"
-            class="p-0 text-[0.9375rem] text-white leading-7 tracking-[0.03rem] font-poppins font-extralight"
-            styleClass="register-btn"
-          />
+        <div class="flex justify-between items-center">
+          <app-button-form label="Login"></app-button-form>
+          <app-link-form label="register"></app-link-form>
         </div>
       </form>
     </div>
