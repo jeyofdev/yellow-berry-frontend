@@ -5,5 +5,5 @@ import { HomePageComponent } from '@features/home/pages/home-page/home-page.comp
 export const routes: Routes = [
 	{ path: 'home', component: HomePageComponent },
 	{ path: '', redirectTo: 'home', pathMatch: 'full' },
-	{ path: 'login', component: LoginPageComponent },
+	{ path: 'auth/login', component: LoginPageComponent, data: { title: 'login' } },
 ];
