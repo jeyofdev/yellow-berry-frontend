@@ -54,22 +54,32 @@
         (ngSubmit)="onSubmit()"
         class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
       >
-        <div class="flex flex-col w-full">
-          <label
-            for="email"
-            class="text-[0.9375rem] text-gray-500 leading-[1.625rem] tracking-[0.02rem] font-poppins font-normal mb-0.5"
-            >Email*</label
-          >
-          <input
-            type="text"
-            pInputText
-            placeholder="Enter your email"
-            formControlName="email"
-            class="input-control"
-          />
-        </div>
+        <app-text-field
+          labelFor="email"
+          label="Email"
+          isRequired
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          [parentForm]="mainForm"
+          formControlName="email"
+          controlName="email"
+        ></app-text-field>
 
-        <div class="flex flex-col w-full">
+        <app-password-field
+          labelFor="password"
+          label="Password"
+          isRequired
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          [feedback]="false"
+          [toggleMask]="true"
+          [parentForm]="mainForm"
+          formControlName="password"
+          controlName="password"
+        ></app-password-field>
+        <!-- <div class="flex flex-col w-full">
           <label
             for="password"
             class="text-[0.9375rem] text-gray-500 leading-[1.625rem] tracking-[0.02rem] font-poppins font-normal mb-0.5"
@@ -81,7 +91,7 @@
             [toggleMask]="true"
             placeholder="Enter your password"
           />
-        </div>
+        </div> -->
 
         <p-button
           variant="text"

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormAuthLogin } from '@models/form/form-auth-login.model';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
+import { PasswordFieldComponent } from '@shared/components/ui/form/password-field/password-field.component';
 import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';
+import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-field.component';
 import { HeaderNavigationComponent } from '@shared/components/ui/header/header-navigation/header-navigation.component';
 import { HeaderPrimaryNavigationComponent } from '@shared/components/ui/header/header-primary-navigation/header-primary-navigation.component';
 import { HeaderTopbarComponent } from '@shared/components/ui/header/header-topbar/header-topbar.component';
@@ -25,6 +27,8 @@ import { PasswordModule } from 'primeng/password';
 		ReactiveFormsModule,
 		PasswordModule,
 		ButtonModule,
+		TextFieldComponent,
+		PasswordFieldComponent,
 	],
 	templateUrl: './login-page.component.html',
 	styleUrl: './login-page.component.scss',
