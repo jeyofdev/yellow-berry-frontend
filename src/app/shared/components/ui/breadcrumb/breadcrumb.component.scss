@@ -1,0 +1,14 @@
+:host
+  ::ng-deep
+  p-breadcrumb
+  .p-breadcrumb
+  .p-breadcrumb-list
+  .p-breadcrumb-item {
+  .p-breadcrumb-item-label {
+    @apply text-sm text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-normal capitalize;
+  }
+
+  &:first-child .p-breadcrumb-item-label {
+    @apply font-semibold;
+  }
+}

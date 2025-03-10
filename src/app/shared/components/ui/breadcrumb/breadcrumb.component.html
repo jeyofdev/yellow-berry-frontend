@@ -1,0 +1,22 @@
+<div class="flex flex-col justify-center">
+  <app-layout
+    justifyContent="justify-between"
+    alignItems="items-center"
+    class="bg-gray-100 items-center py-[1.59375rem]"
+  >
+    <p
+      class="text-base text-gray-700 leading-[1.2rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
+    >
+      {{ currentRouteTitle() }}
+    </p>
+    <p-breadcrumb
+      class="max-w-full"
+      [model]="items"
+      styleClass="bg-transparent p-0"
+    >
+      <ng-template #separator>
+        <p-image src="images/chevron-right.svg" width="14.33" height="14" />
+      </ng-template>
+    </p-breadcrumb>
+  </app-layout>
+</div>
