@@ -49,8 +49,26 @@
       </p>
 
       <form
+        #loginForm="ngForm"
+        [formGroup]="mainForm"
+        (ngSubmit)="onSubmit()"
         class="border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
-      ></form>
+      >
+        <div class="form-control">
+          <label for="email">Email*</label>
+          <input type="text" pInputText formControlName="email" />
+        </div>
+
+        <div class="form-control">
+          <label for="password">password*</label>
+          <p-password formControlName="password" [feedback]="false" />
+        </div>
+
+        <div class="btn-group">
+          <p-button type="submit" label="Login" />
+          <p-button variant="text" severity="secondary" label="register" />
+        </div>
+      </form>
     </div>
   </app-layout>
 </div>
