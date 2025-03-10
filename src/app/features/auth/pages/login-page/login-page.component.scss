@@ -1,9 +1,3 @@
-:host ::ng-deep .register-btn {
-  .p-button-label {
-    @apply font-light;
-  }
-}
-
 :host ::ng-deep .forgot-password-btn,
 :host ::ng-deep .register-btn {
   @apply p-0;

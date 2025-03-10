@@ -80,27 +80,14 @@
           controlName="password"
         ></app-password-field>
 
-        <p-button
-          variant="text"
-          severity="secondary"
+        <app-link-form
           label="Forgot password ?"
-          class="p-0 text-sm text-zinc-700 leading-7 tracking-[0.03rem] font-poppins font-medium capitalize"
-          styleClass="forgot-password-btn"
-        />
+          styleClass="info"
+        ></app-link-form>
 
-        <div class="flex justify-between">
-          <p-button
-            type="submit"
-            label="Login"
-            styleClass="rounded-[0.625rem] px-5 py-1.5 text-sm text-white leading-7 tracking-[0.03rem] font-poppins font-normal"
-          />
-          <p-button
-            variant="text"
-            severity="secondary"
-            label="register"
-            class="p-0 text-[0.9375rem] text-white leading-7 tracking-[0.03rem] font-poppins font-extralight"
-            styleClass="register-btn"
-          />
+        <div class="flex justify-between items-center">
+          <app-button-form label="Login"></app-button-form>
+          <app-link-form label="register"></app-link-form>
         </div>
       </form>
     </div>
