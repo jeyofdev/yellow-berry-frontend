@@ -25,8 +25,8 @@ export class PasswordFieldComponent implements OnInit, ControlValueAccessor {
 	public id: InputSignal<string> = input.required<string>();
 	public name: InputSignal<string> = input.required<string>();
 	public placeholder: InputSignal<string> = input<string>('');
-	public feedback: InputSignal<boolean> = input<boolean>(false);
-	public toggleMask: InputSignal<boolean> = input<boolean>(false);
+	public feedback = input<boolean, unknown>(false, { transform: booleanAttribute });
+	public toggleMask = input<boolean, unknown>(false, { transform: booleanAttribute });
 
 	public parentForm: InputSignal<FormGroup> = input.required<FormGroup>();
 	public groupName: InputSignal<string> = input<string>('');

@@ -1,5 +1,6 @@
 import { Component, InputSignal, OnInit, booleanAttribute, forwardRef, input } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { TextFieldTypeInput } from '@type/form-field-input.type';
 import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
@@ -22,7 +23,7 @@ export class TextFieldComponent implements OnInit, ControlValueAccessor {
 		transform: booleanAttribute,
 	});
 
-	public type: InputSignal<'text' | 'email'> = input<'text' | 'email'>('text');
+	public type: InputSignal<TextFieldTypeInput> = input<TextFieldTypeInput>('text');
 	public id: InputSignal<string> = input.required<string>();
 	public name: InputSignal<string> = input.required<string>();
 	public placeholder: InputSignal<string> = input<string>('');

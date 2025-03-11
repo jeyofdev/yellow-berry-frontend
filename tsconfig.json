@@ -23,6 +23,7 @@
 			"@features/*": ["app/features/*"],
 			"@shared/*": ["app/shared/*"],
 			"@models/*": ["app/core/models/*"],
+			"@type/*": ["app/core/types/*"],
 			"@services/*": ["app/core/services/*"],
 			"@theme/*": ["theme/*"]
 		}

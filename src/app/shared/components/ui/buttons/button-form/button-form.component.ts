@@ -1,4 +1,5 @@
 import { Component, InputSignal, input } from '@angular/core';
+import { ButtonFormTypeInput } from '@type/button-input.type';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -8,6 +9,6 @@ import { ButtonModule } from 'primeng/button';
 	styleUrl: './button-form.component.scss',
 })
 export class ButtonFormComponent {
-	public type: InputSignal<'submit' | 'reset'> = input<'submit' | 'reset'>('submit');
+	public type: InputSignal<ButtonFormTypeInput> = input<ButtonFormTypeInput>('submit');
 	public label: InputSignal<string> = input.required<string>();
 }
