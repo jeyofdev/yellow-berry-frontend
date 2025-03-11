@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormAuthLogin } from '@models/form/form-auth-login.model';
+import { AuthService } from '@services/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
 import { PasswordFieldComponent } from '@shared/components/ui/form/password-field/password-field.component';
@@ -45,7 +46,10 @@ export class LoginPageComponent implements OnInit {
 	public emailCtrl!: FormControl<string | null>;
 	public passwordCtrl!: FormControl<string | null>;
 
-	constructor(private _formBuilder: FormBuilder) {}
+	constructor(
+		private _formBuilder: FormBuilder,
+		private _authService: AuthService,
+	) {}
 
 	ngOnInit(): void {
 		this.initFormControls();
@@ -53,7 +57,21 @@ export class LoginPageComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		console.log('form is submit with value : ', this.mainForm.value);
+		if (this.mainForm.value.email && this.mainForm.value.password) {
+			const loginRequest = {
+				email: this.mainForm.value.email ?? '',
+				password: this.mainForm.value.password ?? '',
+			};
+			this._authService.login(loginRequest).subscribe({
+				next: response => {
+					console.log('Login successful', response);
+					console.log(this._authService.getLoggedIn() ? 'User is logged in.' : 'User is not logged in.');
+				},
+				error: err => {
+					console.error('Error during login', err);
+				},
+			});
+		}
 	}
 
 	private initMainForm() {
