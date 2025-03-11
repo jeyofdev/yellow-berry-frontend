@@ -1,13 +1,13 @@
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LayoutComponent } from '@shared/components/ui/layout/layout.component';
+import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
 import { MenuItem } from 'primeng/api';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ImageModule } from 'primeng/image';
 
 @Component({
 	selector: 'app-breadcrumb',
-	imports: [BreadcrumbModule, LayoutComponent, ImageModule],
+	imports: [BreadcrumbModule, LayoutBaseComponent, ImageModule],
 	templateUrl: './breadcrumb.component.html',
 	styleUrl: './breadcrumb.component.scss',
 })

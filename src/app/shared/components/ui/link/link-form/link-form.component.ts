@@ -1,4 +1,5 @@
 import { Component, InputSignal, OnInit, input } from '@angular/core';
+import { LinkClassNameInput } from '@type/link-input.type';
 
 @Component({
 	selector: 'app-link-form',
@@ -8,7 +9,7 @@ import { Component, InputSignal, OnInit, input } from '@angular/core';
 })
 export class LinkFormComponent implements OnInit {
 	public label: InputSignal<string> = input.required<string>();
-	public styleClass: InputSignal<'next' | 'info'> = input<'next' | 'info'>('next');
+	public styleClass: InputSignal<LinkClassNameInput> = input<LinkClassNameInput>('next');
 
 	public className!: string;
 

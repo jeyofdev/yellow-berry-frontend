@@ -9,7 +9,8 @@ import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-f
 import { HeaderNavigationComponent } from '@shared/components/ui/header/header-navigation/header-navigation.component';
 import { HeaderPrimaryNavigationComponent } from '@shared/components/ui/header/header-primary-navigation/header-primary-navigation.component';
 import { HeaderTopbarComponent } from '@shared/components/ui/header/header-topbar/header-topbar.component';
-import { LayoutComponent } from '@shared/components/ui/layout/layout.component';
+import { LayoutAuthFormComponent } from '@shared/components/ui/layout/layout-auth-form/layout-auth-form.component';
+import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
 import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-form.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -18,7 +19,7 @@ import { PasswordModule } from 'primeng/password';
 @Component({
 	selector: 'app-login',
 	imports: [
-		LayoutComponent,
+		LayoutBaseComponent,
 		HeaderTopbarComponent,
 		HeaderNavigationComponent,
 		HeaderPrimaryNavigationComponent,
@@ -33,6 +34,7 @@ import { PasswordModule } from 'primeng/password';
 		PasswordFieldComponent,
 		ButtonFormComponent,
 		LinkFormComponent,
+		LayoutAuthFormComponent,
 	],
 	templateUrl: './login-page.component.html',
 	styleUrl: './login-page.component.scss',

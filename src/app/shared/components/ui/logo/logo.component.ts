@@ -1,7 +1,6 @@
 import { Component, InputSignal, OnInit, input } from '@angular/core';
+import { LogoTextPositionInput } from '@type/logo-input.type';
 import { ImageModule } from 'primeng/image';
-
-type LogoTextPositionInput = 'left' | 'right';
 
 @Component({
 	selector: 'app-logo',
