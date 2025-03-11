@@ -1,0 +1,179 @@
+<header class="flex flex-col justify-center">
+  <div class="hidden md:block justify-between bg-gray-700 w-full py-1.5">
+    <app-layout-base justifyContent="justify-center">
+      <app-header-topbar class="w-full"></app-header-topbar>
+    </app-layout-base>
+  </div>
+
+  <app-layout-base
+    class="bg-white w-full py-1.5 lg:border-b border-b-gray-200"
+    justifyContent="justify-start "
+  >
+    <app-header-navigation class="w-full"></app-header-navigation>
+  </app-layout-base>
+
+  <app-layout-base
+    class="bg-white w-full py-1.5 border-b border-b-gray-200"
+    justifyContent="justify-start "
+  >
+    <app-header-primary-navigation
+      class="w-full hidden lg:flex"
+    ></app-header-primary-navigation>
+
+    <app-search-field class="w-full lg:hidden"></app-search-field>
+  </app-layout-base>
+</header>
+
+<app-breadcrumb></app-breadcrumb>
+
+<app-layout-auth-form
+  subtitle="Best place to buy and sell digital products"
+  pageTitleSecondary="Register"
+>
+  <form
+    #loginForm="ngForm"
+    [formGroup]="mainForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
+  >
+    <ng-container [formGroup]="userInfoGroup">
+      <app-text-field
+        labelFor="lastname"
+        label="First name"
+        isRequired
+        id="firstname"
+        name="firstname"
+        placeholder="Enter your firstname"
+        [parentForm]="mainForm"
+        groupName="userInfoGroup"
+        formControlName="firstname"
+        controlName="firstname"
+      ></app-text-field>
+
+      <app-text-field
+        labelFor="lastname"
+        label="Last name"
+        isRequired
+        id="lastname"
+        name="lastname"
+        placeholder="Enter your lastname"
+        [parentForm]="mainForm"
+        groupName="userInfoGroup"
+        formControlName="lastname"
+        controlName="lastname"
+      ></app-text-field>
+    </ng-container>
+
+    <ng-container [formGroup]="userContactGroup">
+      <app-text-field
+        labelFor="email"
+        label="Email"
+        isRequired
+        id="email"
+        name="email"
+        placeholder="Enter your email"
+        [parentForm]="mainForm"
+        groupName="userContactGroup"
+        formControlName="email"
+        controlName="email"
+      ></app-text-field>
+
+      <app-mask-field
+        labelFor="phone"
+        label="Phone"
+        isRequired
+        id="phone"
+        name="phone"
+        type="phone"
+        [parentForm]="mainForm"
+        groupName="userContactGroup"
+        formControlName="phone"
+        controlName="phone"
+      ></app-mask-field>
+    </ng-container>
+    <ng-container [formGroup]="userAddressGroup">
+      <app-text-field
+        labelFor="address"
+        label="Address"
+        isRequired
+        id="address"
+        name="address"
+        placeholder="Enter your address"
+        [parentForm]="mainForm"
+        groupName="userAddressGroup"
+        formControlName="address"
+        controlName="address"
+      ></app-text-field>
+
+      <app-text-field
+        labelFor="region"
+        label="Region"
+        isRequired
+        id="region"
+        name="region"
+        placeholder="Enter your region"
+        [parentForm]="mainForm"
+        groupName="userAddressGroup"
+        formControlName="region"
+        controlName="region"
+      ></app-text-field>
+
+      <app-text-field
+        labelFor="department"
+        label="Department"
+        isRequired
+        id="department"
+        name="department"
+        placeholder="Enter your department"
+        [parentForm]="mainForm"
+        groupName="userAddressGroup"
+        formControlName="department"
+        controlName="department"
+      ></app-text-field>
+
+      <!-- <app-text-field
+        labelFor="zipCode"
+        label="Zipcode"
+        isRequired
+        id="zipCode"
+        name="zipCode"
+        placeholder="Enter your zipCode"
+        [parentForm]="mainForm"
+        groupName="userAddressGroup"
+        formControlName="zipCode"
+        controlName="zipCode"
+      ></app-text-field> -->
+
+      <app-mask-field
+        labelFor="zipCode"
+        label="ZipCode"
+        isRequired
+        id="zipCode"
+        name="zipCode"
+        type="zipCode"
+        [parentForm]="mainForm"
+        groupName="userContactGroup"
+        formControlName="zipCode"
+        controlName="zipCode"
+      ></app-mask-field>
+
+      <app-text-field
+        labelFor="city"
+        label="city"
+        isRequired
+        id="city"
+        name="city"
+        placeholder="Enter your city"
+        [parentForm]="mainForm"
+        groupName="userAddressGroup"
+        formControlName="city"
+        controlName="city"
+      ></app-text-field>
+    </ng-container>
+
+    <div class="flex justify-between items-center">
+      <app-button-form label="Login"></app-button-form>
+      <app-link-form label="register"></app-link-form>
+    </div>
+  </form>
+</app-layout-auth-form>

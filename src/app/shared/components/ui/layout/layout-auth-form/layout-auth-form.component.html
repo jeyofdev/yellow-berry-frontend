@@ -8,10 +8,12 @@
           class="text-[1.5625rem] text-gray-700 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
           >{{ pageTitleSecondary() }}</span
         >
+        @if(pageTitlePrimary()) {
         <span
           class="text-[1.5625rem] text-primary-500 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize ml-1.5"
           >{{ pageTitlePrimary() }}</span
         >
+        }
       </h1>
 
       <p

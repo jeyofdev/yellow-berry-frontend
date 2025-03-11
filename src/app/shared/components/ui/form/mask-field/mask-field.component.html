@@ -4,16 +4,15 @@
     class="text-[0.9375rem] text-gray-500 leading-[1.625rem] tracking-[0.02rem] font-poppins font-normal mb-0.5 capitalize"
     >{{ fullLabel }}</label
   >
-  <input
-    [type]="type()"
-    pInputText
-    [id]="id()"
+  <p-inputmask
+    [inputId]="id()"
     [name]="name()"
-    [placeholder]="placeholder()"
-    [value]="value"
+    [placeholder]="placeholder"
+    [mask]="mask"
+    [autoClear]="autoClear()"
     [disabled]="disabled"
-    formControlName="email"
-    (input)="onInputChange($event)"
+    [(ngModel)]="value"
+    (onInput)="onInputMaskChange($event)"
     (focus)="markAsTouched()"
   />
 </div>

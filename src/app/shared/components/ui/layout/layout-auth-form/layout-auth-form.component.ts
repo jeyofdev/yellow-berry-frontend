@@ -10,5 +10,5 @@ import { LayoutBaseComponent } from '../layout-base/layout-base.component';
 export class LayoutAuthFormComponent {
 	public subtitle: InputSignal<string> = input.required<string>();
 	public pageTitleSecondary: InputSignal<string> = input.required<string>();
-	public pageTitlePrimary: InputSignal<string> = input.required<string>();
+	public pageTitlePrimary: InputSignal<string> = input<string>('');
 }

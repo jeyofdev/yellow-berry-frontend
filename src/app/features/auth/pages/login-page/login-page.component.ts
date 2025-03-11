@@ -20,6 +20,8 @@ import { PasswordModule } from 'primeng/password';
 @Component({
 	selector: 'app-login',
 	imports: [
+		FormsModule,
+		ReactiveFormsModule,
 		LayoutBaseComponent,
 		HeaderTopbarComponent,
 		HeaderNavigationComponent,
@@ -27,8 +29,6 @@ import { PasswordModule } from 'primeng/password';
 		SearchFieldComponent,
 		BreadcrumbComponent,
 		InputTextModule,
-		FormsModule,
-		ReactiveFormsModule,
 		PasswordModule,
 		ButtonModule,
 		TextFieldComponent,
