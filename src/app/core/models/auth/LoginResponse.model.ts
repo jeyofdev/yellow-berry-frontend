@@ -1,6 +1,6 @@
 export class LoginResponse {
 	constructor(
-		private token: string,
-		private message: string,
+		public token: string,
+		public message: string,
 	) {}
 }
