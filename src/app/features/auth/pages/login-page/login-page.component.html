@@ -1,18 +1,18 @@
 <header class="flex flex-col justify-center">
   <div class="hidden md:block justify-between bg-gray-700 w-full py-1.5">
-    <app-layout justifyContent="justify-center">
+    <app-layout-base justifyContent="justify-center">
       <app-header-topbar class="w-full"></app-header-topbar>
-    </app-layout>
+    </app-layout-base>
   </div>
 
-  <app-layout
+  <app-layout-base
     class="bg-white w-full py-1.5 lg:border-b border-b-gray-200"
     justifyContent="justify-start "
   >
     <app-header-navigation class="w-full"></app-header-navigation>
-  </app-layout>
+  </app-layout-base>
 
-  <app-layout
+  <app-layout-base
     class="bg-white w-full py-1.5 border-b border-b-gray-200"
     justifyContent="justify-start "
   >
@@ -21,75 +21,53 @@
     ></app-header-primary-navigation>
 
     <app-search-field class="w-full lg:hidden"></app-search-field>
-  </app-layout>
+  </app-layout-base>
 </header>
 
 <app-breadcrumb></app-breadcrumb>
 
-<div class="flex flex-col justify-center">
-  <app-layout justifyContent="justify-center" alignItems="items-center">
-    <div
-      class="py-8 flex flex-col justify-center items-center gap-3 w-full max-w-[31.25rem]"
-    >
-      <h1>
-        <span
-          class="text-[1.5625rem] text-gray-700 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
-          >Log</span
-        >
-        <span
-          class="text-[1.5625rem] text-primary-500 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize ml-1.5"
-          >In</span
-        >
-      </h1>
+<app-layout-auth-form
+  subtitle="Best place to buy and sell digital products"
+  pageTitleSecondary="Log"
+  pageTitlePrimary="In"
+>
+  <form
+    #loginForm="ngForm"
+    [formGroup]="mainForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
+  >
+    <app-text-field
+      labelFor="email"
+      label="Email"
+      isRequired
+      id="email"
+      name="email"
+      placeholder="Enter your email"
+      [parentForm]="mainForm"
+      formControlName="email"
+      controlName="email"
+    ></app-text-field>
 
-      <p
-        class="text-sm text-gray-700 leading-[1.125rem] tracking-[0.03rem] font-poppins font-light text-center"
-      >
-        Best place to buy and sell digital products
-      </p>
+    <app-password-field
+      labelFor="password"
+      label="Password"
+      isRequired
+      id="password"
+      name="password"
+      placeholder="Enter your password"
+      [feedback]="false"
+      [toggleMask]="true"
+      [parentForm]="mainForm"
+      formControlName="password"
+      controlName="password"
+    ></app-password-field>
 
-      <form
-        #loginForm="ngForm"
-        [formGroup]="mainForm"
-        (ngSubmit)="onSubmit()"
-        class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
-      >
-        <app-text-field
-          labelFor="email"
-          label="Email"
-          isRequired
-          id="email"
-          name="email"
-          placeholder="Enter your email"
-          [parentForm]="mainForm"
-          formControlName="email"
-          controlName="email"
-        ></app-text-field>
+    <app-link-form label="Forgot password ?" styleClass="info"></app-link-form>
 
-        <app-password-field
-          labelFor="password"
-          label="Password"
-          isRequired
-          id="password"
-          name="password"
-          placeholder="Enter your password"
-          [feedback]="false"
-          [toggleMask]="true"
-          [parentForm]="mainForm"
-          formControlName="password"
-          controlName="password"
-        ></app-password-field>
-
-        <app-link-form
-          label="Forgot password ?"
-          styleClass="info"
-        ></app-link-form>
-
-        <div class="flex justify-between items-center">
-          <app-button-form label="Login"></app-button-form>
-          <app-link-form label="register"></app-link-form>
-        </div>
-      </form>
+    <div class="flex justify-between items-center">
+      <app-button-form label="Login"></app-button-form>
+      <app-link-form label="register"></app-link-form>
     </div>
-  </app-layout>
-</div>
+  </form>
+</app-layout-auth-form>

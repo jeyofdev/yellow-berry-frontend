@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, InputSignal, OnInit, input } from '@angular/core';
 
 @Component({
-	selector: 'app-layout',
+	selector: 'app-layout-base',
 	imports: [CommonModule],
-	templateUrl: './layout.component.html',
+	templateUrl: './layout-base.component.html',
 })
-export class LayoutComponent implements OnInit {
+export class LayoutBaseComponent implements OnInit {
 	public justifyContent: InputSignal<string> = input.required<string>();
 	public alignItems: InputSignal<string> = input<string>('items-start');
 	public flexDirection: InputSignal<string> = input<string>('flex-row');
