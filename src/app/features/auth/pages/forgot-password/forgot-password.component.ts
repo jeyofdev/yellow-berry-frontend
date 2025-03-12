@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormAuthForgotPassword } from '@models/form/form-auth-forgot-password.model';
+import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonBackComponent } from '@shared/components/ui/buttons/button-back/button-back.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
@@ -36,6 +37,7 @@ export class ForgotPasswordComponent implements OnInit {
 	public emailCtrl!: FormControl<string | null>;
 
 	private _formBuilder: FormBuilder = inject(FormBuilder);
+	private _authService: AuthService = inject(AuthService);
 
 	ngOnInit(): void {
 		this.initFormControls();
@@ -43,7 +45,16 @@ export class ForgotPasswordComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		console.log('forgot password form datas : ', this.mainForm.value);
+		const email = this.mainForm.value.email ?? '';
+
+		this._authService.forgotPassword(email).subscribe({
+			next: response => {
+				console.log('Forgot password query successful', response);
+			},
+			error: err => {
+				console.error('Error during forgot password query', err);
+			},
+		});
 	}
 
 	private initMainForm() {

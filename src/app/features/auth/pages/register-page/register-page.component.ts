@@ -78,10 +78,10 @@ export class RegisterPageComponent {
 			})
 			.subscribe({
 				next: response => {
-					console.log('Login successful', response);
+					console.log('Register successful', response);
 				},
 				error: err => {
-					console.error('Error during login', err);
+					console.error('Error during register', err);
 				},
 			});
 	}

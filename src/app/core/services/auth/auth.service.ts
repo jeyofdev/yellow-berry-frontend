@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { LoginRequest } from '@models/auth/LoginRequest.model';
 import { LoginResponse } from '@models/auth/LoginResponse.model';
+import { MessageResponse } from '@models/auth/MessageResponse.model';
 import { RegisterRequest } from '@models/auth/RegisterRequest.model';
 import { RegisterResponse } from '@models/auth/RegisterResponse.model';
 import { LocalStorageService } from '@services/auth/local-storage.service';
-import { Observable, switchMap, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -29,6 +30,10 @@ export class AuthService {
 				this.setLoggedIn(true);
 			}),
 		);
+	}
+
+	public forgotPassword(email: string): Observable<MessageResponse> {
+		return this._httpClient.post<MessageResponse>(this.BASE_URL + `/forgot-password?email=${email}`, {});
 	}
 
 	public setLoggedIn(value: boolean) {
