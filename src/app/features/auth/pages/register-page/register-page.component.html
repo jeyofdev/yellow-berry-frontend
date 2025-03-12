@@ -29,6 +29,7 @@
 <app-layout-auth-form
   subtitle="Best place to buy and sell digital products"
   pageTitleSecondary="Register"
+  maxWidth="max-w-[56.25rem]"
 >
   <form
     #loginForm="ngForm"
@@ -36,7 +37,10 @@
     (ngSubmit)="onSubmit()"
     class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
   >
-    <ng-container [formGroup]="userInfoGroup">
+    <div
+      [formGroup]="userInfoGroup"
+      class="flex flex-col sm:flex-row justify-between gap-x-6 gap-y-5"
+    >
       <app-text-field
         labelFor="lastname"
         label="First name"
@@ -48,6 +52,7 @@
         groupName="userInfoGroup"
         formControlName="firstname"
         controlName="firstname"
+        class="w-full"
       ></app-text-field>
 
       <app-text-field
@@ -61,10 +66,14 @@
         groupName="userInfoGroup"
         formControlName="lastname"
         controlName="lastname"
+        class="w-full"
       ></app-text-field>
-    </ng-container>
+    </div>
 
-    <ng-container [formGroup]="userContactGroup">
+    <div
+      [formGroup]="userContactGroup"
+      class="flex flex-col sm:flex-row justify-between gap-x-6 gap-y-5"
+    >
       <app-text-field
         labelFor="email"
         label="Email"
@@ -76,6 +85,7 @@
         groupName="userContactGroup"
         formControlName="email"
         controlName="email"
+        class="w-full"
       ></app-text-field>
 
       <app-mask-field
@@ -89,91 +99,98 @@
         groupName="userContactGroup"
         formControlName="phone"
         controlName="phone"
+        class="w-full"
       ></app-mask-field>
-    </ng-container>
-    <ng-container [formGroup]="userAddressGroup">
-      <app-text-field
-        labelFor="address"
-        label="Address"
-        isRequired
-        id="address"
-        name="address"
-        placeholder="Enter your address"
-        [parentForm]="mainForm"
-        groupName="userAddressGroup"
-        formControlName="address"
-        controlName="address"
-      ></app-text-field>
+    </div>
 
-      <app-text-field
-        labelFor="region"
-        label="Region"
-        isRequired
-        id="region"
-        name="region"
-        placeholder="Enter your region"
-        [parentForm]="mainForm"
-        groupName="userAddressGroup"
-        formControlName="region"
-        controlName="region"
-      ></app-text-field>
+    <div
+      [formGroup]="userAddressGroup"
+      class="flex flex-col justify-between gap-x-5 flex-wrap gap-y-4"
+    >
+      <div class="w-full">
+        <app-text-field
+          labelFor="address"
+          label="Address"
+          isRequired
+          id="address"
+          name="address"
+          placeholder="Enter your address"
+          [parentForm]="mainForm"
+          groupName="userAddressGroup"
+          formControlName="address"
+          controlName="address"
+          class="w-full"
+        ></app-text-field>
+      </div>
 
-      <app-text-field
-        labelFor="department"
-        label="Department"
-        isRequired
-        id="department"
-        name="department"
-        placeholder="Enter your department"
-        [parentForm]="mainForm"
-        groupName="userAddressGroup"
-        formControlName="department"
-        controlName="department"
-      ></app-text-field>
+      <div
+        class="flex flex-col sm:flex-row justify-between gap-x-5 flex-wrap gap-y-5 w-full"
+      >
+        <div class="w-full sm:w-[calc(50%-0.75rem)]">
+          <app-text-field
+            labelFor="region"
+            label="Region"
+            isRequired
+            id="region"
+            name="region"
+            placeholder="Enter your region"
+            [parentForm]="mainForm"
+            groupName="userAddressGroup"
+            formControlName="region"
+            controlName="region"
+          ></app-text-field>
+        </div>
 
-      <!-- <app-text-field
-        labelFor="zipCode"
-        label="Zipcode"
-        isRequired
-        id="zipCode"
-        name="zipCode"
-        placeholder="Enter your zipCode"
-        [parentForm]="mainForm"
-        groupName="userAddressGroup"
-        formControlName="zipCode"
-        controlName="zipCode"
-      ></app-text-field> -->
+        <div class="w-full sm:w-[calc(50%-0.75rem)]">
+          <app-text-field
+            labelFor="department"
+            label="Department"
+            isRequired
+            id="department"
+            name="department"
+            placeholder="Enter your department"
+            [parentForm]="mainForm"
+            groupName="userAddressGroup"
+            formControlName="department"
+            controlName="department"
+          ></app-text-field>
+        </div>
 
-      <app-mask-field
-        labelFor="zipCode"
-        label="ZipCode"
-        isRequired
-        id="zipCode"
-        name="zipCode"
-        type="zipCode"
-        [parentForm]="mainForm"
-        groupName="userContactGroup"
-        formControlName="zipCode"
-        controlName="zipCode"
-      ></app-mask-field>
+        <div class="w-full sm:w-[calc(50%-0.75rem)]">
+          <app-mask-field
+            labelFor="zipCode"
+            label="ZipCode"
+            isRequired
+            id="zipCode"
+            name="zipCode"
+            type="zipCode"
+            [parentForm]="mainForm"
+            groupName="userContactGroup"
+            formControlName="zipCode"
+            controlName="zipCode"
+          ></app-mask-field>
+        </div>
 
-      <app-text-field
-        labelFor="city"
-        label="city"
-        isRequired
-        id="city"
-        name="city"
-        placeholder="Enter your city"
-        [parentForm]="mainForm"
-        groupName="userAddressGroup"
-        formControlName="city"
-        controlName="city"
-      ></app-text-field>
-    </ng-container>
+        <div class="w-full sm:w-[calc(50%-0.75rem)]">
+          <app-text-field
+            labelFor="city"
+            label="City"
+            isRequired
+            id="city"
+            name="city"
+            placeholder="Enter your city"
+            [parentForm]="mainForm"
+            groupName="userAddressGroup"
+            formControlName="city"
+            controlName="city"
+          ></app-text-field>
+        </div>
+      </div>
+    </div>
 
-    <div class="flex justify-between items-center">
-      <app-button-form label="Login"></app-button-form>
-      <app-link-form label="register"></app-link-form>
+    <div class="flex justify-between items-center mt-2">
+      <app-button-form label="Register"></app-button-form>
+      <app-link-form label="Login"></app-link-form>
     </div>
   </form>
 </app-layout-auth-form>
