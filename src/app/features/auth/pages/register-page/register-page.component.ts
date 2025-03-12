@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RoleEnum } from '@enum/role-enum.enum';
 import { FormAuthLogin } from '@models/form/form-auth-login.model';
 import { FormAuthRegisterAddress } from '@models/form/form-auth-register-address.model';
 import { FormAuthRegisterContact } from '@models/form/form-auth-register-contact.model';
 import { FormAuthRegisterInfo } from '@models/form/form-auth-register-info.model';
 import { FormAuthRegister } from '@models/form/form-auth-register.model';
+import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
 import { MaskFieldComponent } from '@shared/components/ui/form/mask-field/mask-field.component';
@@ -53,7 +55,8 @@ export class RegisterPageComponent {
 	public zipCodeCtrl!: FormControl<string | null>;
 	public cityCtrl!: FormControl<string | null>;
 
-	constructor(private _formBuilder: FormBuilder) {}
+	private _formBuilder: FormBuilder = inject(FormBuilder);
+	private _authService: AuthService = inject(AuthService);
 
 	ngOnInit(): void {
 		this.initFormControls();
@@ -62,6 +65,20 @@ export class RegisterPageComponent {
 
 	onSubmit(): void {
 		console.log('register datas : ', this.mainForm.value);
+		this._authService
+			.register({
+				email: 'ttest@teest.toto',
+				password: 'toTo12345*4',
+				role: RoleEnum.USER,
+			})
+			.subscribe({
+				next: response => {
+					console.log('Login successful', response);
+				},
+				error: err => {
+					console.error('Error during login', err);
+				},
+			});
 	}
 
 	private initMainForm() {
