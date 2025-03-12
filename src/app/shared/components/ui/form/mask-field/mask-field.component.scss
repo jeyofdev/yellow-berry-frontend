@@ -1,0 +1,11 @@
+:host ::ng-deep p-inputmask {
+  @apply border-0;
+
+  .p-inputmask {
+    @apply w-full;
+  }
+}
+
+:host ::ng-deep p-inputmask .p-inputmask {
+  @apply w-full rounded-[0.625rem] border border-gray-200 h-12 text-sm text-gray-500 tracking-[0.03125rem] font-poppins font-normal placeholder-stone-300;
+}

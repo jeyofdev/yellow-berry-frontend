@@ -3,7 +3,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { LoginRequest } from '@models/auth/LoginRequest.model';
 import { LoginResponse } from '@models/auth/LoginResponse.model';
 import { LocalStorageService } from '@services/auth/local-storage.service';
-import { Observable, catchError, of, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',

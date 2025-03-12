@@ -1,0 +1,196 @@
+<header class="flex flex-col justify-center">
+  <div class="hidden md:block justify-between bg-gray-700 w-full py-1.5">
+    <app-layout-base justifyContent="justify-center">
+      <app-header-topbar class="w-full"></app-header-topbar>
+    </app-layout-base>
+  </div>
+
+  <app-layout-base
+    class="bg-white w-full py-1.5 lg:border-b border-b-gray-200"
+    justifyContent="justify-start "
+  >
+    <app-header-navigation class="w-full"></app-header-navigation>
+  </app-layout-base>
+
+  <app-layout-base
+    class="bg-white w-full py-1.5 border-b border-b-gray-200"
+    justifyContent="justify-start "
+  >
+    <app-header-primary-navigation
+      class="w-full hidden lg:flex"
+    ></app-header-primary-navigation>
+
+    <app-search-field class="w-full lg:hidden"></app-search-field>
+  </app-layout-base>
+</header>
+
+<app-breadcrumb></app-breadcrumb>
+
+<app-layout-auth-form
+  subtitle="Best place to buy and sell digital products"
+  pageTitleSecondary="Register"
+  maxWidth="max-w-[56.25rem]"
+>
+  <form
+    #loginForm="ngForm"
+    [formGroup]="mainForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
+  >
+    <div
+      [formGroup]="userInfoGroup"
+      class="flex flex-col sm:flex-row justify-between gap-x-6 gap-y-5"
+    >
+      <app-text-field
+        labelFor="lastname"
+        label="First name"
+        isRequired
+        id="firstname"
+        name="firstname"
+        placeholder="Enter your firstname"
+        [parentForm]="mainForm"
+        groupName="userInfoGroup"
+        formControlName="firstname"
+        controlName="firstname"
+        class="w-full"
+      ></app-text-field>
+
+      <app-text-field
+        labelFor="lastname"
+        label="Last name"
+        isRequired
+        id="lastname"
+        name="lastname"
+        placeholder="Enter your lastname"
+        [parentForm]="mainForm"
+        groupName="userInfoGroup"
+        formControlName="lastname"
+        controlName="lastname"
+        class="w-full"
+      ></app-text-field>
+    </div>
+
+    <div
+      [formGroup]="userContactGroup"
+      class="flex flex-col sm:flex-row justify-between gap-x-6 gap-y-5"
+    >
+      <app-text-field
+        labelFor="email"
+        label="Email"
+        isRequired
+        id="email"
+        name="email"
+        placeholder="Enter your email"
+        [parentForm]="mainForm"
+        groupName="userContactGroup"
+        formControlName="email"
+        controlName="email"
+        class="w-full"
+      ></app-text-field>
+
+      <app-mask-field
+        labelFor="phone"
+        label="Phone"
+        isRequired
+        id="phone"
+        name="phone"
+        type="phone"
+        [parentForm]="mainForm"
+        groupName="userContactGroup"
+        formControlName="phone"
+        controlName="phone"
+        class="w-full"
+      ></app-mask-field>
+    </div>
+
+    <div
+      [formGroup]="userAddressGroup"
+      class="flex flex-col justify-between gap-x-5 flex-wrap gap-y-4"
+    >
+      <div class="w-full">
+        <app-text-field
+          labelFor="address"
+          label="Address"
+          isRequired
+          id="address"
+          name="address"
+          placeholder="Enter your address"
+          [parentForm]="mainForm"
+          groupName="userAddressGroup"
+          formControlName="address"
+          controlName="address"
+          class="w-full"
+        ></app-text-field>
+      </div>
+
+      <div
+        class="flex flex-col sm:flex-row justify-between gap-x-5 flex-wrap gap-y-5 w-full"
+      >
+        <div class="w-full sm:w-[calc(50%-0.75rem)]">
+          <app-text-field
+            labelFor="region"
+            label="Region"
+            isRequired
+            id="region"
+            name="region"
+            placeholder="Enter your region"
+            [parentForm]="mainForm"
+            groupName="userAddressGroup"
+            formControlName="region"
+            controlName="region"
+          ></app-text-field>
+        </div>
+
+        <div class="w-full sm:w-[calc(50%-0.75rem)]">
+          <app-text-field
+            labelFor="department"
+            label="Department"
+            isRequired
+            id="department"
+            name="department"
+            placeholder="Enter your department"
+            [parentForm]="mainForm"
+            groupName="userAddressGroup"
+            formControlName="department"
+            controlName="department"
+          ></app-text-field>
+        </div>
+
+        <div class="w-full sm:w-[calc(50%-0.75rem)]">
+          <app-mask-field
+            labelFor="zipCode"
+            label="ZipCode"
+            isRequired
+            id="zipCode"
+            name="zipCode"
+            type="zipCode"
+            [parentForm]="mainForm"
+            groupName="userContactGroup"
+            formControlName="zipCode"
+            controlName="zipCode"
+          ></app-mask-field>
+        </div>
+
+        <div class="w-full sm:w-[calc(50%-0.75rem)]">
+          <app-text-field
+            labelFor="city"
+            label="City"
+            isRequired
+            id="city"
+            name="city"
+            placeholder="Enter your city"
+            [parentForm]="mainForm"
+            groupName="userAddressGroup"
+            formControlName="city"
+            controlName="city"
+          ></app-text-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center mt-2">
+      <app-button-form label="Register"></app-button-form>
+      <app-link-form label="Login"></app-link-form>
+    </div>
+  </form>
+</app-layout-auth-form>
