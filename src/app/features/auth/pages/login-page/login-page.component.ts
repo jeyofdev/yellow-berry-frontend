@@ -10,7 +10,7 @@ import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-f
 import { HeaderNavigationComponent } from '@shared/components/ui/header/header-navigation/header-navigation.component';
 import { HeaderPrimaryNavigationComponent } from '@shared/components/ui/header/header-primary-navigation/header-primary-navigation.component';
 import { HeaderTopbarComponent } from '@shared/components/ui/header/header-topbar/header-topbar.component';
-import { LayoutAuthFormComponent } from '@shared/components/ui/layout/layout-auth-form/layout-auth-form.component';
+import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
 import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-form.component';
 import { ButtonModule } from 'primeng/button';
@@ -35,7 +35,7 @@ import { PasswordModule } from 'primeng/password';
 		PasswordFieldComponent,
 		ButtonFormComponent,
 		LinkFormComponent,
-		LayoutAuthFormComponent,
+		LayoutAuthContentComponent,
 	],
 	templateUrl: './login-page.component.html',
 	styleUrl: './login-page.component.scss',

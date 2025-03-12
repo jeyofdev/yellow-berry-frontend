@@ -1,11 +1,10 @@
 import { Component, InputSignal, input } from '@angular/core';
 
 @Component({
-	selector: 'app-button-back',
+	selector: 'app-link-back',
 	imports: [],
-	templateUrl: './button-back.component.html',
-	styleUrl: './button-back.component.scss',
+	templateUrl: './link-back.component.html',
 })
-export class ButtonBackComponent {
+export class LinkBackComponent {
 	public label: InputSignal<string> = input.required<string>();
 }

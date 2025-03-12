@@ -16,7 +16,7 @@ import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-f
 import { HeaderNavigationComponent } from '@shared/components/ui/header/header-navigation/header-navigation.component';
 import { HeaderPrimaryNavigationComponent } from '@shared/components/ui/header/header-primary-navigation/header-primary-navigation.component';
 import { HeaderTopbarComponent } from '@shared/components/ui/header/header-topbar/header-topbar.component';
-import { LayoutAuthFormComponent } from '@shared/components/ui/layout/layout-auth-form/layout-auth-form.component';
+import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
 import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-form.component';
 
@@ -31,7 +31,7 @@ import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-for
 		HeaderPrimaryNavigationComponent,
 		SearchFieldComponent,
 		BreadcrumbComponent,
-		LayoutAuthFormComponent,
+		LayoutAuthContentComponent,
 		ButtonFormComponent,
 		LinkFormComponent,
 		TextFieldComponent,
