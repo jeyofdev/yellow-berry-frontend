@@ -1,15 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoleEnum } from '@enum/role-enum.enum';
-import { FormAuthLogin } from '@models/form/form-auth-login.model';
 import { FormAuthRegisterAddress } from '@models/form/form-auth-register-address.model';
 import { FormAuthRegisterContact } from '@models/form/form-auth-register-contact.model';
 import { FormAuthRegisterInfo } from '@models/form/form-auth-register-info.model';
+import { FormAuthRegisterPassword } from '@models/form/form-auth-register-password.model';
 import { FormAuthRegister } from '@models/form/form-auth-register.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
 import { MaskFieldComponent } from '@shared/components/ui/form/mask-field/mask-field.component';
+import { PasswordFieldComponent } from '@shared/components/ui/form/password-field/password-field.component';
 import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';
 import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-field.component';
 import { HeaderNavigationComponent } from '@shared/components/ui/header/header-navigation/header-navigation.component';
@@ -35,6 +36,7 @@ import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-for
 		LinkFormComponent,
 		TextFieldComponent,
 		MaskFieldComponent,
+		PasswordFieldComponent,
 	],
 	templateUrl: './register-page.component.html',
 	styleUrl: './register-page.component.scss',
@@ -44,6 +46,7 @@ export class RegisterPageComponent {
 	public userInfoGroup!: FormGroup<FormAuthRegisterInfo>;
 	public userContactGroup!: FormGroup<FormAuthRegisterContact>;
 	public userAddressGroup!: FormGroup<FormAuthRegisterAddress>;
+	public userPasswordGroup!: FormGroup<FormAuthRegisterPassword>;
 
 	public firstnameCtrl!: FormControl<string | null>;
 	public lastnameCtrl!: FormControl<string | null>;
@@ -54,6 +57,8 @@ export class RegisterPageComponent {
 	public departmentCtrl!: FormControl<string | null>;
 	public zipCodeCtrl!: FormControl<string | null>;
 	public cityCtrl!: FormControl<string | null>;
+	public passwordCtrl!: FormControl<string | null>;
+	public confirmPasswordCtrl!: FormControl<string | null>;
 
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
@@ -67,8 +72,8 @@ export class RegisterPageComponent {
 		console.log('register datas : ', this.mainForm.value);
 		this._authService
 			.register({
-				email: 'ttest@teest.toto',
-				password: 'toTo12345*4',
+				email: this.mainForm.value.contact?.email ?? '',
+				password: this.mainForm.value.password?.password ?? '',
 				role: RoleEnum.USER,
 			})
 			.subscribe({
@@ -86,6 +91,7 @@ export class RegisterPageComponent {
 			info: this.userInfoGroup,
 			contact: this.userContactGroup,
 			address: this.userAddressGroup,
+			password: this.userPasswordGroup,
 		});
 	}
 
@@ -99,6 +105,8 @@ export class RegisterPageComponent {
 		this.departmentCtrl = this._formBuilder.control('');
 		this.cityCtrl = this._formBuilder.control('');
 		this.zipCodeCtrl = this._formBuilder.control('');
+		this.passwordCtrl = this._formBuilder.control('');
+		this.confirmPasswordCtrl = this._formBuilder.control('');
 
 		this.userInfoGroup = this._formBuilder.group({
 			firstname: this.firstnameCtrl,
@@ -116,6 +124,11 @@ export class RegisterPageComponent {
 			department: this.departmentCtrl,
 			zipCode: this.zipCodeCtrl,
 			city: this.cityCtrl,
+		});
+
+		this.userPasswordGroup = this._formBuilder.group({
+			password: this.passwordCtrl,
+			confirmPassword: this.confirmPasswordCtrl,
 		});
 	}
 }

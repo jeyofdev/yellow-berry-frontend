@@ -42,7 +42,7 @@
       class="flex flex-col sm:flex-row justify-between gap-x-6 gap-y-5"
     >
       <app-text-field
-        labelFor="lastname"
+        labelFor="fistname"
         label="First name"
         isRequired
         id="firstname"
@@ -186,6 +186,41 @@
           ></app-text-field>
         </div>
       </div>
+    </div>
+
+    <div
+      [formGroup]="userPasswordGroup"
+      class="flex flex-col sm:flex-row justify-between gap-x-6 gap-y-5"
+    >
+      <app-password-field
+        labelFor="password"
+        label="Password"
+        isRequired
+        id="password"
+        name="password"
+        placeholder="Enter your password"
+        toggleMask
+        [parentForm]="mainForm"
+        groupName="userPasswordGroup"
+        formControlName="password"
+        controlName="password"
+        class="w-full"
+      ></app-password-field>
+
+      <app-password-field
+        labelFor="confirmPassword"
+        label="Confirm password"
+        isRequired
+        id="confirmPassword"
+        name="confirmPassword"
+        placeholder="Enter your confirmPassword"
+        toggleMask
+        [parentForm]="mainForm"
+        groupName="userPasswordGroup"
+        formControlName="confirmPassword"
+        controlName="confirmPassword"
+        class="w-full"
+      ></app-password-field>
     </div>
 
     <div class="flex justify-between items-center mt-2">
