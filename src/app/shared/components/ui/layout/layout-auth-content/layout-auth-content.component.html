@@ -6,6 +6,7 @@
           class="text-[1.5625rem] text-gray-700 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
           >{{ pageTitleSecondary() }}</span
         >
+
         @if(pageTitlePrimary()) {
         <span
           class="text-[1.5625rem] text-primary-500 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize ml-1.5"
@@ -19,6 +20,12 @@
       >
         {{ subtitle() }}
       </p>
+      @if(email()) {
+      <span
+        class="text-sm text-gray-700 leading-[1.125rem] tracking-[0.03rem] font-poppins font-light text-center"
+        >{{ email() }}</span
+      >
+      }
       <ng-content></ng-content>
     </div>
   </app-layout-base>
