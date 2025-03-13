@@ -3,9 +3,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideRouter } from '@angular/router';
 
 import { provideHttpClient } from '@angular/common/http';
+import { routes } from '@routes/app.routes';
 import ThemePreset from '@theme/theme-preset';
 import { providePrimeNG } from 'primeng/config';
-import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
 	providers: [

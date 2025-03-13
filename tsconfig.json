@@ -26,6 +26,7 @@
 			"@type/*": ["app/core/types/*"],
 			"@abstract/*": ["app/core/abstract/*"],
 			"@enum/*": ["app/core/enums/*"],
+			"@routes/*": ["app/routes/*"],
 			"@services/*": ["app/core/services/*"],
 			"@theme/*": ["theme/*"]
 		}

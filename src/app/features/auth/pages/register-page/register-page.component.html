@@ -201,7 +201,10 @@
 
     <div class="flex justify-between items-center mt-2">
       <app-button-form label="Register"></app-button-form>
-      <app-link-form label="Login"></app-link-form>
+      <app-link-form
+        [route]="routeEnum.AUTH_LOGIN"
+        label="Login"
+      ></app-link-form>
     </div>
   </form>
 </app-layout-auth-content>

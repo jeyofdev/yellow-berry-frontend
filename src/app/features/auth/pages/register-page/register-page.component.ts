@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { RoleEnum } from '@enum/role-enum.enum';
+import { RouteEnum } from '@enum/route.enum';
 import { FormAuthRegisterAddress } from '@models/form/form-auth-register-address.model';
 import { FormAuthRegisterContact } from '@models/form/form-auth-register-contact.model';
 import { FormAuthRegisterInfo } from '@models/form/form-auth-register-info.model';
@@ -52,6 +54,8 @@ export class RegisterPageComponent {
 	public cityCtrl!: FormControl<string | null>;
 	public passwordCtrl!: FormControl<string | null>;
 	public confirmPasswordCtrl!: FormControl<string | null>;
+
+	public routeEnum = RouteEnum;
 
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);

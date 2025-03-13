@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouteEnum } from '@enum/route.enum';
 import { FormAuthLogin } from '@models/form/form-auth-login.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
@@ -36,6 +37,8 @@ export class LoginPageComponent implements OnInit {
 
 	public emailCtrl!: FormControl<string | null>;
 	public passwordCtrl!: FormControl<string | null>;
+
+	public routeEnum = RouteEnum;
 
 	constructor(
 		private _formBuilder: FormBuilder,
