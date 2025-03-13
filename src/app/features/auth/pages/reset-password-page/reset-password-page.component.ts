@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormAuthResetPassword } from '@models/form/form-auth-reset-password.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
@@ -18,7 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 
 @Component({
-	selector: 'app-reset-password',
+	selector: 'app-reset-password-page',
 	imports: [
 		FormsModule,
 		ReactiveFormsModule,
@@ -36,10 +36,10 @@ import { PasswordModule } from 'primeng/password';
 		LayoutAuthContentComponent,
 		LinkBackComponent,
 	],
-	templateUrl: './reset-password.component.html',
-	styleUrl: './reset-password.component.scss',
+	templateUrl: './reset-password-page.component.html',
+	styleUrl: './reset-password-page.component.scss',
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordPageComponent implements OnInit {
 	public mainForm!: FormGroup<FormAuthResetPassword>;
 
 	public passwordCtrl!: FormControl<string | null>;
@@ -48,6 +48,7 @@ export class ResetPasswordComponent implements OnInit {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 	private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+	private _router: Router = inject(Router);
 
 	ngOnInit(): void {
 		this.initFormControls();
@@ -63,6 +64,7 @@ export class ResetPasswordComponent implements OnInit {
 			.subscribe({
 				next: response => {
 					console.log('reset password successful', response);
+					this._router.navigateByUrl('/auth/reset-password/confirm');
 				},
 				error: err => {
 					console.error('Error during reset password', err);

@@ -11,7 +11,7 @@ import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-bac
 import { ButtonModule } from 'primeng/button';
 
 @Component({
-	selector: 'app-check-email',
+	selector: 'app-check-email-page',
 	imports: [
 		LayoutBaseComponent,
 		HeaderTopbarComponent,
@@ -23,10 +23,10 @@ import { ButtonModule } from 'primeng/button';
 		LinkBackComponent,
 		ButtonModule,
 	],
-	templateUrl: './check-email.component.html',
-	styleUrl: './check-email.component.scss',
+	templateUrl: './check-email-page.component.html',
+	styleUrl: './check-email-page.component.scss',
 })
-export class CheckEmailComponent implements OnInit {
+export class CheckEmailPageComponent implements OnInit {
 	email!: string;
 
 	private _authService = inject(AuthService);
