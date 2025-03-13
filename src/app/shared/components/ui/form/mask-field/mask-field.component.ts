@@ -1,5 +1,6 @@
-import { Component, InputSignal, OnInit, booleanAttribute, forwardRef, input } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormGroup, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormInputAbstract } from '@abstract/form-input.abstract';
+import { Component, InputSignal, booleanAttribute, forwardRef, input } from '@angular/core';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MaskFieldTypeInput } from '@type/form-field-input.type';
 import { InputMaskModule } from 'primeng/inputmask';
 
@@ -16,37 +17,17 @@ import { InputMaskModule } from 'primeng/inputmask';
 		},
 	],
 })
-export class MaskFieldComponent implements OnInit, ControlValueAccessor {
-	public labelFor: InputSignal<string> = input.required<string>();
-	public label: InputSignal<string> = input.required<string>();
-	public isRequired = input<boolean, unknown>(false, {
-		transform: booleanAttribute,
-	});
-
-	public id: InputSignal<string> = input.required<string>();
-	public name: InputSignal<string> = input.required<string>();
+export class MaskFieldComponent extends FormInputAbstract<string> {
 	public type: InputSignal<MaskFieldTypeInput> = input.required<MaskFieldTypeInput>();
 	public autoClear = input<boolean, unknown>(false, {
 		transform: booleanAttribute,
 	});
 
-	public parentForm: InputSignal<FormGroup> = input.required<FormGroup>();
-	public groupName: InputSignal<string> = input<string>('');
-	public controlName: InputSignal<string> = input.required<string>();
-
-	public fullLabel!: string;
 	public mask!: string;
 	public placeholder!: string;
 
-	public value!: string;
-	public disabled!: boolean;
-
-	private onChanged!: (value: string) => void;
-	private onTouched!: () => void;
-
-	ngOnInit(): void {
-		this.disabled = false;
-		this.fullLabel = this.isRequired() ? `${this.label()}*` : this.label();
+	override ngOnInit(): void {
+		super.ngOnInit();
 
 		if (this.type() === 'phone') {
 			this.mask = '99-99-99-99-99';
@@ -57,7 +38,7 @@ export class MaskFieldComponent implements OnInit, ControlValueAccessor {
 		}
 	}
 
-	onInputMaskChange(event: Event): void {
+	override onInputChange(event: Event): void {
 		if (this.disabled) {
 			return;
 		}
@@ -65,38 +46,5 @@ export class MaskFieldComponent implements OnInit, ControlValueAccessor {
 		this.value = (event.target as HTMLInputElement).value;
 
 		this.onChanged(this.value);
-	}
-
-	writeValue(value: string): void {
-		this.value = value;
-	}
-
-	registerOnChange(fn: (value: string) => void): void {
-		this.onChanged = fn;
-	}
-
-	registerOnTouched(fn: () => void): void {
-		this.onTouched = fn;
-	}
-
-	setDisabledState(isDisabled: boolean): void {
-		this.disabled = isDisabled;
-	}
-
-	markAsTouched(): void {
-		this.onTouched();
-	}
-
-	getFormControl(groupName: string, parentForm: FormGroup, controlName: string) {
-		if (groupName) {
-			const group = parentForm.get(groupName) as FormGroup;
-			return group ? group.get(controlName) : null;
-		} else {
-			return parentForm.get(controlName);
-		}
-	}
-
-	get control(): AbstractControl | null {
-		return this.getFormControl(this.groupName() || '', this.parentForm(), this.name());
 	}
 }

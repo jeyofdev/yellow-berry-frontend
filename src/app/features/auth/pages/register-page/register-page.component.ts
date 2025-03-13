@@ -69,7 +69,6 @@ export class RegisterPageComponent {
 	}
 
 	onSubmit(): void {
-		console.log('register datas : ', this.mainForm.value);
 		this._authService
 			.register({
 				email: this.mainForm.value.contact?.email ?? '',

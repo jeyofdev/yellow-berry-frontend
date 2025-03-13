@@ -24,6 +24,7 @@
 			"@shared/*": ["app/shared/*"],
 			"@models/*": ["app/core/models/*"],
 			"@type/*": ["app/core/types/*"],
+			"@abstract/*": ["app/core/abstract/*"],
 			"@enum/*": ["app/core/enums/*"],
 			"@services/*": ["app/core/services/*"],
 			"@theme/*": ["theme/*"]
