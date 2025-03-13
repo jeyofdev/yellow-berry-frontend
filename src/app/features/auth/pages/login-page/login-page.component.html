@@ -39,11 +39,18 @@
       controlName="password"
     ></app-password-field>
 
-    <app-link-form label="Forgot password ?" styleClass="info"></app-link-form>
+    <app-link-form
+      [route]="routeEnum.AUTH_FORGOT_PASSWORD"
+      label="Forgot password ?"
+      styleClass="info"
+    ></app-link-form>
 
     <div class="flex justify-between items-center">
       <app-button-form label="Login"></app-button-form>
-      <app-link-form label="register"></app-link-form>
+      <app-link-form
+        [route]="routeEnum.AUTH_REGISTER"
+        label="register"
+      ></app-link-form>
     </div>
   </form>
 </app-layout-auth-content>
