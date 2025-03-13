@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { CheckEmailComponent } from '@features/auth/pages/check-email/check-email.component';
-import { ForgotPasswordComponent } from '@features/auth/pages/forgot-password/forgot-password.component';
+import { CheckEmailPageComponent } from '@features/auth/pages/check-email-page/check-email-page.component';
+import { ForgotPasswordPageComponent } from '@features/auth/pages/forgot-password-page/forgot-password-page.component';
 import { LoginPageComponent } from '@features/auth/pages/login-page/login-page.component';
 import { RegisterPageComponent } from '@features/auth/pages/register-page/register-page.component';
-import { ResetPasswordComponent } from '@features/auth/pages/reset-password/reset-password.component';
+import { ResetPasswordPageComponent } from '@features/auth/pages/reset-password-page/reset-password-page.component';
 import { HomePageComponent } from '@features/home/pages/home-page/home-page.component';
 
 export const routes: Routes = [
@@ -11,7 +11,7 @@ export const routes: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full' },
 	{ path: 'auth/login', component: LoginPageComponent, data: { title: 'login' } },
 	{ path: 'auth/register', component: RegisterPageComponent, data: { title: 'register' } },
-	{ path: 'auth/forgot-password', component: ForgotPasswordComponent, data: { title: 'forgot password' } },
-	{ path: 'auth/check-email', component: CheckEmailComponent, data: { title: 'check email' } },
-	{ path: 'auth/reset-password', component: ResetPasswordComponent, data: { title: 'reset password' } },
+	{ path: 'auth/forgot-password', component: ForgotPasswordPageComponent, data: { title: 'forgot password' } },
+	{ path: 'auth/check-email', component: CheckEmailPageComponent, data: { title: 'check email' } },
+	{ path: 'auth/reset-password', component: ResetPasswordPageComponent, data: { title: 'reset password' } },
 ];

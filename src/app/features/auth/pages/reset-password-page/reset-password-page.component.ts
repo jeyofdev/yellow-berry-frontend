@@ -18,7 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 
 @Component({
-	selector: 'app-reset-password',
+	selector: 'app-reset-password-page',
 	imports: [
 		FormsModule,
 		ReactiveFormsModule,
@@ -36,10 +36,10 @@ import { PasswordModule } from 'primeng/password';
 		LayoutAuthContentComponent,
 		LinkBackComponent,
 	],
-	templateUrl: './reset-password.component.html',
-	styleUrl: './reset-password.component.scss',
+	templateUrl: './reset-password-page.component.html',
+	styleUrl: './reset-password-page.component.scss',
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordPageComponent implements OnInit {
 	public mainForm!: FormGroup<FormAuthResetPassword>;
 
 	public passwordCtrl!: FormControl<string | null>;

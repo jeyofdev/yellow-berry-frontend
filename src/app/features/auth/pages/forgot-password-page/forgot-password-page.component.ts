@@ -15,7 +15,7 @@ import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/la
 import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-back.component';
 
 @Component({
-	selector: 'app-forgot-password',
+	selector: 'app-forgot-password-page',
 	imports: [
 		FormsModule,
 		ReactiveFormsModule,
@@ -30,10 +30,10 @@ import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-bac
 		ButtonFormComponent,
 		LinkBackComponent,
 	],
-	templateUrl: './forgot-password.component.html',
-	styleUrl: './forgot-password.component.scss',
+	templateUrl: './forgot-password-page.component.html',
+	styleUrl: './forgot-password-page.component.scss',
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordPageComponent implements OnInit {
 	public mainForm!: FormGroup<FormAuthForgotPassword>;
 	public emailCtrl!: FormControl<string | null>;
 
