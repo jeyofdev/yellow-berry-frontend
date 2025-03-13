@@ -5,13 +5,9 @@ import { FormAuthForgotPassword } from '@models/form/form-auth-forgot-password.m
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
-import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';
 import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-field.component';
-import { HeaderNavigationComponent } from '@shared/components/ui/header/header-navigation/header-navigation.component';
-import { HeaderPrimaryNavigationComponent } from '@shared/components/ui/header/header-primary-navigation/header-primary-navigation.component';
-import { HeaderTopbarComponent } from '@shared/components/ui/header/header-topbar/header-topbar.component';
+import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
-import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
 import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-back.component';
 
 @Component({
@@ -19,11 +15,7 @@ import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-bac
 	imports: [
 		FormsModule,
 		ReactiveFormsModule,
-		LayoutBaseComponent,
-		HeaderTopbarComponent,
-		HeaderNavigationComponent,
-		HeaderPrimaryNavigationComponent,
-		SearchFieldComponent,
+		HeaderComponent,
 		BreadcrumbComponent,
 		LayoutAuthContentComponent,
 		TextFieldComponent,

@@ -1,28 +1,4 @@
-<header class="flex flex-col justify-center">
-  <div class="hidden md:block justify-between bg-gray-700 w-full py-1.5">
-    <app-layout-base justifyContent="justify-center">
-      <app-header-topbar class="w-full"></app-header-topbar>
-    </app-layout-base>
-  </div>
-
-  <app-layout-base
-    class="bg-white w-full py-1.5 lg:border-b border-b-gray-200"
-    justifyContent="justify-start "
-  >
-    <app-header-navigation class="w-full"></app-header-navigation>
-  </app-layout-base>
-
-  <app-layout-base
-    class="bg-white w-full py-1.5 border-b border-b-gray-200"
-    justifyContent="justify-start "
-  >
-    <app-header-primary-navigation
-      class="w-full hidden lg:flex"
-    ></app-header-primary-navigation>
-
-    <app-search-field class="w-full lg:hidden"></app-search-field>
-  </app-layout-base>
-</header>
+<app-header></app-header>
 
 <app-breadcrumb></app-breadcrumb>
 
