@@ -29,7 +29,6 @@ import { PasswordModule } from 'primeng/password';
 		LinkBackComponent,
 	],
 	templateUrl: './reset-password-page.component.html',
-	styleUrl: './reset-password-page.component.scss',
 })
 export class ResetPasswordPageComponent implements OnInit {
 	public mainForm!: FormGroup<FormAuthResetPassword>;

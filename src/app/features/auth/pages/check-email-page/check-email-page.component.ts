@@ -1,16 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
+import { ButtonLargeComponent } from '@shared/components/ui/buttons/button-large/button-large.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-back.component';
-import { ButtonModule } from 'primeng/button';
 
 @Component({
 	selector: 'app-check-email-page',
-	imports: [HeaderComponent, BreadcrumbComponent, LayoutAuthContentComponent, LinkBackComponent, ButtonModule],
+	imports: [HeaderComponent, BreadcrumbComponent, LayoutAuthContentComponent, LinkBackComponent, ButtonLargeComponent],
 	templateUrl: './check-email-page.component.html',
-	styleUrl: './check-email-page.component.scss',
 })
 export class CheckEmailPageComponent implements OnInit {
 	email!: string;

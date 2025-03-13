@@ -31,7 +31,6 @@ import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-for
 		PasswordFieldComponent,
 	],
 	templateUrl: './register-page.component.html',
-	styleUrl: './register-page.component.scss',
 })
 export class RegisterPageComponent {
 	public mainForm!: FormGroup<FormAuthRegister>;

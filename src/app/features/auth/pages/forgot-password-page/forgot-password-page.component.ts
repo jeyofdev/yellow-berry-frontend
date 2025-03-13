@@ -23,7 +23,6 @@ import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-bac
 		LinkBackComponent,
 	],
 	templateUrl: './forgot-password-page.component.html',
-	styleUrl: './forgot-password-page.component.scss',
 })
 export class ForgotPasswordPageComponent implements OnInit {
 	public mainForm!: FormGroup<FormAuthForgotPassword>;
