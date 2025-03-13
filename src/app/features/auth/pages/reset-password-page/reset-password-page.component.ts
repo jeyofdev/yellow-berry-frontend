@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormAuthResetPassword } from '@models/form/form-auth-reset-password.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
@@ -48,6 +48,7 @@ export class ResetPasswordPageComponent implements OnInit {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 	private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+	private _router: Router = inject(Router);
 
 	ngOnInit(): void {
 		this.initFormControls();
@@ -63,6 +64,7 @@ export class ResetPasswordPageComponent implements OnInit {
 			.subscribe({
 				next: response => {
 					console.log('reset password successful', response);
+					this._router.navigateByUrl('/auth/reset-password/confirm');
 				},
 				error: err => {
 					console.error('Error during reset password', err);
