@@ -11,13 +11,9 @@ import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
 import { MaskFieldComponent } from '@shared/components/ui/form/mask-field/mask-field.component';
 import { PasswordFieldComponent } from '@shared/components/ui/form/password-field/password-field.component';
-import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';
 import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-field.component';
-import { HeaderNavigationComponent } from '@shared/components/ui/header/header-navigation/header-navigation.component';
-import { HeaderPrimaryNavigationComponent } from '@shared/components/ui/header/header-primary-navigation/header-primary-navigation.component';
-import { HeaderTopbarComponent } from '@shared/components/ui/header/header-topbar/header-topbar.component';
+import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
-import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
 import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-form.component';
 
 @Component({
@@ -25,11 +21,7 @@ import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-for
 	imports: [
 		FormsModule,
 		ReactiveFormsModule,
-		LayoutBaseComponent,
-		HeaderTopbarComponent,
-		HeaderNavigationComponent,
-		HeaderPrimaryNavigationComponent,
-		SearchFieldComponent,
+		HeaderComponent,
 		BreadcrumbComponent,
 		LayoutAuthContentComponent,
 		ButtonFormComponent,
@@ -39,7 +31,6 @@ import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-for
 		PasswordFieldComponent,
 	],
 	templateUrl: './register-page.component.html',
-	styleUrl: './register-page.component.scss',
 })
 export class RegisterPageComponent {
 	public mainForm!: FormGroup<FormAuthRegister>;
@@ -69,7 +60,6 @@ export class RegisterPageComponent {
 	}
 
 	onSubmit(): void {
-		console.log('register datas : ', this.mainForm.value);
 		this._authService
 			.register({
 				email: this.mainForm.value.contact?.email ?? '',
