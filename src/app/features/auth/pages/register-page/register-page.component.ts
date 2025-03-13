@@ -6,6 +6,8 @@ import { FormAuthRegisterContact } from '@models/form/form-auth-register-contact
 import { FormAuthRegisterInfo } from '@models/form/form-auth-register-info.model';
 import { FormAuthRegisterPassword } from '@models/form/form-auth-register-password.model';
 import { FormAuthRegister } from '@models/form/form-auth-register.model';
+import { ProfileResponse } from '@models/profile/save-profile-response.model';
+import { SuccessResponse } from '@models/success-response.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
@@ -61,14 +63,26 @@ export class RegisterPageComponent {
 
 	onSubmit(): void {
 		this._authService
-			.register({
-				email: this.mainForm.value.contact?.email ?? '',
-				password: this.mainForm.value.password?.password ?? '',
-				role: RoleEnum.USER,
-			})
+			.register(
+				{
+					email: this.mainForm.value.contact?.email ?? '',
+					password: this.mainForm.value.password?.password ?? '',
+					role: RoleEnum.USER,
+				},
+				{
+					firstname: this.mainForm.value.info?.firstname ?? '',
+					lastname: this.mainForm.value.info?.lastname ?? '',
+					phone: `(+33) ${this.mainForm.value.contact?.phone?.slice(1).replaceAll('-', ' ')}`,
+					address: this.mainForm.value.address?.address ?? '',
+					zipCode: this.mainForm.value.address?.zipCode ?? '',
+					city: this.mainForm.value.address?.city ?? '',
+					department: this.mainForm.value.address?.department ?? '',
+					region: this.mainForm.value.address?.region ?? '',
+				},
+			)
 			.subscribe({
-				next: response => {
-					console.log('Register successful', response);
+				next: (successResponse: SuccessResponse<ProfileResponse>) => {
+					console.log('Register successful', successResponse);
 				},
 				error: err => {
 					console.error('Error during register', err);
