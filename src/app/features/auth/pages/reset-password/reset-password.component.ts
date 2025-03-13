@@ -1,19 +1,18 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { FormAuthResetPassword } from '@models/form/form-auth-reset-password.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
 import { PasswordFieldComponent } from '@shared/components/ui/form/password-field/password-field.component';
 import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';
-import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-field.component';
 import { HeaderNavigationComponent } from '@shared/components/ui/header/header-navigation/header-navigation.component';
 import { HeaderPrimaryNavigationComponent } from '@shared/components/ui/header/header-primary-navigation/header-primary-navigation.component';
 import { HeaderTopbarComponent } from '@shared/components/ui/header/header-topbar/header-topbar.component';
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
 import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-back.component';
-import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-form.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -32,10 +31,8 @@ import { PasswordModule } from 'primeng/password';
 		InputTextModule,
 		PasswordModule,
 		ButtonModule,
-		TextFieldComponent,
 		PasswordFieldComponent,
 		ButtonFormComponent,
-		LinkFormComponent,
 		LayoutAuthContentComponent,
 		LinkBackComponent,
 	],
@@ -49,6 +46,8 @@ export class ResetPasswordComponent implements OnInit {
 	public confirmPassword!: FormControl<string | null>;
 
 	private _formBuilder: FormBuilder = inject(FormBuilder);
+	private _authService: AuthService = inject(AuthService);
+	private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 
 	ngOnInit(): void {
 		this.initFormControls();
@@ -56,7 +55,19 @@ export class ResetPasswordComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		console.log('reset password form values : ', this.mainForm.value);
+		this._authService
+			.resetPassword({
+				resetToken: this._activatedRoute.snapshot.queryParams['resetToken'],
+				newPassword: this.mainForm.value.password ?? '',
+			})
+			.subscribe({
+				next: response => {
+					console.log('reset password successful', response);
+				},
+				error: err => {
+					console.error('Error during reset password', err);
+				},
+			});
 	}
 
 	private initMainForm() {

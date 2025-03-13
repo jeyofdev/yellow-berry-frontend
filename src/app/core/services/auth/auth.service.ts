@@ -5,6 +5,7 @@ import { LoginResponse } from '@models/auth/LoginResponse.model';
 import { MessageResponse } from '@models/auth/MessageResponse.model';
 import { RegisterRequest } from '@models/auth/RegisterRequest.model';
 import { RegisterResponse } from '@models/auth/RegisterResponse.model';
+import { ResetPasswordRequest } from '@models/auth/ResetPassswordRequest.model';
 import { LocalStorageService } from '@services/auth/local-storage.service';
 import { Observable, tap } from 'rxjs';
 
@@ -34,6 +35,14 @@ export class AuthService {
 
 	public forgotPassword(email: string): Observable<MessageResponse> {
 		return this._httpClient.post<MessageResponse>(this.BASE_URL + `/forgot-password?email=${email}`, {});
+	}
+
+	public resetPassword(resetPasswordRequest: ResetPasswordRequest): Observable<MessageResponse> {
+		return this._httpClient.post<MessageResponse>(
+			this.BASE_URL +
+				`/reset-password?resetToken=${resetPasswordRequest.resetToken}&newPassword=${resetPasswordRequest.newPassword}`,
+			{},
+		);
 	}
 
 	public setLoggedIn(value: boolean) {
