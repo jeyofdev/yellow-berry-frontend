@@ -6,8 +6,12 @@ import { MessageResponse } from '@models/auth/MessageResponse.model';
 import { RegisterRequest } from '@models/auth/RegisterRequest.model';
 import { RegisterResponse } from '@models/auth/RegisterResponse.model';
 import { ResetPasswordRequest } from '@models/auth/ResetPassswordRequest.model';
+import { SaveProfileRequest } from '@models/profile/save-profile-request.model';
+import { ProfileResponse } from '@models/profile/save-profile-response.model';
+import { SuccessResponse } from '@models/success-response.model';
 import { LocalStorageService } from '@services/auth/local-storage.service';
-import { Observable, tap } from 'rxjs';
+import { ProfileService } from '@services/profile.service';
+import { Observable, switchMap, tap } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -15,13 +19,27 @@ import { Observable, tap } from 'rxjs';
 export class AuthService {
 	private _httpClient: HttpClient = inject(HttpClient);
 	private _localStorageService = inject(LocalStorageService);
+	private _profileService: ProfileService = inject(ProfileService);
 
 	private BASE_URL = 'http://localhost:8080/api/v1/auth';
 
 	private loggedIn = signal<boolean>(false);
 
-	public register(registerRequest: RegisterRequest): Observable<RegisterResponse> {
-		return this._httpClient.post<RegisterResponse>(this.BASE_URL + '/register', registerRequest);
+	public register(
+		registerRequest: RegisterRequest,
+		profileDatas: SaveProfileRequest,
+	): Observable<SuccessResponse<ProfileResponse>> {
+		return this._httpClient
+			.post<RegisterResponse>(this.BASE_URL + '/register', registerRequest)
+			.pipe(
+				switchMap((registerResponse: RegisterResponse) =>
+					this.login({ email: registerRequest.email, password: registerRequest.password }).pipe(
+						switchMap((loginResponse: LoginResponse) =>
+							this._profileService.save(loginResponse.token, registerResponse.userId, profileDatas),
+						),
+					),
+				),
+			);
 	}
 
 	public login(loginRequest: LoginRequest): Observable<LoginResponse> {
