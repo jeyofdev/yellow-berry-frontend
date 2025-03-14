@@ -1,4 +1,4 @@
-import { Component, OnInit, WritableSignal } from '@angular/core';
+import { Component, OnInit, WritableSignal, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HeaderTopBarLink } from '@models/header-topbar-link.model';
 import { HeaderTopbarLinkService } from '@services/header-topbar-links.service';
@@ -11,7 +11,7 @@ import { HeaderTopbarLinkService } from '@services/header-topbar-links.service';
 export class HeaderTopbarComponent implements OnInit {
 	protected headerTopbarLinks!: WritableSignal<HeaderTopBarLink[]>;
 
-	constructor(private _headerTopbarLinkService: HeaderTopbarLinkService) {}
+	private _headerTopbarLinkService: HeaderTopbarLinkService = inject(HeaderTopbarLinkService);
 
 	ngOnInit(): void {
 		this.headerTopbarLinks = this._headerTopbarLinkService.getHeaderTopBarLinks();

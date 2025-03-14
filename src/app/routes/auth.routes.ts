@@ -11,7 +11,7 @@ export const routes: Routes = [
 	{ path: RouteEnum.LOGIN, component: LoginPageComponent, data: { title: 'login' } },
 	{ path: RouteEnum.REGISTER, component: RegisterPageComponent, data: { title: 'register' } },
 	{ path: RouteEnum.FORGOT_PASSWORD, component: ForgotPasswordPageComponent, data: { title: 'forgot password' } },
-	{ path: RouteEnum.AUTH_CHECK_EMAIL, component: CheckEmailPageComponent, data: { title: 'check email' } },
+	{ path: RouteEnum.CHECK_EMAIL, component: CheckEmailPageComponent, data: { title: 'check email' } },
 	{ path: RouteEnum.RESET_PASSORD, component: ResetPasswordPageComponent, data: { title: 'reset password' } },
 	{
 		path: RouteEnum.RESET_PASSORD_CONFIRM,

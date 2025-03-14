@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RouteEnum } from '@enum/route.enum';
 import { FormAuthResetPassword } from '@models/form/form-auth-reset-password.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
@@ -40,6 +41,8 @@ export class ResetPasswordPageComponent implements OnInit {
 	private _authService: AuthService = inject(AuthService);
 	private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 	private _router: Router = inject(Router);
+
+	public routeEnum = RouteEnum;
 
 	ngOnInit(): void {
 		this.initFormControls();

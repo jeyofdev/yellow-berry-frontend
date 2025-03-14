@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouteEnum } from '@enum/route.enum';
 import { FormAuthLogin } from '@models/form/form-auth-login.model';
@@ -40,10 +40,8 @@ export class LoginPageComponent implements OnInit {
 
 	public routeEnum = RouteEnum;
 
-	constructor(
-		private _formBuilder: FormBuilder,
-		private _authService: AuthService,
-	) {}
+	private _formBuilder: FormBuilder = inject(FormBuilder);
+	private _authService: AuthService = inject(AuthService);
 
 	ngOnInit(): void {
 		this.initFormControls();

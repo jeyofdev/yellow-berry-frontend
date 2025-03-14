@@ -3,5 +3,6 @@ export class NavigationLink {
 		public label: string,
 		public link: string,
 		public icon: string,
+		public command?: () => void,
 	) {}
 }

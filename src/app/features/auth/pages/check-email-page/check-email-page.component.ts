@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { RouteEnum } from '@enum/route.enum';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonLargeComponent } from '@shared/components/ui/buttons/button-large/button-large.component';
@@ -12,7 +13,8 @@ import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-bac
 	templateUrl: './check-email-page.component.html',
 })
 export class CheckEmailPageComponent implements OnInit {
-	email!: string;
+	public email!: string;
+	public routeEnum = RouteEnum;
 
 	private _authService = inject(AuthService);
 

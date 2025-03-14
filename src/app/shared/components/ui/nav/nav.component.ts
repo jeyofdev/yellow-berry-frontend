@@ -1,4 +1,4 @@
-import { Component, OnInit, WritableSignal } from '@angular/core';
+import { Component, OnInit, WritableSignal, inject } from '@angular/core';
 import { NavigationLink } from '@models/navigation-links.model';
 import { NavigationLinksService } from '@services/navigation-links.service';
 import { MenubarModule } from 'primeng/menubar';
@@ -12,7 +12,7 @@ import { MenubarModule } from 'primeng/menubar';
 export class NavComponent implements OnInit {
 	protected navigationLinks!: WritableSignal<NavigationLink[]>;
 
-	constructor(private _navigationLinksService: NavigationLinksService) {}
+	private _navigationLinksService: NavigationLinksService = inject(NavigationLinksService);
 
 	ngOnInit(): void {
 		this.navigationLinks = this._navigationLinksService.getNavigationLinks();
