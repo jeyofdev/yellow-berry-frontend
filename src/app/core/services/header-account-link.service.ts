@@ -1,16 +1,20 @@
-import { Injectable, WritableSignal } from '@angular/core';
+import { Injectable, WritableSignal, inject } from '@angular/core';
 import { signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouteEnum } from '@enum/route.enum';
 import { HeaderAccountLink } from '@models/header-account-link.model';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class HeaderAccountLinkService {
+	private _router: Router = inject(Router);
+
 	private _headerAccountLinks: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
 		{
 			label: 'Login',
 			sublabel: 'Account',
-			link: '/',
+			link: '/auth/login',
 			icon: 'account',
 		},
 		{
@@ -33,12 +37,14 @@ export class HeaderAccountLinkService {
 			sublabel: '',
 			link: '/',
 			icon: '',
+			command: () => this._router.navigateByUrl('/' + RouteEnum.AUTH_REGISTER),
 		},
 		{
 			label: 'Login',
 			sublabel: '',
 			link: '/',
 			icon: '',
+			command: () => this._router.navigateByUrl('/' + RouteEnum.AUTH_LOGIN),
 		},
 	]);
 

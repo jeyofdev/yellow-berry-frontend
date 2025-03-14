@@ -4,5 +4,6 @@ export class HeaderAccountLink {
 		public sublabel: string,
 		public link: string,
 		public icon: string,
+		public command?: () => void,
 	) {}
 }

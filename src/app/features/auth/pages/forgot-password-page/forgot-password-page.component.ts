@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RouteEnum } from '@enum/route.enum';
 import { FormAuthForgotPassword } from '@models/form/form-auth-forgot-password.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
@@ -31,6 +32,9 @@ export class ForgotPasswordPageComponent implements OnInit {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 	private _router: Router = inject(Router);
+
+	public routeEnum = RouteEnum;
+
 	ngOnInit(): void {
 		this.initFormControls();
 		this.initMainForm();

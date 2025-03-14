@@ -15,6 +15,9 @@
       class="w-full mb-8"
       (click)="onClick()"
     ></app-button-large>
-    <app-link-back label="Back to login"></app-link-back>
+    <app-link-back
+      [route]="routeEnum.AUTH_LOGIN"
+      label="Back to login"
+    ></app-link-back>
   </div>
 </app-layout-auth-content>
