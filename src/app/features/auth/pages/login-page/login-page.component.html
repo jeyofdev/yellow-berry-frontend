@@ -8,6 +8,10 @@
   pageTitlePrimary="In"
   maxWidth="max-w-[31.25rem]"
 >
+  @if (mainFormError) {
+  <app-alert-form-error [message]="mainFormError"></app-alert-form-error>
+  }
+
   <form
     #loginForm="ngForm"
     [formGroup]="mainForm"
@@ -24,6 +28,7 @@
       [parentForm]="mainForm"
       formControlName="email"
       controlName="email"
+      [form]="loginForm"
     ></app-text-field>
 
     <app-password-field

@@ -42,6 +42,7 @@ export class RegisterPageComponent {
 	public userContactGroup!: FormGroup<FormAuthRegisterContact>;
 	public userAddressGroup!: FormGroup<FormAuthRegisterAddress>;
 	public userPasswordGroup!: FormGroup<FormAuthRegisterPassword>;
+	public mainFormError!: string;
 
 	public firstnameCtrl!: FormControl<string | null>;
 	public lastnameCtrl!: FormControl<string | null>;
@@ -66,32 +67,38 @@ export class RegisterPageComponent {
 	}
 
 	onSubmit(): void {
-		this._authService
-			.register(
-				{
-					email: this.mainForm.value.contact?.email ?? '',
-					password: this.mainForm.value.password?.password ?? '',
-					role: RoleEnum.USER,
-				},
-				{
-					firstname: this.mainForm.value.info?.firstname ?? '',
-					lastname: this.mainForm.value.info?.lastname ?? '',
-					phone: `(+33) ${this.mainForm.value.contact?.phone?.slice(1).replaceAll('-', ' ')}`,
-					address: this.mainForm.value.address?.address ?? '',
-					zipCode: this.mainForm.value.address?.zipCode ?? '',
-					city: this.mainForm.value.address?.city ?? '',
-					department: this.mainForm.value.address?.department ?? '',
-					region: this.mainForm.value.address?.region ?? '',
-				},
-			)
-			.subscribe({
-				next: (successResponse: SuccessResponse<ProfileResponse>) => {
-					console.log('Register successful', successResponse);
-				},
-				error: err => {
-					console.error('Error during register', err);
-				},
-			});
+		if (this.mainForm.valid) {
+			this.mainFormError = '';
+
+			// this._authService
+			// 	.register(
+			// 		{
+			// 			email: this.mainForm.value.contact?.email ?? '',
+			// 			password: this.mainForm.value.password?.password ?? '',
+			// 			role: RoleEnum.USER,
+			// 		},
+			// 		{
+			// 			firstname: this.mainForm.value.info?.firstname ?? '',
+			// 			lastname: this.mainForm.value.info?.lastname ?? '',
+			// 			phone: `(+33) ${this.mainForm.value.contact?.phone?.slice(1).replaceAll('-', ' ')}`,
+			// 			address: this.mainForm.value.address?.address ?? '',
+			// 			zipCode: this.mainForm.value.address?.zipCode ?? '',
+			// 			city: this.mainForm.value.address?.city ?? '',
+			// 			department: this.mainForm.value.address?.department ?? '',
+			// 			region: this.mainForm.value.address?.region ?? '',
+			// 		},
+			// 	)
+			// 	.subscribe({
+			// 		next: (successResponse: SuccessResponse<ProfileResponse>) => {
+			// 			console.log('Register successful', successResponse);
+			// 		},
+			// 		error: err => {
+			// 			console.error('Error during register', err);
+			// 		},
+			// 	});
+		} else {
+			this.mainFormError = 'Login failed. Please verify your credentials and try again.';
+		}
 	}
 
 	private initMainForm() {
