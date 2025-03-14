@@ -1,0 +1,7 @@
+:host ::ng-deep p-message .p-message {
+  @apply mt-1;
+
+  .p-message-text {
+    @apply text-xs text-red-500 leading-4 tracking-[0.03rem] font-poppins font-normal;
+  }
+}
