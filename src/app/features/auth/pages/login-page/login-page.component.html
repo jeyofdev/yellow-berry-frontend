@@ -8,11 +8,18 @@
   pageTitlePrimary="In"
   maxWidth="max-w-[31.25rem]"
 >
+  @if (mainFormError) {
+  <app-alert-form-error
+    [message]="mainFormError"
+    class="w-full mt-10 mb-4"
+  ></app-alert-form-error>
+  }
+
   <form
     #loginForm="ngForm"
     [formGroup]="mainForm"
     (ngSubmit)="onSubmit()"
-    class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
+    class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full"
   >
     <app-text-field
       labelFor="email"
@@ -24,6 +31,7 @@
       [parentForm]="mainForm"
       formControlName="email"
       controlName="email"
+      [form]="loginForm"
     ></app-text-field>
 
     <app-password-field

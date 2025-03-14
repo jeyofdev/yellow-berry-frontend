@@ -8,7 +8,7 @@
   maxWidth="max-w-[56.25rem]"
 >
   <form
-    #loginForm="ngForm"
+    #registerForm="ngForm"
     [formGroup]="mainForm"
     (ngSubmit)="onSubmit()"
     class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
@@ -29,6 +29,7 @@
         formControlName="firstname"
         controlName="firstname"
         class="w-full"
+        [form]="registerForm"
       ></app-text-field>
 
       <app-text-field
@@ -43,6 +44,7 @@
         formControlName="lastname"
         controlName="lastname"
         class="w-full"
+        [form]="registerForm"
       ></app-text-field>
     </div>
 
@@ -62,6 +64,7 @@
         formControlName="email"
         controlName="email"
         class="w-full"
+        [form]="registerForm"
       ></app-text-field>
 
       <app-mask-field
@@ -96,6 +99,7 @@
           formControlName="address"
           controlName="address"
           class="w-full"
+          [form]="registerForm"
         ></app-text-field>
       </div>
 
@@ -114,6 +118,7 @@
             groupName="userAddressGroup"
             formControlName="region"
             controlName="region"
+            [form]="registerForm"
           ></app-text-field>
         </div>
 
@@ -129,6 +134,7 @@
             groupName="userAddressGroup"
             formControlName="department"
             controlName="department"
+            [form]="registerForm"
           ></app-text-field>
         </div>
 
@@ -159,6 +165,7 @@
             groupName="userAddressGroup"
             formControlName="city"
             controlName="city"
+            [form]="registerForm"
           ></app-text-field>
         </div>
       </div>

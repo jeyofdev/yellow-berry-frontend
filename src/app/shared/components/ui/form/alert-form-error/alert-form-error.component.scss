@@ -1,0 +1,11 @@
+:host ::ng-deep p-message .p-message {
+  @apply rounded-[0.625rem];
+
+  .p-message-content {
+    @apply py-3 flex justify-center;
+
+    .p-message-text {
+      @apply text-sm text-red-500 leading-4 tracking-[0.03rem] font-poppins font-medium;
+    }
+  }
+}

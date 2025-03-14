@@ -60,7 +60,7 @@ export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccess
 		}
 	}
 
-	private get control(): AbstractControl | null {
+	public get control(): AbstractControl | null {
 		return this.getFormControl(this.groupName() || '', this.parentForm(), this.name());
 	}
 }
