@@ -1,4 +1,4 @@
-import { Component, OnInit, WritableSignal, signal } from '@angular/core';
+import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
 import { MenuItem } from 'primeng/api';
@@ -16,7 +16,7 @@ export class BreadcrumbComponent implements OnInit {
 	public home: MenuItem | undefined;
 	public currentRouteTitle: WritableSignal<string> = signal<string>('');
 
-	constructor(private _activatedRoute: ActivatedRoute) {}
+	private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 
 	ngOnInit() {
 		this._activatedRoute.data.subscribe(data => {

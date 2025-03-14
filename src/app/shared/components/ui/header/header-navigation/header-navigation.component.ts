@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, WritableSignal } from '@angular/core';
+import { Component, OnInit, ViewChild, WritableSignal, inject } from '@angular/core';
 import { HeaderAccountLink } from '@models/header-account-link.model';
 import { HeaderAccountLinkService } from '@services/header-account-link.service';
 import { ButtonCtaSearchComponent } from '@shared/components/ui/buttons/button-cta-search/button-cta-search.component';
@@ -36,7 +36,7 @@ export class HeaderNavigationComponent implements OnInit {
 	isMenuOpen = false;
 	private hideMenuTimeout!: ReturnType<typeof setTimeout>;
 
-	constructor(private _headerAccountLinkService: HeaderAccountLinkService) {}
+	private _headerAccountLinkService: HeaderAccountLinkService = inject(HeaderAccountLinkService);
 
 	ngOnInit(): void {
 		this.headerAccountLinks = this._headerAccountLinkService.getHeaderAccountLinks();
