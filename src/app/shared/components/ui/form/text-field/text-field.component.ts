@@ -21,6 +21,8 @@ import { InputTextModule } from 'primeng/inputtext';
 export class TextFieldComponent extends FormInputAbstract<string> {
 	public type: InputSignal<TextFieldTypeInput> = input<TextFieldTypeInput>('text');
 	public placeholder: InputSignal<string> = input<string>('');
+	public min: InputSignal<number> = input<number>(0);
+	public max: InputSignal<number> = input<number>(0);
 
 	public form: InputSignal<FormGroupDirective> = input.required<FormGroupDirective>();
 

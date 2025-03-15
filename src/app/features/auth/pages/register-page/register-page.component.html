@@ -30,6 +30,8 @@
         controlName="firstname"
         class="w-full"
         [form]="registerForm"
+        [min]="3"
+        [max]="30"
       ></app-text-field>
 
       <app-text-field
@@ -45,6 +47,8 @@
         controlName="lastname"
         class="w-full"
         [form]="registerForm"
+        [min]="3"
+        [max]="80"
       ></app-text-field>
     </div>
 
@@ -100,6 +104,8 @@
           controlName="address"
           class="w-full"
           [form]="registerForm"
+          [min]="3"
+          [max]="100"
         ></app-text-field>
       </div>
 
@@ -119,6 +125,8 @@
             formControlName="region"
             controlName="region"
             [form]="registerForm"
+            [min]="3"
+            [max]="30"
           ></app-text-field>
         </div>
 
@@ -135,6 +143,8 @@
             formControlName="department"
             controlName="department"
             [form]="registerForm"
+            [min]="3"
+            [max]="30"
           ></app-text-field>
         </div>
 
@@ -166,6 +176,8 @@
             formControlName="city"
             controlName="city"
             [form]="registerForm"
+            [min]="3"
+            [max]="30"
           ></app-text-field>
         </div>
       </div>
@@ -188,6 +200,9 @@
         formControlName="password"
         controlName="password"
         class="w-full"
+        [form]="registerForm"
+        [min]="8"
+        [max]="16"
       ></app-password-field>
 
       <app-password-field
@@ -203,6 +218,9 @@
         formControlName="confirmPassword"
         controlName="confirmPassword"
         class="w-full"
+        [form]="registerForm"
+        [min]="8"
+        [max]="16"
       ></app-password-field>
     </div>
 

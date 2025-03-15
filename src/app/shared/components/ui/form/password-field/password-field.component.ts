@@ -21,6 +21,8 @@ export class PasswordFieldComponent extends FormInputAbstract<string> {
 	public placeholder: InputSignal<string> = input<string>('');
 	public feedback = input<boolean, unknown>(false, { transform: booleanAttribute });
 	public toggleMask = input<boolean, unknown>(false, { transform: booleanAttribute });
+	public min: InputSignal<number> = input.required<number>();
+	public max: InputSignal<number> = input.required<number>();
 
 	public form: InputSignal<FormGroupDirective> = input.required<FormGroupDirective>();
 

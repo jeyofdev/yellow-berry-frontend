@@ -2,10 +2,10 @@ import { FormControl } from '@angular/forms';
 
 export class FormAuthRegisterAddress {
 	constructor(
-		public address: FormControl<string | null>,
-		public region: FormControl<string | null>,
-		public department: FormControl<string | null>,
-		public zipCode: FormControl<string | null>,
-		public city: FormControl<string | null>,
+		public address: FormControl<string>,
+		public region: FormControl<string>,
+		public department: FormControl<string>,
+		public zipCode: FormControl<string>,
+		public city: FormControl<string>,
 	) {}
 }

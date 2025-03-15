@@ -27,7 +27,6 @@ export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccess
 	public ngOnInit(): void {
 		this.disabled = false;
 		this.fullLabel = this.isRequired() ? `${this.label()}*` : this.label();
-		console.log(this.control);
 	}
 
 	public abstract onInputChange(event: Event): void;

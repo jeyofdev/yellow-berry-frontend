@@ -17,8 +17,11 @@ export class InputErrorMessagePipe implements PipeTransform {
 		} else if (control.hasError('pattern')) {
 			if (fieldName === 'email') {
 				return `The ${fieldName} is not in the correct format.`;
+			}
+			if (fieldName.indexOf('password') !== -1) {
+				return `The ${fieldName} must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.`;
 			} else {
-				return `The ${fieldName} must contain at least one lowercase letter, one uppercase letter, one digit, and one special character..`;
+				return `The ${fieldName} must contain only letters.`;
 			}
 		}
 		return '';
