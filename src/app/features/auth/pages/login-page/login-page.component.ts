@@ -12,6 +12,7 @@ import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-f
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-form.component';
+import { LengthValidator } from '@shared/validators/length.validator';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -89,7 +90,7 @@ export class LoginPageComponent implements OnInit {
 		});
 
 		this.passwordCtrl = this._formBuilder.control<string>('', {
-			// validators: [Validators.required],
+			validators: [Validators.required, LengthValidator(8, 16), Validators.pattern(Regex.PASSWORD_PATTERN)],
 			nonNullable: true,
 		});
 	}

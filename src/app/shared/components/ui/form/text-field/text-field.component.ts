@@ -1,14 +1,13 @@
 import { FormInputAbstract } from '@abstract/form-input.abstract';
 import { Component, InputSignal, forwardRef, input } from '@angular/core';
 import { FormGroupDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ErrorFieldComponent } from '@shared/components/ui/form/error-field/error-field.component';
 import { TextFieldTypeInput } from '@type/form-field-input.type';
 import { InputTextModule } from 'primeng/inputtext';
-import { MessageModule } from 'primeng/message';
-import { ErrorFieldComponent } from '../error-field/error-field.component';
 
 @Component({
 	selector: 'app-text-field',
-	imports: [InputTextModule, MessageModule, ErrorFieldComponent],
+	imports: [InputTextModule, ErrorFieldComponent],
 	templateUrl: './text-field.component.html',
 	styleUrl: './text-field.component.scss',
 	providers: [

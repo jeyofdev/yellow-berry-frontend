@@ -3,7 +3,11 @@
 <p-message severity="error" variant="simple" size="small">{{
   control() | formErrorMessage : fieldName()
 }}</p-message>
-} @if (control()?.hasError('pattern')) {
+} @else if (control()?.hasError('length') && min() && max()) {
+<p-message severity="error" variant="simple" size="small">{{
+  control() | formErrorMessage : fieldName() : min() : max()
+}}</p-message>
+} @else if (control()?.hasError('pattern')) {
 <p-message severity="error" variant="simple" size="small">{{
   control() | formErrorMessage : fieldName()
 }}</p-message>

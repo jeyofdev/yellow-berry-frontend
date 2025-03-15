@@ -13,4 +13,6 @@ export class ErrorFieldComponent {
 	public form: InputSignal<FormGroupDirective> = input.required<FormGroupDirective>();
 	public control: InputSignal<AbstractControl | null> = input.required<AbstractControl | null>();
 	public fieldName: InputSignal<string> = input.required<string>();
+	public min: InputSignal<number> = input<number>(0);
+	public max: InputSignal<number> = input<number>(0);
 }
