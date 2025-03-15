@@ -14,6 +14,7 @@ import { SuccessResponse } from '@models/success-response.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
+import { AlertFormErrorComponent } from '@shared/components/ui/form/alert-form-error/alert-form-error.component';
 import { MaskFieldComponent } from '@shared/components/ui/form/mask-field/mask-field.component';
 import { PasswordFieldComponent } from '@shared/components/ui/form/password-field/password-field.component';
 import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-field.component';
@@ -35,6 +36,7 @@ import { LengthValidator } from '@shared/validators/length.validator';
 		TextFieldComponent,
 		MaskFieldComponent,
 		PasswordFieldComponent,
+		AlertFormErrorComponent,
 	],
 	templateUrl: './register-page.component.html',
 })
@@ -70,8 +72,6 @@ export class RegisterPageComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		console.log(this.mainForm.value);
-
 		if (this.mainForm.valid) {
 			this.mainFormError = '';
 
@@ -157,7 +157,7 @@ export class RegisterPageComponent implements OnInit {
 		});
 
 		this.phoneCtrl = this._formBuilder.control('', {
-			validators: [Validators.required],
+			validators: [Validators.required, Validators.pattern(Regex.PHONE_PATTERN)],
 			nonNullable: true,
 		});
 
@@ -182,7 +182,7 @@ export class RegisterPageComponent implements OnInit {
 		});
 
 		this.zipCodeCtrl = this._formBuilder.control('', {
-			validators: [Validators.required],
+			validators: [Validators.required, Validators.pattern(Regex.ZIP_CODE_PATTERN)],
 			nonNullable: true,
 		});
 

@@ -7,11 +7,17 @@
   pageTitleSecondary="Register"
   maxWidth="max-w-[56.25rem]"
 >
+  @if (mainFormError) {
+  <app-alert-form-error
+    [message]="mainFormError"
+    class="w-full mt-10 mb-4"
+  ></app-alert-form-error>
+  }
   <form
     #registerForm="ngForm"
     [formGroup]="mainForm"
     (ngSubmit)="onSubmit()"
-    class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
+    class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full"
   >
     <div
       [formGroup]="userInfoGroup"
@@ -83,6 +89,7 @@
         formControlName="phone"
         controlName="phone"
         class="w-full"
+        [form]="registerForm"
       ></app-mask-field>
     </div>
 
@@ -157,9 +164,10 @@
             name="zipCode"
             type="zipCode"
             [parentForm]="mainForm"
-            groupName="userContactGroup"
+            groupName="userAddressGroup"
             formControlName="zipCode"
             controlName="zipCode"
+            [form]="registerForm"
           ></app-mask-field>
         </div>
 

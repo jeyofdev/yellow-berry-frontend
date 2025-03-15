@@ -72,7 +72,7 @@ export class LoginPageComponent implements OnInit {
 			// 	});
 			// }
 		} else {
-			this.mainFormError = 'Login failed. Please verify your credentials and try again.';
+			this.mainFormError = 'Register failed. Please verify yours informations and try again.';
 		}
 	}
 

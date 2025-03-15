@@ -17,9 +17,12 @@ export class InputErrorMessagePipe implements PipeTransform {
 		} else if (control.hasError('pattern')) {
 			if (fieldName === 'email') {
 				return `The ${fieldName} is not in the correct format.`;
-			}
-			if (fieldName.indexOf('password') !== -1) {
+			} else if (fieldName.indexOf('password') !== -1) {
 				return `The ${fieldName} must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.`;
+			} else if (fieldName.indexOf('phone') !== -1) {
+				return `The ${fieldName} must start with 01, 02, ..., 09 and follow the format XX-XX-XX-XX-XX.`;
+			} else if (fieldName.indexOf('zipCode') !== -1) {
+				return `Invalid postal code! It must be 5 digits long.`;
 			} else {
 				return `The ${fieldName} must contain only letters.`;
 			}

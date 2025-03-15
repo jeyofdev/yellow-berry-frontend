@@ -4,4 +4,8 @@ export class Regex {
 	static readonly PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,16}$/;
 
 	static readonly TEXT_PATTERN = /^[A-Za-zÀ-ÖØ-öø-ÿ-]+$/;
+
+	static readonly PHONE_PATTERN = /^0[1-9]-(\d{2}-){3}(\d{2})$/;
+
+	static readonly ZIP_CODE_PATTERN = /^(\d){5}$/;
 }
