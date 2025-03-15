@@ -1,15 +1,18 @@
 import { FormInputAbstract } from '@abstract/form-input.abstract';
+import { JsonPipe } from '@angular/common';
 import { Component, InputSignal, booleanAttribute, forwardRef, input } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormGroupDirective, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ErrorFieldComponent } from '@shared/components/ui/form/error-field/error-field.component';
 import { MaskFieldTypeInput } from '@type/form-field-input.type';
 import { InputMaskModule } from 'primeng/inputmask';
 
 @Component({
 	selector: 'app-mask-field',
-	imports: [FormsModule, InputMaskModule],
+	imports: [FormsModule, InputMaskModule, ErrorFieldComponent],
 	templateUrl: './mask-field.component.html',
 	styleUrl: './mask-field.component.scss',
 	providers: [
+		JsonPipe,
 		{
 			provide: NG_VALUE_ACCESSOR,
 			useExisting: forwardRef(() => MaskFieldComponent),
@@ -22,6 +25,8 @@ export class MaskFieldComponent extends FormInputAbstract<string> {
 	public autoClear = input<boolean, unknown>(false, {
 		transform: booleanAttribute,
 	});
+
+	public form: InputSignal<FormGroupDirective> = input.required<FormGroupDirective>();
 
 	public mask!: string;
 	public placeholder!: string;

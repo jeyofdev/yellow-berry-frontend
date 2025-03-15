@@ -7,11 +7,17 @@
   pageTitleSecondary="Register"
   maxWidth="max-w-[56.25rem]"
 >
+  @if (mainFormError) {
+  <app-alert-form-error
+    [message]="mainFormError"
+    class="w-full mt-10 mb-4"
+  ></app-alert-form-error>
+  }
   <form
     #registerForm="ngForm"
     [formGroup]="mainForm"
     (ngSubmit)="onSubmit()"
-    class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full mt-10"
+    class="flex flex-col gap-5 border border-gray-200 rounded-[1.25rem] p-[1.875rem] w-full"
   >
     <div
       [formGroup]="userInfoGroup"
@@ -30,6 +36,8 @@
         controlName="firstname"
         class="w-full"
         [form]="registerForm"
+        [min]="3"
+        [max]="30"
       ></app-text-field>
 
       <app-text-field
@@ -45,6 +53,8 @@
         controlName="lastname"
         class="w-full"
         [form]="registerForm"
+        [min]="3"
+        [max]="80"
       ></app-text-field>
     </div>
 
@@ -79,6 +89,7 @@
         formControlName="phone"
         controlName="phone"
         class="w-full"
+        [form]="registerForm"
       ></app-mask-field>
     </div>
 
@@ -100,6 +111,8 @@
           controlName="address"
           class="w-full"
           [form]="registerForm"
+          [min]="3"
+          [max]="100"
         ></app-text-field>
       </div>
 
@@ -119,6 +132,8 @@
             formControlName="region"
             controlName="region"
             [form]="registerForm"
+            [min]="3"
+            [max]="30"
           ></app-text-field>
         </div>
 
@@ -135,6 +150,8 @@
             formControlName="department"
             controlName="department"
             [form]="registerForm"
+            [min]="3"
+            [max]="30"
           ></app-text-field>
         </div>
 
@@ -147,9 +164,10 @@
             name="zipCode"
             type="zipCode"
             [parentForm]="mainForm"
-            groupName="userContactGroup"
+            groupName="userAddressGroup"
             formControlName="zipCode"
             controlName="zipCode"
+            [form]="registerForm"
           ></app-mask-field>
         </div>
 
@@ -166,6 +184,8 @@
             formControlName="city"
             controlName="city"
             [form]="registerForm"
+            [min]="3"
+            [max]="30"
           ></app-text-field>
         </div>
       </div>
@@ -188,6 +208,9 @@
         formControlName="password"
         controlName="password"
         class="w-full"
+        [form]="registerForm"
+        [min]="8"
+        [max]="16"
       ></app-password-field>
 
       <app-password-field
@@ -203,6 +226,9 @@
         formControlName="confirmPassword"
         controlName="confirmPassword"
         class="w-full"
+        [form]="registerForm"
+        [min]="8"
+        [max]="16"
       ></app-password-field>
     </div>
 

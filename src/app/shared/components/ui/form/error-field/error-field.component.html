@@ -1,10 +1,14 @@
 @if (form().submitted && control()?.invalid) { @if
 (control()?.hasError('required')) {
-<p-message severity="error" variant="simple" size="small"
-  >the field is required</p-message
->
-} @if (control()?.hasError('pattern')) {
-<p-message severity="error" variant="simple" size="small"
-  >error pattern</p-message
->
+<p-message severity="error" variant="simple" size="small">{{
+  control() | formErrorMessage : fieldName()
+}}</p-message>
+} @else if (control()?.hasError('length') && min() && max()) {
+<p-message severity="error" variant="simple" size="small">{{
+  control() | formErrorMessage : fieldName() : min() : max()
+}}</p-message>
+} @else if (control()?.hasError('pattern')) {
+<p-message severity="error" variant="simple" size="small">{{
+  control() | formErrorMessage : fieldName()
+}}</p-message>
 } }

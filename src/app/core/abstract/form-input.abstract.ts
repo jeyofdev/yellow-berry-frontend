@@ -54,6 +54,7 @@ export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccess
 	private getFormControl(groupName: string, parentForm: FormGroup, controlName: string) {
 		if (groupName) {
 			const group = parentForm.get(groupName) as FormGroup;
+
 			return group ? group.get(controlName) : null;
 		} else {
 			return parentForm.get(controlName);

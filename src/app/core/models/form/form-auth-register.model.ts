@@ -6,9 +6,9 @@ import { FormAuthRegisterPassword } from './form-auth-register-password.model';
 
 export class FormAuthRegister {
 	constructor(
-		public info: FormGroup<FormAuthRegisterInfo>,
-		public contact: FormGroup<FormAuthRegisterContact>,
-		public address: FormGroup<FormAuthRegisterAddress>,
-		public password: FormGroup<FormAuthRegisterPassword>,
+		public userInfoGroup: FormGroup<FormAuthRegisterInfo>,
+		public userContactGroup: FormGroup<FormAuthRegisterContact>,
+		public userAddressGroup: FormGroup<FormAuthRegisterAddress>,
+		public userPasswordGroup: FormGroup<FormAuthRegisterPassword>,
 	) {}
 }

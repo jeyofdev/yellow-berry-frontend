@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Regex } from '@constants/regex.constant';
 import { RoleEnum } from '@enum/role-enum.enum';
 import { RouteEnum } from '@enum/route.enum';
 import { FormAuthRegisterAddress } from '@models/form/form-auth-register-address.model';
@@ -13,12 +14,14 @@ import { SuccessResponse } from '@models/success-response.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
+import { AlertFormErrorComponent } from '@shared/components/ui/form/alert-form-error/alert-form-error.component';
 import { MaskFieldComponent } from '@shared/components/ui/form/mask-field/mask-field.component';
 import { PasswordFieldComponent } from '@shared/components/ui/form/password-field/password-field.component';
 import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-field.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-form.component';
+import { LengthValidator } from '@shared/validators/length.validator';
 
 @Component({
 	selector: 'app-register',
@@ -33,28 +36,29 @@ import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-for
 		TextFieldComponent,
 		MaskFieldComponent,
 		PasswordFieldComponent,
+		AlertFormErrorComponent,
 	],
 	templateUrl: './register-page.component.html',
 })
-export class RegisterPageComponent {
+export class RegisterPageComponent implements OnInit {
 	public mainForm!: FormGroup<FormAuthRegister>;
+	public mainFormError!: string;
 	public userInfoGroup!: FormGroup<FormAuthRegisterInfo>;
 	public userContactGroup!: FormGroup<FormAuthRegisterContact>;
 	public userAddressGroup!: FormGroup<FormAuthRegisterAddress>;
 	public userPasswordGroup!: FormGroup<FormAuthRegisterPassword>;
-	public mainFormError!: string;
 
-	public firstnameCtrl!: FormControl<string | null>;
-	public lastnameCtrl!: FormControl<string | null>;
-	public emailCtrl!: FormControl<string | null>;
-	public phoneCtrl!: FormControl<string | null>;
-	public addressCtrl!: FormControl<string | null>;
-	public regionCtrl!: FormControl<string | null>;
-	public departmentCtrl!: FormControl<string | null>;
-	public zipCodeCtrl!: FormControl<string | null>;
-	public cityCtrl!: FormControl<string | null>;
-	public passwordCtrl!: FormControl<string | null>;
-	public confirmPasswordCtrl!: FormControl<string | null>;
+	public firstnameCtrl!: FormControl<string>;
+	public lastnameCtrl!: FormControl<string>;
+	public emailCtrl!: FormControl<string>;
+	public phoneCtrl!: FormControl<string>;
+	public addressCtrl!: FormControl<string>;
+	public regionCtrl!: FormControl<string>;
+	public departmentCtrl!: FormControl<string>;
+	public zipCodeCtrl!: FormControl<string>;
+	public cityCtrl!: FormControl<string>;
+	public passwordCtrl!: FormControl<string>;
+	public confirmPasswordCtrl!: FormControl<string>;
 
 	public routeEnum = RouteEnum;
 
@@ -63,6 +67,7 @@ export class RegisterPageComponent {
 
 	ngOnInit(): void {
 		this.initFormControls();
+		this.initFormGroups();
 		this.initMainForm();
 	}
 
@@ -103,26 +108,14 @@ export class RegisterPageComponent {
 
 	private initMainForm() {
 		this.mainForm = this._formBuilder.group({
-			info: this.userInfoGroup,
-			contact: this.userContactGroup,
-			address: this.userAddressGroup,
-			password: this.userPasswordGroup,
+			userInfoGroup: this.userInfoGroup,
+			userContactGroup: this.userContactGroup,
+			userAddressGroup: this.userAddressGroup,
+			userPasswordGroup: this.userPasswordGroup,
 		});
 	}
 
-	private initFormControls(): void {
-		this.firstnameCtrl = this._formBuilder.control('');
-		this.lastnameCtrl = this._formBuilder.control('');
-		this.emailCtrl = this._formBuilder.control('');
-		this.phoneCtrl = this._formBuilder.control('');
-		this.addressCtrl = this._formBuilder.control('');
-		this.regionCtrl = this._formBuilder.control('');
-		this.departmentCtrl = this._formBuilder.control('');
-		this.cityCtrl = this._formBuilder.control('');
-		this.zipCodeCtrl = this._formBuilder.control('');
-		this.passwordCtrl = this._formBuilder.control('');
-		this.confirmPasswordCtrl = this._formBuilder.control('');
-
+	private initFormGroups(): void {
 		this.userInfoGroup = this._formBuilder.group({
 			firstname: this.firstnameCtrl,
 			lastname: this.lastnameCtrl,
@@ -144,6 +137,63 @@ export class RegisterPageComponent {
 		this.userPasswordGroup = this._formBuilder.group({
 			password: this.passwordCtrl,
 			confirmPassword: this.confirmPasswordCtrl,
+		});
+	}
+
+	private initFormControls(): void {
+		this.firstnameCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, LengthValidator(3, 30), Validators.pattern(Regex.TEXT_PATTERN)],
+			nonNullable: true,
+		});
+
+		this.lastnameCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, LengthValidator(3, 80), Validators.pattern(Regex.TEXT_PATTERN)],
+			nonNullable: true,
+		});
+
+		this.emailCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, Validators.pattern(Regex.EMAIL_PATTERN)],
+			nonNullable: true,
+		});
+
+		this.phoneCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, Validators.pattern(Regex.PHONE_PATTERN)],
+			nonNullable: true,
+		});
+
+		this.addressCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, LengthValidator(3, 100)],
+			nonNullable: true,
+		});
+
+		this.regionCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, LengthValidator(3, 30), Validators.pattern(Regex.TEXT_PATTERN)],
+			nonNullable: true,
+		});
+
+		this.departmentCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, LengthValidator(3, 30), Validators.pattern(Regex.TEXT_PATTERN)],
+			nonNullable: true,
+		});
+
+		this.cityCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, LengthValidator(3, 30), Validators.pattern(Regex.TEXT_PATTERN)],
+			nonNullable: true,
+		});
+
+		this.zipCodeCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, Validators.pattern(Regex.ZIP_CODE_PATTERN)],
+			nonNullable: true,
+		});
+
+		this.passwordCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, LengthValidator(8, 16), Validators.pattern(Regex.PASSWORD_PATTERN)],
+			nonNullable: true,
+		});
+
+		this.confirmPasswordCtrl = this._formBuilder.control('', {
+			validators: [Validators.required, LengthValidator(8, 16), Validators.pattern(Regex.PASSWORD_PATTERN)],
+			nonNullable: true,
 		});
 	}
 }

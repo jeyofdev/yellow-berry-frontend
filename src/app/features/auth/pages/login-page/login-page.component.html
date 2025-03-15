@@ -45,6 +45,9 @@
       [parentForm]="mainForm"
       formControlName="password"
       controlName="password"
+      [form]="loginForm"
+      [min]="8"
+      [max]="16"
     ></app-password-field>
 
     <app-link-form
