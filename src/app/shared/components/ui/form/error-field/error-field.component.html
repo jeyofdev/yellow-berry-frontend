@@ -1,10 +1,10 @@
 @if (form().submitted && control()?.invalid) { @if
 (control()?.hasError('required')) {
-<p-message severity="error" variant="simple" size="small"
-  >the field is required</p-message
->
+<p-message severity="error" variant="simple" size="small">{{
+  control() | formErrorMessage : fieldName()
+}}</p-message>
 } @if (control()?.hasError('pattern')) {
-<p-message severity="error" variant="simple" size="small"
-  >error pattern</p-message
->
+<p-message severity="error" variant="simple" size="small">{{
+  control() | formErrorMessage : fieldName()
+}}</p-message>
 } }
