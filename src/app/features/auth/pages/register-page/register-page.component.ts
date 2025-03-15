@@ -22,6 +22,7 @@ import { HeaderComponent } from '@shared/components/ui/header/header/header.comp
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-form.component';
 import { LengthValidator } from '@shared/validators/length.validator';
+import { PasswordMatchValidator } from '@shared/validators/password-match.validator';
 
 @Component({
 	selector: 'app-register',
@@ -134,10 +135,15 @@ export class RegisterPageComponent implements OnInit {
 			city: this.cityCtrl,
 		});
 
-		this.userPasswordGroup = this._formBuilder.group({
-			password: this.passwordCtrl,
-			confirmPassword: this.confirmPasswordCtrl,
-		});
+		this.userPasswordGroup = this._formBuilder.group(
+			{
+				password: this.passwordCtrl,
+				confirmPassword: this.confirmPasswordCtrl,
+			},
+			{
+				validators: [PasswordMatchValidator('password', 'confirmPassword')],
+			},
+		);
 	}
 
 	private initFormControls(): void {

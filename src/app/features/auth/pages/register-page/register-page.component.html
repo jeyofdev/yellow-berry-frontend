@@ -7,12 +7,15 @@
   pageTitleSecondary="Register"
   maxWidth="max-w-[56.25rem]"
 >
-  @if (mainFormError) {
-  <app-alert-form-error
-    [message]="mainFormError"
-    class="w-full mt-10 mb-4"
-  ></app-alert-form-error>
-  }
+  <div class="w-full mt-10 mb-4">
+    @if (mainFormError) {
+    <app-alert-form-error
+      [message]="mainFormError"
+      class="w-full"
+    ></app-alert-form-error>
+    }
+  </div>
+
   <form
     #registerForm="ngForm"
     [formGroup]="mainForm"

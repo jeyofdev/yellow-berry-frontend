@@ -13,6 +13,7 @@ import { HeaderComponent } from '@shared/components/ui/header/header/header.comp
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-back.component';
 import { LengthValidator } from '@shared/validators/length.validator';
+import { PasswordMatchValidator } from '@shared/validators/password-match.validator';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -78,10 +79,15 @@ export class ResetPasswordPageComponent implements OnInit {
 	}
 
 	private initMainForm() {
-		this.mainForm = this._formBuilder.group({
-			password: this.passwordCtrl,
-			confirmPassword: this.confirmPassword,
-		});
+		this.mainForm = this._formBuilder.group(
+			{
+				password: this.passwordCtrl,
+				confirmPassword: this.confirmPassword,
+			},
+			{
+				validators: [PasswordMatchValidator('password', 'confirmPassword')],
+			},
+		);
 	}
 
 	private initFormControls(): void {

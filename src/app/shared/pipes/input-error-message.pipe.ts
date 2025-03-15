@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 @Pipe({
-	name: 'formErrorMessage',
+	name: 'inputErrorMessage',
 })
 export class InputErrorMessagePipe implements PipeTransform {
 	transform(control: AbstractControl | null, fieldName: string, min?: number, max?: number): string {
@@ -26,7 +26,10 @@ export class InputErrorMessagePipe implements PipeTransform {
 			} else {
 				return `The ${fieldName} must contain only letters.`;
 			}
+		} else if (control.hasError('passwordMismatch')) {
+			return `Passwords do not match! Please make sure both passwords are identical.`;
 		}
+
 		return '';
 	}
 }
