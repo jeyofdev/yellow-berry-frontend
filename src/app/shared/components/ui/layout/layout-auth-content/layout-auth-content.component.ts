@@ -1,5 +1,5 @@
 import { Component, InputSignal, OnInit, input } from '@angular/core';
-import { LayoutBaseComponent } from '../layout-base/layout-base.component';
+import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
 
 @Component({
 	selector: 'app-layout-auth-content',

@@ -1,5 +1,5 @@
 import { AddressDetailsFormat } from '@models/format/AddressDetailsFormat';
-import { NameDetailsFormat } from '../format/NameDetailsFormat';
+import { NameDetailsFormat } from '@models/format/NameDetailsFormat';
 
 export class ProfileResponse {
 	constructor(

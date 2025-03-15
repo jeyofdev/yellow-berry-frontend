@@ -1,14 +1,18 @@
 @if (form().submitted && control()?.invalid) { @if
 (control()?.hasError('required')) {
 <p-message severity="error" variant="simple" size="small">{{
-  control() | formErrorMessage : fieldName()
+  control() | inputErrorMessage : fieldName()
 }}</p-message>
 } @else if (control()?.hasError('length') && min() && max()) {
 <p-message severity="error" variant="simple" size="small">{{
-  control() | formErrorMessage : fieldName() : min() : max()
+  control() | inputErrorMessage : fieldName() : min() : max()
 }}</p-message>
 } @else if (control()?.hasError('pattern')) {
 <p-message severity="error" variant="simple" size="small">{{
-  control() | formErrorMessage : fieldName()
+  control() | inputErrorMessage : fieldName()
 }}</p-message>
-} }
+} @else if (control()?.hasError('passwordMismatch')) {
+<p-message severity="error" variant="simple" size="small">
+  {{ control() | inputErrorMessage : fieldName() }}
+</p-message>
+}}
