@@ -1,8 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Regex } from '@constants/regex.constant';
-import { RouteEnum } from '@enum/route.enum';
 import { FormAuthForgotPassword } from '@models/form/form-auth-forgot-password.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
@@ -28,24 +28,14 @@ import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-bac
 	],
 	templateUrl: './forgot-password-page.component.html',
 })
-export class ForgotPasswordPageComponent implements OnInit {
-	public mainForm!: FormGroup<FormAuthForgotPassword>;
-	public mainFormError!: string;
-
+export class ForgotPasswordPageComponent extends AuthPageAbstract<FormGroup<FormAuthForgotPassword>> {
 	public emailCtrl!: FormControl<string>;
 
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 	private _router: Router = inject(Router);
 
-	public routeEnum = RouteEnum;
-
-	ngOnInit(): void {
-		this.initFormControls();
-		this.initMainForm();
-	}
-
-	onSubmit(): void {
+	public override onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError = '';
 
@@ -65,13 +55,13 @@ export class ForgotPasswordPageComponent implements OnInit {
 		}
 	}
 
-	private initMainForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			email: this.emailCtrl,
 		});
 	}
 
-	private initFormControls(): void {
+	protected override initFormControls(): void {
 		this.emailCtrl = this._formBuilder.control('', {
 			validators: [Validators.required, Validators.pattern(Regex.EMAIL_PATTERN)],
 			nonNullable: true,

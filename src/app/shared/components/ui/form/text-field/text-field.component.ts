@@ -24,8 +24,6 @@ export class TextFieldComponent extends FormInputAbstract<string> {
 	public min: InputSignal<number> = input<number>(0);
 	public max: InputSignal<number> = input<number>(0);
 
-	public form: InputSignal<FormGroupDirective> = input.required<FormGroupDirective>();
-
 	override onInputChange(event: Event): void {
 		if (this.disabled) {
 			return;

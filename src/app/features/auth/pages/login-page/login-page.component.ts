@@ -1,7 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Regex } from '@constants/regex.constant';
-import { RouteEnum } from '@enum/route.enum';
 import { FormAuthLogin } from '@models/form/form-auth-login.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
@@ -36,24 +36,14 @@ import { PasswordModule } from 'primeng/password';
 	],
 	templateUrl: './login-page.component.html',
 })
-export class LoginPageComponent implements OnInit {
-	public mainForm!: FormGroup<FormAuthLogin>;
-	public mainFormError!: string;
-
+export class LoginPageComponent extends AuthPageAbstract<FormGroup<FormAuthLogin>> {
 	public emailCtrl!: FormControl<string>;
 	public passwordCtrl!: FormControl<string>;
-
-	public routeEnum = RouteEnum;
 
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 
-	ngOnInit(): void {
-		this.initFormControls();
-		this.initMainForm();
-	}
-
-	onSubmit(): void {
+	public override onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError = '';
 
@@ -76,14 +66,14 @@ export class LoginPageComponent implements OnInit {
 		}
 	}
 
-	private initMainForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			email: this.emailCtrl,
 			password: this.passwordCtrl,
 		});
 	}
 
-	private initFormControls(): void {
+	protected override initFormControls(): void {
 		this.emailCtrl = this._formBuilder.control<string>('', {
 			validators: [Validators.required, Validators.pattern(Regex.EMAIL_PATTERN)],
 			nonNullable: true,

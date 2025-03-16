@@ -1,14 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Regex } from '@constants/regex.constant';
-import { RoleEnum } from '@enum/role-enum.enum';
-import { RouteEnum } from '@enum/route.enum';
-import { FormAuthRegisterAddress } from '@models/form/form-auth-register-address.model';
-import { FormAuthRegisterContact } from '@models/form/form-auth-register-contact.model';
-import { FormAuthRegisterInfo } from '@models/form/form-auth-register-info.model';
-import { FormAuthRegisterPassword } from '@models/form/form-auth-register-password.model';
-import { FormAuthRegister } from '@models/form/form-auth-register.model';
+import { FormAuthRegisterAddress } from '@models/form/register/form-auth-register-address.model';
+import { FormAuthRegisterContact } from '@models/form/register/form-auth-register-contact.model';
+import { FormAuthRegisterInfo } from '@models/form/register/form-auth-register-info.model';
+import { FormAuthRegisterPassword } from '@models/form/register/form-auth-register-password.model';
+import { FormAuthRegister } from '@models/form/register/form-auth-register.model';
 import { ProfileResponse } from '@models/profile/save-profile-response.model';
 import { SuccessResponse } from '@models/success-response.model';
 import { AuthService } from '@services/auth/auth.service';
@@ -41,9 +40,7 @@ import { PasswordMatchValidator } from '@shared/validators/password-match.valida
 	],
 	templateUrl: './register-page.component.html',
 })
-export class RegisterPageComponent implements OnInit {
-	public mainForm!: FormGroup<FormAuthRegister>;
-	public mainFormError!: string;
+export class RegisterPageComponent extends AuthPageAbstract<FormGroup<FormAuthRegister>> {
 	public userInfoGroup!: FormGroup<FormAuthRegisterInfo>;
 	public userContactGroup!: FormGroup<FormAuthRegisterContact>;
 	public userAddressGroup!: FormGroup<FormAuthRegisterAddress>;
@@ -61,18 +58,16 @@ export class RegisterPageComponent implements OnInit {
 	public passwordCtrl!: FormControl<string>;
 	public confirmPasswordCtrl!: FormControl<string>;
 
-	public routeEnum = RouteEnum;
-
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 
-	ngOnInit(): void {
+	public override ngOnInit(): void {
 		this.initFormControls();
 		this.initFormGroups();
 		this.initMainForm();
 	}
 
-	onSubmit(): void {
+	public override onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError = '';
 
@@ -103,11 +98,11 @@ export class RegisterPageComponent implements OnInit {
 			// 		},
 			// 	});
 		} else {
-			this.mainFormError = 'Login failed. Please verify your credentials and try again.';
+			this.mainFormError = 'Register failed. Please verify yours informations and try again.';
 		}
 	}
 
-	private initMainForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			userInfoGroup: this.userInfoGroup,
 			userContactGroup: this.userContactGroup,
@@ -116,7 +111,7 @@ export class RegisterPageComponent implements OnInit {
 		});
 	}
 
-	private initFormGroups(): void {
+	protected initFormGroups(): void {
 		this.userInfoGroup = this._formBuilder.group({
 			firstname: this.firstnameCtrl,
 			lastname: this.lastnameCtrl,
@@ -146,7 +141,7 @@ export class RegisterPageComponent implements OnInit {
 		);
 	}
 
-	private initFormControls(): void {
+	protected override initFormControls(): void {
 		this.firstnameCtrl = this._formBuilder.control('', {
 			validators: [Validators.required, LengthValidator(3, 30), Validators.pattern(Regex.TEXT_PATTERN)],
 			nonNullable: true,
