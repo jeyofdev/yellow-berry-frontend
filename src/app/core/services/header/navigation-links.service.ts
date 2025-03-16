@@ -1,7 +1,7 @@
 import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouteEnum } from '@enum/route.enum';
-import { NavigationLink } from '@models/navigation-links.model';
+import { NavigationLink } from '@models/header/navigation-links.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -12,24 +12,23 @@ export class NavigationLinksService {
 	private _navigationLinks: WritableSignal<NavigationLink[]> = signal<NavigationLink[]>([
 		{
 			label: 'Home',
-			link: '/',
 			icon: '',
 			command: () => this._router.navigateByUrl('/' + RouteEnum.HOME),
 		},
 		{
 			label: 'Products',
-			link: '/',
 			icon: 'pi pi-circle',
+			command: () => this._router.navigateByUrl('/' + RouteEnum.HOME),
 		},
 		{
 			label: 'About',
-			link: '/',
 			icon: 'pi pi-circle',
+			command: () => this._router.navigateByUrl('/' + RouteEnum.HOME),
 		},
 		{
 			label: 'Contact',
-			link: '/',
 			icon: 'pi pi-circle',
+			command: () => this._router.navigateByUrl('/' + RouteEnum.HOME),
 		},
 	]);
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, WritableSignal, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HeaderTopBarLink } from '@models/header-topbar-link.model';
-import { HeaderTopbarLinkService } from '@services/header-topbar-links.service';
+import { HeaderTopBarLink } from '@models/header/header-topbar-link.model';
+import { HeaderTopbarLinkService } from '@services/header/header-topbar-links.service';
 
 @Component({
 	selector: 'app-header-topbar',

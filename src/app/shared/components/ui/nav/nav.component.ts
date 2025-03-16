@@ -1,6 +1,6 @@
 import { Component, OnInit, WritableSignal, inject } from '@angular/core';
-import { NavigationLink } from '@models/navigation-links.model';
-import { NavigationLinksService } from '@services/navigation-links.service';
+import { NavigationLink } from '@models/header/navigation-links.model';
+import { NavigationLinksService } from '@services/header/navigation-links.service';
 import { MenubarModule } from 'primeng/menubar';
 
 @Component({
