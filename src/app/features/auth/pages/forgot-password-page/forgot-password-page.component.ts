@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { Router } from '@angular/router';
 import { Regex } from '@constants/regex.constant';
 import { FormAuthForgotPassword } from '@models/form/form-auth-forgot-password.model';
+import { MessageResponse } from '@models/response/message-response.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
@@ -39,17 +40,18 @@ export class ForgotPasswordPageComponent extends AuthPageAbstract<FormGroup<Form
 		if (this.mainForm.valid) {
 			this.mainFormError = '';
 
-			// const email = this.mainForm.value.email ?? '';
-			// this._authService.forgotPassword(email).subscribe({
-			// 	next: response => {
-			// 		console.log('Forgot password query successful', response);
-			// 		localStorage.setItem('forgotPasswordEmail', JSON.stringify(email));
-			// 		this._router.navigateByUrl('/auth/check-email');
-			// 	},
-			// 	error: err => {
-			// 		console.error('Error during forgot password query', err);
-			// 	},
-			// });
+			const requestArgs = { email: this.mainForm.value.email as string };
+
+			this._authService.forgotPassword(requestArgs).subscribe({
+				next: (response: MessageResponse) => {
+					console.log('Forgot password query successful', response);
+					localStorage.setItem('forgotPasswordEmail', JSON.stringify(requestArgs.email));
+					this._router.navigateByUrl('/auth/check-email');
+				},
+				error: err => {
+					console.error('Error during forgot password query', err);
+				},
+			});
 		} else {
 			this.mainFormError = 'The form contains errors. Please verify yours informations and try again.';
 		}

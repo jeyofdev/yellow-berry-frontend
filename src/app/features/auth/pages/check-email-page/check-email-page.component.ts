@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouteEnum } from '@enum/route.enum';
+import { MessageResponse } from '@models/response/message-response.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonLargeComponent } from '@shared/components/ui/buttons/button-large/button-large.component';
@@ -26,8 +27,8 @@ export class CheckEmailPageComponent implements OnInit {
 	}
 
 	onClick(): void {
-		this._authService.forgotPassword(this.email).subscribe({
-			next: response => {
+		this._authService.forgotPassword({ email: this.email }).subscribe({
+			next: (response: MessageResponse) => {
 				console.log('Forgot password query successful', response);
 			},
 			error: err => {

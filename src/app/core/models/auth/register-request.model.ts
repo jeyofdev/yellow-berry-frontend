@@ -1,4 +1,4 @@
-import { RoleEnum } from '@enum/role-enum.enum';
+import { RoleEnum } from '@enum/role.enum';
 
 export class RegisterRequest {
 	constructor(

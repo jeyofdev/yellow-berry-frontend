@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Regex } from '@constants/regex.constant';
 import { FormAuthResetPassword } from '@models/form/form-auth-reset-password.model';
+import { MessageResponse } from '@models/response/message-response.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
@@ -49,20 +50,20 @@ export class ResetPasswordPageComponent extends AuthPageAbstract<FormGroup<FormA
 		if (this.mainForm.valid) {
 			this.mainFormError = '';
 
-			// this._authService
-			// 	.resetPassword({
-			// 		resetToken: this._activatedRoute.snapshot.queryParams['resetToken'],
-			// 		newPassword: this.mainForm.value.password ?? '',
-			// 	})
-			// 	.subscribe({
-			// 		next: response => {
-			// 			console.log('reset password successful', response);
-			// 			this._router.navigateByUrl('/auth/reset-password/confirm');
-			// 		},
-			// 		error: err => {
-			// 			console.error('Error during reset password', err);
-			// 		},
-			// 	});
+			this._authService
+				.resetPassword({
+					resetToken: this._activatedRoute.snapshot.queryParams['resetToken'],
+					newPassword: this.mainForm.value.password as string,
+				})
+				.subscribe({
+					next: (response: MessageResponse) => {
+						console.log('reset password successful', response);
+						this._router.navigateByUrl('/auth/reset-password/confirm');
+					},
+					error: err => {
+						console.error('Error during reset password', err);
+					},
+				});
 		} else {
 			this.mainFormError = 'The form contains errors. Please verify yours informations and try again.';
 		}

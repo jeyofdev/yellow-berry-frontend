@@ -2,6 +2,7 @@ import { AuthPageAbstract } from '@abstract/auth-page.abstract';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Regex } from '@constants/regex.constant';
+import { LoginResponse } from '@models/auth/login-response.model';
 import { FormAuthLogin } from '@models/form/form-auth-login.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
@@ -47,20 +48,20 @@ export class LoginPageComponent extends AuthPageAbstract<FormGroup<FormAuthLogin
 		if (this.mainForm.valid) {
 			this.mainFormError = '';
 
-			// 	const loginRequest = {
-			// 		email: this.mainForm.value.email ?? '',
-			// 		password: this.mainForm.value.password ?? '',
-			// 	};
-			// 	this._authService.login(loginRequest).subscribe({
-			// 		next: response => {
-			// 			console.log('Login successful', response);
-			// 			console.log(this._authService.getLoggedIn() ? 'User is logged in.' : 'User is not logged in.');
-			// 		},
-			// 		error: err => {
-			// 			console.error('Error during login', err);
-			// 		},
-			// 	});
-			// }
+			this._authService
+				.login({
+					email: this.mainForm.value.email as string,
+					password: this.mainForm.value.password as string,
+				})
+				.subscribe({
+					next: (response: LoginResponse) => {
+						console.log('Login successful', response);
+						console.log(this._authService.getLoggedIn() ? 'User is logged in.' : 'User is not logged in.');
+					},
+					error: err => {
+						console.error('Error during login', err);
+					},
+				});
 		} else {
 			this.mainFormError = 'Register failed. Please verify yours informations and try again.';
 		}
