@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Regex } from '@constants/regex.constant';
-import { RouteEnum } from '@enum/route.enum';
 import { FormAuthForgotPassword } from '@models/form/form-auth-forgot-password.model';
+import { MessageResponse } from '@models/response/message-response.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
@@ -28,50 +29,41 @@ import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-bac
 	],
 	templateUrl: './forgot-password-page.component.html',
 })
-export class ForgotPasswordPageComponent implements OnInit {
-	public mainForm!: FormGroup<FormAuthForgotPassword>;
-	public mainFormError!: string;
-
+export class ForgotPasswordPageComponent extends AuthPageAbstract<FormGroup<FormAuthForgotPassword>> {
 	public emailCtrl!: FormControl<string>;
 
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 	private _router: Router = inject(Router);
 
-	public routeEnum = RouteEnum;
-
-	ngOnInit(): void {
-		this.initFormControls();
-		this.initMainForm();
-	}
-
-	onSubmit(): void {
+	public override onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError = '';
 
-			// const email = this.mainForm.value.email ?? '';
-			// this._authService.forgotPassword(email).subscribe({
-			// 	next: response => {
-			// 		console.log('Forgot password query successful', response);
-			// 		localStorage.setItem('forgotPasswordEmail', JSON.stringify(email));
-			// 		this._router.navigateByUrl('/auth/check-email');
-			// 	},
-			// 	error: err => {
-			// 		console.error('Error during forgot password query', err);
-			// 	},
-			// });
+			const requestArgs = { email: this.mainForm.value.email as string };
+
+			this._authService.forgotPassword(requestArgs).subscribe({
+				next: (response: MessageResponse) => {
+					console.log('Forgot password query successful', response);
+					localStorage.setItem('forgotPasswordEmail', JSON.stringify(requestArgs.email));
+					this._router.navigateByUrl('/auth/check-email');
+				},
+				error: err => {
+					console.error('Error during forgot password query', err);
+				},
+			});
 		} else {
 			this.mainFormError = 'The form contains errors. Please verify yours informations and try again.';
 		}
 	}
 
-	private initMainForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			email: this.emailCtrl,
 		});
 	}
 
-	private initFormControls(): void {
+	protected override initFormControls(): void {
 		this.emailCtrl = this._formBuilder.control('', {
 			validators: [Validators.required, Validators.pattern(Regex.EMAIL_PATTERN)],
 			nonNullable: true,

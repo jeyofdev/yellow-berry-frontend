@@ -1,5 +1,5 @@
 import { Directive, InputSignal, OnInit, booleanAttribute, input } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormGroup } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Directive()
 export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccessor {
@@ -15,6 +15,7 @@ export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccess
 	public parentForm: InputSignal<FormGroup> = input.required<FormGroup>();
 	public groupName: InputSignal<string> = input<string>('');
 	public controlName: InputSignal<string> = input.required<string>();
+	public form: InputSignal<FormGroupDirective> = input.required<FormGroupDirective>();
 
 	public fullLabel!: string;
 

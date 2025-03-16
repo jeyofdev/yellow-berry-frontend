@@ -1,6 +1,6 @@
 import { Injectable, WritableSignal } from '@angular/core';
 import { signal } from '@angular/core';
-import { HeaderTopBarLink } from '@models/header-topbar-link.model';
+import { HeaderTopBarLink } from '@models/header/header-topbar-link.model';
 
 @Injectable({
 	providedIn: 'root',

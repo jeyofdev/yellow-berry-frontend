@@ -24,8 +24,6 @@ export class PasswordFieldComponent extends FormInputAbstract<string> {
 	public min: InputSignal<number> = input.required<number>();
 	public max: InputSignal<number> = input.required<number>();
 
-	public form: InputSignal<FormGroupDirective> = input.required<FormGroupDirective>();
-
 	override onInputChange(event: Event): void {
 		if (this.disabled) {
 			return;

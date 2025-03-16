@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { LoginRequest } from '@models/auth/LoginRequest.model';
-import { LoginResponse } from '@models/auth/LoginResponse.model';
-import { MessageResponse } from '@models/auth/MessageResponse.model';
-import { RegisterRequest } from '@models/auth/RegisterRequest.model';
-import { RegisterResponse } from '@models/auth/RegisterResponse.model';
-import { ResetPasswordRequest } from '@models/auth/ResetPassswordRequest.model';
+import { ForgotPasswordRequest } from '@models/auth/forgot-password-request.model';
+import { LoginRequest } from '@models/auth/login-request.model';
+import { LoginResponse } from '@models/auth/login-response.model';
+import { RegisterRequest } from '@models/auth/register-request.model';
+import { RegisterResponse } from '@models/auth/register-response.model';
+import { ResetPasswordRequest } from '@models/auth/reset-password-request.model';
 import { SaveProfileRequest } from '@models/profile/save-profile-request.model';
 import { ProfileResponse } from '@models/profile/save-profile-response.model';
-import { SuccessResponse } from '@models/success-response.model';
+import { MessageResponse } from '@models/response/message-response.model';
+import { SuccessResponse } from '@models/response/success-response.model';
 import { LocalStorageService } from '@services/auth/local-storage.service';
 import { ProfileService } from '@services/profile.service';
 import { Observable, switchMap, tap } from 'rxjs';
@@ -51,8 +52,11 @@ export class AuthService {
 		);
 	}
 
-	public forgotPassword(email: string): Observable<MessageResponse> {
-		return this._httpClient.post<MessageResponse>(this.BASE_URL + `/forgot-password?email=${email}`, {});
+	public forgotPassword(forgotPasswordRequest: ForgotPasswordRequest): Observable<MessageResponse> {
+		return this._httpClient.post<MessageResponse>(
+			this.BASE_URL + `/forgot-password?email=${forgotPasswordRequest.email}`,
+			{},
+		);
 	}
 
 	public resetPassword(resetPasswordRequest: ResetPasswordRequest): Observable<MessageResponse> {

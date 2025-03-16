@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { SaveProfileRequest } from '@models/profile/save-profile-request.model';
 import { ProfileResponse } from '@models/profile/save-profile-response.model';
-import { SuccessResponse } from '@models/success-response.model';
+import { SuccessResponse } from '@models/response/success-response.model';
 import { Observable } from 'rxjs';
 
 @Injectable({

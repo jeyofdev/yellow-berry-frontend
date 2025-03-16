@@ -26,8 +26,6 @@ export class MaskFieldComponent extends FormInputAbstract<string> {
 		transform: booleanAttribute,
 	});
 
-	public form: InputSignal<FormGroupDirective> = input.required<FormGroupDirective>();
-
 	public mask!: string;
 	public placeholder!: string;
 

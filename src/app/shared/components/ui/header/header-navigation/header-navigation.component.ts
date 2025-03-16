@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, WritableSignal, inject } from '@angular/core';
-import { HeaderAccountLink } from '@models/header-account-link.model';
-import { HeaderAccountLinkService } from '@services/header-account-link.service';
+import { HeaderAccountLink } from '@models/header/header-account-link.model';
+import { HeaderAccountLinkService } from '@services/header/header-account-link.service';
 import { ButtonCtaSearchComponent } from '@shared/components/ui/buttons/button-cta-search/button-cta-search.component';
 import { ButtonHeaderAccountComponent } from '@shared/components/ui/buttons/button-header-account/button-header-account.component';
 import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';

@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Regex } from '@constants/regex.constant';
-import { RouteEnum } from '@enum/route.enum';
 import { FormAuthResetPassword } from '@models/form/form-auth-reset-password.model';
+import { MessageResponse } from '@models/response/message-response.model';
 import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
@@ -36,10 +37,7 @@ import { PasswordModule } from 'primeng/password';
 	],
 	templateUrl: './reset-password-page.component.html',
 })
-export class ResetPasswordPageComponent implements OnInit {
-	public mainForm!: FormGroup<FormAuthResetPassword>;
-	public mainFormError!: string;
-
+export class ResetPasswordPageComponent extends AuthPageAbstract<FormGroup<FormAuthResetPassword>> {
 	public passwordCtrl!: FormControl<string>;
 	public confirmPassword!: FormControl<string>;
 
@@ -48,37 +46,30 @@ export class ResetPasswordPageComponent implements OnInit {
 	private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 	private _router: Router = inject(Router);
 
-	public routeEnum = RouteEnum;
-
-	ngOnInit(): void {
-		this.initFormControls();
-		this.initMainForm();
-	}
-
-	onSubmit(): void {
+	public override onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError = '';
 
-			// this._authService
-			// 	.resetPassword({
-			// 		resetToken: this._activatedRoute.snapshot.queryParams['resetToken'],
-			// 		newPassword: this.mainForm.value.password ?? '',
-			// 	})
-			// 	.subscribe({
-			// 		next: response => {
-			// 			console.log('reset password successful', response);
-			// 			this._router.navigateByUrl('/auth/reset-password/confirm');
-			// 		},
-			// 		error: err => {
-			// 			console.error('Error during reset password', err);
-			// 		},
-			// 	});
+			this._authService
+				.resetPassword({
+					resetToken: this._activatedRoute.snapshot.queryParams['resetToken'],
+					newPassword: this.mainForm.value.password as string,
+				})
+				.subscribe({
+					next: (response: MessageResponse) => {
+						console.log('reset password successful', response);
+						this._router.navigateByUrl('/auth/reset-password/confirm');
+					},
+					error: err => {
+						console.error('Error during reset password', err);
+					},
+				});
 		} else {
 			this.mainFormError = 'The form contains errors. Please verify yours informations and try again.';
 		}
 	}
 
-	private initMainForm() {
+	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group(
 			{
 				password: this.passwordCtrl,
@@ -90,7 +81,7 @@ export class ResetPasswordPageComponent implements OnInit {
 		);
 	}
 
-	private initFormControls(): void {
+	protected override initFormControls(): void {
 		this.passwordCtrl = this._formBuilder.control('', {
 			validators: [Validators.required, LengthValidator(8, 16), Validators.pattern(Regex.PASSWORD_PATTERN)],
 			nonNullable: true,
