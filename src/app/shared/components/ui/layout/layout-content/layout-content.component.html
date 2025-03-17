@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-center">
   <app-layout-base justifyContent="justify-center" alignItems="items-center">
-    <div [class]="containerClass">
-      <h1>
+    <div class="py-8 flex flex-col justify-center items-center gap-3 w-full">
+      <h1 class="text-center">
         <span
           class="text-[1.5625rem] text-gray-700 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
           >{{ pageTitleSecondary() }}</span
@@ -16,18 +16,14 @@
       </h1>
 
       <p
-        class="text-sm text-gray-700 leading-5 tracking-[0.03rem] font-poppins font-light text-center max-w-[23rem]"
+        class="text-sm text-gray-500 leading-[1.125rem] tracking-[0.03rem] font-poppins font-light text-center max-w-[23rem]"
       >
         {{ subtitle() }}
       </p>
-      @if(email()) {
-      <span
-        class="text-sm text-gray-500 leading-5 tracking-[0.03rem] font-poppins font-light text-center max-w-[23rem]"
-        >{{ email() }}</span
-      >
-      }
 
-      <ng-content></ng-content>
+      <div class="mt-10">
+        <ng-content></ng-content>
+      </div>
     </div>
   </app-layout-base>
 </div>

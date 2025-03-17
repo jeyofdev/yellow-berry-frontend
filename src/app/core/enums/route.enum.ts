@@ -1,6 +1,6 @@
 export enum RouteEnum {
 	HOME = 'home',
-
+	FAQ = 'faq',
 	AUTH = 'auth',
 
 	LOGIN = 'login',
