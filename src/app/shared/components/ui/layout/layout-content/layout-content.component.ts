@@ -8,7 +8,7 @@ import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/la
 	styleUrl: './layout-content.component.scss',
 })
 export class LayoutContentComponent {
-	public subtitle: InputSignal<string> = input.required<string>();
-	public pageTitleSecondary: InputSignal<string> = input.required<string>();
+	public subtitle: InputSignal<string> = input<string>('');
+	public pageTitleSecondary: InputSignal<string> = input<string>('');
 	public pageTitlePrimary: InputSignal<string> = input<string>('');
 }

@@ -2,12 +2,12 @@
   <app-layout-base justifyContent="justify-center" alignItems="items-center">
     <div class="py-8 flex flex-col justify-center items-center gap-3 w-full">
       <h1 class="text-center">
+        @if(pageTitlePrimary()) {
         <span
           class="text-[1.5625rem] text-gray-700 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
           >{{ pageTitleSecondary() }}</span
         >
-
-        @if(pageTitlePrimary()) {
+        } @if(pageTitlePrimary()) {
         <span
           class="text-[1.5625rem] text-primary-500 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize ml-1.5"
           >{{ pageTitlePrimary() }}</span
@@ -21,7 +21,7 @@
         {{ subtitle() }}
       </p>
 
-      <div class="mt-10">
+      <div class="mt-10 w-full">
         <ng-content></ng-content>
       </div>
     </div>

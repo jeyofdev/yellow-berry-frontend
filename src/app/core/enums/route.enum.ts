@@ -1,6 +1,7 @@
 export enum RouteEnum {
 	HOME = 'home',
 	FAQ = 'faq',
+	ABOUT = 'about',
 	AUTH = 'auth',
 
 	LOGIN = 'login',

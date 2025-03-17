@@ -23,7 +23,7 @@ export class NavigationLinksService {
 		{
 			label: 'About',
 			icon: 'pi pi-circle',
-			command: () => this._router.navigateByUrl('/' + RouteEnum.HOME),
+			command: () => this._router.navigateByUrl('/' + RouteEnum.ABOUT),
 		},
 		{
 			label: 'Contact',
