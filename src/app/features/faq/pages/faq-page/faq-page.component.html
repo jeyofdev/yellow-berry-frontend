@@ -11,51 +11,14 @@
     </div>
 
     <div class="w-2/3">
-      <p-panel
-        header="What is the multi vendor services?"
-        [toggleable]="true"
-        [collapsed]="true"
-      >
-        <p class="">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-          molestie, velit nec vehicula placerat, eros enim sodales justo, ac
-          convallis ex lorem quis mauris. Nam odio tellus, fermentum vitae
-          volutpat non, vulputate egestas erat. Vestibulum quis consequat leo.
-          Morbi a turpis sollicitudin, molestie nisl vel, vulputate odio. Nullam
-          non dolor porta, aliquam odio eget, posuere nibh. Integer pharetra
-          enim ac magna malesuada sagittis. Pellentesque habitant morbi
-          tristique senectus et netus et malesuada fames ac turpis egestas.
-          Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-          per inceptos himenaeos. Phasellus sed magna nec mi faucibus maximus.
-          Mauris sed rhoncus arcu, nec tristique mauris. Morbi dignissim lacus
-          vel ante malesuada cursus et a elit. Aenean vitae pretium tortor, vel
-          dictum lacus. Donec finibus nulla nec metus tincidunt tristique at sed
-          lorem.
-        </p>
-      </p-panel>
-
-      <p-panel
-        header="What is the multi vendor services?"
-        [toggleable]="true"
-        [collapsed]="true"
-      >
-        <p class="">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-          molestie, velit nec vehicula placerat, eros enim sodales justo, ac
-          convallis ex lorem quis mauris. Nam odio tellus, fermentum vitae
-          volutpat non, vulputate egestas erat. Vestibulum quis consequat leo.
-          Morbi a turpis sollicitudin, molestie nisl vel, vulputate odio. Nullam
-          non dolor porta, aliquam odio eget, posuere nibh. Integer pharetra
-          enim ac magna malesuada sagittis. Pellentesque habitant morbi
-          tristique senectus et netus et malesuada fames ac turpis egestas.
-          Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-          per inceptos himenaeos. Phasellus sed magna nec mi faucibus maximus.
-          Mauris sed rhoncus arcu, nec tristique mauris. Morbi dignissim lacus
-          vel ante malesuada cursus et a elit. Aenean vitae pretium tortor, vel
-          dictum lacus. Donec finibus nulla nec metus tincidunt tristique at sed
-          lorem.
-        </p>
-      </p-panel>
+      @for (faq of faqItems(); track faq.id; let i = $index) {
+      <app-panel-toggle
+        [header]="faq.question"
+        [content]="faq.answer"
+        [collapsed]="activePanel !== i"
+        (click)="togglePanel(i)"
+      ></app-panel-toggle>
+      }
     </div>
   </div>
 </app-layout-content>
