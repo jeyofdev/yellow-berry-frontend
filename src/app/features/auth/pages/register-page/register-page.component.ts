@@ -94,7 +94,7 @@ export class RegisterPageComponent extends AuthPageAbstract<FormGroup<FormAuthRe
 						console.log('Register successful', successResponse);
 					},
 					error: err => {
-						console.error('Error during register', err);
+						this.mainFormError = `Register failed. ${err.error.message}`;
 					},
 				});
 		} else {

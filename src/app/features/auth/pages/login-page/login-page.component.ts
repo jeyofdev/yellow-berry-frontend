@@ -59,7 +59,7 @@ export class LoginPageComponent extends AuthPageAbstract<FormGroup<FormAuthLogin
 						console.log(this._authService.getLoggedIn() ? 'User is logged in.' : 'User is not logged in.');
 					},
 					error: err => {
-						console.error('Error during login', err);
+						this.mainFormError = err.error.message;
 					},
 				});
 		} else {
