@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, WritableSignal, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, WritableSignal, effect, inject } from '@angular/core';
 import { HeaderAccountLink } from '@models/header/header-account-link.model';
 import { HeaderAccountLinkService } from '@services/header/header-account-link.service';
 import { ButtonCtaSearchComponent } from '@shared/components/ui/buttons/button-cta-search/button-cta-search.component';
@@ -38,16 +38,20 @@ export class HeaderNavigationComponent implements OnInit {
 
 	private _headerAccountLinkService: HeaderAccountLinkService = inject(HeaderAccountLinkService);
 
+	constructor() {
+		effect(() => {
+			this.items = [
+				{
+					label: 'Account',
+					items: this.accountLinksChildren(),
+				},
+			];
+		});
+	}
+
 	ngOnInit(): void {
 		this.headerAccountLinks = this._headerAccountLinkService.getHeaderAccountLinks();
-		this.accountLinksChildren = this._headerAccountLinkService.getNoAuthAccountLinksChildren();
-
-		this.items = [
-			{
-				label: 'Account',
-				items: this.accountLinksChildren(),
-			},
-		];
+		this.accountLinksChildren = this._headerAccountLinkService.getAuthAccountLinks();
 	}
 
 	onMouseEnter(event: MouseEvent, sublabel: string): void {

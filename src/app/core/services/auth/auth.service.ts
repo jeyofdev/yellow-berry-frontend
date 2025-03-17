@@ -26,6 +26,10 @@ export class AuthService {
 
 	private loggedIn = signal<boolean>(false);
 
+	constructor() {
+		this.checkAuthTokenExist();
+	}
+
 	public register(
 		registerRequest: RegisterRequest,
 		profileDatas: SaveProfileRequest,
@@ -67,11 +71,21 @@ export class AuthService {
 		);
 	}
 
+	public logout(): void {
+		this._localStorageService.clearAuthToken();
+		this.setLoggedIn(false);
+	}
+
 	public setLoggedIn(value: boolean) {
 		this.loggedIn.set(value);
 	}
 
 	public getLoggedIn(): boolean {
 		return this.loggedIn();
+	}
+
+	private checkAuthTokenExist() {
+		const authToken: string | null = this._localStorageService.getAuthToken();
+		this.setLoggedIn(!!authToken);
 	}
 }

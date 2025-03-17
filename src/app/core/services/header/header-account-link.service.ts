@@ -1,14 +1,22 @@
-import { Injectable, WritableSignal, inject } from '@angular/core';
+import { Injectable, WritableSignal, effect, inject } from '@angular/core';
 import { signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouteEnum } from '@enum/route.enum';
 import { HeaderAccountLink } from '@models/header/header-account-link.model';
+import { AuthService } from '@services/auth/auth.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class HeaderAccountLinkService {
 	private _router: Router = inject(Router);
+	private _authService: AuthService = inject(AuthService);
+
+	constructor() {
+		effect(() => {
+			this.setAuthAccountLinks();
+		});
+	}
 
 	private _headerAccountLinks: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
 		{
@@ -28,7 +36,9 @@ export class HeaderAccountLinkService {
 		},
 	]);
 
-	private _noAuthAccountLinksChildren: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
+	private _authAccountLinksChildren: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([]);
+
+	private _notConnectedAccountLinks: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
 		{
 			label: 'Register',
 			sublabel: '',
@@ -43,7 +53,7 @@ export class HeaderAccountLinkService {
 		},
 	]);
 
-	private _authAccountLinksChildren: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
+	private _connectedAccountLinks: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
 		{
 			label: 'Profile',
 			sublabel: '',
@@ -53,6 +63,10 @@ export class HeaderAccountLinkService {
 			label: 'Logout',
 			sublabel: '',
 			icon: '',
+			command: () => {
+				this._authService.logout();
+				this._router.navigateByUrl('/' + RouteEnum.HOME);
+			},
 		},
 	]);
 
@@ -60,11 +74,17 @@ export class HeaderAccountLinkService {
 		return this._headerAccountLinks;
 	}
 
-	public getNoAuthAccountLinksChildren() {
-		return this._noAuthAccountLinksChildren;
+	public getAuthAccountLinks() {
+		return this._authAccountLinksChildren;
 	}
 
-	public getAuthAccountLinksChildren() {
+	public setAuthAccountLinks() {
+		if (this._authService.getLoggedIn()) {
+			this._authAccountLinksChildren.set(this._connectedAccountLinks());
+		} else {
+			this._authAccountLinksChildren.set(this._notConnectedAccountLinks());
+		}
+
 		return this._authAccountLinksChildren;
 	}
 }

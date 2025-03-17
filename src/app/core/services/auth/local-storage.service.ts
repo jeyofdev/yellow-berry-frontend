@@ -12,6 +12,19 @@ export class LocalStorageService {
 	}
 
 	/**
+	 * get user token from local storage
+	 */
+	getAuthToken(): string | null {
+		const tokenId: string | null = localStorage.getItem('authToken');
+
+		if (tokenId) {
+			return tokenId;
+		}
+
+		return null;
+	}
+
+	/**
 	 * delete user login token in local storage
 	 */
 	clearAuthToken(): void {
