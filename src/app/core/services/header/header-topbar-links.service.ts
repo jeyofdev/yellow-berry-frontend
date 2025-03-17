@@ -1,5 +1,6 @@
 import { Injectable, WritableSignal } from '@angular/core';
 import { signal } from '@angular/core';
+import { RouteEnum } from '@enum/route.enum';
 import { HeaderTopBarLink } from '@models/header/header-topbar-link.model';
 
 @Injectable({
@@ -9,7 +10,7 @@ export class HeaderTopbarLinkService {
 	private _headerTopBarLinks: WritableSignal<HeaderTopBarLink[]> = signal<HeaderTopBarLink[]>([
 		{
 			label: 'Help?',
-			link: '/',
+			link: '/' + RouteEnum.FAQ,
 		},
 		{
 			label: 'Track order',
