@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-center">
   <app-layout-base justifyContent="justify-center" alignItems="items-center">
     <div class="py-8 flex flex-col justify-center items-center gap-3 w-full">
-      <h1>
+      <h1 class="text-center">
         <span
           class="text-[1.5625rem] text-gray-700 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
           >{{ pageTitleSecondary() }}</span
@@ -21,7 +21,9 @@
         {{ subtitle() }}
       </p>
 
-      <ng-content></ng-content>
+      <div class="mt-10">
+        <ng-content></ng-content>
+      </div>
     </div>
   </app-layout-base>
 </div>
