@@ -61,7 +61,7 @@ export class ResetPasswordPageComponent extends AuthPageAbstract<FormGroup<FormA
 						this._router.navigateByUrl('/auth/reset-password/confirm');
 					},
 					error: err => {
-						console.error('Error during reset password', err);
+						this.mainFormError = err.error.message;
 					},
 				});
 		} else {

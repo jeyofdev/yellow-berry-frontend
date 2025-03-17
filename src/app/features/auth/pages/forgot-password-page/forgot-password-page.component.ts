@@ -49,7 +49,7 @@ export class ForgotPasswordPageComponent extends AuthPageAbstract<FormGroup<Form
 					this._router.navigateByUrl('/auth/check-email');
 				},
 				error: err => {
-					console.error('Error during forgot password query', err);
+					this.mainFormError = err.error.message;
 				},
 			});
 		} else {
