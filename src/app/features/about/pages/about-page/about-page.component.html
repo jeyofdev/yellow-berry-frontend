@@ -72,7 +72,7 @@
   pageTitlePrimary="Services"
 >
   <div
-    class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-y-6 gap-x-8 w-full max-w-[1600px]"
+    class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-y-6 gap-x-8 w-full max-w-[1368px] px-1.5"
   >
     @for (service of serviceItemList(); track service.id; let i = $index) {
     <app-card-service
@@ -91,8 +91,11 @@
   pageTitleInfo="Team"
 >
   <div
-    class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-y-6 gap-x-8 w-full max-w-[1600px]"
+    class="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full max-w-[1400px] overflow-hidden"
   >
-    team member carousel
+    <app-carousel-team
+      [teamMemberList]="teamMemberItemList()"
+      class="w-full"
+    ></app-carousel-team>
   </div>
 </app-layout-content>
