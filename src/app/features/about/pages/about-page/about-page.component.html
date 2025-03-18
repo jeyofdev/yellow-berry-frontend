@@ -7,7 +7,7 @@
     class="flex flex-col lg:flex-row items-center lg:items-start lg:justify-center w-full gap-x-6"
   >
     <div class="flex w-full lg:w-1/2 max-w-[400px] lg:max-w-[636px]">
-      <p-image src="images/about.png" alt="faq" />
+      <p-image src="images/about.png" alt="faq" imageClass="about-img" />
     </div>
 
     <div
@@ -63,5 +63,24 @@
         sit amet, sagittis nec nibh.
       </p>
     </div>
+  </div>
+</app-layout-content>
+
+<app-layout-content
+  subtitle="Customer service should not be a department. It should be the entire company."
+  pageTitleSecondary="Our"
+  pageTitlePrimary="Services"
+>
+  <div
+    class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-y-6 gap-x-8 w-full max-w-[1600px]"
+  >
+    @for (service of serviceItems(); track service.id; let i = $index) {
+    <app-card-service
+      [name]="service.name"
+      [description]="service.description"
+      [index]="i"
+      class="w-full lg:w-1/4 max-w-[500px]"
+    ></app-card-service>
+    }
   </div>
 </app-layout-content>

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
 import { FaqResponse } from '@models/faq/faq-response.model';
+import { SuccessResponse } from '@models/response/success-response.model';
 import { FaqService } from '@services/faq.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
@@ -25,7 +26,7 @@ export class FaqPageComponent implements OnInit {
 		this._faqService
 			.findAll()
 			.pipe(
-				map(faqResponse => {
+				map((faqResponse: SuccessResponse<FaqResponse[]>) => {
 					this.faqItems.set(faqResponse.result);
 				}),
 			)

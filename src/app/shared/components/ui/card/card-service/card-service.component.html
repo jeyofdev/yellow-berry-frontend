@@ -1,0 +1,9 @@
+<p-card styleClass="service-card">
+  <ng-template #header>
+    <p-image [src]="imageSrc" [alt]="name()" />
+  </ng-template>
+
+  <ng-template #title>{{ name() }}</ng-template>
+
+  <ng-template #subtitle> {{ description() }}</ng-template>
+</p-card>
