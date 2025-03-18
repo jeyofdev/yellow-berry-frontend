@@ -72,54 +72,15 @@
   pageTitlePrimary="Services"
 >
   <div
-    class="flex flex-col md:flex-row items-center md:items-start gap-y-6 gap-x-8 w-full max-w-[1600px]"
+    class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-y-6 gap-x-8 w-full max-w-[1600px]"
   >
-    <p-card styleClass="service-card" class="w-full md:w-1/4 max-w-[500px]">
-      <ng-template #header>
-        <p-image src="images/free-shipping.png" alt="free shipping" />
-      </ng-template>
-
-      <ng-template #title>Free Shipping</ng-template>
-
-      <ng-template #subtitle>
-        Free shipping on all Us order or above $200</ng-template
-      >
-    </p-card>
-
-    <p-card styleClass="service-card" class="w-full md:w-1/4 max-w-[500px]">
-      <ng-template #header>
-        <p-image src="images/free-shipping.png" alt="free shipping" />
-      </ng-template>
-
-      <ng-template #title>Free Shipping</ng-template>
-
-      <ng-template #subtitle>
-        Free shipping on all Us order or above $200</ng-template
-      >
-    </p-card>
-
-    <p-card styleClass="service-card" class="w-full md:w-1/4 max-w-[500px]">
-      <ng-template #header>
-        <p-image src="images/free-shipping.png" alt="free shipping" />
-      </ng-template>
-
-      <ng-template #title>Free Shipping</ng-template>
-
-      <ng-template #subtitle>
-        Free shipping on all Us order or above $200</ng-template
-      >
-    </p-card>
-
-    <p-card styleClass="service-card" class="w-full md:w-1/4 max-w-[500px]">
-      <ng-template #header>
-        <p-image src="images/free-shipping.png" alt="free shipping" />
-      </ng-template>
-
-      <ng-template #title>Free Shipping</ng-template>
-
-      <ng-template #subtitle>
-        Free shipping on all Us order or above $200</ng-template
-      >
-    </p-card>
+    @for (service of serviceItems(); track service.id; let i = $index) {
+    <app-card-service
+      [name]="service.name"
+      [description]="service.description"
+      [index]="i"
+      class="w-full lg:w-1/4 max-w-[500px]"
+    ></app-card-service>
+    }
   </div>
 </app-layout-content>
