@@ -74,7 +74,7 @@
   <div
     class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-y-6 gap-x-8 w-full max-w-[1600px]"
   >
-    @for (service of serviceItems(); track service.id; let i = $index) {
+    @for (service of serviceItemList(); track service.id; let i = $index) {
     <app-card-service
       [name]="service.name"
       [description]="service.description"
@@ -82,5 +82,17 @@
       class="w-full lg:w-1/4 max-w-[500px]"
     ></app-card-service>
     }
+  </div>
+</app-layout-content>
+
+<app-layout-content
+  subtitle="Meet out expert team members."
+  pageTitleSecondary="Our"
+  pageTitleInfo="Team"
+>
+  <div
+    class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-y-6 gap-x-8 w-full max-w-[1600px]"
+  >
+    team member carousel
   </div>
 </app-layout-content>

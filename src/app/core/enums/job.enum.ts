@@ -1,0 +1,8 @@
+export enum JobEnum {
+	CEO = 'CEO',
+	CTO = 'CT0',
+	MANAGER = 'MANAGER',
+	CO_FOUNDER = 'CO_FOUNDER',
+	FOUNDER = 'FOUNDER',
+	TEAM_LEADER = 'TEAM_LEADER',
+}

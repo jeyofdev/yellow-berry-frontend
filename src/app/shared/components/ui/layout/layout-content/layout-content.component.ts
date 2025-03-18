@@ -11,4 +11,5 @@ export class LayoutContentComponent {
 	public subtitle: InputSignal<string> = input<string>('');
 	public pageTitleSecondary: InputSignal<string> = input<string>('');
 	public pageTitlePrimary: InputSignal<string> = input<string>('');
+	public pageTitleInfo: InputSignal<string> = input<string>('');
 }
