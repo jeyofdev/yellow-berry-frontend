@@ -1,0 +1,13 @@
+:host ::ng-deep p-carousel {
+  .p-carousel-item {
+    @apply flex flex-col md:flex-row items-start md:items-end justify-center gap-x-6;
+
+    .p-image {
+      @apply flex w-full max-w-[75px] md:max-w-[275px] max-h-[75px] md:max-h-none;
+
+      img {
+        @apply w-full;
+      }
+    }
+  }
+}

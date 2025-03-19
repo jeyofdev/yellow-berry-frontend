@@ -9,3 +9,8 @@
     }
   }
 }
+
+.transparent-text {
+  text-shadow: 1px 1px #111a24, -1px 1px #111a24, 1px -1px #111a24,
+    -1px -1px #111a24;
+}
