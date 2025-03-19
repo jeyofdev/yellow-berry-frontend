@@ -17,14 +17,7 @@
     </div>
 
     <div class="w-full md:w-2/3">
-      @for (faq of faqItems(); track faq.id; let i = $index) {
-      <app-panel-toggle
-        [header]="faq.question"
-        [content]="faq.answer"
-        [collapsed]="activePanel !== i"
-        (click)="togglePanel(i)"
-      ></app-panel-toggle>
-      }
+      <app-accordion [items]="faqItems()"></app-accordion>
     </div>
   </div>
 </app-layout-content>
