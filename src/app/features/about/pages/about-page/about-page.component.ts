@@ -62,7 +62,6 @@ export class AboutPageComponent implements OnInit {
 			.pipe(
 				map((testimonialResponse: SuccessResponse<TestimonialResponse[]>) => {
 					this.testimonialItemList.set(testimonialResponse.result);
-					console.log(this.testimonialItemList());
 				}),
 			)
 			.subscribe();

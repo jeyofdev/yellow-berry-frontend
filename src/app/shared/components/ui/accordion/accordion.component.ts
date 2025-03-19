@@ -10,8 +10,4 @@ import { AccordionModule } from 'primeng/accordion';
 })
 export class AccordionComponent {
 	public items: InputSignal<FaqResponse[]> = input.required<FaqResponse[]>();
-
-	ngOnInit(): void {
-		console.log(this.items());
-	}
 }
