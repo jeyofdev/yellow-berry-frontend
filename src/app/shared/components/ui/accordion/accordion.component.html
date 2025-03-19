@@ -1,0 +1,26 @@
+<p-accordion value="0" class="flex flex-col gap-y-7 border-none">
+  @for (item of items(); track $index; let i = $index) {
+  <p-accordion-panel [value]="i" class="shadow-none mb-0">
+    <p-accordion-header
+      class="hover:bg-transparent text-base text-gray-600 leading-5 tracking-normal font-poppins font-medium py-4 rounded-[0.9375rem] border border-gray-200 overflow-hidden"
+    >
+      {{ item.question }}
+
+      <ng-template #toggleicon let-active="active">
+        @if (active) {
+        <i class="pi pi-minus text-black"></i>
+        } @else {
+        <i class="pi pi-plus text-black"></i>
+        }
+      </ng-template>
+    </p-accordion-header>
+    <p-accordion-content>
+      <p
+        class="text-sm text-stone-600 leading-[1.53125rem] tracking-[0.02rem] font-poppins font-normal mt-5 pb-0"
+      >
+        {{ item.answer }}
+      </p>
+    </p-accordion-content>
+  </p-accordion-panel>
+  }
+</p-accordion>

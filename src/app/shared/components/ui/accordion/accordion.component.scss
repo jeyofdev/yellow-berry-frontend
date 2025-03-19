@@ -1,0 +1,9 @@
+:host::ng-deep p-accordion-content {
+  .p-accordioncontent-content {
+    @apply pb-0;
+  }
+}
+
+:host ::ng-deep p-accordion-panel {
+  @apply mt-0;
+}
