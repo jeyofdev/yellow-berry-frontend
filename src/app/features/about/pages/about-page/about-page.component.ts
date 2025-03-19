@@ -13,6 +13,7 @@ import { HeaderComponent } from '@shared/components/ui/header/header/header.comp
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
 import { ImageModule } from 'primeng/image';
 import { map } from 'rxjs';
+import { CarouselTestimonialComponent } from '../../../../shared/components/ui/carousel/carousel-testimonial/carousel-testimonial.component';
 
 @Component({
 	selector: 'app-about-page',
@@ -23,6 +24,7 @@ import { map } from 'rxjs';
 		ImageModule,
 		CardServiceComponent,
 		CarouselTeamComponent,
+		CarouselTestimonialComponent,
 	],
 	templateUrl: './about-page.component.html',
 	styleUrl: './about-page.component.scss',

@@ -17,6 +17,9 @@ module.exports = {
 			fontFamily: {
 				...themeFont,
 			},
+			borderRadius: {
+				'4xl': '30px',
+			},
 		},
 	},
 	plugins: [PrimeUI],
