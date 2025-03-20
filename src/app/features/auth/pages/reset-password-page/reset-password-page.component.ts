@@ -48,7 +48,7 @@ export class ResetPasswordPageComponent extends AuthPageAbstract<FormGroup<FormA
 
 	public override onSubmit(): void {
 		if (this.mainForm.valid) {
-			this.mainFormError = '';
+			this.mainFormError.set('');
 
 			this._authService
 				.resetPassword({
@@ -65,7 +65,7 @@ export class ResetPasswordPageComponent extends AuthPageAbstract<FormGroup<FormA
 					},
 				});
 		} else {
-			this.mainFormError = 'The form contains errors. Please verify yours informations and try again.';
+			this.mainFormError.set('The form contains errors. Please verify yours informations and try again.');
 		}
 	}
 

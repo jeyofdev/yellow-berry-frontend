@@ -2,31 +2,17 @@
   <app-layout-base justifyContent="justify-center" alignItems="items-center">
     <div class="flex flex-col justify-center items-center gap-3 w-full p-0">
       @if (pageTitleSecondary() || pageTitlePrimary()|| pageTitleInfo()) {
-      <h1 class="text-center">
-        @if(pageTitleSecondary()) {
-        <span
-          class="text-[1.5625rem] text-gray-700 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
-          >{{ pageTitleSecondary() }}</span
-        >
-        } @if(pageTitlePrimary()) {
-        <span
-          class="text-[1.5625rem] text-primary-500 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize ml-1.5"
-          >{{ pageTitlePrimary() }}</span
-        >
-        } @if(pageTitleInfo()) {
-        <span
-          class="text-[1.5625rem] text-blue-400 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize ml-1.5"
-          >{{ pageTitleInfo() }}</span
-        >
-        }
-      </h1>
-      } @if (subtitle()) {
+      <app-section-title
+        [secondaryContent]="pageTitleSecondary()"
+        [primaryContent]="pageTitlePrimary()"
+        [infoContent]="pageTitleInfo()"
+      ></app-section-title>
 
-      <p
-        class="text-sm text-gray-500 leading-[1.125rem] tracking-[0.03rem] font-poppins font-light text-center max-w-[23rem]"
-      >
-        {{ subtitle() }}
-      </p>
+      } @if (subtitle()) {
+      <app-section-subtitle
+        [content]="subtitle()"
+        maxWidth="max-w-[23rem]"
+      ></app-section-subtitle>
       }
 
       <div [class]="childrenContainerStyleClass">

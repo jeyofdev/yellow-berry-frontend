@@ -1,9 +1,11 @@
 import { Component, InputSignal, input } from '@angular/core';
 import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
+import { SectionSubtitleComponent } from '@shared/components/ui/section/section-subtitle/section-subtitle.component';
+import { SectionTitleComponent } from '@shared/components/ui/section/section-title/section-title.component';
 
 @Component({
 	selector: 'app-layout-content',
-	imports: [LayoutBaseComponent],
+	imports: [LayoutBaseComponent, SectionTitleComponent, SectionSubtitleComponent],
 	templateUrl: './layout-content.component.html',
 	styleUrl: './layout-content.component.scss',
 })

@@ -1,25 +1,17 @@
 <div class="flex flex-col justify-center">
   <app-layout-base justifyContent="justify-center" alignItems="items-center">
     <div [class]="containerClass">
-      <h1>
-        <span
-          class="text-[1.5625rem] text-gray-700 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
-          >{{ pageTitleSecondary() }}</span
-        >
+      <app-section-title
+        [secondaryContent]="pageTitleSecondary()"
+        [primaryContent]="pageTitlePrimary()"
+      ></app-section-title>
 
-        @if(pageTitlePrimary()) {
-        <span
-          class="text-[1.5625rem] text-primary-500 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize ml-1.5"
-          >{{ pageTitlePrimary() }}</span
-        >
-        }
-      </h1>
+      <app-section-subtitle
+        [content]="subtitle()"
+        maxWidth="max-w-[23rem]"
+        color="text-gray-700"
+      ></app-section-subtitle>
 
-      <p
-        class="text-sm text-gray-700 leading-5 tracking-[0.03rem] font-poppins font-light text-center max-w-[23rem]"
-      >
-        {{ subtitle() }}
-      </p>
       @if(email()) {
       <span
         class="text-sm text-gray-500 leading-5 tracking-[0.03rem] font-poppins font-light text-center max-w-[23rem]"

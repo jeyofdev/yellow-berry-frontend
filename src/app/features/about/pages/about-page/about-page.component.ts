@@ -1,4 +1,5 @@
-import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { ServiceResponse } from '@models/service/service-response.model';
 import { TeamMemberResponse } from '@models/team-member/team-member-response.model';
@@ -9,11 +10,13 @@ import { TestimonialService } from '@services/testimonial.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { CardServiceComponent } from '@shared/components/ui/card/card-service/card-service.component';
 import { CarouselTeamComponent } from '@shared/components/ui/carousel/carousel-team/carousel-team.component';
+import { CarouselTestimonialComponent } from '@shared/components/ui/carousel/carousel-testimonial/carousel-testimonial.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
+import { SectionSubtitleComponent } from '@shared/components/ui/section/section-subtitle/section-subtitle.component';
+import { SectionTitleComponent } from '@shared/components/ui/section/section-title/section-title.component';
 import { ImageModule } from 'primeng/image';
 import { map } from 'rxjs';
-import { CarouselTestimonialComponent } from '../../../../shared/components/ui/carousel/carousel-testimonial/carousel-testimonial.component';
 
 @Component({
 	selector: 'app-about-page',
@@ -25,45 +28,35 @@ import { CarouselTestimonialComponent } from '../../../../shared/components/ui/c
 		CardServiceComponent,
 		CarouselTeamComponent,
 		CarouselTestimonialComponent,
+		SectionTitleComponent,
+		SectionSubtitleComponent,
 	],
 	templateUrl: './about-page.component.html',
 	styleUrl: './about-page.component.scss',
 })
-export class AboutPageComponent implements OnInit {
-	public serviceItemList: WritableSignal<ServiceResponse[]> = signal([]);
-	public teamMemberItemList: WritableSignal<TeamMemberResponse[]> = signal([]);
-	public testimonialItemList: WritableSignal<TestimonialResponse[]> = signal([]);
-
+export class AboutPageComponent {
 	private _servService: ServService = inject(ServService);
 	private _teamMemberService: TeamMemberService = inject(TeamMemberService);
 	private _testimonialService: TestimonialService = inject(TestimonialService);
 
-	ngOnInit(): void {
+	public serviceItemList: Signal<ServiceResponse[]> = toSignal(
 		this._servService
 			.findAll()
-			.pipe(
-				map((serviceResponse: SuccessResponse<ServiceResponse[]>) => {
-					this.serviceItemList.set(serviceResponse.result);
-				}),
-			)
-			.subscribe();
+			.pipe(map((serviceResponse: SuccessResponse<ServiceResponse[]>) => serviceResponse.result)),
+		{ initialValue: [] },
+	);
 
+	public teamMemberItemList: Signal<TeamMemberResponse[]> = toSignal(
 		this._teamMemberService
 			.findAll()
-			.pipe(
-				map((teamMemberResponse: SuccessResponse<TeamMemberResponse[]>) => {
-					this.teamMemberItemList.set(teamMemberResponse.result);
-				}),
-			)
-			.subscribe();
+			.pipe(map((teamMemberResponse: SuccessResponse<TeamMemberResponse[]>) => teamMemberResponse.result)),
+		{ initialValue: [] },
+	);
 
+	public testimonialItemList: Signal<TestimonialResponse[]> = toSignal(
 		this._testimonialService
 			.findAll()
-			.pipe(
-				map((testimonialResponse: SuccessResponse<TestimonialResponse[]>) => {
-					this.testimonialItemList.set(testimonialResponse.result);
-				}),
-			)
-			.subscribe();
-	}
+			.pipe(map((testimonialResponse: SuccessResponse<TestimonialResponse[]>) => testimonialResponse.result)),
+		{ initialValue: [] },
+	);
 }
