@@ -9,11 +9,13 @@ import { TestimonialService } from '@services/testimonial.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { CardServiceComponent } from '@shared/components/ui/card/card-service/card-service.component';
 import { CarouselTeamComponent } from '@shared/components/ui/carousel/carousel-team/carousel-team.component';
+import { CarouselTestimonialComponent } from '@shared/components/ui/carousel/carousel-testimonial/carousel-testimonial.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
+import { SectionSubtitleComponent } from '@shared/components/ui/section/section-subtitle/section-subtitle.component';
+import { SectionTitleComponent } from '@shared/components/ui/section/section-title/section-title.component';
 import { ImageModule } from 'primeng/image';
 import { map } from 'rxjs';
-import { CarouselTestimonialComponent } from '../../../../shared/components/ui/carousel/carousel-testimonial/carousel-testimonial.component';
 
 @Component({
 	selector: 'app-about-page',
@@ -25,6 +27,8 @@ import { CarouselTestimonialComponent } from '../../../../shared/components/ui/c
 		CardServiceComponent,
 		CarouselTeamComponent,
 		CarouselTestimonialComponent,
+		SectionTitleComponent,
+		SectionSubtitleComponent,
 	],
 	templateUrl: './about-page.component.html',
 	styleUrl: './about-page.component.scss',

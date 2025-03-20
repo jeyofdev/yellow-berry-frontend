@@ -1,0 +1,9 @@
+<h1 [class]="containerClass()">
+  <span class="text-gray-700">{{ secondaryContent() }}</span>
+
+  @if(primaryContent()) {
+  <span class="text-primary-500 ml-1.5">{{ primaryContent() }}</span>
+  } @if(infoContent()) {
+  <span class="text-blue-400 ml-1.5">{{ infoContent() }}</span>
+  }
+</h1>

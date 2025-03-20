@@ -1,9 +1,11 @@
 import { Component, InputSignal, OnInit, input } from '@angular/core';
 import { LayoutBaseComponent } from '@shared/components/ui/layout/layout-base/layout-base.component';
+import { SectionSubtitleComponent } from '@shared/components/ui/section/section-subtitle/section-subtitle.component';
+import { SectionTitleComponent } from '@shared/components/ui/section/section-title/section-title.component';
 
 @Component({
 	selector: 'app-layout-auth-content',
-	imports: [LayoutBaseComponent],
+	imports: [LayoutBaseComponent, SectionTitleComponent, SectionSubtitleComponent],
 	templateUrl: './layout-auth-content.component.html',
 	styleUrl: './layout-auth-content.component.scss',
 })

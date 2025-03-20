@@ -16,23 +16,22 @@
     <div
       class="flex flex-col items-center lg:items-start w-full lg:w-1/2 pt-0 lg:pt-10 mt-10 lg:mt-0"
     >
-      <h1 class="text-center lg:text-left">
-        <span
-          class="text-[1.5625rem] text-gray-700 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize"
-          >About the</span
-        >
+      <app-section-title
+        secondaryContent="About the"
+        primaryContent="YellowBerry"
+        containerClass="text-center lg:text-left"
+      ></app-section-title>
 
-        <span
-          class="text-[1.5625rem] text-primary-500 leading-[1.5625rem] tracking-[0.03rem] font-quicksand font-bold capitalize ml-1.5"
-          >YellowBerry</span
-        >
-      </h1>
-
-      <p
-        class="text-lg text-gray-700 leading-[1.3125rem] tracking-[0.03rem] font-quicksand font-bold text-center lg:text-left w-full mt-2.5"
-      >
-        Farm-fresh Goodness, just a click Away.
-      </p>
+      <app-section-subtitle
+        content="Farm-fresh Goodness, just a click Away."
+        fontSize="text-lg"
+        color="text-gray-700"
+        lineHeight="leading-[1.3125rem]"
+        fontFamily="font-quicksand"
+        fontWeight="font-normal"
+        textAlign="text-center lg:text-left"
+        marginTop="mt-2.5"
+      ></app-section-subtitle>
 
       <p
         class="text-sm text-gray-500 leading-[1.75rem] tracking-[0.03rem] font-poppins font-light text-center lg:text-left max-w-[500px] lg:max-w-none mt-5"
