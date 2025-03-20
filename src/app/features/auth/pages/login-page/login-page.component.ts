@@ -1,5 +1,5 @@
 import { AuthPageAbstract } from '@abstract/auth-page.abstract';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Regex } from '@constants/regex.constant';
 import { LoginResponse } from '@models/auth/login-response.model';
@@ -38,15 +38,17 @@ import { PasswordModule } from 'primeng/password';
 	templateUrl: './login-page.component.html',
 })
 export class LoginPageComponent extends AuthPageAbstract<FormGroup<FormAuthLogin>> {
-	public emailCtrl!: FormControl<string>;
-	public passwordCtrl!: FormControl<string>;
-
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 
+	public emailCtrl!: FormControl<string>;
+	public passwordCtrl!: FormControl<string>;
+
+	public loginResponse = signal<LoginResponse | null>(null);
+
 	public override onSubmit(): void {
 		if (this.mainForm.valid) {
-			this.mainFormError = '';
+			this.mainFormError.set('');
 
 			this._authService
 				.login({
@@ -63,7 +65,7 @@ export class LoginPageComponent extends AuthPageAbstract<FormGroup<FormAuthLogin
 					},
 				});
 		} else {
-			this.mainFormError = 'Register failed. Please verify yours informations and try again.';
+			this.mainFormError.set('Register failed. Please verify yours informations and try again.');
 		}
 	}
 

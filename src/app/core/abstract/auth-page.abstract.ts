@@ -1,10 +1,10 @@
-import { Directive, OnInit } from '@angular/core';
+import { Directive, OnInit, WritableSignal, signal } from '@angular/core';
 import { RouteEnum } from '@enum/route.enum';
 
 @Directive()
 export abstract class AuthPageAbstract<T> implements OnInit {
 	public mainForm!: T;
-	public mainFormError!: string;
+	public mainFormError: WritableSignal<string> = signal<string>('');
 
 	public routeEnum = RouteEnum;
 

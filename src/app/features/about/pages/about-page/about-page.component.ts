@@ -1,4 +1,5 @@
-import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { ServiceResponse } from '@models/service/service-response.model';
 import { TeamMemberResponse } from '@models/team-member/team-member-response.model';
@@ -33,41 +34,29 @@ import { map } from 'rxjs';
 	templateUrl: './about-page.component.html',
 	styleUrl: './about-page.component.scss',
 })
-export class AboutPageComponent implements OnInit {
-	public serviceItemList: WritableSignal<ServiceResponse[]> = signal([]);
-	public teamMemberItemList: WritableSignal<TeamMemberResponse[]> = signal([]);
-	public testimonialItemList: WritableSignal<TestimonialResponse[]> = signal([]);
-
+export class AboutPageComponent {
 	private _servService: ServService = inject(ServService);
 	private _teamMemberService: TeamMemberService = inject(TeamMemberService);
 	private _testimonialService: TestimonialService = inject(TestimonialService);
 
-	ngOnInit(): void {
+	public serviceItemList: Signal<ServiceResponse[]> = toSignal(
 		this._servService
 			.findAll()
-			.pipe(
-				map((serviceResponse: SuccessResponse<ServiceResponse[]>) => {
-					this.serviceItemList.set(serviceResponse.result);
-				}),
-			)
-			.subscribe();
+			.pipe(map((serviceResponse: SuccessResponse<ServiceResponse[]>) => serviceResponse.result)),
+		{ initialValue: [] },
+	);
 
+	public teamMemberItemList: Signal<TeamMemberResponse[]> = toSignal(
 		this._teamMemberService
 			.findAll()
-			.pipe(
-				map((teamMemberResponse: SuccessResponse<TeamMemberResponse[]>) => {
-					this.teamMemberItemList.set(teamMemberResponse.result);
-				}),
-			)
-			.subscribe();
+			.pipe(map((teamMemberResponse: SuccessResponse<TeamMemberResponse[]>) => teamMemberResponse.result)),
+		{ initialValue: [] },
+	);
 
+	public testimonialItemList: Signal<TestimonialResponse[]> = toSignal(
 		this._testimonialService
 			.findAll()
-			.pipe(
-				map((testimonialResponse: SuccessResponse<TestimonialResponse[]>) => {
-					this.testimonialItemList.set(testimonialResponse.result);
-				}),
-			)
-			.subscribe();
-	}
+			.pipe(map((testimonialResponse: SuccessResponse<TestimonialResponse[]>) => testimonialResponse.result)),
+		{ initialValue: [] },
+	);
 }

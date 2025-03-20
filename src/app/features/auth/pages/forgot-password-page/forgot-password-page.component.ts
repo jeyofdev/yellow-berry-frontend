@@ -38,7 +38,7 @@ export class ForgotPasswordPageComponent extends AuthPageAbstract<FormGroup<Form
 
 	public override onSubmit(): void {
 		if (this.mainForm.valid) {
-			this.mainFormError = '';
+			this.mainFormError.set('');
 
 			const requestArgs = { email: this.mainForm.value.email as string };
 
@@ -53,7 +53,7 @@ export class ForgotPasswordPageComponent extends AuthPageAbstract<FormGroup<Form
 				},
 			});
 		} else {
-			this.mainFormError = 'The form contains errors. Please verify yours informations and try again.';
+			this.mainFormError.set('The form contains errors. Please verify yours informations and try again.');
 		}
 	}
 

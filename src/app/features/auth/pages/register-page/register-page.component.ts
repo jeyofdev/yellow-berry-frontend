@@ -69,7 +69,7 @@ export class RegisterPageComponent extends AuthPageAbstract<FormGroup<FormAuthRe
 
 	public override onSubmit(): void {
 		if (this.mainForm.valid) {
-			this.mainFormError = '';
+			this.mainFormError.set('');
 
 			this._authService
 				.register(
@@ -94,11 +94,11 @@ export class RegisterPageComponent extends AuthPageAbstract<FormGroup<FormAuthRe
 						console.log('Register successful', successResponse);
 					},
 					error: err => {
-						this.mainFormError = `Register failed. ${err.error.message}`;
+						this.mainFormError.set(`Register failed. ${err.error.message}`);
 					},
 				});
 		} else {
-			this.mainFormError = 'Register failed. Please verify yours informations and try again.';
+			this.mainFormError.set('Register failed. Please verify yours informations and try again.');
 		}
 	}
 

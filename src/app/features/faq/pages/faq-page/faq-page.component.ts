@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FaqResponse } from '@models/faq/faq-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { FaqService } from '@services/faq.service';
@@ -14,24 +15,16 @@ import { map } from 'rxjs';
 	imports: [HeaderComponent, LayoutContentComponent, ImageModule, BreadcrumbComponent, AccordionComponent],
 	templateUrl: './faq-page.component.html',
 	styleUrl: './faq-page.component.scss',
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FaqPageComponent implements OnInit {
-	public faqItems: WritableSignal<FaqResponse[]> = signal([]);
-	public activePanel: number | null = null;
-
+export class FaqPageComponent {
 	private _faqService: FaqService = inject(FaqService);
 
-	ngOnInit(): void {
-		this._faqService
-			.findAll()
-			.pipe(
-				map((faqResponse: SuccessResponse<FaqResponse[]>) => {
-					this.faqItems.set(faqResponse.result);
-				}),
-			)
-			.subscribe();
-	}
+	public faqItems: Signal<FaqResponse[]> = toSignal(
+		this._faqService.findAll().pipe(map((faqResponse: SuccessResponse<FaqResponse[]>) => faqResponse.result)),
+		{ initialValue: [] },
+	);
+
+	public activePanel: number | null = null;
 
 	public togglePanel(panelIndex: number): void {
 		this.activePanel = this.activePanel === panelIndex ? null : panelIndex;
