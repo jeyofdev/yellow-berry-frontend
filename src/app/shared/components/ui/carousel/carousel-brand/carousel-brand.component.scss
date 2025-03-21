@@ -1,0 +1,5 @@
+:host ::ng-deep p-carousel {
+  .p-carousel-item {
+    @apply flex flex-col items-center px-4;
+  }
+}

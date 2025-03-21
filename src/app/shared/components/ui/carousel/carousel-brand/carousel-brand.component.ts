@@ -1,5 +1,5 @@
 import { Component, InputSignal, OnInit, input } from '@angular/core';
-import { ProductResponse } from '@models/product/product-response.model';
+import { BrandResponse } from '@models/brand/brand-response.model';
 import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { ImageModule } from 'primeng/image';
 
@@ -10,7 +10,7 @@ import { ImageModule } from 'primeng/image';
 	styleUrl: './carousel-brand.component.scss',
 })
 export class CarouselBrandComponent implements OnInit {
-	items: InputSignal<ProductResponse[]> = input.required<ProductResponse[]>();
+	items: InputSignal<BrandResponse[]> = input.required<BrandResponse[]>();
 
 	responsiveOptions!: CarouselResponsiveOptions[];
 
@@ -18,7 +18,7 @@ export class CarouselBrandComponent implements OnInit {
 		this.responsiveOptions = [
 			{
 				breakpoint: '1400px',
-				numVisible: 4,
+				numVisible: 6,
 				numScroll: 1,
 			},
 			{

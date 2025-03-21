@@ -1,15 +1,15 @@
 <p-carousel
   [value]="items()"
-  [numVisible]="4"
+  [numVisible]="6"
   [numScroll]="1"
   [circular]="false"
   [showIndicators]="false"
   [showNavigators]="false"
-  [autoplayInterval]="2000"
+  [autoplayInterval]="0"
   [circular]="true"
   [responsiveOptions]="responsiveOptions"
 >
-  <ng-template let-product #item>
-    {{ product.name }}
+  <ng-template let-brand #item>
+    <p>{{ brand.name }}</p>
   </ng-template>
 </p-carousel>
