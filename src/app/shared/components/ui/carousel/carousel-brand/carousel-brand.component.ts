@@ -22,17 +22,27 @@ export class CarouselBrandComponent implements OnInit {
 				numScroll: 1,
 			},
 			{
-				breakpoint: '1199px',
+				breakpoint: '1280px',
+				numVisible: 5,
+				numScroll: 1,
+			},
+			{
+				breakpoint: '1100px',
+				numVisible: 4,
+				numScroll: 1,
+			},
+			{
+				breakpoint: '960px',
 				numVisible: 3,
 				numScroll: 1,
 			},
 			{
-				breakpoint: '767px',
+				breakpoint: '768px',
 				numVisible: 2,
 				numScroll: 1,
 			},
 			{
-				breakpoint: '575px',
+				breakpoint: '400px',
 				numVisible: 1,
 				numScroll: 1,
 			},
