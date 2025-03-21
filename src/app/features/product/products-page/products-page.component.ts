@@ -11,7 +11,9 @@ import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
+import { CardModule } from 'primeng/card';
 import { DataViewModule } from 'primeng/dataview';
+import { RatingModule } from 'primeng/rating';
 import { SelectButton } from 'primeng/selectbutton';
 import { map } from 'rxjs';
 
@@ -26,6 +28,8 @@ import { map } from 'rxjs';
 		CarouselBrandComponent,
 		DataViewModule,
 		SelectButton,
+		CardModule,
+		RatingModule,
 	],
 	templateUrl: './products-page.component.html',
 	styleUrl: './products-page.component.scss',
