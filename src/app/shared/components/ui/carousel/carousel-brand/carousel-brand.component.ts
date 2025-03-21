@@ -1,16 +1,16 @@
 import { Component, InputSignal, OnInit, input } from '@angular/core';
-import { TeamMemberResponse } from '@models/team-member/team-member-response.model';
+import { BrandResponse } from '@models/brand/brand-response.model';
 import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { ImageModule } from 'primeng/image';
 
 @Component({
-	selector: 'app-carousel-team',
+	selector: 'app-carousel-brand',
 	imports: [CarouselModule, ImageModule],
-	templateUrl: './carousel-team.component.html',
-	styleUrl: './carousel-team.component.scss',
+	templateUrl: './carousel-brand.component.html',
+	styleUrl: './carousel-brand.component.scss',
 })
-export class CarouselTeamComponent implements OnInit {
-	items: InputSignal<TeamMemberResponse[]> = input.required<TeamMemberResponse[]>();
+export class CarouselBrandComponent implements OnInit {
+	items: InputSignal<BrandResponse[]> = input.required<BrandResponse[]>();
 
 	responsiveOptions!: CarouselResponsiveOptions[];
 
@@ -18,21 +18,31 @@ export class CarouselTeamComponent implements OnInit {
 		this.responsiveOptions = [
 			{
 				breakpoint: '1400px',
+				numVisible: 6,
+				numScroll: 1,
+			},
+			{
+				breakpoint: '1280px',
+				numVisible: 5,
+				numScroll: 1,
+			},
+			{
+				breakpoint: '1100px',
 				numVisible: 4,
 				numScroll: 1,
 			},
 			{
-				breakpoint: '1199px',
+				breakpoint: '960px',
 				numVisible: 3,
 				numScroll: 1,
 			},
 			{
-				breakpoint: '767px',
+				breakpoint: '768px',
 				numVisible: 2,
 				numScroll: 1,
 			},
 			{
-				breakpoint: '575px',
+				breakpoint: '400px',
 				numVisible: 1,
 				numScroll: 1,
 			},

@@ -2,6 +2,7 @@ export enum RouteEnum {
 	HOME = 'home',
 	FAQ = 'faq',
 	ABOUT = 'about',
+	PRODUCT = 'product',
 	AUTH = 'auth',
 
 	LOGIN = 'login',
@@ -17,4 +18,6 @@ export enum RouteEnum {
 	AUTH_CHECK_EMAIL = 'auth/check-email',
 	AUTH_RESET_PASSORD = 'auth/reset-password',
 	AUTH_RESET_PASSORD_CONFIRM = 'auth/reset-password/confirm',
+
+	PRODUCT_ROOT = 'product',
 }

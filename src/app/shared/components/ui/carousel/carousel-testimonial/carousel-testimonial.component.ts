@@ -1,6 +1,6 @@
 import { Component, InputSignal, input } from '@angular/core';
 import { TestimonialResponse } from '@models/testimonial/testimonial-response.model';
-import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
+import { CarouselModule } from 'primeng/carousel';
 import { ImageModule } from 'primeng/image';
 
 @Component({
@@ -10,5 +10,5 @@ import { ImageModule } from 'primeng/image';
 	styleUrl: './carousel-testimonial.component.scss',
 })
 export class CarouselTestimonialComponent {
-	items: InputSignal<TestimonialResponse[]> = input<TestimonialResponse[]>([]);
+	items: InputSignal<TestimonialResponse[]> = input.required<TestimonialResponse[]>();
 }
