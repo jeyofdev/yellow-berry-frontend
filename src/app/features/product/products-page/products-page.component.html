@@ -3,7 +3,44 @@
 <app-breadcrumb></app-breadcrumb>
 
 <app-layout-content containerMarginTop="mt-10">
-  <div class="w-full overflow-hidden">
+  <div class="flex flex-col gap-y-6 w-full overflow-hidden">
     <app-carousel-brand [items]="brandItemList()"></app-carousel-brand>
+
+    <div class="flex">
+      <div class="flex w-1/4">filter</div>
+
+      <div class="flex-1">
+        <p-dataview #dv [value]="productItemList()" [layout]="layout()">
+          <ng-template #header>
+            <div
+              class="flex justify-start border border-gray-200 bg-gray-100 rounded-[1.25rem] py-[0.6875rem] px-[0.8125rem]"
+            >
+              <p-selectbutton
+                [(ngModel)]="layout"
+                [options]="options"
+                [allowEmpty]="false"
+              >
+                <ng-template #item let-item>
+                  <i
+                    class="pi"
+                    [ngClass]="{
+                      'pi-table': item === 'grid',
+                      'pi-bars': item === 'list',
+                    }"
+                  ></i>
+                </ng-template>
+              </p-selectbutton>
+            </div>
+          </ng-template>
+          <ng-template #list let-items> </ng-template>
+
+          <ng-template #grid let-items>
+            @for (product of items; track $index) {
+            <h1>{{ product.name }}</h1>
+            }
+          </ng-template>
+        </p-dataview>
+      </div>
+    </div>
   </div>
 </app-layout-content>
