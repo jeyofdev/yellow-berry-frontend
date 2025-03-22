@@ -5,5 +5,9 @@ import { ProductsPageComponent } from '@features/product/products-page/products-
 
 export const routes: Routes = [
 	{ path: '', component: ProductsPageComponent, data: { title: 'products' } },
-	{ path: RouteEnum.DETAILS, component: ProductsDetailsPageComponent, data: { title: 'product' } },
+	{
+		path: RouteEnum.DETAILS,
+		component: ProductsDetailsPageComponent,
+		data: { title: 'product' },
+	},
 ];
