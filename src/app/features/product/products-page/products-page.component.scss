@@ -4,15 +4,7 @@
   }
 
   .p-dataview-content {
-    @apply flex flex-wrap;
-
-    p-card .p-card {
-      @apply shadow-none border border-gray-200 rounded-[1.25rem] overflow-hidden;
-
-      .p-card-body {
-        @apply p-4 border-t border-t-gray-200;
-      }
-    }
+    @apply flex flex-wrap gap-6;
   }
 }
 
@@ -28,12 +20,5 @@
     .p-togglebutton-content .pi {
       @apply text-lg leading-5;
     }
-  }
-}
-
-:host ::ng-deep p-rating {
-  @apply gap-1;
-  .p-rating-option .p-iconwrapper .p-rating-icon {
-    @apply w-[0.875rem] w-[0.875rem];
   }
 }

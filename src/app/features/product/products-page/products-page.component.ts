@@ -1,7 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, Signal, WritableSignal, inject, signal } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { FormsModule } from '@angular/forms';
 import { BrandResponse } from '@models/brand/brand-response.model';
 import { ProductResponse } from '@models/product/product-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
@@ -11,26 +9,12 @@ import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
-import { CardModule } from 'primeng/card';
-import { DataViewModule } from 'primeng/dataview';
-import { RatingModule } from 'primeng/rating';
-import { SelectButton } from 'primeng/selectbutton';
+import { ListProductComponent } from '@shared/components/ui/list/list-product/list-product.component';
 import { map } from 'rxjs';
 
 @Component({
 	selector: 'app-products-page',
-	imports: [
-		CommonModule,
-		FormsModule,
-		HeaderComponent,
-		BreadcrumbComponent,
-		LayoutContentComponent,
-		CarouselBrandComponent,
-		DataViewModule,
-		SelectButton,
-		CardModule,
-		RatingModule,
-	],
+	imports: [HeaderComponent, BreadcrumbComponent, LayoutContentComponent, CarouselBrandComponent, ListProductComponent],
 	templateUrl: './products-page.component.html',
 	styleUrl: './products-page.component.scss',
 })
@@ -38,18 +22,22 @@ export class ProductsPageComponent {
 	private _brandService: BrandService = inject(BrandService);
 	private _productService: ProductService = inject(ProductService);
 
-	layout: WritableSignal<'grid' | 'list'> = signal<'grid' | 'list'>('grid');
-	options = ['grid', 'list'];
+	public brandItemList: Signal<BrandResponse[]> = this.getBrandItemList();
+	public productItemList: Signal<ProductResponse[]> = this.getProductItemList();
 
-	public brandItemList: Signal<BrandResponse[]> = toSignal(
-		this._brandService.findAll().pipe(map((brandResponse: SuccessResponse<BrandResponse[]>) => brandResponse.result)),
-		{ initialValue: [] },
-	);
+	private getBrandItemList(): Signal<BrandResponse[]> {
+		return toSignal(
+			this._brandService.findAll().pipe(map((brandResponse: SuccessResponse<BrandResponse[]>) => brandResponse.result)),
+			{ initialValue: [] },
+		);
+	}
 
-	public productItemList: Signal<ProductResponse[]> = toSignal(
-		this._productService
-			.findAll()
-			.pipe(map((productResponse: SuccessResponse<ProductResponse[]>) => productResponse.result)),
-		{ initialValue: [] },
-	);
+	private getProductItemList(): Signal<ProductResponse[]> {
+		return toSignal(
+			this._productService
+				.findAll()
+				.pipe(map((productResponse: SuccessResponse<ProductResponse[]>) => productResponse.result)),
+			{ initialValue: [] },
+		);
+	}
 }

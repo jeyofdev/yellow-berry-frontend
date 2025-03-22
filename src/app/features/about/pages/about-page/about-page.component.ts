@@ -39,24 +39,34 @@ export class AboutPageComponent {
 	private _teamMemberService: TeamMemberService = inject(TeamMemberService);
 	private _testimonialService: TestimonialService = inject(TestimonialService);
 
-	public serviceItemList: Signal<ServiceResponse[]> = toSignal(
-		this._servService
-			.findAll()
-			.pipe(map((serviceResponse: SuccessResponse<ServiceResponse[]>) => serviceResponse.result)),
-		{ initialValue: [] },
-	);
+	public serviceItemList: Signal<ServiceResponse[]> = this.getServiceItemList();
+	public teamMemberItemList: Signal<TeamMemberResponse[]> = this.getTeamMemberItemList();
+	public testimonialItemList: Signal<TestimonialResponse[]> = this.getTestimonialItemList();
 
-	public teamMemberItemList: Signal<TeamMemberResponse[]> = toSignal(
-		this._teamMemberService
-			.findAll()
-			.pipe(map((teamMemberResponse: SuccessResponse<TeamMemberResponse[]>) => teamMemberResponse.result)),
-		{ initialValue: [] },
-	);
+	private getServiceItemList(): Signal<ServiceResponse[]> {
+		return toSignal(
+			this._servService
+				.findAll()
+				.pipe(map((serviceResponse: SuccessResponse<ServiceResponse[]>) => serviceResponse.result)),
+			{ initialValue: [] },
+		);
+	}
 
-	public testimonialItemList: Signal<TestimonialResponse[]> = toSignal(
-		this._testimonialService
-			.findAll()
-			.pipe(map((testimonialResponse: SuccessResponse<TestimonialResponse[]>) => testimonialResponse.result)),
-		{ initialValue: [] },
-	);
+	private getTeamMemberItemList(): Signal<TeamMemberResponse[]> {
+		return toSignal(
+			this._teamMemberService
+				.findAll()
+				.pipe(map((teamMemberResponse: SuccessResponse<TeamMemberResponse[]>) => teamMemberResponse.result)),
+			{ initialValue: [] },
+		);
+	}
+
+	private getTestimonialItemList(): Signal<TestimonialResponse[]> {
+		return toSignal(
+			this._testimonialService
+				.findAll()
+				.pipe(map((testimonialResponse: SuccessResponse<TestimonialResponse[]>) => testimonialResponse.result)),
+			{ initialValue: [] },
+		);
+	}
 }
