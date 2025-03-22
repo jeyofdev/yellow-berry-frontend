@@ -11,6 +11,7 @@ export enum RouteEnum {
 	CHECK_EMAIL = 'check-email',
 	RESET_PASSORD = 'reset-password',
 	RESET_PASSORD_CONFIRM = 'reset-password/confirm',
+	DETAILS = ':id',
 
 	AUTH_LOGIN = 'auth/login',
 	AUTH_REGISTER = 'auth/register',

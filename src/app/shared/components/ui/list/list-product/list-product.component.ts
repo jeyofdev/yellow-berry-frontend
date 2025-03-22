@@ -34,7 +34,7 @@ export class ListProductComponent {
 	options = ['grid', 'list'];
 
 	first: WritableSignal<number> = signal(0);
-	rows: WritableSignal<number> = signal(3);
+	rows: WritableSignal<number> = signal(8);
 
 	onPageChange(event: PaginatorState) {
 		this.first.set(event.first as number);
