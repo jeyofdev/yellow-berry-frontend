@@ -1,0 +1,67 @@
+:host ::ng-deep p-dataview p-paginator {
+  @apply hidden;
+}
+
+:host ::ng-deep p-paginator .p-paginator {
+  @apply bg-transparent p-0 gap-2.5;
+
+  &.left-paginator {
+    .p-paginator-current {
+      @apply text-[0.9375rem] text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-light;
+    }
+
+    .p-paginator-prev,
+    .p-paginator-next {
+      @apply hidden;
+    }
+  }
+
+  .p-paginator-pages {
+    @apply gap-2.5;
+
+    .p-paginator-page {
+      @apply bg-gray-100 rounded-[0.625rem] border border-gray-200 text-[0.9375rem] text-zinc-700 leading-8 tracking-[0.03rem] font-poppins font-light;
+
+      &.p-paginator-page-selected,
+      &:hover {
+        @apply bg-gray-700 text-white;
+      }
+    }
+  }
+
+  .p-paginator-next,
+  .p-paginator-prev {
+    @apply rounded-[0.625rem];
+
+    .p-button {
+      @apply rounded-[0.625rem] bg-gray-700 border border-gray-200;
+    }
+
+    .p-button-label {
+      @apply text-[0.9375rem] text-white leading-[1.875rem] tracking-[0.03rem] font-poppins font-light;
+    }
+
+    .p-button-icon {
+      @apply text-xs text-white ml-2;
+    }
+  }
+
+  .p-paginator-next,
+  .p-paginator-prev {
+    &.p-disabled {
+      @apply opacity-0;
+    }
+  }
+
+  .p-paginator-next {
+    .p-button-icon {
+      @apply text-xs text-white mr-0 ml-2;
+    }
+  }
+
+  .p-paginator-prev {
+    .p-button-icon {
+      @apply text-xs text-white mr-2 ml-0;
+    }
+  }
+}

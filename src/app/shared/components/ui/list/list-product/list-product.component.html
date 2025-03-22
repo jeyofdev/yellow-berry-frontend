@@ -1,4 +1,11 @@
-<p-dataview #dv [value]="productItemList()" [layout]="layout()">
+<p-dataview
+  #dv
+  [value]="productItemList()"
+  [layout]="layout()"
+  [first]="first()"
+  [rows]="rows()"
+  [paginator]="true"
+>
   <ng-template #header>
     <div
       class="flex justify-start border border-gray-200 bg-gray-100 rounded-[1.25rem] py-[0.6875rem] px-[0.8125rem]"
@@ -40,3 +47,48 @@
     }
   </ng-template>
 </p-dataview>
+
+<div class="flex justify-between items-center p-0 mt-4 mb-10">
+  <p-paginator
+    [rows]="rows()"
+    [totalRecords]="productItemList().length"
+    [showFirstLastIcon]="false"
+    [showCurrentPageReport]="true"
+    [showPageLinks]="false"
+    [showJumpToPageDropdown]="false"
+    [showFirstLastIcon]="false"
+    currentPageReportTemplate="Showing {first}-{last} of {totalRecords} item(s)"
+    styleClass="left-paginator"
+  ></p-paginator>
+
+  <p-paginator
+    [rows]="rows()"
+    [totalRecords]="productItemList().length"
+    [showFirstLastIcon]="false"
+    [showCurrentPageReport]="false"
+    [showPageLinks]="true"
+    [showJumpToPageDropdown]="false"
+    currentPageReportTemplate="Showing {first}-{last} of {totalRecords} item(s)"
+    (onPageChange)="onPageChange($event)"
+  >
+    <ng-template #nextpagelinkicon>
+      <p-button
+        label="Next"
+        icon="pi pi-chevron-right"
+        iconPos="right"
+        severity="secondary"
+      />
+    </ng-template>
+
+    <ng-template #previouspagelinkicon>
+      <p-button
+        label="Prev"
+        icon="pi pi-chevron-left"
+        iconPos="left"
+        severity="secondary"
+      />
+    </ng-template>
+
+    ></p-paginator
+  >
+</div>
