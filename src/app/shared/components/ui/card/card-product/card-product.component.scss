@@ -1,0 +1,11 @@
+:host ::ng-deep p-image {
+  @apply flex w-full;
+
+  .p-image {
+    @apply w-full;
+
+    img {
+      @apply w-full;
+    }
+  }
+}

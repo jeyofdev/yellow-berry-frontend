@@ -32,59 +32,23 @@
               </p-selectbutton>
             </div>
           </ng-template>
-          <ng-template #list let-items> </ng-template>
 
           <ng-template #grid let-items>
             @for (product of items; track product.id) {
-            <div class="flex flex-col sm:items-center p-3 gap-4 w-1/4">
-              <div
-                class="shadow-none border border-gray-200 rounded-[1.25rem] overflow-hidden"
-              >
-                <img
-                  alt="Card"
-                  class="w-full"
-                  src="images/product/product-1.png"
-                />
+            <app-card-product
+              [product]="product"
+              class="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333333%-1.25rem)] xl:w-[calc(25%-1.25rem)]"
+            ></app-card-product>
+            }
+          </ng-template>
 
-                <div class="py-4 px-5 border-t border-t-gray-200">
-                  <div class="flex justify-between">
-                    <p
-                      class="text-[0.8125rem] text-zinc-700 leading-4 tracking-[0.03rem] font-poppins font-light"
-                    >
-                      category
-                    </p>
-                    <p-rating [ngModel]="2" [readonly]="true"></p-rating>
-                  </div>
-
-                  <h5
-                    class="text-[0.9375rem] text-gray-700 leading-[1.125rem] tracking-[0.03rem] font-quicksand font-semibold underline mt-4 mb-3"
-                  >
-                    {{ product.name }}
-                  </h5>
-
-                  <div class="flex justify-between">
-                    <div class="flex items-end gap-x-2.5">
-                      <p
-                        class="text-2xl text-gray-500 leading-6 tracking-[0.02rem] font-poppins font-bold"
-                      >
-                        $15
-                      </p>
-                      <p
-                        class="text-[1.3125rem] text-gray-500 leading-4 tracking-[0.03rem] font-poppins font-light line-through mb-[3px]"
-                      >
-                        $15
-                      </p>
-                    </div>
-
-                    <p
-                      class="text-sm text-gray-500 leading-6 tracking-[0.02rem] font-poppins font-normal"
-                    >
-                      500g
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <ng-template #list let-items>
+            @for (product of items; track product.id) {
+            <app-card-product
+              [product]="product"
+              class="min-w-full"
+              layout="list"
+            ></app-card-product>
             }
           </ng-template>
         </p-dataview>

@@ -8,6 +8,7 @@ import { SuccessResponse } from '@models/response/success-response.model';
 import { BrandService } from '@services/brand.service';
 import { ProductService } from '@services/product.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
+import { CardProductComponent } from '@shared/components/ui/card/card-product/card-product.component';
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
@@ -30,6 +31,7 @@ import { map } from 'rxjs';
 		SelectButton,
 		CardModule,
 		RatingModule,
+		CardProductComponent,
 	],
 	templateUrl: './products-page.component.html',
 	styleUrl: './products-page.component.scss',
@@ -38,7 +40,7 @@ export class ProductsPageComponent {
 	private _brandService: BrandService = inject(BrandService);
 	private _productService: ProductService = inject(ProductService);
 
-	layout: WritableSignal<'grid' | 'list'> = signal<'grid' | 'list'>('grid');
+	layout: WritableSignal<'list' | 'grid'> = signal<'list' | 'grid'>('grid');
 	options = ['grid', 'list'];
 
 	public brandItemList: Signal<BrandResponse[]> = toSignal(
