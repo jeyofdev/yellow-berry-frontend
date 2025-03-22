@@ -1,0 +1,42 @@
+<p-dataview #dv [value]="productItemList()" [layout]="layout()">
+  <ng-template #header>
+    <div
+      class="flex justify-start border border-gray-200 bg-gray-100 rounded-[1.25rem] py-[0.6875rem] px-[0.8125rem]"
+    >
+      <p-selectbutton
+        [(ngModel)]="layout"
+        [options]="options"
+        [allowEmpty]="false"
+      >
+        <ng-template #item let-item>
+          <i
+            class="pi"
+            [ngClass]="{
+                      'pi-table': item === 'grid',
+                      'pi-bars': item === 'list',
+                    }"
+          ></i>
+        </ng-template>
+      </p-selectbutton>
+    </div>
+  </ng-template>
+
+  <ng-template #grid let-items>
+    @for (product of items; track product.id) {
+    <app-card-product
+      [product]="product"
+      class="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333333%-1.25rem)] xl:w-[calc(25%-1.25rem)]"
+    ></app-card-product>
+    }
+  </ng-template>
+
+  <ng-template #list let-items>
+    @for (product of items; track product.id) {
+    <app-card-product
+      [product]="product"
+      class="min-w-full"
+      layout="list"
+    ></app-card-product>
+    }
+  </ng-template>
+</p-dataview>

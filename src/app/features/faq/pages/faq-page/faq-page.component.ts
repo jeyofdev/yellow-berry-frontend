@@ -19,14 +19,18 @@ import { map } from 'rxjs';
 export class FaqPageComponent {
 	private _faqService: FaqService = inject(FaqService);
 
-	public faqItems: Signal<FaqResponse[]> = toSignal(
-		this._faqService.findAll().pipe(map((faqResponse: SuccessResponse<FaqResponse[]>) => faqResponse.result)),
-		{ initialValue: [] },
-	);
+	public faqItems: Signal<FaqResponse[]> = this.getFaqItemList();
 
 	public activePanel: number | null = null;
 
 	public togglePanel(panelIndex: number): void {
 		this.activePanel = this.activePanel === panelIndex ? null : panelIndex;
+	}
+
+	private getFaqItemList(): Signal<FaqResponse[]> {
+		return toSignal(
+			this._faqService.findAll().pipe(map((faqResponse: SuccessResponse<FaqResponse[]>) => faqResponse.result)),
+			{ initialValue: [] },
+		);
 	}
 }
