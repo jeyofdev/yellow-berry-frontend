@@ -12,7 +12,9 @@
         'max-w-[350px]': layout() === 'list'
       }"
     >
-      <p-image src="images/product/product-1.png" alt="product-img" />
+      <a [routerLink]="['/' + routeEnum.PRODUCT, product().id]">
+        <p-image src="images/product/product-1.png" alt="product-img" />
+      </a>
     </div>
 
     <div
@@ -31,11 +33,12 @@
         <app-rating [rating]="product().rating"></app-rating>
       </div>
 
-      <h5
-        class="text-[0.9375rem] text-gray-700 leading-[1.125rem] tracking-[0.03rem] font-quicksand font-semibold underline mt-4 mb-3"
+      <a
+        [routerLink]="['/' + routeEnum.PRODUCT, product().id]"
+        class="flex text-[0.9375rem] text-gray-700 leading-[1.125rem] tracking-[0.03rem] font-quicksand font-semibold underline mt-4 mb-3"
       >
         {{ product().name }}
-      </h5>
+      </a>
 
       @if (layout() === "list") {
       <p
