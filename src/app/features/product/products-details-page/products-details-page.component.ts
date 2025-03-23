@@ -11,6 +11,7 @@ import { RatingComponent } from '@shared/components/ui/rating/rating.component';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { TabsModule } from 'primeng/tabs';
 
 @Component({
 	selector: 'app-products-details-page',
@@ -24,6 +25,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 		RatingComponent,
 		ButtonModule,
 		InputNumberModule,
+		TabsModule,
 	],
 	templateUrl: './products-details-page.component.html',
 	styleUrl: './products-details-page.component.scss',
@@ -36,6 +38,34 @@ export class ProductsDetailsPageComponent {
 
 	weightValues: string[] = ['250g', '500g', '1kg', '2kg'];
 	productNb: number = 1;
+
+	tabTitles: { id: string; value: string }[] = [
+		{ id: '0', value: 'Details' },
+		{ id: '1', value: 'Informations' },
+		{ id: '2', value: 'Reviews' },
+	];
+
+	productDetails: string[] = [
+		'Lorem ipsum dolor sit amet.',
+		'Consectetur adipiscing elit.',
+		' Sed ut perspiciatis unde omnis.',
+		' Nemo enim ipsam voluptatem quia voluptas.',
+		'At vero eos et accusamus.',
+	];
+
+	productSpecificDetails: { name: string; value: string }[] = [
+		{ name: 'Highlights', value: 'Lorem ipsum dolor sit amet.' },
+		{ name: 'Seller', value: 'Consectetur adipiscing elit.' },
+		{ name: 'services', value: ' Sed ut perspiciatis unde omnis.' },
+	];
+
+	productInformations: { name: string; value: string | number }[] = [
+		{ name: 'Weight', value: '500g' },
+		{ name: 'Dimensions', value: '17 × 15 × 3 cm' },
+		{ name: 'Brand', value: 'lorem.' },
+		{ name: 'Quantity', value: 5 },
+		{ name: 'Color', value: 'black,yellow,red.' },
+	];
 
 	constructor() {
 		effect(() => {

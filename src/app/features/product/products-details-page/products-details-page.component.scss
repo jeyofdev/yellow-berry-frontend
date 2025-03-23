@@ -79,3 +79,19 @@
     }
   }
 }
+
+:host ::ng-deep p-tabs .p-tablist .p-tablist-content .p-tablist-tab-list {
+  @apply border-none;
+
+  .p-tab.last::after {
+    @apply hidden;
+  }
+
+  .p-tab-active {
+    @apply text-primary-500;
+  }
+
+  .p-tablist-active-bar {
+    @apply hidden;
+  }
+}
