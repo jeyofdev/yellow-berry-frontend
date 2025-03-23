@@ -1,0 +1,12 @@
+<div class="flex items-end gap-x-2.5">
+  <p
+    class="text-xl text-gray-700 leading-6 tracking-[0.03rem] font-quicksand font-bold"
+  >
+    {{ priceDiscount() | currency : "EUR" }}
+  </p>
+  <p
+    class="text-xl text-gray-700 leading-6 tracking-[0.03rem] font-quicksand font-bold"
+  >
+    -{{ discount() / 100 | percent }}
+  </p>
+</div>

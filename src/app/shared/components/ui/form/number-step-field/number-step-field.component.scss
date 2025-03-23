@@ -1,0 +1,29 @@
+:host ::ng-deep p-inputnumber {
+  .p-inputnumber-input {
+    @apply text-sm text-zinc-700 leading-[2.1875rem] tracking-[0.02rem] font-poppins font-normal text-center border border-x-0 border-gray-200 w-auto h-auto max-w-[1.4375rem] py-[0.09375rem] px-0;
+
+    &:focus {
+      @apply outline-none;
+    }
+  }
+
+  .p-inputnumber-button {
+    @apply text-zinc-700 border border-gray-200 w-auto h-auto py-[0.09375rem] px-2;
+
+    &:hover {
+      @apply bg-transparent;
+    }
+
+    &.p-inputnumber-decrement-button {
+      @apply rounded-r-none rounded-l-[0.625rem];
+    }
+
+    &.p-inputnumber-increment-button {
+      @apply rounded-l-none rounded-r-[0.625rem];
+    }
+
+    .pi {
+      @apply text-sm;
+    }
+  }
+}
