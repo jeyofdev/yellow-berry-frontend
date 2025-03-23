@@ -1,1 +1,11 @@
-<p-rating [ngModel]="rating()" [readonly]="true"></p-rating>
+<div class="flex">
+  <p-rating [ngModel]="rating()" [readonly]="true"></p-rating>
+
+  @if(total()) {
+  <span
+    class="text-[0.9375rem] text-primary-500 leading-4 tracking-[0.03rem] font-poppins font-light border-l border-gray-700 ml-4 pl-4"
+  >
+    992 ratings
+  </span>
+  }
+</div>
