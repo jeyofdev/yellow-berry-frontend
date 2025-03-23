@@ -1,0 +1,13 @@
+<p-tablist>
+  @for (tabTitle of titleList(); track tabTitle.id) {
+  <p-tab
+    [value]="tabTitle.id"
+    class="gap-0 text-base text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-medium border-none px-0 py-0 hover:bg-transparent after:content-['/'] after:text-gray-500 after:mx-4"
+    [ngClass]="{
+      last: tabTitle.id === titleList()[titleList().length - 1].id
+    }"
+    >{{ tabTitle.value }}</p-tab
+  >
+
+  }
+</p-tablist>
