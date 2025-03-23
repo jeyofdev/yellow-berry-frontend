@@ -1,0 +1,16 @@
+<li class="list-disc" [class]="marginBottom()">
+  @if (label()) {
+  <div class="flex">
+    <h6 class="typo font-medium w-[150px]">
+      {{ label() }}
+    </h6>
+    <p class="typo">
+      {{ content() }}
+    </p>
+  </div>
+  } @else {
+  <p class="typo">
+    {{ content() }}
+  </p>
+  }
+</li>
