@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
 import { ButtonComponent } from '@shared/components/ui/buttons/button/button.component';
 import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
+import { PriceDiscountPercentageComponent } from '@shared/components/ui/price/price-discount-percentage/price-discount-percentage.component';
+import { PriceComponent } from '@shared/components/ui/price/price/price.component';
 import { RatingComponent } from '@shared/components/ui/rating/rating.component';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
@@ -18,6 +20,8 @@ import { ImageModule } from 'primeng/image';
 		ButtonModule,
 		ButtonComponent,
 		NumberStepFieldComponent,
+		PriceDiscountPercentageComponent,
+		PriceComponent,
 	],
 	templateUrl: './card-product-details.component.html',
 	styleUrl: './card-product-details.component.scss',

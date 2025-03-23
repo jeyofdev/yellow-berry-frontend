@@ -32,18 +32,10 @@
     <div class="flex justify-between w-full">
       <div class="flex flex-col w-full">
         <div class="flex justify-between w-full mb-1">
-          <div class="flex items-end gap-x-2.5">
-            <p
-              class="text-xl text-gray-700 leading-6 tracking-[0.03rem] font-quicksand font-bold"
-            >
-              {{ product()?.priceDetails?.priceDiscount | currency : "EUR" }}
-            </p>
-            <p
-              class="text-xl text-gray-700 leading-6 tracking-[0.03rem] font-quicksand font-bold"
-            >
-              -{{ (product()?.priceDetails?.discount ?? 0) / 100 | percent }}
-            </p>
-          </div>
+          <app-price-discount-percentage
+            [priceDiscount]="product()?.priceDetails?.priceDiscount ?? 0"
+            [discount]="product()?.priceDetails?.discount ?? 0"
+          ></app-price-discount-percentage>
 
           <p
             class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
@@ -54,14 +46,10 @@
 
         <div class="w-full">
           <div class="flex justify-between gap-x-2.5 w-full">
-            <p
-              class="text-base text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-light"
-            >
-              M.R.P. :
-              <span class="line-through">{{
-                product()?.priceDetails?.price | currency : "EUR"
-              }}</span>
-            </p>
+            <app-price
+              title="M.R.P. :"
+              [value]="product()?.priceDetails?.price ?? 0"
+            ></app-price>
 
             <p
               class="text-lg text-primary-500 leading-[1.6875rem] tracking-[0.02rem] font-poppins font-normal"
