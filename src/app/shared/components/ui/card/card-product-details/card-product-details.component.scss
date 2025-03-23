@@ -6,9 +6,7 @@
   }
 }
 
-:host ::ng-deep .btn-weight .p-button,
-:host ::ng-deep .btn-view-cart .p-button,
-:host ::ng-deep .btn-icon .p-button {
+:host ::ng-deep .btn-view-cart .p-button {
   @apply rounded-[0.625rem] border border-primary-200 px-[0.9375rem] py-0.5;
 
   .p-button-label {
@@ -32,20 +30,6 @@
 
     .p-button-label {
       @apply text-primary-500;
-    }
-  }
-}
-
-:host ::ng-deep .btn-icon .p-button {
-  &.p-button-outlined.p-button-secondary {
-    @apply text-zinc-700 w-auto h-auto py-[0.5625rem] px-3;
-
-    &:hover {
-      @apply bg-primary-500 text-white;
-    }
-
-    .pi {
-      @apply text-sm;
     }
   }
 }

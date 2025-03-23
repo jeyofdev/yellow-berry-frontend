@@ -82,12 +82,11 @@
 
       <div class="flex gap-x-2">
         @for (weight of weightValues; track $index; let i = $index) {
-        <p-button
+        <app-button
           [label]="weight"
           [variant]="i !== 0 ? 'outlined' : undefined"
           [severity]="i !== 0 ? 'secondary' : undefined"
-          class="btn-weight"
-        />
+        ></app-button>
         }
       </div>
     </div>
@@ -115,21 +114,19 @@
 
       <p-button label="View Cart" class="btn-view-cart" />
 
-      <p-button
+      <app-button
         icon="pi pi-heart"
-        [rounded]="true"
         severity="secondary"
-        [outlined]="true"
-        class="btn-icon"
-      />
+        isRounded
+        isOutlined
+      ></app-button>
 
-      <p-button
+      <app-button
         icon="pi pi-eye"
-        [rounded]="true"
         severity="secondary"
-        [outlined]="true"
-        class="btn-icon"
-      />
+        isRounded
+        isOutlined
+      ></app-button>
     </div>
   </div>
 </div>

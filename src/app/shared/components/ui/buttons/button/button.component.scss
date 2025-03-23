@@ -1,0 +1,29 @@
+:host ::ng-deep .p-button {
+  @apply rounded-[0.625rem] border border-primary-200 px-[0.9375rem] py-0.5;
+
+  .p-button-label {
+    @apply text-sm text-white leading-7 tracking-[0.03rem] font-poppins font-light;
+  }
+
+  &.p-button-secondary {
+    @apply border-gray-200;
+
+    .p-button-label {
+      @apply text-gray-500;
+    }
+  }
+
+  &.p-button-icon-only {
+    &.p-button-outlined.p-button-secondary {
+      @apply text-zinc-700 w-auto h-auto py-[0.5625rem] px-3;
+
+      &:hover {
+        @apply bg-primary-500 text-white;
+      }
+
+      .pi {
+        @apply text-sm;
+      }
+    }
+  }
+}
