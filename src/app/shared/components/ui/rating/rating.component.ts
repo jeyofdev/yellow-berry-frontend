@@ -10,4 +10,5 @@ import { RatingModule } from 'primeng/rating';
 })
 export class RatingComponent {
 	public rating: InputSignal<number> = input.required<number>();
+	public total: InputSignal<number> = input<number>(0);
 }
