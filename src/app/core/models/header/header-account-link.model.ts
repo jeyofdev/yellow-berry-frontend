@@ -6,5 +6,6 @@ export class HeaderAccountLink implements Partial<MenuItem> {
 		public sublabel: string,
 		public icon: string,
 		public command?: () => void,
+		public redirectTo?: string,
 	) {}
 }
