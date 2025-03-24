@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, InputSignal, WritableSignal, input, signal } from '@angular/core';
+import { Component, InputSignal, WritableSignal, booleanAttribute, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductResponse } from '@models/product/product-response.model';
 import { CardProductComponent } from '@shared/components/ui/card/card-product/card-product.component';
@@ -29,6 +29,9 @@ import { SelectButton } from 'primeng/selectbutton';
 })
 export class ListProductComponent {
 	productItemList: InputSignal<ProductResponse[]> = input.required<ProductResponse[]>();
+	hasPagination = input<boolean, unknown>(false, {
+		transform: booleanAttribute,
+	});
 
 	layout: WritableSignal<LayoutTypeInput> = signal<LayoutTypeInput>('grid');
 	options = ['grid', 'list'];

@@ -8,6 +8,6 @@ export class ProfileResponse {
 		public role: string,
 		public nameDetails: NameDetailsFormat,
 		public phone: string,
-		public address: AddressDetailsFormat,
+		public addressDetails: AddressDetailsFormat,
 	) {}
 }
