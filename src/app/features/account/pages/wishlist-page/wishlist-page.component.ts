@@ -1,10 +1,9 @@
 import { Component, Signal, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ProductResponse } from '@models/product/product-response.model';
+import { Product } from '@models/product/product.model';
 import { SuccessResponse } from '@models/response/success-response.model';
-import { AuthTokenService } from '@services/auth/auth-token.service';
-import { LocalStorageService } from '@services/auth/local-storage.service';
-import { ProductService } from '@services/product.service';
+import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
+import { WishlistService } from '@services/wishlist.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
@@ -18,23 +17,18 @@ import { map } from 'rxjs';
 	styleUrl: './wishlist-page.component.scss',
 })
 export class WishlistPageComponent {
-	private _productService: ProductService = inject(ProductService);
-	private _authTokenService: AuthTokenService = inject(AuthTokenService);
-	private _localStorageService: LocalStorageService = inject(LocalStorageService);
+	private _wishlistService: WishlistService = inject(WishlistService);
 
-	public productItemList: Signal<ProductResponse[]> = this.getProductItemList();
+	public productItemList: Signal<Product[]> = this.getProductItemList();
 
-	private getProductItemList(): Signal<ProductResponse[]> {
+	private getProductItemList(): Signal<Product[]> {
 		return toSignal(
-			this._productService
-				.findAll()
-				.pipe(map((productResponse: SuccessResponse<ProductResponse[]>) => productResponse.result)),
+			this._wishlistService.findById().pipe(
+				map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => {
+					return wishlistResponse.result.products.results;
+				}),
+			),
 			{ initialValue: [] },
 		);
-	}
-
-	ngOnInit(): void {
-		const authToken = this._localStorageService.getAuthToken() as string;
-		console.log(this._authTokenService._decodeToken(authToken));
 	}
 }

@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { FindProfileDetailsRequest } from '@models/profile/find-profile-details-request.model';
+import { ProfileDetailsResponse } from '@models/profile/profile-details-response.model';
 import { SaveProfileRequest } from '@models/profile/save-profile-request.model';
 import { ProfileResponse } from '@models/profile/save-profile-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
@@ -22,5 +24,16 @@ export class ProfileService {
 		return this._httpClient.post<SuccessResponse<ProfileResponse>>(this.BASE_URL + `/user/${userId}`, profileDatas, {
 			headers,
 		});
+	}
+
+	public findByUserId(
+		findProfileDetailsRequest: FindProfileDetailsRequest,
+	): Observable<SuccessResponse<ProfileDetailsResponse>> {
+		const headers = new HttpHeaders().set('Authorization', `Bearer ${findProfileDetailsRequest.authToken}`);
+
+		return this._httpClient.get<SuccessResponse<ProfileDetailsResponse>>(
+			`${this.BASE_URL}/user/${findProfileDetailsRequest.authUserId}`,
+			{ headers },
+		);
 	}
 }
