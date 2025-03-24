@@ -28,6 +28,7 @@ export class HeaderAccountLinkService {
 			label: 'Wishlist',
 			sublabel: '3 items',
 			icon: 'wishlist',
+			redirectTo: '/' + RouteEnum.ACCOUNT_WISHLIST,
 		},
 		{
 			label: 'cart',

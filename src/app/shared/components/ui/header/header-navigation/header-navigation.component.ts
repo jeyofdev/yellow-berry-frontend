@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, WritableSignal, effect, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { HeaderAccountLink } from '@models/header/header-account-link.model';
 import { HeaderAccountLinkService } from '@services/header/header-account-link.service';
 import { ButtonCtaSearchComponent } from '@shared/components/ui/buttons/button-cta-search/button-cta-search.component';
@@ -14,6 +15,7 @@ import { Menu, MenuModule } from 'primeng/menu';
 @Component({
 	selector: 'app-header-navigation',
 	imports: [
+		RouterModule,
 		LogoComponent,
 		ButtonHeaderAccountComponent,
 		SearchFieldComponent,

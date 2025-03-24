@@ -10,5 +10,6 @@ export const routes: Routes = [
 	{ path: RouteEnum.FAQ, component: FaqPageComponent },
 	{ path: RouteEnum.ABOUT, component: AboutPageComponent },
 	{ path: RouteEnum.AUTH, loadChildren: () => import('./auth.routes').then(m => m.routes) },
+	{ path: RouteEnum.ACCOUNT, loadChildren: () => import('./account.routes').then(m => m.routes) },
 	{ path: RouteEnum.PRODUCT, loadChildren: () => import('./product.routes').then(m => m.routes) },
 ];
