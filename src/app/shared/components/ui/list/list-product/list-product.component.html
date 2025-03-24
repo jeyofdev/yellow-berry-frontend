@@ -48,6 +48,7 @@
   </ng-template>
 </p-dataview>
 
+@if (hasPagination()) {
 <div class="flex justify-between items-center p-0 mt-8">
   <p-paginator
     [rows]="rows()"
@@ -92,3 +93,4 @@
     ></p-paginator
   >
 </div>
+}
