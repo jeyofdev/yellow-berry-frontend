@@ -1,7 +1,9 @@
 import { AuthPageAbstract } from '@abstract/auth-page.abstract';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Regex } from '@constants/regex.constant';
+import { RouteEnum } from '@enum/route.enum';
 import { LoginResponse } from '@models/auth/login-response.model';
 import { FormAuthLogin } from '@models/form/form-auth-login.model';
 import { AuthService } from '@services/auth/auth.service';
@@ -40,6 +42,8 @@ import { PasswordModule } from 'primeng/password';
 export class LoginPageComponent extends AuthPageAbstract<FormGroup<FormAuthLogin>> {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
+	private _activatedRouteService: ActivatedRoute = inject(ActivatedRoute);
+	private _routerService: Router = inject(Router);
 
 	public emailCtrl!: FormControl<string>;
 	public passwordCtrl!: FormControl<string>;
@@ -56,9 +60,9 @@ export class LoginPageComponent extends AuthPageAbstract<FormGroup<FormAuthLogin
 					password: this.mainForm.value.password as string,
 				})
 				.subscribe({
-					next: (response: LoginResponse) => {
-						console.log('Login successful', response);
-						console.log(this._authService.getLoggedIn() ? 'User is logged in.' : 'User is not logged in.');
+					next: () => {
+						const returnUrl = this._activatedRouteService.snapshot.queryParams['returnUrl'];
+						this._routerService.navigateByUrl(returnUrl);
 					},
 					error: err => {
 						this.mainFormError = err.error.message;
