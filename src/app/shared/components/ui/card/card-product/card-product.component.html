@@ -30,7 +30,7 @@
         >
           category
         </p>
-        <app-rating [rating]="product().rating"></app-rating>
+        <app-rating [rating]="product().ratingDetails.rating"></app-rating>
       </div>
 
       <a
@@ -44,10 +44,7 @@
       <p
         class="text-sm text-gray-500 leading-[1.75rem] tracking-[0.03rem] font-poppins font-light mb-3"
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione sit aut
-        neque perferendis magni odio quam molestiae ex! Culpa saepe explicabo,
-        sed nihil deserunt nulla laudantium reprehenderit consectetur minima
-        expedita!
+        {{ product().description }}
       </p>
       }
 
@@ -60,7 +57,7 @@
         <p
           class="text-sm text-gray-500 leading-6 tracking-[0.02rem] font-poppins font-normal"
         >
-          500g
+          {{ product().weight }}
         </p>
       </div>
     </div>

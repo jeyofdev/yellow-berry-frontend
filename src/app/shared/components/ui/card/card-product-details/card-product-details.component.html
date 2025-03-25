@@ -19,14 +19,15 @@
       {{ product()?.name }}
     </h1>
 
-    <app-rating [rating]="product()?.rating ?? 0" [total]="500"></app-rating>
+    <app-rating
+      [rating]="product()?.ratingDetails?.rating ?? 0"
+      [total]="product()?.ratingDetails?.count ?? 0"
+    ></app-rating>
 
     <p
       class="text-[0.9375rem] text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-light mt-5 mb-6"
     >
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione sit aut
-      neque perferendis magni odio quam molestiae ex! Culpa saepe explicabo, sed
-      nihil deserunt nulla laudantium reprehenderit consectetur minima expedita!
+      {{ product()?.details?.description }}
     </p>
 
     <div class="flex justify-between w-full">
@@ -40,7 +41,7 @@
           <p
             class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
           >
-            SKU#: WH12
+            REF#: {{ product()?.reference }}
           </p>
         </div>
 
@@ -54,7 +55,7 @@
             <p
               class="text-lg text-primary-500 leading-[1.6875rem] tracking-[0.02rem] font-poppins font-normal"
             >
-              In stock
+              {{ product()?.stock }}
             </p>
           </div>
         </div>
