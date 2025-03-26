@@ -29,6 +29,5 @@ import { ImageModule } from 'primeng/image';
 export class CardProductDetailsComponent {
 	product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
 
-	weightValues: string[] = ['250g', '500g', '1kg', '2kg'];
 	productNb: number = 1;
 }

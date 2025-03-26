@@ -1,5 +1,6 @@
 import { Component, Signal, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ProductResponse } from '@models/product/product-response.model';
 import { Product } from '@models/product/product.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
@@ -19,9 +20,9 @@ import { map } from 'rxjs';
 export class WishlistPageComponent {
 	private _wishlistService: WishlistService = inject(WishlistService);
 
-	public productItemList: Signal<Product[]> = this.getProductItemList();
+	public productItemList: Signal<ProductResponse[]> = this.getProductItemList();
 
-	private getProductItemList(): Signal<Product[]> {
+	private getProductItemList(): Signal<ProductResponse[]> {
 		return toSignal(
 			this._wishlistService.findById().pipe(
 				map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => {

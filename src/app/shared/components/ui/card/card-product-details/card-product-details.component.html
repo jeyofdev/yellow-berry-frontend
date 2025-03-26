@@ -70,7 +70,8 @@
       </h6>
 
       <div class="flex gap-x-2">
-        @for (weight of weightValues; track $index; let i = $index) {
+        @for (weight of product()?.informations?.weightList; track $index; let i
+        = $index) {
         <app-button
           [label]="weight"
           [variant]="i !== 0 ? 'outlined' : undefined"
