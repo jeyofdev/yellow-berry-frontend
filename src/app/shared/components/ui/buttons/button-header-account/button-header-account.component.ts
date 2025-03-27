@@ -22,7 +22,7 @@ export class ButtonHeaderAccountComponent implements OnInit {
 		this.imgSrc = 'icons/' + this.imgNameFile() + '.svg';
 	}
 
-	onClick(): void {
+	public onClick(): void {
 		if (this.redirectTo()) {
 			this._router.navigateByUrl(this.redirectTo());
 		}

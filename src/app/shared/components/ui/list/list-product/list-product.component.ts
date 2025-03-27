@@ -28,19 +28,19 @@ import { SelectButton } from 'primeng/selectbutton';
 	styleUrl: './list-product.component.scss',
 })
 export class ListProductComponent {
-	isShowCloseBtn: InputSignal<boolean> = input<boolean>(false);
-	productItemList: InputSignal<ProductResponse[]> = input.required<ProductResponse[]>();
-	hasPagination = input<boolean, unknown>(false, {
+	public isShowCloseBtn: InputSignal<boolean> = input<boolean>(false);
+	public productItemList: InputSignal<ProductResponse[]> = input.required<ProductResponse[]>();
+	public hasPagination = input<boolean, unknown>(false, {
 		transform: booleanAttribute,
 	});
 
-	layout: WritableSignal<LayoutTypeInput> = signal<LayoutTypeInput>('grid');
-	options = ['grid', 'list'];
+	public layout: WritableSignal<LayoutTypeInput> = signal<LayoutTypeInput>('grid');
+	public options = ['grid', 'list'];
 
-	first: WritableSignal<number> = signal(0);
-	rows: WritableSignal<number> = signal(8);
+	public first: WritableSignal<number> = signal(0);
+	public rows: WritableSignal<number> = signal(8);
 
-	onPageChange(event: PaginatorState) {
+	public onPageChange(event: PaginatorState) {
 		this.first.set(event.first as number);
 		this.rows.set(event.rows as number);
 	}

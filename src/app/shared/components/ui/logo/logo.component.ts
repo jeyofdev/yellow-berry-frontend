@@ -16,7 +16,6 @@ export class LogoComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.textOrderClassname = this.textPosition() === 'left' ? 'order-1' : 'order-2';
-
 		this.imgOrderClassname = this.textPosition() === 'left' ? 'order-2' : 'order-1';
 	}
 }

@@ -17,9 +17,9 @@ interface Category {
 	styleUrl: './search-field.component.scss',
 })
 export class SearchFieldComponent implements OnInit {
-	categories: Category[] | undefined;
+	public categories: Category[] | undefined;
 
-	selectedCategory: Category | undefined;
+	public selectedCategory: Category | undefined;
 
 	ngOnInit() {
 		this.categories = [{ name: 'Fruits' }, { name: 'Bakery' }, { name: 'Cold Drinks' }, { name: 'Vegetables' }];

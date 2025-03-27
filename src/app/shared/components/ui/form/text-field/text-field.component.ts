@@ -24,7 +24,7 @@ export class TextFieldComponent extends FormInputAbstract<string> {
 	public min: InputSignal<number> = input<number>(0);
 	public max: InputSignal<number> = input<number>(0);
 
-	override onInputChange(event: Event): void {
+	public override onInputChange(event: Event): void {
 		if (this.disabled) {
 			return;
 		}

@@ -32,10 +32,10 @@ export class HeaderNavigationComponent implements OnInit {
 	protected headerAccountLinks!: WritableSignal<HeaderAccountLink[]>;
 	protected accountLinksChildren!: WritableSignal<HeaderAccountLink[]>;
 
-	@ViewChild('accountMenu', { static: false }) accountMenu!: Menu;
+	@ViewChild('accountMenu', { static: false }) public accountMenu!: Menu;
 
-	items: MenuItem[] | undefined;
-	isMenuOpen = false;
+	public items: MenuItem[] | undefined;
+	public isMenuOpen = false;
 	private hideMenuTimeout!: ReturnType<typeof setTimeout>;
 
 	private _headerAccountLinkService: HeaderAccountLinkService = inject(HeaderAccountLinkService);
@@ -56,7 +56,7 @@ export class HeaderNavigationComponent implements OnInit {
 		this.accountLinksChildren = this._headerAccountLinkService.getAuthAccountLinks();
 	}
 
-	onMouseEnter(event: MouseEvent, sublabel: string): void {
+	public onMouseEnter(event: MouseEvent, sublabel: string): void {
 		if (sublabel === 'Account') {
 			clearTimeout(this.hideMenuTimeout);
 			if (!this.isMenuOpen) {
@@ -66,22 +66,22 @@ export class HeaderNavigationComponent implements OnInit {
 		}
 	}
 
-	onMouseLeave(): void {
+	public onMouseLeave(): void {
 		this.hideMenuWithDelay();
 	}
 
-	cancelHideMenu(): void {
+	public cancelHideMenu(): void {
 		clearTimeout(this.hideMenuTimeout);
 	}
 
-	hideMenuWithDelay(): void {
+	public hideMenuWithDelay(): void {
 		this.hideMenuTimeout = setTimeout(() => {
 			this.isMenuOpen = false;
 			this.accountMenu.hide();
 		}, 300);
 	}
 
-	toggleAccountMenu(e: MouseEvent, sublabel: string, accountMenu: Menu): void {
+	public toggleAccountMenu(e: MouseEvent, sublabel: string, accountMenu: Menu): void {
 		sublabel === 'Account' ? accountMenu.toggle(e) : null;
 	}
 }

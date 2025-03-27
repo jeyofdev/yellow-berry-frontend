@@ -41,7 +41,7 @@ export class MaskFieldComponent extends FormInputAbstract<string> {
 		}
 	}
 
-	override onInputChange(event: Event): void {
+	public override onInputChange(event: Event): void {
 		if (this.disabled) {
 			return;
 		}
