@@ -52,10 +52,9 @@ export class CardProductDetailsComponent {
 
 	public addOrRemoveToWishlist(): void {
 		const productId = this.product()?.id as string;
-		const wishlistId = this.wishlistId();
 
 		this._productService
-			.addOrRemoveProductToWishlist({ productId, wishlistId })
+			.addOrRemoveProductToWishlist({ productId, wishlistId: this.wishlistId() })
 			.pipe(
 				tap(() => {
 					const updatedProducts = new Set(this.wishlistProducts());
@@ -83,14 +82,15 @@ export class CardProductDetailsComponent {
 
 	private loadWishlistProducts(): void {
 		toSignal(
-			this._wishlistService
-				.findByUserId()
-				.pipe(
-					map(
-						(wishlistResponse: SuccessResponse<WishlistDetailsResponse>) =>
-							new Set(wishlistResponse.result.products.results.map(product => product.id)),
-					),
+			this._wishlistService.findByUserId().pipe(
+				map(
+					(wishlistResponse: SuccessResponse<WishlistDetailsResponse>) =>
+						new Set(wishlistResponse.result.products.results.map(product => product.id)),
 				),
+				tap(productsSet => {
+					this.wishlistProducts.set(productsSet);
+				}),
+			),
 			{ initialValue: new Set<string>() },
 		);
 	}
