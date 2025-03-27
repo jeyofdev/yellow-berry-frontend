@@ -29,11 +29,11 @@ export class ProductService {
 
 	public addOrRemoveProductToWishlist(
 		addOrRemoveProductToWishlistRequest: AddOrRemoveProductToWishlistRequest,
-	): Observable<SuccessResponse<ProductDetailsResponse[]>> {
+	): Observable<SuccessResponse<ProductDetailsResponse>> {
 		const authToken = this._localStorageService.getAuthToken() as string;
 		const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
 
-		return this._httpClient.post<SuccessResponse<ProductDetailsResponse[]>>(
+		return this._httpClient.post<SuccessResponse<ProductDetailsResponse>>(
 			`${this.BASE_URL}/${addOrRemoveProductToWishlistRequest.productId}/wishlist/${addOrRemoveProductToWishlistRequest.wishlistId}`,
 			{},
 			{ headers },
