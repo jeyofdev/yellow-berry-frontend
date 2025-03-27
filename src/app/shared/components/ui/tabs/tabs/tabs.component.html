@@ -33,7 +33,7 @@
       </p-tabpanel>
       <p-tabpanel value="1">
         <ul class="pl-6 mt-4">
-          @for (productInformation of productInformations; track $index) {
+          @for (productInformation of productInformations(); track $index) {
           <app-tab-li
             [label]="productInformation.name"
             [content]="productInformation.value"

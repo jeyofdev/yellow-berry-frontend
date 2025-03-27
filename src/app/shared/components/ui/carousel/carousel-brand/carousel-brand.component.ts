@@ -10,9 +10,9 @@ import { ImageModule } from 'primeng/image';
 	styleUrl: './carousel-brand.component.scss',
 })
 export class CarouselBrandComponent implements OnInit {
-	items: InputSignal<BrandResponse[]> = input.required<BrandResponse[]>();
+	public items: InputSignal<BrandResponse[]> = input.required<BrandResponse[]>();
 
-	responsiveOptions!: CarouselResponsiveOptions[];
+	public responsiveOptions!: CarouselResponsiveOptions[];
 
 	ngOnInit() {
 		this.responsiveOptions = [

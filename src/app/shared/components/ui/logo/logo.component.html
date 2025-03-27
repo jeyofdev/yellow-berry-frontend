@@ -1,5 +1,11 @@
 <div class="flex items-end gap-x-4">
-  <div class="flex flex-col mb-3 gap-y-[0.15rem]" [class]="textOrderClassname">
+  <div
+    class="flex flex-col mb-3 gap-y-[0.15rem]"
+    [ngClass]="{
+      'order-1': this.textPosition() === 'left',
+      'order-2': this.textPosition() === 'right'
+    }"
+  >
     <span
       class="font-poppins font-medium text-xs tracking-[0.03rem] text-orange-500"
       >Yellow</span
@@ -14,6 +20,9 @@
     src="images/logo.svg"
     alt="logo"
     width="68"
-    [class]="imgOrderClassname"
+    [ngClass]="{
+      'order-2': this.textPosition() === 'left',
+      'order-1': this.textPosition() === 'right'
+    }"
   />
 </div>

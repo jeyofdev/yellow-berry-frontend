@@ -10,9 +10,9 @@ import { ImageModule } from 'primeng/image';
 	styleUrl: './carousel-team.component.scss',
 })
 export class CarouselTeamComponent implements OnInit {
-	items: InputSignal<TeamMemberResponse[]> = input.required<TeamMemberResponse[]>();
+	public items: InputSignal<TeamMemberResponse[]> = input.required<TeamMemberResponse[]>();
 
-	responsiveOptions!: CarouselResponsiveOptions[];
+	public responsiveOptions!: CarouselResponsiveOptions[];
 
 	ngOnInit() {
 		this.responsiveOptions = [

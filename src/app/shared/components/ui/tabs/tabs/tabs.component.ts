@@ -11,15 +11,15 @@ import { TablistComponent } from '../tablist/tablist.component';
 	styleUrl: './tabs.component.scss',
 })
 export class TabsComponent {
-	product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
+	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
 
-	tabTitles: { id: string; value: string }[] = [
+	public tabTitles: { id: string; value: string }[] = [
 		{ id: '0', value: 'Details' },
 		{ id: '1', value: 'Informations' },
 		{ id: '2', value: 'Reviews' },
 	];
 
-	productDetails: string[] = [
+	public productDetails: string[] = [
 		'Lorem ipsum dolor sit amet.',
 		'Consectetur adipiscing elit.',
 		' Sed ut perspiciatis unde omnis.',
@@ -27,32 +27,41 @@ export class TabsComponent {
 		'At vero eos et accusamus.',
 	];
 
-	productSpecificDetails: { name: string; value: string }[] = [
+	public productSpecificDetails: { name: string; value: string }[] = [
 		{ name: 'Highlights', value: 'Lorem ipsum dolor sit amet.' },
 		{ name: 'Seller', value: 'Consectetur adipiscing elit.' },
 		{ name: 'services', value: ' Sed ut perspiciatis unde omnis.' },
 	];
 
-	get productInformations(): { name: string; value: string | number }[] {
+	public productInformations(): { name: string; value: string | number }[] {
 		if (!this.product()) {
 			return [];
 		}
 
 		return [
-			{ name: 'Weight', value: '500g' },
+			{ name: 'Weight', value: this._convertWeightToString() },
 			{ name: 'Dimensions', value: '17 × 15 × 3 cm' },
 			{ name: 'Brand', value: 'lorem.' },
 			{ name: 'Quantity', value: 5 },
-			{ name: 'Color', value: this.convertColorsToString() },
+			{ name: 'Color', value: this._convertColorsToString() },
 		];
 	}
 
-	private convertColorsToString(): string {
+	private _convertColorsToString(): string {
 		if (!this.product()) {
 			return '';
 		} else {
 			const product = this.product();
 			return product && product.informations.colorList.length > 0 ? product.informations.colorList.join(', ') : '';
+		}
+	}
+
+	private _convertWeightToString(): string {
+		if (!this.product()) {
+			return '';
+		} else {
+			const product = this.product();
+			return product && product.informations.weightList.length > 0 ? product.informations.weightList.join(', ') : '';
 		}
 	}
 }

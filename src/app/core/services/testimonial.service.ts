@@ -11,10 +11,10 @@ import { Observable, map } from 'rxjs';
 export class TestimonialService {
 	private _httpClient: HttpClient = inject(HttpClient);
 
-	private BASE_URL = 'http://localhost:8080/api/v1/testimonial';
+	private _BASE_URL = 'http://localhost:8080/api/v1/testimonial';
 
 	public findAll(): Observable<SuccessResponse<TestimonialResponse[]>> {
-		return this._httpClient.get<SuccessResponse<TestimonialResponse[]>>(this.BASE_URL).pipe(
+		return this._httpClient.get<SuccessResponse<TestimonialResponse[]>>(this._BASE_URL).pipe(
 			map((response: SuccessResponse<TestimonialResponse[]>) => {
 				response.result.forEach(testimonial => {
 					testimonial.job = JobEnum[testimonial.job as keyof typeof JobEnum];

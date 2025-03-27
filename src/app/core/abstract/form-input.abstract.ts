@@ -52,7 +52,11 @@ export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccess
 		this.onTouched();
 	}
 
-	private getFormControl(groupName: string, parentForm: FormGroup, controlName: string) {
+	public get control(): AbstractControl | null {
+		return this._getFormControl(this.groupName() || '', this.parentForm(), this.name());
+	}
+
+	private _getFormControl(groupName: string, parentForm: FormGroup, controlName: string) {
 		if (groupName) {
 			const group = parentForm.get(groupName) as FormGroup;
 
@@ -60,9 +64,5 @@ export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccess
 		} else {
 			return parentForm.get(controlName);
 		}
-	}
-
-	public get control(): AbstractControl | null {
-		return this.getFormControl(this.groupName() || '', this.parentForm(), this.name());
 	}
 }

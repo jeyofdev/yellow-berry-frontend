@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 export class BrandService {
 	private _httpClient: HttpClient = inject(HttpClient);
 
-	private BASE_URL = 'http://localhost:8080/api/v1/brand';
+	_BASE_URL = 'http://localhost:8080/api/v1/brand';
 
 	public findAll(): Observable<SuccessResponse<BrandResponse[]>> {
-		return this._httpClient.get<SuccessResponse<BrandResponse[]>>(this.BASE_URL).pipe();
+		return this._httpClient.get<SuccessResponse<BrandResponse[]>>(this._BASE_URL).pipe();
 	}
 }

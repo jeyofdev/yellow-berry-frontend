@@ -10,5 +10,5 @@ import { ImageModule } from 'primeng/image';
 	styleUrl: './carousel-testimonial.component.scss',
 })
 export class CarouselTestimonialComponent {
-	items: InputSignal<TestimonialResponse[]> = input.required<TestimonialResponse[]>();
+	public items: InputSignal<TestimonialResponse[]> = input.required<TestimonialResponse[]>();
 }

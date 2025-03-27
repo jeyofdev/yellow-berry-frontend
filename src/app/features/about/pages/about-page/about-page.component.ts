@@ -39,11 +39,11 @@ export class AboutPageComponent {
 	private _teamMemberService: TeamMemberService = inject(TeamMemberService);
 	private _testimonialService: TestimonialService = inject(TestimonialService);
 
-	public serviceItemList: Signal<ServiceResponse[]> = this.getServiceItemList();
-	public teamMemberItemList: Signal<TeamMemberResponse[]> = this.getTeamMemberItemList();
-	public testimonialItemList: Signal<TestimonialResponse[]> = this.getTestimonialItemList();
+	public serviceItemList: Signal<ServiceResponse[]> = this._getServiceItemList();
+	public teamMemberItemList: Signal<TeamMemberResponse[]> = this._getTeamMemberItemList();
+	public testimonialItemList: Signal<TestimonialResponse[]> = this._getTestimonialItemList();
 
-	private getServiceItemList(): Signal<ServiceResponse[]> {
+	private _getServiceItemList(): Signal<ServiceResponse[]> {
 		return toSignal(
 			this._servService
 				.findAll()
@@ -52,7 +52,7 @@ export class AboutPageComponent {
 		);
 	}
 
-	private getTeamMemberItemList(): Signal<TeamMemberResponse[]> {
+	private _getTeamMemberItemList(): Signal<TeamMemberResponse[]> {
 		return toSignal(
 			this._teamMemberService
 				.findAll()
@@ -61,7 +61,7 @@ export class AboutPageComponent {
 		);
 	}
 
-	private getTestimonialItemList(): Signal<TestimonialResponse[]> {
+	private _getTestimonialItemList(): Signal<TestimonialResponse[]> {
 		return toSignal(
 			this._testimonialService
 				.findAll()

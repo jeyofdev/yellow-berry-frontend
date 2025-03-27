@@ -1,6 +1,6 @@
 import { FormInputAbstract } from '@abstract/form-input.abstract';
 import { Component, InputSignal, forwardRef, input } from '@angular/core';
-import { FormGroupDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ErrorFieldComponent } from '@shared/components/ui/form/error-field/error-field.component';
 import { TextFieldTypeInput } from '@type/form-field-input.type';
 import { InputTextModule } from 'primeng/inputtext';
@@ -24,7 +24,7 @@ export class TextFieldComponent extends FormInputAbstract<string> {
 	public min: InputSignal<number> = input<number>(0);
 	public max: InputSignal<number> = input<number>(0);
 
-	override onInputChange(event: Event): void {
+	public override onInputChange(event: Event): void {
 		if (this.disabled) {
 			return;
 		}

@@ -17,7 +17,7 @@ export class WishlistService {
 	private _localStorageService: LocalStorageService = inject(LocalStorageService);
 	private _authTokenService: AuthTokenService = inject(AuthTokenService);
 
-	private BASE_URL = 'http://localhost:8080/api/v1/wishlist';
+	private _BASE_URL = 'http://localhost:8080/api/v1/wishlist';
 
 	public findByUserId(): Observable<SuccessResponse<WishlistDetailsResponse>> {
 		const authToken = this._localStorageService.getAuthToken() as string;
@@ -28,7 +28,7 @@ export class WishlistService {
 		return this._profileService.findByUserId({ authToken, authUserId }).pipe(
 			switchMap((profileResponse: SuccessResponse<ProfileDetailsResponse>) => {
 				return this._httpClient.get<SuccessResponse<WishlistDetailsResponse>>(
-					`${this.BASE_URL}/${profileResponse.result.wishlist.id}`,
+					`${this._BASE_URL}/${profileResponse.result.wishlist.id}`,
 					{ headers },
 				);
 			}),

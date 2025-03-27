@@ -11,10 +11,10 @@ import { Observable, map } from 'rxjs';
 export class TeamMemberService {
 	private _httpClient: HttpClient = inject(HttpClient);
 
-	private BASE_URL = 'http://localhost:8080/api/v1/team/member';
+	private _BASE_URL = 'http://localhost:8080/api/v1/team/member';
 
 	public findAll(): Observable<SuccessResponse<TeamMemberResponse[]>> {
-		return this._httpClient.get<SuccessResponse<TeamMemberResponse[]>>(this.BASE_URL).pipe(
+		return this._httpClient.get<SuccessResponse<TeamMemberResponse[]>>(this._BASE_URL).pipe(
 			map((response: SuccessResponse<TeamMemberResponse[]>) => {
 				response.result.forEach(member => {
 					member.job = JobEnum[member.job as keyof typeof JobEnum];

@@ -15,15 +15,15 @@ export class ProductService {
 	private _httpClient: HttpClient = inject(HttpClient);
 	private _localStorageService: LocalStorageService = inject(LocalStorageService);
 
-	private BASE_URL = 'http://localhost:8080/api/v1/product';
+	private _BASE_URL = 'http://localhost:8080/api/v1/product';
 
 	public findAll(): Observable<SuccessResponse<ProductResponse[]>> {
-		return this._httpClient.get<SuccessResponse<ProductResponse[]>>(this.BASE_URL);
+		return this._httpClient.get<SuccessResponse<ProductResponse[]>>(this._BASE_URL);
 	}
 
 	public findById(findProductByIdRequest: FindProductByIdRequest): Observable<SuccessResponse<ProductDetailsResponse>> {
 		return this._httpClient.get<SuccessResponse<ProductDetailsResponse>>(
-			`${this.BASE_URL}/${findProductByIdRequest.productId}`,
+			`${this._BASE_URL}/${findProductByIdRequest.productId}`,
 		);
 	}
 
@@ -34,7 +34,7 @@ export class ProductService {
 		const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
 
 		return this._httpClient.post<SuccessResponse<ProductDetailsResponse>>(
-			`${this.BASE_URL}/${addOrRemoveProductToWishlistRequest.productId}/wishlist/${addOrRemoveProductToWishlistRequest.wishlistId}`,
+			`${this._BASE_URL}/${addOrRemoveProductToWishlistRequest.productId}/wishlist/${addOrRemoveProductToWishlistRequest.wishlistId}`,
 			{},
 			{ headers },
 		);

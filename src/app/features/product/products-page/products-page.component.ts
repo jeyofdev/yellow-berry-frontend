@@ -22,17 +22,17 @@ export class ProductsPageComponent {
 	private _brandService: BrandService = inject(BrandService);
 	private _productService: ProductService = inject(ProductService);
 
-	public brandItemList: Signal<BrandResponse[]> = this.getBrandItemList();
-	public productItemList: Signal<ProductResponse[]> = this.getProductItemList();
+	public brandItemList: Signal<BrandResponse[]> = this._getBrandItemList();
+	public productItemList: Signal<ProductResponse[]> = this._getProductItemList();
 
-	private getBrandItemList(): Signal<BrandResponse[]> {
+	private _getBrandItemList(): Signal<BrandResponse[]> {
 		return toSignal(
 			this._brandService.findAll().pipe(map((brandResponse: SuccessResponse<BrandResponse[]>) => brandResponse.result)),
 			{ initialValue: [] },
 		);
 	}
 
-	private getProductItemList(): Signal<ProductResponse[]> {
+	private _getProductItemList(): Signal<ProductResponse[]> {
 		return toSignal(
 			this._productService
 				.findAll()
