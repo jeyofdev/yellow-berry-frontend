@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, InputSignal, Signal, inject, input } from '@angular/core';
+import { Component, InputSignal, Signal, WritableSignal, computed, inject, input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
@@ -14,7 +14,7 @@ import { PriceComponent } from '@shared/components/ui/price/price/price.componen
 import { RatingComponent } from '@shared/components/ui/rating/rating.component';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-card-product-details',
@@ -38,15 +38,37 @@ export class CardProductDetailsComponent {
 
 	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
 	public wishlistId: Signal<string> = this.getWishlistId();
+	public wishlistProducts: WritableSignal<Set<string>> = signal<Set<string>>(new Set());
 
-	productNb: number = 1;
+	public isProductInWishlist: Signal<boolean> = computed(
+		() => this.product() !== null && this.wishlistProducts().has(this.product()!.id),
+	);
 
-	addOrRemoveToWishlist(): void {
+	public productNb: number = 1;
+
+	constructor() {
+		this.loadWishlistProducts();
+	}
+
+	public addOrRemoveToWishlist(): void {
+		const productId = this.product()?.id as string;
+		const wishlistId = this.wishlistId();
+
 		this._productService
-			.addOrRemoveProductToWishlist({
-				productId: this.product()?.id as string,
-				wishlistId: this.wishlistId(),
-			})
+			.addOrRemoveProductToWishlist({ productId, wishlistId })
+			.pipe(
+				tap(() => {
+					const updatedProducts = new Set(this.wishlistProducts());
+
+					if (updatedProducts.has(productId)) {
+						updatedProducts.delete(productId);
+					} else {
+						updatedProducts.add(productId);
+					}
+
+					this.wishlistProducts.set(updatedProducts);
+				}),
+			)
 			.subscribe();
 	}
 
@@ -56,6 +78,20 @@ export class CardProductDetailsComponent {
 				.findByUserId()
 				.pipe(map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => wishlistResponse.result.id)),
 			{ initialValue: '' },
+		);
+	}
+
+	private loadWishlistProducts(): void {
+		toSignal(
+			this._wishlistService
+				.findByUserId()
+				.pipe(
+					map(
+						(wishlistResponse: SuccessResponse<WishlistDetailsResponse>) =>
+							new Set(wishlistResponse.result.products.results.map(product => product.id)),
+					),
+				),
+			{ initialValue: new Set<string>() },
 		);
 	}
 }

@@ -87,9 +87,9 @@
 
       <app-button
         icon="pi pi-heart"
-        severity="secondary"
+        [severity]="isProductInWishlist() ? 'primary' : 'secondary'"
         isRounded
-        isOutlined
+        [isOutlined]="!isProductInWishlist() ? true : false"
         (click)="addOrRemoveToWishlist()"
       ></app-button>
 
