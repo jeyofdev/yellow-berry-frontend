@@ -19,7 +19,7 @@ export class WishlistService {
 
 	private BASE_URL = 'http://localhost:8080/api/v1/wishlist';
 
-	public findById(): Observable<SuccessResponse<WishlistDetailsResponse>> {
+	public findByUserId(): Observable<SuccessResponse<WishlistDetailsResponse>> {
 		const authToken = this._localStorageService.getAuthToken() as string;
 		const authUserId = this._authTokenService._decodeToken(authToken).id;
 

@@ -86,10 +86,11 @@
       <p-button label="View Cart" class="btn-view-cart" />
 
       <app-button
-        icon="pi pi-heart"
-        severity="secondary"
+        [icon]="!isProductInWishlist() ? 'pi pi-heart' : 'pi pi-heart-fill'"
+        [severity]="isProductInWishlist() ? 'primary' : 'secondary'"
         isRounded
         isOutlined
+        (click)="addOrRemoveToWishlist()"
       ></app-button>
 
       <app-button

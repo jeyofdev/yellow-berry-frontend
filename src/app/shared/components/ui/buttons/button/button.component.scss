@@ -14,15 +14,21 @@
   }
 
   &.p-button-icon-only {
-    &.p-button-outlined.p-button-secondary {
-      @apply text-zinc-700 w-auto h-auto py-[0.5625rem] px-3;
+    @apply w-auto h-auto py-[0.5625rem] px-3;
+
+    &:hover {
+      @apply bg-primary-500 text-white;
+    }
+
+    .pi {
+      @apply text-sm;
+    }
+
+    &.p-button-secondary {
+      @apply text-zinc-700;
 
       &:hover {
         @apply bg-primary-500 text-white;
-      }
-
-      .pi {
-        @apply text-sm;
       }
     }
   }

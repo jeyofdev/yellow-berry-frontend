@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, InputSignal, input } from '@angular/core';
+import { Component, InputSignal, Signal, WritableSignal, computed, inject, input, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
+import { SuccessResponse } from '@models/response/success-response.model';
+import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
+import { ProductService } from '@services/product.service';
+import { WishlistService } from '@services/wishlist.service';
 import { ButtonComponent } from '@shared/components/ui/buttons/button/button.component';
 import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
 import { PriceDiscountPercentageComponent } from '@shared/components/ui/price/price-discount-percentage/price-discount-percentage.component';
@@ -9,6 +14,7 @@ import { PriceComponent } from '@shared/components/ui/price/price/price.componen
 import { RatingComponent } from '@shared/components/ui/rating/rating.component';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
+import { map, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-card-product-details',
@@ -27,7 +33,65 @@ import { ImageModule } from 'primeng/image';
 	styleUrl: './card-product-details.component.scss',
 })
 export class CardProductDetailsComponent {
-	product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
+	private _productService: ProductService = inject(ProductService);
+	private _wishlistService: WishlistService = inject(WishlistService);
 
-	productNb: number = 1;
+	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
+	public wishlistId: Signal<string> = this.getWishlistId();
+	public wishlistProducts: WritableSignal<Set<string>> = signal<Set<string>>(new Set());
+
+	public isProductInWishlist: Signal<boolean> = computed(
+		() => this.product() !== null && this.wishlistProducts().has(this.product()!.id),
+	);
+
+	public productNb: number = 1;
+
+	constructor() {
+		this.loadWishlistProducts();
+	}
+
+	public addOrRemoveToWishlist(): void {
+		const productId = this.product()?.id as string;
+
+		this._productService
+			.addOrRemoveProductToWishlist({ productId, wishlistId: this.wishlistId() })
+			.pipe(
+				tap(() => {
+					const updatedProducts = new Set(this.wishlistProducts());
+
+					if (updatedProducts.has(productId)) {
+						updatedProducts.delete(productId);
+					} else {
+						updatedProducts.add(productId);
+					}
+
+					this.wishlistProducts.set(updatedProducts);
+				}),
+			)
+			.subscribe();
+	}
+
+	private getWishlistId(): Signal<string> {
+		return toSignal(
+			this._wishlistService
+				.findByUserId()
+				.pipe(map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => wishlistResponse.result.id)),
+			{ initialValue: '' },
+		);
+	}
+
+	private loadWishlistProducts(): void {
+		toSignal(
+			this._wishlistService.findByUserId().pipe(
+				map(
+					(wishlistResponse: SuccessResponse<WishlistDetailsResponse>) =>
+						new Set(wishlistResponse.result.products.results.map(product => product.id)),
+				),
+				tap(productsSet => {
+					this.wishlistProducts.set(productsSet);
+				}),
+			),
+			{ initialValue: new Set<string>() },
+		);
+	}
 }
