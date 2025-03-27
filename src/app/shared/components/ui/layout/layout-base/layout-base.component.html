@@ -1,3 +1,6 @@
-<div [class]="styleClass">
+<div
+  class="flex max-w-screen-sm sm:max-w-screen-md md:max-w-screen-lg lg:max-w-screen-xl xl:max-w-screen-2xl 2xl:max-w-screen-3xl mx-auto px-6 w-full"
+  [class]="[justifyContent(), alignItems(), flexDirection(), gap()]"
+>
   <ng-content></ng-content>
 </div>

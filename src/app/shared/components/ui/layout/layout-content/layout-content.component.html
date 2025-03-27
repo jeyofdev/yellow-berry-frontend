@@ -1,4 +1,7 @@
-<div [class]="containerStyleClass">
+<div
+  class="flex flex-col justify-center my-0 py-0"
+  [class]="[containerMarginTop(), containerMarginBottom()]"
+>
   <app-layout-base justifyContent="justify-center" alignItems="items-center">
     <div class="flex flex-col justify-center items-center gap-3 w-full p-0">
       @if (pageTitleSecondary() || pageTitlePrimary()|| pageTitleInfo()) {
@@ -15,7 +18,13 @@
       ></app-section-subtitle>
       }
 
-      <div [class]="childrenContainerStyleClass">
+      <div
+        class="flex justify-center w-full"
+        [class]="[
+          childrenContainerMarginTop(),
+          childrenContainerMarginBottom()
+        ]"
+      >
         <ng-content></ng-content>
       </div>
     </div>

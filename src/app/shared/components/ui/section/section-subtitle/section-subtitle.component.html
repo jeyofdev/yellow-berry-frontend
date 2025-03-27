@@ -1,3 +1,15 @@
-<p [class]="styleClass">
+<p
+  class="w-full tracking-[0.03rem]"
+  [class]="[
+    fontSize(),
+    color(),
+    lineHeight(),
+    fontFamily(),
+    fontWeight(),
+    textAlign(),
+    marginTop(),
+    maxWidth()
+  ]"
+>
   {{ content() }}
 </p>

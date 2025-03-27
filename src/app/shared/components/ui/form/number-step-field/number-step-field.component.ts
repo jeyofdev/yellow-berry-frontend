@@ -1,4 +1,4 @@
-import { Component, InputSignal, OutputEmitterRef, effect, input, model, output } from '@angular/core';
+import { Component, InputSignal, effect, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
 
