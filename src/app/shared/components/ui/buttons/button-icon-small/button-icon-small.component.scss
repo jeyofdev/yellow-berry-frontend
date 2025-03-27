@@ -1,0 +1,11 @@
+:host ::ng-deep p-button .p-button {
+  @apply px-1.5 py-1 border-none bg-gray-700 text-white;
+
+  &.p-button-icon-only {
+    @apply h-auto w-auto;
+  }
+
+  .p-button-icon {
+    @apply text-xs;
+  }
+}

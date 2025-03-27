@@ -28,6 +28,7 @@ import { SelectButton } from 'primeng/selectbutton';
 	styleUrl: './list-product.component.scss',
 })
 export class ListProductComponent {
+	isShowCloseBtn: InputSignal<boolean> = input<boolean>(false);
 	productItemList: InputSignal<ProductResponse[]> = input.required<ProductResponse[]>();
 	hasPagination = input<boolean, unknown>(false, {
 		transform: booleanAttribute,

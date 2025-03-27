@@ -1,14 +1,15 @@
-import { Component, Signal, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, WritableSignal, effect, inject, signal } from '@angular/core';
 import { ProductResponse } from '@models/product/product-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
+import { ProductComponentService } from '@services/components/product-component.service';
+import { WishlistComponentService } from '@services/components/wishlist-component.service';
 import { WishlistService } from '@services/wishlist.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
 import { ListProductComponent } from '@shared/components/ui/list/list-product/list-product.component';
-import { map } from 'rxjs';
+import { Subject, map } from 'rxjs';
 
 @Component({
 	selector: 'app-wishlist-page',
@@ -18,17 +19,36 @@ import { map } from 'rxjs';
 })
 export class WishlistPageComponent {
 	private _wishlistService: WishlistService = inject(WishlistService);
+	private _productComponentService: ProductComponentService = inject(ProductComponentService);
+	private _wishlistComponentService: WishlistComponentService = inject(WishlistComponentService);
 
-	public productItemList: Signal<ProductResponse[]> = this.getProductItemList();
+	public wishlistId: WritableSignal<string> = signal<string>('');
+	public productItemList: WritableSignal<ProductResponse[]> = signal<ProductResponse[]>([]);
 
-	private getProductItemList(): Signal<ProductResponse[]> {
-		return toSignal(
-			this._wishlistService.findByUserId().pipe(
+	private destroy$ = new Subject<void>();
+
+	constructor() {
+		this.loadWishlist();
+
+		effect(() => {
+			this.productItemList.set(this._productComponentService.getProductListInWishlist());
+		});
+	}
+
+	private loadWishlist(): void {
+		this._wishlistService
+			.findByUserId()
+			.pipe(
 				map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => {
-					return wishlistResponse.result.products.results;
+					this._wishlistComponentService.setWishlistId(wishlistResponse.result.id);
+					this._productComponentService.setProductListInWishlist(wishlistResponse.result.products.results);
 				}),
-			),
-			{ initialValue: [] },
-		);
+			)
+			.subscribe();
+	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }

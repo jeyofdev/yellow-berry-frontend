@@ -32,6 +32,7 @@
     @for (product of items; track product.id) {
     <app-card-product
       [product]="product"
+      [isShowCloseBtn]="isShowCloseBtn()"
       class="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333333%-1.25rem)] xl:w-[calc(25%-1.25rem)]"
     ></app-card-product>
     }
@@ -41,8 +42,9 @@
     @for (product of items; track product.id) {
     <app-card-product
       [product]="product"
-      class="min-w-full"
+      [isShowCloseBtn]="isShowCloseBtn()"
       layout="list"
+      class="min-w-full"
     ></app-card-product>
     }
   </ng-template>

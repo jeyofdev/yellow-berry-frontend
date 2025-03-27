@@ -1,10 +1,18 @@
 <div class="flex flex-col w-full">
   <div
-    class="flex flex-col items-center shadow-none border border-gray-200 rounded-[1.25rem] overflow-hidden w-full"
+    class="relative flex flex-col items-center shadow-none border border-gray-200 rounded-[1.25rem] overflow-hidden w-full"
     [ngClass]="{
       'md:flex-row': layout() === 'list'
     }"
   >
+    @if (isShowCloseBtn()) {
+    <div class="absolute right-4 top-4">
+      <app-button-icon-small
+        icon="pi pi-times"
+        (click)="onClick()"
+      ></app-button-icon-small>
+    </div>
+    }
     <div
       class="flex w-full"
       [ngClass]="{

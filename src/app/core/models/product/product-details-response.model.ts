@@ -14,6 +14,7 @@ export class ProductDetailsResponse extends Product {
 		public details: ProductDetails,
 		public informations: ProductInformations,
 		public reference: string,
+		public description: string,
 	) {
 		super(id, name, ratingDetails, priceDetails, stock);
 	}
