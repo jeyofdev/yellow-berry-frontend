@@ -17,8 +17,8 @@ import { TabsComponent } from '@shared/components/ui/tabs/tabs/tabs.component';
 export class ProductsDetailsPageComponent {
 	private _productService: ProductService = inject(ProductService);
 
-	id: InputSignal<string> = input.required<string>();
-	product: WritableSignal<ProductDetailsResponse | null> = signal<ProductDetailsResponse | null>(null);
+	public id: InputSignal<string> = input.required<string>();
+	public product: WritableSignal<ProductDetailsResponse | null> = signal<ProductDetailsResponse | null>(null);
 
 	constructor() {
 		effect(() => {

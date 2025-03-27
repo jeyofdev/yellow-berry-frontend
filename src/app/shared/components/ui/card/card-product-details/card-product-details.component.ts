@@ -37,7 +37,7 @@ export class CardProductDetailsComponent {
 	private _wishlistService: WishlistService = inject(WishlistService);
 
 	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
-	public wishlistId: Signal<string> = this.getWishlistId();
+	public wishlistId: Signal<string> = this._getWishlistId();
 	public wishlistProducts: WritableSignal<Set<string>> = signal<Set<string>>(new Set());
 
 	public isProductInWishlist: Signal<boolean> = computed(
@@ -47,7 +47,7 @@ export class CardProductDetailsComponent {
 	public productNb: number = 1;
 
 	constructor() {
-		this.loadWishlistProducts();
+		this._loadWishlistProducts();
 	}
 
 	public addOrRemoveToWishlist(): void {
@@ -71,7 +71,7 @@ export class CardProductDetailsComponent {
 			.subscribe();
 	}
 
-	private getWishlistId(): Signal<string> {
+	private _getWishlistId(): Signal<string> {
 		return toSignal(
 			this._wishlistService
 				.findByUserId()
@@ -80,7 +80,7 @@ export class CardProductDetailsComponent {
 		);
 	}
 
-	private loadWishlistProducts(): void {
+	private _loadWishlistProducts(): void {
 		toSignal(
 			this._wishlistService.findByUserId().pipe(
 				map(

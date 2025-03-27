@@ -39,15 +39,15 @@ export class TabsComponent {
 		}
 
 		return [
-			{ name: 'Weight', value: this.convertWeightToString() },
+			{ name: 'Weight', value: this._convertWeightToString() },
 			{ name: 'Dimensions', value: '17 × 15 × 3 cm' },
 			{ name: 'Brand', value: 'lorem.' },
 			{ name: 'Quantity', value: 5 },
-			{ name: 'Color', value: this.convertColorsToString() },
+			{ name: 'Color', value: this._convertColorsToString() },
 		];
 	}
 
-	private convertColorsToString(): string {
+	private _convertColorsToString(): string {
 		if (!this.product()) {
 			return '';
 		} else {
@@ -56,7 +56,7 @@ export class TabsComponent {
 		}
 	}
 
-	private convertWeightToString(): string {
+	private _convertWeightToString(): string {
 		if (!this.product()) {
 			return '';
 		} else {

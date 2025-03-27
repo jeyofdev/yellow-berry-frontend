@@ -1,4 +1,4 @@
-import { Component, WritableSignal, effect, inject, signal } from '@angular/core';
+import { Component, OnDestroy, WritableSignal, effect, inject, signal } from '@angular/core';
 import { ProductResponse } from '@models/product/product-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
@@ -17,7 +17,7 @@ import { Subject, map } from 'rxjs';
 	templateUrl: './wishlist-page.component.html',
 	styleUrl: './wishlist-page.component.scss',
 })
-export class WishlistPageComponent {
+export class WishlistPageComponent implements OnDestroy {
 	private _wishlistService: WishlistService = inject(WishlistService);
 	private _productComponentService: ProductComponentService = inject(ProductComponentService);
 	private _wishlistComponentService: WishlistComponentService = inject(WishlistComponentService);
@@ -25,17 +25,17 @@ export class WishlistPageComponent {
 	public wishlistId: WritableSignal<string> = signal<string>('');
 	public productItemList: WritableSignal<ProductResponse[]> = signal<ProductResponse[]>([]);
 
-	private destroy$ = new Subject<void>();
+	private _destroy$ = new Subject<void>();
 
 	constructor() {
-		this.loadWishlist();
+		this._loadWishlist();
 
 		effect(() => {
 			this.productItemList.set(this._productComponentService.getProductListInWishlist());
 		});
 	}
 
-	private loadWishlist(): void {
+	private _loadWishlist(): void {
 		this._wishlistService
 			.findByUserId()
 			.pipe(
@@ -48,7 +48,7 @@ export class WishlistPageComponent {
 	}
 
 	ngOnDestroy(): void {
-		this.destroy$.next();
-		this.destroy$.complete();
+		this._destroy$.next();
+		this._destroy$.complete();
 	}
 }

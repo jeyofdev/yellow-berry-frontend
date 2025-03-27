@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 export class FaqService {
 	private _httpClient: HttpClient = inject(HttpClient);
 
-	private BASE_URL = 'http://localhost:8080/api/v1/faq';
+	private _BASE_URL = 'http://localhost:8080/api/v1/faq';
 
 	public findAll(): Observable<SuccessResponse<FaqResponse[]>> {
-		return this._httpClient.get<SuccessResponse<FaqResponse[]>>(this.BASE_URL);
+		return this._httpClient.get<SuccessResponse<FaqResponse[]>>(this._BASE_URL);
 	}
 }

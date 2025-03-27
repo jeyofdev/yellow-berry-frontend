@@ -29,6 +29,8 @@ import { Menu, MenuModule } from 'primeng/menu';
 	styleUrl: './header-navigation.component.scss',
 })
 export class HeaderNavigationComponent implements OnInit {
+	private _headerAccountLinkService: HeaderAccountLinkService = inject(HeaderAccountLinkService);
+
 	protected headerAccountLinks!: WritableSignal<HeaderAccountLink[]>;
 	protected accountLinksChildren!: WritableSignal<HeaderAccountLink[]>;
 
@@ -36,9 +38,7 @@ export class HeaderNavigationComponent implements OnInit {
 
 	public items: MenuItem[] | undefined;
 	public isMenuOpen = false;
-	private hideMenuTimeout!: ReturnType<typeof setTimeout>;
-
-	private _headerAccountLinkService: HeaderAccountLinkService = inject(HeaderAccountLinkService);
+	private _hideMenuTimeout!: ReturnType<typeof setTimeout>;
 
 	constructor() {
 		effect(() => {
@@ -58,7 +58,7 @@ export class HeaderNavigationComponent implements OnInit {
 
 	public onMouseEnter(event: MouseEvent, sublabel: string): void {
 		if (sublabel === 'Account') {
-			clearTimeout(this.hideMenuTimeout);
+			clearTimeout(this._hideMenuTimeout);
 			if (!this.isMenuOpen) {
 				this.isMenuOpen = true;
 				this.accountMenu.toggle(event);
@@ -71,11 +71,11 @@ export class HeaderNavigationComponent implements OnInit {
 	}
 
 	public cancelHideMenu(): void {
-		clearTimeout(this.hideMenuTimeout);
+		clearTimeout(this._hideMenuTimeout);
 	}
 
 	public hideMenuWithDelay(): void {
-		this.hideMenuTimeout = setTimeout(() => {
+		this._hideMenuTimeout = setTimeout(() => {
 			this.isMenuOpen = false;
 			this.accountMenu.hide();
 		}, 300);

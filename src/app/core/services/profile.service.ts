@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class ProfileService {
 	private _httpClient: HttpClient = inject(HttpClient);
 
-	private BASE_URL = 'http://localhost:8080/api/v1/profile';
+	private _BASE_URL = 'http://localhost:8080/api/v1/profile';
 
 	public save(
 		authToken: string,
@@ -21,7 +21,7 @@ export class ProfileService {
 		profileDatas: SaveProfileRequest,
 	): Observable<SuccessResponse<ProfileResponse>> {
 		const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
-		return this._httpClient.post<SuccessResponse<ProfileResponse>>(this.BASE_URL + `/user/${userId}`, profileDatas, {
+		return this._httpClient.post<SuccessResponse<ProfileResponse>>(this._BASE_URL + `/user/${userId}`, profileDatas, {
 			headers,
 		});
 	}
@@ -32,7 +32,7 @@ export class ProfileService {
 		const headers = new HttpHeaders().set('Authorization', `Bearer ${findProfileDetailsRequest.authToken}`);
 
 		return this._httpClient.get<SuccessResponse<ProfileDetailsResponse>>(
-			`${this.BASE_URL}/user/${findProfileDetailsRequest.authUserId}`,
+			`${this._BASE_URL}/user/${findProfileDetailsRequest.authUserId}`,
 			{ headers },
 		);
 	}

@@ -19,7 +19,7 @@ import { map } from 'rxjs';
 export class FaqPageComponent {
 	private _faqService: FaqService = inject(FaqService);
 
-	public faqItems: Signal<FaqResponse[]> = this.getFaqItemList();
+	public faqItems: Signal<FaqResponse[]> = this._getFaqItemList();
 
 	public activePanel: number | null = null;
 
@@ -27,7 +27,7 @@ export class FaqPageComponent {
 		this.activePanel = this.activePanel === panelIndex ? null : panelIndex;
 	}
 
-	private getFaqItemList(): Signal<FaqResponse[]> {
+	private _getFaqItemList(): Signal<FaqResponse[]> {
 		return toSignal(
 			this._faqService.findAll().pipe(map((faqResponse: SuccessResponse<FaqResponse[]>) => faqResponse.result)),
 			{ initialValue: [] },

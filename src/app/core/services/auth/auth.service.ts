@@ -22,12 +22,12 @@ export class AuthService {
 	private _localStorageService = inject(LocalStorageService);
 	private _profileService: ProfileService = inject(ProfileService);
 
-	private BASE_URL = 'http://localhost:8080/api/v1/auth';
+	private _BASE_URL = 'http://localhost:8080/api/v1/auth';
 
-	private loggedIn = signal<boolean>(false);
+	private _loggedIn = signal<boolean>(false);
 
 	constructor() {
-		this.checkAuthTokenExist();
+		this._checkAuthTokenExist();
 	}
 
 	public register(
@@ -35,7 +35,7 @@ export class AuthService {
 		profileDatas: SaveProfileRequest,
 	): Observable<SuccessResponse<ProfileResponse>> {
 		return this._httpClient
-			.post<RegisterResponse>(this.BASE_URL + '/register', registerRequest)
+			.post<RegisterResponse>(this._BASE_URL + '/register', registerRequest)
 			.pipe(
 				switchMap((registerResponse: RegisterResponse) =>
 					this.login({ email: registerRequest.email, password: registerRequest.password }).pipe(
@@ -48,7 +48,7 @@ export class AuthService {
 	}
 
 	public login(loginRequest: LoginRequest): Observable<LoginResponse> {
-		return this._httpClient.post<LoginResponse>(this.BASE_URL + '/login', loginRequest).pipe(
+		return this._httpClient.post<LoginResponse>(this._BASE_URL + '/login', loginRequest).pipe(
 			tap(response => {
 				this._localStorageService.setAuthToken(response.token);
 				this.setLoggedIn(true);
@@ -58,14 +58,14 @@ export class AuthService {
 
 	public forgotPassword(forgotPasswordRequest: ForgotPasswordRequest): Observable<MessageResponse> {
 		return this._httpClient.post<MessageResponse>(
-			this.BASE_URL + `/forgot-password?email=${forgotPasswordRequest.email}`,
+			this._BASE_URL + `/forgot-password?email=${forgotPasswordRequest.email}`,
 			{},
 		);
 	}
 
 	public resetPassword(resetPasswordRequest: ResetPasswordRequest): Observable<MessageResponse> {
 		return this._httpClient.post<MessageResponse>(
-			this.BASE_URL +
+			this._BASE_URL +
 				`/reset-password?resetToken=${resetPasswordRequest.resetToken}&newPassword=${resetPasswordRequest.newPassword}`,
 			{},
 		);
@@ -77,14 +77,14 @@ export class AuthService {
 	}
 
 	public setLoggedIn(value: boolean) {
-		this.loggedIn.set(value);
+		this._loggedIn.set(value);
 	}
 
 	public getLoggedIn(): boolean {
-		return this.loggedIn();
+		return this._loggedIn();
 	}
 
-	private checkAuthTokenExist() {
+	private _checkAuthTokenExist() {
 		const authToken: string | null = this._localStorageService.getAuthToken();
 		this.setLoggedIn(!!authToken);
 	}

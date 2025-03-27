@@ -14,17 +14,17 @@ export class ProductComponentService {
 	private _wishlistComponentService: WishlistComponentService = inject(WishlistComponentService);
 
 	private _productListInWishlist: WritableSignal<ProductResponse[]> = signal<ProductResponse[]>([]);
-	private productSubscription: Subscription | null = null;
+	private _productSubscription: Subscription | null = null;
 
 	addOrRemoveProductToWishlistAndUpdateSignal(productId: string): void {
 		this._unsubscribe();
 
-		this.productSubscription = this._productService
+		this._productSubscription = this._productService
 			.addOrRemoveProductToWishlist({ productId, wishlistId: this._wishlistComponentService.getWishlistId() })
 			.pipe(
 				map((response: SuccessResponse<ProductDetailsResponse>) => {
 					this._productListInWishlist.update(currentWishlist => {
-						return this.updateCurrentProductList(currentWishlist, productId, response);
+						return this._updateCurrentProductList(currentWishlist, productId, response);
 					});
 				}),
 			)
@@ -39,7 +39,7 @@ export class ProductComponentService {
 		return this._productListInWishlist();
 	}
 
-	private updateCurrentProductList(
+	private _updateCurrentProductList(
 		currentWishlist: ProductResponse[],
 		productId: string,
 		response: SuccessResponse<ProductDetailsResponse>,
@@ -52,8 +52,8 @@ export class ProductComponentService {
 	}
 
 	private _unsubscribe(): void {
-		if (this.productSubscription) {
-			this.productSubscription.unsubscribe();
+		if (this._productSubscription) {
+			this._productSubscription.unsubscribe();
 		}
 	}
 }
