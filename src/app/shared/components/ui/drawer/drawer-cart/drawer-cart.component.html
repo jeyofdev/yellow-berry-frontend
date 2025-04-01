@@ -1,0 +1,10 @@
+<p-drawer
+  #drawerRef
+  position="right"
+  [visible]="isVisible()"
+  (onHide)="onClose()"
+>
+  <ng-template #headless>
+    <div class="flex flex-col h-full"></div>
+  </ng-template>
+</p-drawer>
