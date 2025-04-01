@@ -11,8 +11,9 @@ import { ProfileResponse } from '@models/profile/save-profile-response.model';
 import { MessageResponse } from '@models/response/message-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { LocalStorageService } from '@services/auth/local-storage.service';
+import { CartService } from '@services/cart.service';
 import { ProfileService } from '@services/profile.service';
-import { Observable, switchMap, tap } from 'rxjs';
+import { Observable, of, switchMap, tap } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -21,6 +22,7 @@ export class AuthService {
 	private _httpClient: HttpClient = inject(HttpClient);
 	private _localStorageService = inject(LocalStorageService);
 	private _profileService: ProfileService = inject(ProfileService);
+	private _cartService: CartService = inject(CartService);
 
 	private _BASE_URL = 'http://localhost:8080/api/v1/auth';
 
@@ -40,7 +42,15 @@ export class AuthService {
 				switchMap((registerResponse: RegisterResponse) =>
 					this.login({ email: registerRequest.email, password: registerRequest.password }).pipe(
 						switchMap((loginResponse: LoginResponse) =>
-							this._profileService.save(loginResponse.token, registerResponse.userId, profileDatas),
+							this._profileService
+								.save(loginResponse.token, registerResponse.userId, profileDatas)
+								.pipe(
+									switchMap((profileResponse: SuccessResponse<ProfileResponse>) =>
+										this._cartService
+											.save({ profileId: profileResponse.result.id })
+											.pipe(switchMap(() => of(profileResponse))),
+									),
+								),
 						),
 					),
 				),

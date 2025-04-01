@@ -2,6 +2,7 @@ import { Profile } from '@models/profile/profile.model';
 
 export class ProfileResponse extends Profile {
 	constructor(
+		public id: string,
 		public override firstname: string,
 		public override lastname: string,
 		public override phone: string,
