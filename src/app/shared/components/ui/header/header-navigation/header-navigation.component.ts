@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, WritableSignal, effect, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, WritableSignal, effect, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HeaderAccountLink } from '@models/header/header-account-link.model';
 import { HeaderAccountLinkService } from '@services/header/header-account-link.service';
 import { ButtonCtaSearchComponent } from '@shared/components/ui/buttons/button-cta-search/button-cta-search.component';
 import { ButtonHeaderAccountComponent } from '@shared/components/ui/buttons/button-header-account/button-header-account.component';
+import { DrawerCartComponent } from '@shared/components/ui/drawer/drawer-cart/drawer-cart.component';
 import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';
 import { LogoComponent } from '@shared/components/ui/logo/logo.component';
 import { NavComponent } from '@shared/components/ui/nav/nav.component';
@@ -24,6 +25,7 @@ import { Menu, MenuModule } from 'primeng/menu';
 		ImageModule,
 		NavComponent,
 		ButtonCtaSearchComponent,
+		DrawerCartComponent,
 	],
 	templateUrl: './header-navigation.component.html',
 	styleUrl: './header-navigation.component.scss',
@@ -39,6 +41,8 @@ export class HeaderNavigationComponent implements OnInit {
 	public items: MenuItem[] | undefined;
 	public isMenuOpen = false;
 	private _hideMenuTimeout!: ReturnType<typeof setTimeout>;
+
+	isDrawerCartOpen: WritableSignal<boolean> = signal<boolean>(false);
 
 	constructor() {
 		effect(() => {
@@ -83,5 +87,9 @@ export class HeaderNavigationComponent implements OnInit {
 
 	public toggleAccountMenu(e: MouseEvent, sublabel: string, accountMenu: Menu): void {
 		sublabel === 'Account' ? accountMenu.toggle(e) : null;
+	}
+
+	public toggleDrawerCart(): void {
+		this.isDrawerCartOpen.update((isOpen: boolean) => !isOpen);
 	}
 }

@@ -17,12 +17,20 @@
         (mouseenter)="onMouseEnter($event, headerAccountLink.sublabel)"
         (mouseleave)="onMouseLeave()"
       ></app-button-header-account>
+      } @else if (i === 1) {
+      <app-button-header-account
+        [label]="headerAccountLink.label"
+        [sublabel]="headerAccountLink.sublabel"
+        [imgNameFile]="headerAccountLink.icon"
+        [redirectTo]="headerAccountLink.redirectTo || ''"
+      ></app-button-header-account>
       } @else {
       <app-button-header-account
         [label]="headerAccountLink.label"
         [sublabel]="headerAccountLink.sublabel"
         [imgNameFile]="headerAccountLink.icon"
         [redirectTo]="headerAccountLink.redirectTo || ''"
+        (click)="toggleDrawerCart()"
       ></app-button-header-account>
       }
     </div>
@@ -35,6 +43,11 @@
       (mouseenter)="cancelHideMenu()"
       (mouseleave)="hideMenuWithDelay()"
     />
+
+    <app-drawer-cart
+      [isVisible]="isDrawerCartOpen()"
+      (close)="toggleDrawerCart()"
+    ></app-drawer-cart>
 
     <app-button-cta-search
       hasNoPadding
