@@ -15,11 +15,11 @@
     }
 
     &.p-inputnumber-decrement-button {
-      @apply rounded-r-none rounded-l-[0.625rem];
+      @apply rounded-r-none rounded-l-[0.625rem] bg-white;
     }
 
     &.p-inputnumber-increment-button {
-      @apply rounded-l-none rounded-r-[0.625rem];
+      @apply rounded-l-none rounded-r-[0.625rem] bg-white;
     }
 
     .pi {
