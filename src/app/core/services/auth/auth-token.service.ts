@@ -17,6 +17,7 @@ export class AuthTokenService {
 
 	public getAuthQueryInfos(): AuthQueryInfos {
 		const authToken = this._localStorageService.getAuthToken() as string;
+
 		const authUserId = this.decodeToken(authToken).id;
 		const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
 
