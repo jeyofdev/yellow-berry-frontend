@@ -41,9 +41,9 @@ export class AuthService {
 			.pipe(
 				switchMap((registerResponse: RegisterResponse) =>
 					this.login({ email: registerRequest.email, password: registerRequest.password }).pipe(
-						switchMap((loginResponse: LoginResponse) =>
+						switchMap(() =>
 							this._profileService
-								.save(loginResponse.token, registerResponse.userId, profileDatas)
+								.save(registerResponse.userId, profileDatas)
 								.pipe(
 									switchMap((profileResponse: SuccessResponse<ProfileResponse>) =>
 										this._cartService

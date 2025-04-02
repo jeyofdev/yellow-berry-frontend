@@ -40,7 +40,7 @@ export class DrawerCartComponent {
 	public productNb: number = 1;
 
 	constructor() {
-		// this._loadWishlist();
+		this._loadWishlist();
 	}
 
 	public onClose(): void {
@@ -53,7 +53,6 @@ export class DrawerCartComponent {
 			.pipe(
 				map((cartDetailsResponse: SuccessResponse<CartDetailsResponse>) => {
 					this.productItemList.set(cartDetailsResponse.result.products.results);
-					console.log(this.productItemList());
 				}),
 			)
 			.subscribe();

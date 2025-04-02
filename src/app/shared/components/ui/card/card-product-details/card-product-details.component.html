@@ -85,6 +85,7 @@
       <app-number-step-field [value]="productNb"></app-number-step-field>
       <p-button label="View Cart" class="btn-view-cart" />
 
+      @if (loggedIn) {
       <app-button
         [icon]="!isProductInWishlist() ? 'pi pi-heart' : 'pi pi-heart-fill'"
         [severity]="isProductInWishlist() ? 'primary' : 'secondary'"
@@ -92,6 +93,7 @@
         isOutlined
         (click)="addOrRemoveToWishlist()"
       ></app-button>
+      }
 
       <app-button
         icon="pi pi-eye"

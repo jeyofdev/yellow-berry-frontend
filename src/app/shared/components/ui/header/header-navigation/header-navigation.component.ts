@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, WritableSignal, effect, inject, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { RouteEnum } from '@enum/route.enum';
 import { HeaderAccountLink } from '@models/header/header-account-link.model';
+import { AuthService } from '@services/auth/auth.service';
 import { HeaderAccountLinkService } from '@services/header/header-account-link.service';
 import { ButtonCtaSearchComponent } from '@shared/components/ui/buttons/button-cta-search/button-cta-search.component';
 import { ButtonHeaderAccountComponent } from '@shared/components/ui/buttons/button-header-account/button-header-account.component';
@@ -32,6 +34,8 @@ import { Menu, MenuModule } from 'primeng/menu';
 })
 export class HeaderNavigationComponent implements OnInit {
 	private _headerAccountLinkService: HeaderAccountLinkService = inject(HeaderAccountLinkService);
+	private _authService: AuthService = inject(AuthService);
+	private _router: Router = inject(Router);
 
 	protected headerAccountLinks!: WritableSignal<HeaderAccountLink[]>;
 	protected accountLinksChildren!: WritableSignal<HeaderAccountLink[]>;
@@ -90,6 +94,12 @@ export class HeaderNavigationComponent implements OnInit {
 	}
 
 	public toggleDrawerCart(): void {
-		this.isDrawerCartOpen.update((isOpen: boolean) => !isOpen);
+		if (!this._authService.getLoggedIn()) {
+			this._router.navigate(['/' + RouteEnum.AUTH_LOGIN], {
+				queryParams: { returnUrl: this._router.routerState.snapshot.url },
+			});
+		} else {
+			this.isDrawerCartOpen.update((isOpen: boolean) => !isOpen);
+		}
 	}
 }

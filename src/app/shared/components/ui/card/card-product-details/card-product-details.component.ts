@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
+import { AuthService } from '@services/auth/auth.service';
 import { ProductService } from '@services/product.service';
 import { WishlistService } from '@services/wishlist.service';
 import { ButtonComponent } from '@shared/components/ui/buttons/button/button.component';
@@ -14,7 +15,7 @@ import { PriceComponent } from '@shared/components/ui/price/price/price.componen
 import { RatingComponent } from '@shared/components/ui/rating/rating.component';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
-import { map, tap } from 'rxjs';
+import { catchError, map, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-card-product-details',
@@ -35,10 +36,12 @@ import { map, tap } from 'rxjs';
 export class CardProductDetailsComponent {
 	private _productService: ProductService = inject(ProductService);
 	private _wishlistService: WishlistService = inject(WishlistService);
+	private _authService: AuthService = inject(AuthService);
 
 	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
 	public wishlistId: Signal<string> = this._getWishlistId();
 	public wishlistProducts: WritableSignal<Set<string>> = signal<Set<string>>(new Set());
+	public loggedIn = this._authService.getLoggedIn();
 
 	public isProductInWishlist: Signal<boolean> = computed(
 		() => this.product() !== null && this.wishlistProducts().has(this.product()!.id),
@@ -72,26 +75,34 @@ export class CardProductDetailsComponent {
 	}
 
 	private _getWishlistId(): Signal<string> {
-		return toSignal(
-			this._wishlistService
-				.findByUserId()
-				.pipe(map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => wishlistResponse.result.id)),
-			{ initialValue: '' },
-		);
+		if (this.loggedIn) {
+			return toSignal(
+				this._wishlistService.findByUserId().pipe(
+					map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => wishlistResponse.result.id),
+					catchError(() => {
+						return '';
+					}),
+				),
+				{ initialValue: '' },
+			);
+		}
+		return signal('');
 	}
 
 	private _loadWishlistProducts(): void {
-		toSignal(
-			this._wishlistService.findByUserId().pipe(
-				map(
-					(wishlistResponse: SuccessResponse<WishlistDetailsResponse>) =>
-						new Set(wishlistResponse.result.products.results.map(product => product.id)),
+		if (this.loggedIn) {
+			toSignal(
+				this._wishlistService.findByUserId().pipe(
+					map(
+						(wishlistResponse: SuccessResponse<WishlistDetailsResponse>) =>
+							new Set(wishlistResponse.result.products.results.map(product => product.id)),
+					),
+					tap(productsSet => {
+						this.wishlistProducts.set(productsSet);
+					}),
 				),
-				tap(productsSet => {
-					this.wishlistProducts.set(productsSet);
-				}),
-			),
-			{ initialValue: new Set<string>() },
-		);
+				{ initialValue: new Set<string>() },
+			);
+		}
 	}
 }
