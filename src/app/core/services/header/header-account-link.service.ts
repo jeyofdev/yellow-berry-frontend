@@ -1,6 +1,6 @@
 import { Injectable, WritableSignal, effect, inject } from '@angular/core';
 import { signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouteEnum } from '@enum/route.enum';
 import { HeaderAccountLink } from '@models/header/header-account-link.model';
 import { AuthService } from '@services/auth/auth.service';
@@ -10,6 +10,7 @@ import { AuthService } from '@services/auth/auth.service';
 })
 export class HeaderAccountLinkService {
 	private _router: Router = inject(Router);
+	private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 	private _authService: AuthService = inject(AuthService);
 
 	constructor() {
@@ -66,7 +67,9 @@ export class HeaderAccountLinkService {
 			icon: '',
 			command: () => {
 				this._authService.logout();
-				this._router.navigateByUrl('/' + RouteEnum.HOME);
+				this._router.navigate(['/' + RouteEnum.AUTH_LOGIN], {
+					queryParams: { returnUrl: this._router.routerState.snapshot.url },
+				});
 			},
 		},
 	]);
