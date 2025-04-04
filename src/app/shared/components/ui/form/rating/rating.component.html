@@ -1,0 +1,18 @@
+<div class="flex items-center gap-x-4 w-full">
+  @if (label() && labelFor()) {
+
+  <label
+    [for]="labelFor()"
+    class="text-base text-gray-700 leading-[1.625rem] tracking-[0.02rem] font-poppins font-semibold mb-0.5 capitalize"
+    >{{ fullLabel }}</label
+  >
+  }
+
+  <p-rating
+    [readonly]="false"
+    [(ngModel)]="value"
+    [disabled]="disabled"
+    (onRate)="onInputChange($event)"
+    (focus)="markAsTouched()"
+  ></p-rating>
+</div>

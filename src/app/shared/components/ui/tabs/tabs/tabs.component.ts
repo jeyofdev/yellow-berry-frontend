@@ -1,20 +1,39 @@
-import { Component, InputSignal, input } from '@angular/core';
+import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { Component, InputSignal, inject, input } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormComment } from '@models/form/form-comment.model';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
-import { RatingComponent } from '@shared/components/ui/rating/rating.component';
+import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
+import { CardCommentComponent } from '@shared/components/ui/card/card-comment/card-comment.component';
+import { RatingComponent } from '@shared/components/ui/form/rating/rating.component';
+import { TextareaFieldComponent } from '@shared/components/ui/form/textarea-field/textarea-field.component';
 import { TabLiComponent } from '@shared/components/ui/tabs/tab-li/tab-li.component';
 import { TablistComponent } from '@shared/components/ui/tabs/tablist/tablist.component';
-import { ImageModule } from 'primeng/image';
 import { TabsModule } from 'primeng/tabs';
-import { CardCommentComponent } from '../../card/card-comment/card-comment.component';
 
 @Component({
 	selector: 'app-tabs',
-	imports: [TabsModule, TablistComponent, TabLiComponent, CardCommentComponent],
+	imports: [
+		FormsModule,
+		ReactiveFormsModule,
+		TabsModule,
+		TablistComponent,
+		TabLiComponent,
+		CardCommentComponent,
+		TextareaFieldComponent,
+		ButtonFormComponent,
+		RatingComponent,
+	],
 	templateUrl: './tabs.component.html',
 	styleUrl: './tabs.component.scss',
 })
-export class TabsComponent {
+export class TabsComponent extends AuthPageAbstract<FormGroup<FormComment>> {
+	private _formBuilder: FormBuilder = inject(FormBuilder);
+
 	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
+
+	public ratingCtrl!: FormControl<number>;
+	public commentCtrl!: FormControl<string>;
 
 	public tabTitles: { id: string; value: string }[] = [
 		{ id: '0', value: 'Details' },
@@ -50,6 +69,10 @@ export class TabsComponent {
 		];
 	}
 
+	public override onSubmit(): void {
+		console.log(this.mainForm.value);
+	}
+
 	private _convertColorsToString(): string {
 		if (!this.product()) {
 			return '';
@@ -66,5 +89,24 @@ export class TabsComponent {
 			const product = this.product();
 			return product && product.informations.weightList.length > 0 ? product.informations.weightList.join(', ') : '';
 		}
+	}
+
+	protected override initMainForm() {
+		this.mainForm = this._formBuilder.group({
+			rating: this.ratingCtrl,
+			comment: this.commentCtrl,
+		});
+	}
+
+	protected override initFormControls(): void {
+		this.ratingCtrl = this._formBuilder.control<number>(0, {
+			validators: [Validators.required, Validators.min(1), Validators.max(5)],
+			nonNullable: true,
+		});
+
+		this.commentCtrl = this._formBuilder.control<string>('', {
+			validators: [Validators.required],
+			nonNullable: true,
+		});
 	}
 }

@@ -1,0 +1,29 @@
+<div class="flex flex-col w-full">
+  @if (label() && labelFor()) {
+
+  <label
+    [for]="labelFor()"
+    class="text-[0.9375rem] text-gray-500 leading-[1.625rem] tracking-[0.02rem] font-poppins font-normal mb-0.5 capitalize"
+    >{{ fullLabel }}</label
+  >
+  }
+
+  <textarea
+    pTextarea
+    [id]="id()"
+    [name]="name()"
+    [placeholder]="placeholder()"
+    [rows]="rows()"
+    [value]="value"
+    [disabled]="disabled"
+    formControlName="comment"
+    (input)="onInputChange($event)"
+    (focus)="markAsTouched()"
+  ></textarea>
+
+  <app-error-field
+    [form]="form()"
+    [control]="control"
+    [fieldName]="name()"
+  ></app-error-field>
+</div>

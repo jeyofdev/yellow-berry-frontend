@@ -52,9 +52,50 @@
       <p-tabpanel value="2">
         <div class="flex flex-col gap-y-7 max-w-[1000px]">
           @for (comment of product()?.comments?.results; track $index) {
-
           <app-card-comment [comment]="comment"></app-card-comment>
           }
+        </div>
+
+        <div class="mt-8 max-w-[1000px]">
+          <h5
+            class="text-[1.375rem] text-gray-700 leading-[1.65rem] tracking-[0.03rem] font-quicksand font-bold mb-2.5"
+          >
+            Add a Review
+          </h5>
+
+          <form
+            #commentForm="ngForm"
+            [formGroup]="mainForm"
+            (ngSubmit)="onSubmit()"
+            class="flex flex-col gap-5 w-full"
+          >
+            <app-rating
+              labelFor="rating"
+              label="Your rating"
+              id="rating"
+              name="rating"
+              [parentForm]="mainForm"
+              formControlName="rating"
+              controlName="rating"
+              [form]="commentForm"
+            ></app-rating>
+
+            <app-textarea-field
+              isRequired
+              id="comment"
+              name="comment"
+              placeholder="Enter your comment"
+              [rows]="8"
+              [parentForm]="mainForm"
+              formControlName="comment"
+              controlName="comment"
+              [form]="commentForm"
+            ></app-textarea-field>
+
+            <div class="flex justify-between items-center">
+              <app-button-form label="Login"></app-button-form>
+            </div>
+          </form>
         </div>
       </p-tabpanel>
     </p-tabpanels>

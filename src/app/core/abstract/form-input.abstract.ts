@@ -1,5 +1,6 @@
 import { Directive, InputSignal, OnInit, booleanAttribute, input } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormGroup, FormGroupDirective } from '@angular/forms';
+import { RatingRateEvent } from 'primeng/rating';
 
 @Directive()
 export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccessor {
@@ -30,7 +31,7 @@ export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccess
 		this.fullLabel = this.isRequired() ? `${this.label()}*` : this.label();
 	}
 
-	public abstract onInputChange(event: Event): void;
+	public abstract onInputChange(event: Event | RatingRateEvent): void;
 
 	public writeValue(value: T): void {
 		this.value = value;
