@@ -1,0 +1,15 @@
+:host ::ng-deep p-rating {
+  @apply gap-1;
+
+  .p-rating-option {
+    @apply cursor-pointer;
+  }
+
+  .p-iconwrapper .p-rating-icon {
+    @apply w-[0.875rem] h-[0.875rem] text-zinc-700;
+
+    &.p-rating-icon-active {
+      @apply text-primary-500;
+    }
+  }
+}
