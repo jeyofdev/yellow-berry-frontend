@@ -1,7 +1,7 @@
 export class NameDetailsFormat {
 	constructor(
-		public firstName: string,
-		public lastName: string,
-		public fullName: string,
+		public firstname: string,
+		public lastname: string,
+		public fullname: string,
 	) {}
 }

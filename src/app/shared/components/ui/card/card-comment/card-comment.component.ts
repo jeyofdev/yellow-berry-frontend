@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, InputSignal, input } from '@angular/core';
+import { CommentResponse } from '@models/comment/comment-response.model';
 import { RatingComponent } from '@shared/components/ui/rating/rating.component';
 import { ImageModule } from 'primeng/image';
 
@@ -8,4 +9,6 @@ import { ImageModule } from 'primeng/image';
 	templateUrl: './card-comment.component.html',
 	styleUrl: './card-comment.component.scss',
 })
-export class CardCommentComponent {}
+export class CardCommentComponent {
+	public comment: InputSignal<CommentResponse> = input.required<CommentResponse>();
+}

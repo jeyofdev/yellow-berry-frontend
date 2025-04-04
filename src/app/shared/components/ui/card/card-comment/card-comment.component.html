@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-y-2.5">
+<div class="flex flex-col gap-y-1.5">
   <div class="flex items-start w-full gap-x-3.5">
     <div class="rounded-2xl w-full overflow-hidden max-w-[75px]">
       <p-image src="images/team-member-1.png" alt="product-img" />
@@ -8,18 +8,16 @@
       <h6
         class="text-base text-gray-700 leading-7 tracking-[0.03rem] font-quicksand font-bold mb-2.5"
       >
-        John doe
+        {{ comment().profile.nameDetails.fullname }}
       </h6>
 
-      <app-rating [rating]="3"></app-rating>
+      <app-rating [rating]="comment().rating"></app-rating>
     </div>
   </div>
 
   <p
-    class="text-sm text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-light"
+    class="text-sm text-gray-500 leading-6 tracking-[0.03rem] font-poppins font-light"
   >
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-    voluptatibus, cumque, quibusdam, voluptates quisquam voluptatibus cumque
-    quibusdam voluptates quisquam voluptatibus cumque quibusdam voluptates.
+    {{ comment().body }}
   </p>
 </div>
