@@ -40,7 +40,7 @@ export class DrawerCartComponent {
 	public productNb: number = 1;
 
 	constructor() {
-		this._loadWishlist();
+		// this._loadWishlist();
 	}
 
 	public onClose(): void {

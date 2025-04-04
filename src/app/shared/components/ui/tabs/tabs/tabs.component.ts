@@ -1,9 +1,16 @@
 import { AuthPageAbstract } from '@abstract/auth-page.abstract';
-import { Component, InputSignal, inject, input } from '@angular/core';
+import { Component, InputSignal, WritableSignal, inject, input, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RouteEnum } from '@enum/route.enum';
+import { CommentResponse } from '@models/comment/comment-response.model';
 import { FormComment } from '@models/form/form-comment.model';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
+import { SuccessResponse } from '@models/response/success-response.model';
+import { AuthService } from '@services/auth/auth.service';
+import { CommentService } from '@services/comment.service';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
+import { ButtonLargeComponent } from '@shared/components/ui/buttons/button-large/button-large.component';
 import { CardCommentComponent } from '@shared/components/ui/card/card-comment/card-comment.component';
 import { RatingComponent } from '@shared/components/ui/form/rating/rating.component';
 import { TextareaFieldComponent } from '@shared/components/ui/form/textarea-field/textarea-field.component';
@@ -23,14 +30,20 @@ import { TabsModule } from 'primeng/tabs';
 		TextareaFieldComponent,
 		ButtonFormComponent,
 		RatingComponent,
+		ButtonLargeComponent,
 	],
 	templateUrl: './tabs.component.html',
 	styleUrl: './tabs.component.scss',
 })
 export class TabsComponent extends AuthPageAbstract<FormGroup<FormComment>> {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
+	private _authService: AuthService = inject(AuthService);
+	private _router: Router = inject(Router);
+	private _commentService: CommentService = inject(CommentService);
 
 	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
+	public comments: WritableSignal<CommentResponse[]> = signal<CommentResponse[]>([]);
+	public loggedIn = this._authService.getLoggedIn();
 
 	public ratingCtrl!: FormControl<number>;
 	public commentCtrl!: FormControl<string>;
@@ -55,6 +68,12 @@ export class TabsComponent extends AuthPageAbstract<FormGroup<FormComment>> {
 		{ name: 'services', value: ' Sed ut perspiciatis unde omnis.' },
 	];
 
+	ngOnChanges(): void {
+		if (this.product()?.comments?.results) {
+			this._loadComments();
+		}
+	}
+
 	public productInformations(): { name: string; value: string | number }[] {
 		if (!this.product()) {
 			return [];
@@ -69,8 +88,31 @@ export class TabsComponent extends AuthPageAbstract<FormGroup<FormComment>> {
 		];
 	}
 
+	public onRedirect(): void {
+		this._router.navigate(['/' + RouteEnum.AUTH_LOGIN], {
+			queryParams: { returnUrl: this._router.routerState.snapshot.url },
+		});
+	}
+
 	public override onSubmit(): void {
-		console.log(this.mainForm.value);
+		if (this.mainForm.valid) {
+			this.mainFormError.set('');
+
+			this._commentService
+				.save(this.product()?.id as string, {
+					rating: this.mainForm.value.rating as number,
+					body: this.mainForm.value.comment as string,
+				})
+				.subscribe({
+					next: (response: SuccessResponse<CommentResponse>) => {
+						this.comments.update(existingComments => [...existingComments, response.result]);
+						this.mainForm.reset();
+					},
+					error: err => {
+						this.mainFormError = err.error.message;
+					},
+				});
+		}
 	}
 
 	private _convertColorsToString(): string {
@@ -108,5 +150,13 @@ export class TabsComponent extends AuthPageAbstract<FormGroup<FormComment>> {
 			validators: [Validators.required],
 			nonNullable: true,
 		});
+	}
+
+	private _loadComments(): void {
+		if (this.product() && this.product()?.comments?.results) {
+			this.comments.set(this.product()?.comments.results as CommentResponse[]);
+		} else {
+			this.comments.set([]);
+		}
 	}
 }

@@ -51,7 +51,7 @@
 
       <p-tabpanel value="2">
         <div class="flex flex-col gap-y-7 max-w-[1000px]">
-          @for (comment of product()?.comments?.results; track $index) {
+          @for (comment of comments(); track $index) {
           <app-card-comment [comment]="comment"></app-card-comment>
           }
         </div>
@@ -63,6 +63,7 @@
             Add a Review
           </h5>
 
+          @if(loggedIn) {
           <form
             #commentForm="ngForm"
             [formGroup]="mainForm"
@@ -93,9 +94,16 @@
             ></app-textarea-field>
 
             <div class="flex justify-between items-center">
-              <app-button-form label="Login"></app-button-form>
+              <app-button-form label="Add a Review"></app-button-form>
             </div>
           </form>
+          } @else {
+          <app-button-large
+            label="Add a Review"
+            class="w-full mb-8"
+            (click)="onRedirect()"
+          ></app-button-large>
+          }
         </div>
       </p-tabpanel>
     </p-tabpanels>

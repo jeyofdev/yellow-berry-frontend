@@ -23,6 +23,7 @@ export class ProductsDetailsPageComponent {
 	constructor() {
 		effect(() => {
 			const productId = this.id();
+
 			if (productId) {
 				this._productService.findById({ productId }).subscribe((response: SuccessResponse<ProductDetailsResponse>) => {
 					this.product.set(response.result);
