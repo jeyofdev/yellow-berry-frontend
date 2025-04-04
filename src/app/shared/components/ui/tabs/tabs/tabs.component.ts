@@ -1,12 +1,15 @@
 import { Component, InputSignal, input } from '@angular/core';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
+import { RatingComponent } from '@shared/components/ui/rating/rating.component';
+import { TabLiComponent } from '@shared/components/ui/tabs/tab-li/tab-li.component';
+import { TablistComponent } from '@shared/components/ui/tabs/tablist/tablist.component';
+import { ImageModule } from 'primeng/image';
 import { TabsModule } from 'primeng/tabs';
-import { TabLiComponent } from '../tab-li/tab-li.component';
-import { TablistComponent } from '../tablist/tablist.component';
+import { CardCommentComponent } from '../../card/card-comment/card-comment.component';
 
 @Component({
 	selector: 'app-tabs',
-	imports: [TabsModule, TablistComponent, TabLiComponent],
+	imports: [TabsModule, TablistComponent, TabLiComponent, CardCommentComponent],
 	templateUrl: './tabs.component.html',
 	styleUrl: './tabs.component.scss',
 })

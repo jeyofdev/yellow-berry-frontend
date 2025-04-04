@@ -6,49 +6,56 @@
       class="border border-gray-200 rounded-[1.25rem] px-4 py-[1.1875rem] mt-5"
     >
       <p-tabpanel [value]="tabTitles[0].id">
-        <p
-          class="text-[0.9375rem] text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-light"
-        >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
-          voluptatum. Vitae dolores alias repellat eligendi, officiis,
-          exercitationem corporis quisquam delectus cum non recusandae numquam
-          dignissimos molestiae magnam hic natus. Cumque.
-        </p>
+        <div class="w-full max-w-[1000px]">
+          <p
+            class="text-[0.9375rem] text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-light"
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
+            voluptatum. Vitae dolores alias repellat eligendi, officiis,
+            exercitationem corporis quisquam delectus cum non recusandae numquam
+            dignissimos molestiae magnam hic natus. Cumque.
+          </p>
 
-        <ul class="pl-6 mt-4">
-          @for (productDetail of productDetails; track $index) {
-          <app-tab-li
-            [content]="productDetail"
-            marginBottom="mb-2.5"
-          ></app-tab-li>
-          } @for (productSpecificDetail of productSpecificDetails; track $index)
-          {
-          <app-tab-li
-            [label]="productSpecificDetail.name"
-            [content]="productSpecificDetail.value"
-            marginBottom="mb-2.5"
-          ></app-tab-li>
-          }
-        </ul>
+          <ul class="pl-6 mt-4">
+            @for (productDetail of productDetails; track $index) {
+            <app-tab-li
+              [content]="productDetail"
+              marginBottom="mb-2.5"
+            ></app-tab-li>
+            } @for (productSpecificDetail of productSpecificDetails; track
+            $index) {
+            <app-tab-li
+              [label]="productSpecificDetail.name"
+              [content]="productSpecificDetail.value"
+              marginBottom="mb-2.5"
+            ></app-tab-li>
+            }
+          </ul>
+        </div>
       </p-tabpanel>
+
       <p-tabpanel value="1">
-        <ul class="pl-6 mt-4">
-          @for (productInformation of productInformations(); track $index) {
-          <app-tab-li
-            [label]="productInformation.name"
-            [content]="productInformation.value"
-            marginBottom="mb-2.5"
-          ></app-tab-li>
+        <div class="w-full max-w-[1000px]">
+          <ul class="pl-6 mt-4">
+            @for (productInformation of productInformations(); track $index) {
+            <app-tab-li
+              [label]="productInformation.name"
+              [content]="productInformation.value"
+              marginBottom="mb-2.5"
+            ></app-tab-li>
 
-          }
-        </ul>
+            }
+          </ul>
+        </div>
       </p-tabpanel>
+
       <p-tabpanel value="2">
-        <p
-          class="text-[0.9375rem] text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-light"
-        >
-          Comment
-        </p>
+        <div class="flex flex-col gap-y-7 max-w-[1000px]">
+          @for (comment of product()?.comments?.results; track $index) {
+
+          <app-card-comment [comment]="comment"></app-card-comment>
+          }
+        </div>
       </p-tabpanel>
     </p-tabpanels>
   </p-tabs>
