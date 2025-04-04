@@ -31,6 +31,7 @@
           }
         </ul>
       </p-tabpanel>
+
       <p-tabpanel value="1">
         <ul class="pl-6 mt-4">
           @for (productInformation of productInformations(); track $index) {
@@ -43,12 +44,9 @@
           }
         </ul>
       </p-tabpanel>
+
       <p-tabpanel value="2">
-        <p
-          class="text-[0.9375rem] text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-light"
-        >
-          Comment
-        </p>
+        <app-card-comment></app-card-comment>
       </p-tabpanel>
     </p-tabpanels>
   </p-tabs>
