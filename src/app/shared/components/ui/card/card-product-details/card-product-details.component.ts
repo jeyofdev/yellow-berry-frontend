@@ -19,6 +19,7 @@ import { ProductDetailsResponse } from '@models/product/product-details-response
 import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
 import { AuthService } from '@services/auth/auth.service';
+import { CartService } from '@services/cart.service';
 import { ProductService } from '@services/product.service';
 import { WishlistService } from '@services/wishlist.service';
 import { ButtonComponent } from '@shared/components/ui/buttons/button/button.component';
@@ -52,6 +53,7 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 	private _productService: ProductService = inject(ProductService);
 	private _wishlistService: WishlistService = inject(WishlistService);
 	private _authService: AuthService = inject(AuthService);
+	private _cartService: CartService = inject(CartService);
 
 	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
 	public wishlistId: Signal<string> = this._getWishlistId();
@@ -65,8 +67,6 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 	public isProductInWishlist: Signal<boolean> = computed(
 		() => this.product() !== null && this.wishlistProducts().has(this.product()!.id),
 	);
-
-	public productNb: number = 1;
 
 	constructor() {
 		super();
@@ -83,7 +83,21 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 	}
 
 	public onSubmit(): void {
-		console.log(this.mainForm.value);
+		if (this.mainForm.valid) {
+			this.mainFormError.set('');
+
+			this._cartService
+				.addProductToCart(this.product()?.id as string, {
+					weight: this.mainForm.value.weight as string,
+					quantity: this.mainForm.value.quantity as number,
+				})
+				.subscribe({
+					next: () => {},
+					error: err => {
+						this.mainFormError = err.error.message;
+					},
+				});
+		}
 	}
 
 	public onClickWeight(weight: string): void {
