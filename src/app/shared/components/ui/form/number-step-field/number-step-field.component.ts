@@ -1,18 +1,42 @@
-import { Component, InputSignal, effect, input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputNumberModule } from 'primeng/inputnumber';
+import { FormInputAbstract } from '@abstract/form-input.abstract';
+import { Component, InputSignal, effect, forwardRef, input } from '@angular/core';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputNumberInputEvent, InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
 	selector: 'app-number-step-field',
 	imports: [InputNumberModule, FormsModule],
 	templateUrl: './number-step-field.component.html',
 	styleUrl: './number-step-field.component.scss',
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => NumberStepFieldComponent),
+			multi: true,
+		},
+	],
 })
-export class NumberStepFieldComponent {
-	public _value: InputSignal<number> = input.required<number>({ alias: 'value' });
-	public value!: number;
+export class NumberStepFieldComponent extends FormInputAbstract<number> {
+	public override labelFor: InputSignal<string> = input<string>('');
+	public override label: InputSignal<string> = input<string>('');
+	// public _value: InputSignal<number> = input.required<number>({ alias: 'value' });
 
 	constructor() {
-		effect(() => (this.value = this._value()));
+		super();
+		// effect(() => (this.value = this._value()));
+
+		this.onChanged = () => {};
+		this.onTouched = () => {};
+	}
+
+	public override onInputChange(event: InputNumberInputEvent): void {
+		if (this.disabled) {
+			return;
+		}
+
+		console.log('ooops', event);
+
+		this.value = event.value as number;
+		this.onChanged(this.value);
 	}
 }

@@ -87,7 +87,14 @@
       </div>
 
       <div class="flex gap-x-2 items-center mt-8">
-        <app-number-step-field [value]="productNb"></app-number-step-field>
+        <app-number-step-field
+          id="quantity"
+          name="quantity"
+          [parentForm]="mainForm"
+          formControlName="quantity"
+          controlName="quantity"
+          [form]="addToCartForm"
+        ></app-number-step-field>
         <p-button type="submit" label="View Cart" class="btn-view-cart" />
 
         @if (loggedIn) {

@@ -13,7 +13,7 @@ import {
 	signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormAddToCart } from '@models/form/form-add-to-cart.model';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
@@ -59,6 +59,7 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 	public loggedIn = this._authService.getLoggedIn();
 
 	public weightCtrl!: FormControl<string>;
+	public quantityCtrl!: FormControl<number>;
 	public activeWeight: WritableSignal<string> = signal<string>('');
 
 	public isProductInWishlist: Signal<boolean> = computed(
@@ -71,9 +72,10 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 		super();
 
 		effect(() => {
-			const p = this.product();
-			if (p && p.informations?.weightList?.length && !this.activeWeight()) {
-				this.activeWeight.set(p.informations.weightList[0]);
+			const product = this.product();
+			if (product && product.informations?.weightList?.length && !this.activeWeight()) {
+				this.activeWeight.set(product.informations.weightList[0]);
+				this.weightCtrl.setValue(product.informations.weightList[0]);
 			}
 		});
 
@@ -145,11 +147,16 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
 			weight: this.weightCtrl,
+			quantity: this.quantityCtrl,
 		});
 	}
 
 	protected override initFormControls(): void {
 		this.weightCtrl = this._formBuilder.control<string>('', {
+			nonNullable: true,
+		});
+		this.quantityCtrl = this._formBuilder.control<number>(1, {
+			validators: [Validators.min(1)],
 			nonNullable: true,
 		});
 	}
