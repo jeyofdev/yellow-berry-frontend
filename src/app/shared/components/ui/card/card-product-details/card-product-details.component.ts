@@ -1,7 +1,20 @@
+import { AuthPageAbstract } from '@abstract/auth-page.abstract';
 import { CommonModule } from '@angular/common';
-import { Component, InputSignal, Signal, WritableSignal, computed, inject, input, signal } from '@angular/core';
+import {
+	Component,
+	InputSignal,
+	OnInit,
+	Signal,
+	WritableSignal,
+	computed,
+	effect,
+	inject,
+	input,
+	signal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormAddToCart } from '@models/form/form-add-to-cart.model';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
@@ -22,6 +35,7 @@ import { catchError, map, tap } from 'rxjs';
 	imports: [
 		CommonModule,
 		FormsModule,
+		ReactiveFormsModule,
 		ImageModule,
 		RatingComponent,
 		ButtonModule,
@@ -33,7 +47,8 @@ import { catchError, map, tap } from 'rxjs';
 	templateUrl: './card-product-details.component.html',
 	styleUrl: './card-product-details.component.scss',
 })
-export class CardProductDetailsComponent {
+export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<FormAddToCart>> implements OnInit {
+	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _productService: ProductService = inject(ProductService);
 	private _wishlistService: WishlistService = inject(WishlistService);
 	private _authService: AuthService = inject(AuthService);
@@ -43,6 +58,9 @@ export class CardProductDetailsComponent {
 	public wishlistProducts: WritableSignal<Set<string>> = signal<Set<string>>(new Set());
 	public loggedIn = this._authService.getLoggedIn();
 
+	public weightCtrl!: FormControl<string>;
+	public activeWeight: WritableSignal<string> = signal<string>('');
+
 	public isProductInWishlist: Signal<boolean> = computed(
 		() => this.product() !== null && this.wishlistProducts().has(this.product()!.id),
 	);
@@ -50,7 +68,25 @@ export class CardProductDetailsComponent {
 	public productNb: number = 1;
 
 	constructor() {
+		super();
+
+		effect(() => {
+			const p = this.product();
+			if (p && p.informations?.weightList?.length && !this.activeWeight()) {
+				this.activeWeight.set(p.informations.weightList[0]);
+			}
+		});
+
 		this._loadWishlistProducts();
+	}
+
+	public onSubmit(): void {
+		console.log(this.mainForm.value);
+	}
+
+	public onClickWeight(weight: string): void {
+		this.weightCtrl.setValue(weight);
+		this.activeWeight.set(weight);
 	}
 
 	public addOrRemoveToWishlist(): void {
@@ -104,5 +140,17 @@ export class CardProductDetailsComponent {
 				{ initialValue: new Set<string>() },
 			);
 		}
+	}
+
+	protected override initMainForm() {
+		this.mainForm = this._formBuilder.group({
+			weight: this.weightCtrl,
+		});
+	}
+
+	protected override initFormControls(): void {
+		this.weightCtrl = this._formBuilder.control<string>('', {
+			nonNullable: true,
+		});
 	}
 }

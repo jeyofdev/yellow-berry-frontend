@@ -62,45 +62,51 @@
       </div>
     </div>
 
-    <div class="mt-6">
-      <h6
-        class="text-base text-gray-700 leading-[1.2rem] tracking-[0.03rem] font-quicksand font-bold mb-5"
-      >
-        Weight
-      </h6>
+    <form
+      #addToCartForm="ngForm"
+      [formGroup]="mainForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="mt-6">
+        <h6
+          class="text-base text-gray-700 leading-[1.2rem] tracking-[0.03rem] font-quicksand font-bold mb-5"
+        >
+          Weight
+        </h6>
 
-      <div class="flex gap-x-2">
-        @for (weight of product()?.informations?.weightList; track $index; let i
-        = $index) {
+        <div class="flex gap-x-2">
+          @for (weight of product()?.informations?.weightList; track $index;) {
+          <app-button
+            [label]="weight"
+            [variant]="activeWeight() !== weight ? 'outlined' : undefined"
+            [severity]="activeWeight() !== weight ? 'secondary' : undefined"
+            (click)="onClickWeight(weight)"
+          ></app-button>
+          }
+        </div>
+      </div>
+
+      <div class="flex gap-x-2 items-center mt-8">
+        <app-number-step-field [value]="productNb"></app-number-step-field>
+        <p-button type="submit" label="View Cart" class="btn-view-cart" />
+
+        @if (loggedIn) {
         <app-button
-          [label]="weight"
-          [variant]="i !== 0 ? 'outlined' : undefined"
-          [severity]="i !== 0 ? 'secondary' : undefined"
+          [icon]="!isProductInWishlist() ? 'pi pi-heart' : 'pi pi-heart-fill'"
+          [severity]="isProductInWishlist() ? 'primary' : 'secondary'"
+          isRounded
+          isOutlined
+          (click)="addOrRemoveToWishlist()"
         ></app-button>
         }
+
+        <app-button
+          icon="pi pi-eye"
+          severity="secondary"
+          isRounded
+          isOutlined
+        ></app-button>
       </div>
-    </div>
-
-    <div class="flex gap-x-2 items-center mt-8">
-      <app-number-step-field [value]="productNb"></app-number-step-field>
-      <p-button label="View Cart" class="btn-view-cart" />
-
-      @if (loggedIn) {
-      <app-button
-        [icon]="!isProductInWishlist() ? 'pi pi-heart' : 'pi pi-heart-fill'"
-        [severity]="isProductInWishlist() ? 'primary' : 'secondary'"
-        isRounded
-        isOutlined
-        (click)="addOrRemoveToWishlist()"
-      ></app-button>
-      }
-
-      <app-button
-        icon="pi pi-eye"
-        severity="secondary"
-        isRounded
-        isOutlined
-      ></app-button>
-    </div>
+    </form>
   </div>
 </div>
