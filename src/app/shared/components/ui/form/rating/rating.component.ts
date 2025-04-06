@@ -23,8 +23,6 @@ export class RatingComponent extends FormInputAbstract<number> {
 			return;
 		}
 
-		console.log('ok');
-
 		this.value = event.value;
 		this.onChanged(this.value);
 	}

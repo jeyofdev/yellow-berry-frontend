@@ -1,11 +1,25 @@
+import { AuthPageAbstract } from '@abstract/auth-page.abstract';
 import { CommonModule } from '@angular/common';
-import { Component, InputSignal, Signal, WritableSignal, computed, inject, input, signal } from '@angular/core';
+import {
+	Component,
+	InputSignal,
+	OnInit,
+	Signal,
+	WritableSignal,
+	computed,
+	effect,
+	inject,
+	input,
+	signal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormAddToCart } from '@models/form/form-add-to-cart.model';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
 import { AuthService } from '@services/auth/auth.service';
+import { CartService } from '@services/cart.service';
 import { ProductService } from '@services/product.service';
 import { WishlistService } from '@services/wishlist.service';
 import { ButtonComponent } from '@shared/components/ui/buttons/button/button.component';
@@ -22,6 +36,7 @@ import { catchError, map, tap } from 'rxjs';
 	imports: [
 		CommonModule,
 		FormsModule,
+		ReactiveFormsModule,
 		ImageModule,
 		RatingComponent,
 		ButtonModule,
@@ -33,24 +48,61 @@ import { catchError, map, tap } from 'rxjs';
 	templateUrl: './card-product-details.component.html',
 	styleUrl: './card-product-details.component.scss',
 })
-export class CardProductDetailsComponent {
+export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<FormAddToCart>> implements OnInit {
+	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _productService: ProductService = inject(ProductService);
 	private _wishlistService: WishlistService = inject(WishlistService);
 	private _authService: AuthService = inject(AuthService);
+	private _cartService: CartService = inject(CartService);
 
 	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
 	public wishlistId: Signal<string> = this._getWishlistId();
 	public wishlistProducts: WritableSignal<Set<string>> = signal<Set<string>>(new Set());
 	public loggedIn = this._authService.getLoggedIn();
 
+	public weightCtrl!: FormControl<string>;
+	public quantityCtrl!: FormControl<number>;
+	public activeWeight: WritableSignal<string> = signal<string>('');
+
 	public isProductInWishlist: Signal<boolean> = computed(
 		() => this.product() !== null && this.wishlistProducts().has(this.product()!.id),
 	);
 
-	public productNb: number = 1;
-
 	constructor() {
+		super();
+
+		effect(() => {
+			const product = this.product();
+			if (product && product.informations?.weightList?.length && !this.activeWeight()) {
+				this.activeWeight.set(product.informations.weightList[0]);
+				this.weightCtrl.setValue(product.informations.weightList[0]);
+			}
+		});
+
 		this._loadWishlistProducts();
+	}
+
+	public onSubmit(): void {
+		if (this.mainForm.valid) {
+			this.mainFormError.set('');
+
+			this._cartService
+				.addProductToCart(this.product()?.id as string, {
+					weight: this.mainForm.value.weight as string,
+					quantity: this.mainForm.value.quantity as number,
+				})
+				.subscribe({
+					next: () => {},
+					error: err => {
+						this.mainFormError = err.error.message;
+					},
+				});
+		}
+	}
+
+	public onClickWeight(weight: string): void {
+		this.weightCtrl.setValue(weight);
+		this.activeWeight.set(weight);
 	}
 
 	public addOrRemoveToWishlist(): void {
@@ -104,5 +156,22 @@ export class CardProductDetailsComponent {
 				{ initialValue: new Set<string>() },
 			);
 		}
+	}
+
+	protected override initMainForm() {
+		this.mainForm = this._formBuilder.group({
+			weight: this.weightCtrl,
+			quantity: this.quantityCtrl,
+		});
+	}
+
+	protected override initFormControls(): void {
+		this.weightCtrl = this._formBuilder.control<string>('', {
+			nonNullable: true,
+		});
+		this.quantityCtrl = this._formBuilder.control<number>(1, {
+			validators: [Validators.min(1)],
+			nonNullable: true,
+		});
 	}
 }
