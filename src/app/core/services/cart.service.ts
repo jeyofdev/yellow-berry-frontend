@@ -5,6 +5,7 @@ import { CartResponse } from '@models/cart/cart-response.model';
 import { SaveCartRequest } from '@models/cart/save-cart-request.model';
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { SaveProductToCartRequest } from '@models/product-to-cart/save-product-to-cart-request.model';
+import { SuccessMessageResponse } from '@models/response/success-message-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { Observable, switchMap } from 'rxjs';
 import { parseWeightStringToEnumKey } from '../utils/enum.utils';
@@ -55,6 +56,28 @@ export class CartService {
 					{ headers },
 				);
 			}),
+		);
+	}
+
+	public removeProductFromCart(productToCartId: string): Observable<SuccessResponse<SuccessMessageResponse>> {
+		const { headers } = this._authTokenService.getAuthQueryInfos();
+
+		return this._httpClient.delete<SuccessResponse<SuccessMessageResponse>>(
+			`${this._PRODUCT_TO_CART_URL}/${productToCartId}`,
+			{ headers },
+		);
+	}
+
+	public updateProductFromCart(
+		productToCartId: string,
+		updateProductToCartRequest: Partial<SaveProductToCartRequest>,
+	): Observable<SuccessResponse<CartDetailsResponse>> {
+		const { headers } = this._authTokenService.getAuthQueryInfos();
+
+		return this._httpClient.put<SuccessResponse<CartDetailsResponse>>(
+			`${this._PRODUCT_TO_CART_URL}/${productToCartId}`,
+			updateProductToCartRequest,
+			{ headers },
 		);
 	}
 }

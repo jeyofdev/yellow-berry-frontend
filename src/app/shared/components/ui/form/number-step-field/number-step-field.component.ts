@@ -30,6 +30,7 @@ export class NumberStepFieldComponent extends FormInputAbstract<number> {
 		}
 
 		this.value = event.value as number;
+
 		this.onChanged(this.value);
 	}
 }

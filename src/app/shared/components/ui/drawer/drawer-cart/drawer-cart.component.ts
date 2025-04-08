@@ -1,30 +1,18 @@
 import { CommonModule } from '@angular/common';
-import {
-	Component,
-	InputSignal,
-	OutputEmitterRef,
-	OutputRef,
-	ViewEncapsulation,
-	WritableSignal,
-	inject,
-	input,
-	output,
-	signal,
-} from '@angular/core';
+import { Component, InputSignal, OutputEmitterRef, WritableSignal, inject, input, output, signal } from '@angular/core';
 import { CartDetailsResponse } from '@models/cart/cart-details-response.model';
-import { ProductResponse } from '@models/product/product-response.model';
+import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { CartService } from '@services/cart.service';
-import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
+import { CardProductCartComponent } from '@shared/components/ui/card/card-product-cart/card-product-cart.component';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { DrawerModule } from 'primeng/drawer';
-import { ImageModule } from 'primeng/image';
 import { map } from 'rxjs';
 
 @Component({
 	selector: 'app-drawer-cart',
-	imports: [CommonModule, DrawerModule, NumberStepFieldComponent, ImageModule, DividerModule, ButtonModule],
+	imports: [CommonModule, DrawerModule, DividerModule, ButtonModule, CardProductCartComponent],
 	templateUrl: './drawer-cart.component.html',
 	styleUrl: './drawer-cart.component.scss',
 })
@@ -35,19 +23,24 @@ export class DrawerCartComponent {
 
 	public close: OutputEmitterRef<boolean> = output();
 
-	public productItemList: WritableSignal<ProductResponse[]> = signal<ProductResponse[]>([]);
-
-	public productNb: number = 1;
+	public productItemList: WritableSignal<ProductToCartResponse[]> = signal<ProductToCartResponse[]>([]);
 
 	constructor() {
-		// this._loadWishlist();
+		this._loadProductList();
 	}
 
 	public onClose(): void {
 		this.close.emit(false);
 	}
 
-	private _loadWishlist(): void {
+	public removeFromCart(productCartId: string): void {
+		this._cartService.removeProductFromCart(productCartId).subscribe(() => {
+			const updatedList = this.productItemList().filter(product => product.id !== productCartId);
+			this.productItemList.set(updatedList);
+		});
+	}
+
+	private _loadProductList(): void {
 		this._cartService
 			.findByUserId()
 			.pipe(
