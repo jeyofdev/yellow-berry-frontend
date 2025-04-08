@@ -5,7 +5,6 @@ import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-r
 import { SuccessResponse } from '@models/response/success-response.model';
 import { CartService } from '@services/cart.service';
 import { CardProductCartComponent } from '@shared/components/ui/card/card-product-cart/card-product-cart.component';
-import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { DrawerModule } from 'primeng/drawer';
@@ -13,14 +12,7 @@ import { map } from 'rxjs';
 
 @Component({
 	selector: 'app-drawer-cart',
-	imports: [
-		CommonModule,
-		DrawerModule,
-		NumberStepFieldComponent,
-		DividerModule,
-		ButtonModule,
-		CardProductCartComponent,
-	],
+	imports: [CommonModule, DrawerModule, DividerModule, ButtonModule, CardProductCartComponent],
 	templateUrl: './drawer-cart.component.html',
 	styleUrl: './drawer-cart.component.scss',
 })
@@ -34,7 +26,7 @@ export class DrawerCartComponent {
 	public productItemList: WritableSignal<ProductToCartResponse[]> = signal<ProductToCartResponse[]>([]);
 
 	constructor() {
-		this._loadWishlist();
+		this._loadProductList();
 	}
 
 	public onClose(): void {
@@ -48,7 +40,7 @@ export class DrawerCartComponent {
 		});
 	}
 
-	private _loadWishlist(): void {
+	private _loadProductList(): void {
 		this._cartService
 			.findByUserId()
 			.pipe(
