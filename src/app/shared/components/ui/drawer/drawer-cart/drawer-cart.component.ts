@@ -4,13 +4,12 @@ import { CartDetailsResponse } from '@models/cart/cart-details-response.model';
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { CartService } from '@services/cart.service';
-import { ButtonIconSmallComponent } from '@shared/components/ui/buttons/button-icon-small/button-icon-small.component';
+import { CardProductCartComponent } from '@shared/components/ui/card/card-product-cart/card-product-cart.component';
 import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { DrawerModule } from 'primeng/drawer';
-import { ImageModule } from 'primeng/image';
-import { map, tap } from 'rxjs';
+import { map } from 'rxjs';
 
 @Component({
 	selector: 'app-drawer-cart',
@@ -18,10 +17,9 @@ import { map, tap } from 'rxjs';
 		CommonModule,
 		DrawerModule,
 		NumberStepFieldComponent,
-		ImageModule,
 		DividerModule,
 		ButtonModule,
-		ButtonIconSmallComponent,
+		CardProductCartComponent,
 	],
 	templateUrl: './drawer-cart.component.html',
 	styleUrl: './drawer-cart.component.scss',
@@ -34,8 +32,6 @@ export class DrawerCartComponent {
 	public close: OutputEmitterRef<boolean> = output();
 
 	public productItemList: WritableSignal<ProductToCartResponse[]> = signal<ProductToCartResponse[]>([]);
-
-	public productNb: number = 1;
 
 	constructor() {
 		this._loadWishlist();
