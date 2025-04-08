@@ -127,7 +127,7 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 	}
 
 	private _getWishlistId(): Signal<string> {
-		if (this.loggedIn) {
+		if (this._authService.getLoggedIn()) {
 			return toSignal(
 				this._wishlistService.findByUserId().pipe(
 					map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => wishlistResponse.result.id),
@@ -142,7 +142,7 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 	}
 
 	private _loadWishlistProducts(): void {
-		if (this.loggedIn) {
+		if (this._authService.getLoggedIn()) {
 			toSignal(
 				this._wishlistService.findByUserId().pipe(
 					map(
