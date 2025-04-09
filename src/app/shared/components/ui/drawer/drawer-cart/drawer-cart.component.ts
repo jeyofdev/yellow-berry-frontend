@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, InputSignal, OutputEmitterRef, WritableSignal, inject, input, output, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouteEnum } from '@enum/route.enum';
 import { CartDetailsResponse } from '@models/cart/cart-details-response.model';
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { SuccessResponse } from '@models/response/success-response.model';
@@ -18,6 +20,7 @@ import { map } from 'rxjs';
 })
 export class DrawerCartComponent {
 	private _cartService: CartService = inject(CartService);
+	private _router: Router = inject(Router);
 
 	public isVisible: InputSignal<boolean> = input<boolean>(false);
 
@@ -31,6 +34,10 @@ export class DrawerCartComponent {
 
 	public onClose(): void {
 		this.close.emit(false);
+	}
+
+	public redirectToCart(): void {
+		this._router.navigateByUrl('/' + RouteEnum.ACCOUNT_CART);
 	}
 
 	public removeFromCart(productCartId: string): void {
