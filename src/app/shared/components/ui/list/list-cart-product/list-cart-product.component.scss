@@ -1,6 +1,12 @@
 :host ::ng-deep p-table .p-datatable {
   @apply w-full;
 
+  .p-datatable-thead th {
+    &.th-product {
+      @apply w-[60%];
+    }
+  }
+
   .p-datatable-tbody {
     td {
       @apply border-t border-b-0 border-gray-200;

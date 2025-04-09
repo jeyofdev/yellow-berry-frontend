@@ -1,42 +1,20 @@
 import { AuthPageAbstract } from '@abstract/auth-page.abstract';
-import { CommonModule } from '@angular/common';
-import {
-	Component,
-	InputSignal,
-	OnDestroy,
-	OnInit,
-	OutputEmitterRef,
-	WritableSignal,
-	inject,
-	input,
-	output,
-	signal,
-} from '@angular/core';
+import { Component, InputSignal, OnDestroy, OnInit, OutputEmitterRef, inject, input, output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { QuantityChangedEvent } from '@models/changed/quantity-changed-event.model';
 import { FormProductFromCart } from '@models/form/register/form-product-from-cart.model';
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { CartService } from '@services/cart.service';
-import { ButtonIconSmallComponent } from '@shared/components/ui/buttons/button-icon-small/button-icon-small.component';
 import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
-import { ImageModule } from 'primeng/image';
-import { InputNumberModule } from 'primeng/inputnumber';
 import { Subscription } from 'rxjs';
 
 @Component({
-	selector: 'app-card-product-cart',
-	imports: [
-		CommonModule,
-		FormsModule,
-		ReactiveFormsModule,
-		ImageModule,
-		ButtonIconSmallComponent,
-		InputNumberModule,
-		NumberStepFieldComponent,
-	],
-	templateUrl: './card-product-cart.component.html',
-	styleUrl: './card-product-cart.component.scss',
+	selector: 'app-quantity-form',
+	imports: [FormsModule, ReactiveFormsModule, NumberStepFieldComponent],
+	templateUrl: './quantity-form.component.html',
+	styleUrl: './quantity-form.component.scss',
 })
-export class CardProductCartComponent
+export class QuantityFormComponent
 	extends AuthPageAbstract<FormGroup<FormProductFromCart>>
 	implements OnInit, OnDestroy
 {
@@ -44,11 +22,10 @@ export class CardProductCartComponent
 	private _cartService: CartService = inject(CartService);
 
 	public product: InputSignal<ProductToCartResponse> = input.required<ProductToCartResponse>();
+
+	public quantityChanged: OutputEmitterRef<QuantityChangedEvent> = output<QuantityChangedEvent>();
+
 	public quantityCtrl!: FormControl<number>;
-
-	price: WritableSignal<number> = signal<number>(0);
-
-	sendProductIdToParent: OutputEmitterRef<string> = output<string>();
 
 	private quantityValueChangesSubscription!: Subscription;
 
@@ -64,11 +41,9 @@ export class CardProductCartComponent
 	}
 
 	public onQuantityChange(quantity: number): void {
-		this._cartService.updateProductFromCart(this.product().id, { quantity }).subscribe();
-	}
-
-	public onDelete(): void {
-		this.sendProductIdToParent.emit(this.product().id);
+		this._cartService.updateProductFromCart(this.product().id, { quantity }).subscribe(() => {
+			this.quantityChanged.emit({ productId: this.product().id, quantity });
+		});
 	}
 
 	protected override initMainForm() {

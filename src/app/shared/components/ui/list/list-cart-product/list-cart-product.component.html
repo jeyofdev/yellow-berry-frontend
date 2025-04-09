@@ -33,13 +33,29 @@
           {{ product.name }}
         </h6>
       </td>
+
       <td
         class="text-[0.9375rem] text-gray-500 leading-[1.625rem] tracking-[0.02rem] font-poppins font-medium"
       >
-        {{ product.priceDetails.price | currency : "EUR" }}
+        {{ product.priceDetails.priceDiscount | currency : "EUR" }}
       </td>
-      <td></td>
-      <td></td>
+
+      <td>
+        <app-quantity-form
+          [product]="product"
+          (quantityChanged)="onQuantityUpdated($event)"
+        ></app-quantity-form>
+      </td>
+
+      <td
+        class="text-[0.9375rem] text-gray-500 leading-[1.625rem] tracking-[0.02rem] font-poppins font-medium"
+      >
+        {{
+          product.priceDetails.priceDiscount * product.quantity
+            | currency : "EUR"
+        }}
+      </td>
+
       <td>
         <app-button-icon-small
           icon="pi pi-trash"
