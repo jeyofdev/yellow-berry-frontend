@@ -4,6 +4,12 @@
   .p-datatable-tbody {
     td {
       @apply border-t border-b-0 border-gray-200;
+
+      app-button-icon-small {
+        .p-button .p-button-icon {
+          @apply text-base;
+        }
+      }
     }
   }
 }

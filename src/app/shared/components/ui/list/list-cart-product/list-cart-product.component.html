@@ -40,7 +40,12 @@
       </td>
       <td></td>
       <td></td>
-      <td></td>
+      <td>
+        <app-button-icon-small
+          icon="pi pi-trash"
+          (click)="removeFromCart(product.id)"
+        ></app-button-icon-small>
+      </td>
     </tr>
   </ng-template>
 </p-table>
