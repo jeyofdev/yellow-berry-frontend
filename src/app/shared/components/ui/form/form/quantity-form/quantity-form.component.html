@@ -1,0 +1,10 @@
+<form #addToCartForm="ngForm" [formGroup]="mainForm">
+  <app-number-step-field
+    id="quantity"
+    name="quantity"
+    [parentForm]="mainForm"
+    formControlName="quantity"
+    controlName="quantity"
+    [form]="addToCartForm"
+  ></app-number-step-field>
+</form>
