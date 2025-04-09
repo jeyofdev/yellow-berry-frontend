@@ -14,6 +14,7 @@ export enum RouteEnum {
 	RESET_PASSORD_CONFIRM = 'reset-password/confirm',
 	DETAILS = ':id',
 	WISHLIST = 'wishlist',
+	CART = 'cart',
 
 	AUTH_LOGIN = 'auth/login',
 	AUTH_REGISTER = 'auth/register',
@@ -25,4 +26,5 @@ export enum RouteEnum {
 	PRODUCT_ROOT = 'product',
 
 	ACCOUNT_WISHLIST = 'account/wishlist',
+	ACCOUNT_CART = 'account/cart',
 }
