@@ -3,11 +3,32 @@
 <app-breadcrumb></app-breadcrumb>
 
 <app-layout-content containerMarginTop="mt-10" containerMarginBottom="mb-10">
-  <div class="flex gap-y-6 w-full overflow-hidden">
-    <div class="flex w-1/4">summary</div>
+  <div class="flex items-start gap-y-6 gap-x-6 w-full overflow-hidden">
+    <div
+      class="flex flex-col justify-start items-start border border-gray-200 bg-gray-100 rounded-[1.25rem] py-5 px-5 w-1/4"
+    >
+      <h5
+        class="text-xl text-gray-700 leading-6 tracking-[0.03rem] font-quicksand font-bold mb-6"
+      >
+        Summary
+      </h5>
+
+      <div class="flex w-full">
+        <app-cart-total
+          [subTotal]="cart()?.subTotalPrice ?? 0"
+          [amountTVA]="20"
+          [totalPrice]="cart()?.totalPrice ?? 0"
+          class="w-full"
+        ></app-cart-total>
+      </div>
+    </div>
 
     <div class="flex-1">
-      <app-list-cart-product></app-list-cart-product>
+      <app-list-cart-product
+        [productList]="productList()"
+        (notifListChange)="onProductListChange()"
+      ></app-list-cart-product>
+
       <p-button
         type="submit"
         label="Checkout"

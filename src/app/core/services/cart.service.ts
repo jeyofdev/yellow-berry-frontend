@@ -39,6 +39,12 @@ export class CartService {
 		});
 	}
 
+	public update(cartId: string): Observable<SuccessResponse<CartResponse>> {
+		const { headers } = this._authTokenService.getAuthQueryInfos();
+
+		return this._httpClient.put<SuccessResponse<CartResponse>>(`${this._BASE_URL}/${cartId}`, {}, { headers });
+	}
+
 	public addProductToCart(
 		productId: string,
 		saveProductToCartRequest: SaveProductToCartRequest,

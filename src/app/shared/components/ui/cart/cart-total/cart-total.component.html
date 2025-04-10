@@ -1,0 +1,19 @@
+<div class="flex flex-col gap-y-2 w-full">
+  <app-cart-total-item
+    title="Sub-Total :"
+    [value]="subTotal()"
+    type="currency"
+  ></app-cart-total-item>
+
+  <app-cart-total-item
+    title="TVA (20%) :"
+    [value]="amountTVA()"
+    type="percentage"
+  ></app-cart-total-item>
+
+  <app-cart-total-item
+    title="Total :"
+    [value]="totalPrice()"
+    type="currency"
+  ></app-cart-total-item>
+</div>
