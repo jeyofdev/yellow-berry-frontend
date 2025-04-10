@@ -10,6 +10,8 @@ import {
 	output,
 	signal,
 } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { RouteEnum } from '@enum/route.enum';
 import { QuantityChangedEvent } from '@models/changed/quantity-changed-event.model';
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { CartService } from '@services/cart.service';
@@ -20,12 +22,14 @@ import { TableModule } from 'primeng/table';
 
 @Component({
 	selector: 'app-list-cart-product',
-	imports: [CommonModule, TableModule, ImageModule, ButtonIconSmallComponent, QuantityFormComponent],
+	imports: [CommonModule, RouterModule, TableModule, ImageModule, ButtonIconSmallComponent, QuantityFormComponent],
 	templateUrl: './list-cart-product.component.html',
 	styleUrl: './list-cart-product.component.scss',
 })
 export class ListCartProductComponent {
 	private _cartService: CartService = inject(CartService);
+
+	public routeEnum = RouteEnum;
 
 	public productList: InputSignal<ProductToCartResponse[]> = input.required<ProductToCartResponse[]>();
 	public notifListChange: OutputEmitterRef<void> = output<void>();
