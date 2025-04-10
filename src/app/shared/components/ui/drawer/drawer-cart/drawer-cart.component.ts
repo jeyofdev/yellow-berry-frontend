@@ -6,6 +6,7 @@ import { CartDetailsResponse } from '@models/cart/cart-details-response.model';
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { CartService } from '@services/cart.service';
+import { ButtonCtaLargeComponent } from '@shared/components/ui/buttons/button-cta-large/button-cta-large.component';
 import { CardProductCartComponent } from '@shared/components/ui/card/card-product-cart/card-product-cart.component';
 import { CartTotalComponent } from '@shared/components/ui/cart/cart-total/cart-total.component';
 import { ButtonModule } from 'primeng/button';
@@ -15,7 +16,15 @@ import { map } from 'rxjs';
 
 @Component({
 	selector: 'app-drawer-cart',
-	imports: [CommonModule, DrawerModule, DividerModule, ButtonModule, CardProductCartComponent, CartTotalComponent],
+	imports: [
+		CommonModule,
+		DrawerModule,
+		DividerModule,
+		ButtonModule,
+		CardProductCartComponent,
+		CartTotalComponent,
+		ButtonCtaLargeComponent,
+	],
 	templateUrl: './drawer-cart.component.html',
 	styleUrl: './drawer-cart.component.scss',
 })

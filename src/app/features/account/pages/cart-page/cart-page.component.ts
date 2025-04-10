@@ -6,11 +6,11 @@ import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-r
 import { SuccessResponse } from '@models/response/success-response.model';
 import { CartService } from '@services/cart.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
+import { ButtonCtaLargeComponent } from '@shared/components/ui/buttons/button-cta-large/button-cta-large.component';
 import { CartTotalComponent } from '@shared/components/ui/cart/cart-total/cart-total.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
 import { ListCartProductComponent } from '@shared/components/ui/list/list-cart-product/list-cart-product.component';
-import { ButtonModule } from 'primeng/button';
 import { map, shareReplay, switchMap } from 'rxjs';
 
 @Component({
@@ -20,8 +20,8 @@ import { map, shareReplay, switchMap } from 'rxjs';
 		BreadcrumbComponent,
 		LayoutContentComponent,
 		ListCartProductComponent,
-		ButtonModule,
 		CartTotalComponent,
+		ButtonCtaLargeComponent,
 	],
 	templateUrl: './cart-page.component.html',
 	styleUrl: './cart-page.component.scss',

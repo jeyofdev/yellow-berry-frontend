@@ -22,6 +22,7 @@ import { AuthService } from '@services/auth/auth.service';
 import { CartService } from '@services/cart.service';
 import { ProductService } from '@services/product.service';
 import { WishlistService } from '@services/wishlist.service';
+import { ButtonCtaLargeComponent } from '@shared/components/ui/buttons/button-cta-large/button-cta-large.component';
 import { ButtonComponent } from '@shared/components/ui/buttons/button/button.component';
 import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
 import { PriceDiscountPercentageComponent } from '@shared/components/ui/price/price-discount-percentage/price-discount-percentage.component';
@@ -44,6 +45,7 @@ import { catchError, map, tap } from 'rxjs';
 		NumberStepFieldComponent,
 		PriceDiscountPercentageComponent,
 		PriceComponent,
+		ButtonCtaLargeComponent,
 	],
 	templateUrl: './card-product-details.component.html',
 	styleUrl: './card-product-details.component.scss',
