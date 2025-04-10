@@ -24,14 +24,17 @@
         <div
           class="border border-gray-200 rounded-[1.25rem] w-full max-w-[75px] overflow-hidden"
         >
-          <p-image src="images/product/product-1.png" alt="product-img" />
+          <a [routerLink]="['/' + routeEnum.PRODUCT, product.product.id]">
+            <p-image src="images/product/product-1.png" alt="product-img" />
+          </a>
         </div>
 
-        <h6
+        <a
+          [routerLink]="['/' + routeEnum.PRODUCT, product.product.id]"
           class="text-sm text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-normal"
         >
           {{ product.name }}
-        </h6>
+        </a>
       </td>
 
       <td

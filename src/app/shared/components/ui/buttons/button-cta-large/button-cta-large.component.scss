@@ -1,0 +1,23 @@
+:host ::ng-deep p-button .p-button {
+  @apply rounded-[0.625rem] border border-primary-200 px-[25px] py-[0.3125rem];
+
+  .p-button-label {
+    @apply text-sm text-white leading-7 tracking-[0.03rem] font-poppins font-light;
+  }
+
+  &.p-button-secondary {
+    @apply border-gray-200;
+
+    .p-button-label {
+      @apply text-gray-500;
+    }
+  }
+
+  &:hover {
+    @apply bg-transparent border-primary-500;
+
+    .p-button-label {
+      @apply text-primary-500;
+    }
+  }
+}

@@ -95,7 +95,11 @@
           controlName="quantity"
           [form]="addToCartForm"
         ></app-number-step-field>
-        <p-button type="submit" label="Add to Cart" class="btn-view-cart" />
+
+        <app-button-cta-large
+          type="submit"
+          label="Add to cart"
+        ></app-button-cta-large>
 
         @if (loggedIn) {
         <app-button
