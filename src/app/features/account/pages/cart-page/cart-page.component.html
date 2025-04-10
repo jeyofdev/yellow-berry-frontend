@@ -15,9 +15,9 @@
 
       <div class="flex w-full">
         <app-cart-total
-          [subTotal]="cart()?.subTotalPrice ?? 0"
+          [subTotal]="subTotalPrice()"
           [amountTVA]="20"
-          [totalPrice]="cart()?.totalPrice ?? 0"
+          [totalPrice]="totalPrice()"
           class="w-full"
         ></app-cart-total>
       </div>
@@ -26,7 +26,7 @@
     <div class="flex-1">
       <app-list-cart-product
         [productList]="productList()"
-        (notifListChange)="onProductListChange()"
+        (notifListChange)="refreshCart()"
       ></app-list-cart-product>
 
       <p-button
