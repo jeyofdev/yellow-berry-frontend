@@ -7,6 +7,7 @@ import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-r
 import { SuccessResponse } from '@models/response/success-response.model';
 import { CartService } from '@services/cart.service';
 import { CardProductCartComponent } from '@shared/components/ui/card/card-product-cart/card-product-cart.component';
+import { CartTotalComponent } from '@shared/components/ui/cart/cart-total/cart-total.component';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { DrawerModule } from 'primeng/drawer';
@@ -14,7 +15,7 @@ import { map } from 'rxjs';
 
 @Component({
 	selector: 'app-drawer-cart',
-	imports: [CommonModule, DrawerModule, DividerModule, ButtonModule, CardProductCartComponent],
+	imports: [CommonModule, DrawerModule, DividerModule, ButtonModule, CardProductCartComponent, CartTotalComponent],
 	templateUrl: './drawer-cart.component.html',
 	styleUrl: './drawer-cart.component.scss',
 })

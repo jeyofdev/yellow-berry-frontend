@@ -1,0 +1,21 @@
+<div class="flex justify-between">
+  <h6
+    class="text-sm text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-medium"
+  >
+    {{ title() }}
+  </h6>
+
+  @if (type() === "currency") {
+  <p
+    class="text-sm text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-semibold"
+  >
+    {{ value() | currency : "EUR" }}
+  </p>
+  } @else {
+  <p
+    class="text-sm text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-semibold"
+  >
+    {{ value() / 100 | percent }}
+  </p>
+  }
+</div>
