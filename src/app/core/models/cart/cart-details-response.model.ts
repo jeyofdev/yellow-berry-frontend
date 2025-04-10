@@ -8,9 +8,11 @@ export class CartDetailsResponse extends Cart {
 		public override id: string,
 		public override createdAt: Date,
 		public override updatedAt: Date,
+		public override subTotalPrice: number,
+		public override totalPrice: number,
 		public products: SuccessListResponse<ProductToCartResponse>,
 		public profile: Profile,
 	) {
-		super(id, createdAt, updatedAt);
+		super(id, createdAt, updatedAt, subTotalPrice, totalPrice);
 	}
 }

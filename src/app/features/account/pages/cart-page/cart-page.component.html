@@ -15,16 +15,20 @@
 
       <div class="flex w-full">
         <app-cart-total
-          [subTotal]="300"
+          [subTotal]="cart()?.subTotalPrice ?? 0"
           [amountTVA]="20"
-          [totalPrice]="400"
+          [totalPrice]="cart()?.totalPrice ?? 0"
           class="w-full"
         ></app-cart-total>
       </div>
     </div>
 
     <div class="flex-1">
-      <app-list-cart-product></app-list-cart-product>
+      <app-list-cart-product
+        [productList]="productList()"
+        (notifListChange)="onProductListChange()"
+      ></app-list-cart-product>
+
       <p-button
         type="submit"
         label="Checkout"
