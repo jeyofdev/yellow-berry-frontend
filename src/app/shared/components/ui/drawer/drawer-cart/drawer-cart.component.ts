@@ -1,8 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, InputSignal, OutputEmitterRef, WritableSignal, inject, input, output, signal } from '@angular/core';
+import {
+	Component,
+	InputSignal,
+	OutputEmitterRef,
+	WritableSignal,
+	computed,
+	effect,
+	inject,
+	input,
+	output,
+	signal,
+} from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { RouteEnum } from '@enum/route.enum';
 import { CartDetailsResponse } from '@models/cart/cart-details-response.model';
+import { CartResponse } from '@models/cart/cart-response.model';
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { CartService } from '@services/cart.service';
@@ -12,7 +25,7 @@ import { CartTotalComponent } from '@shared/components/ui/cart/cart-total/cart-t
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { DrawerModule } from 'primeng/drawer';
-import { map } from 'rxjs';
+import { map, shareReplay, switchMap, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-drawer-cart',
@@ -33,13 +46,58 @@ export class DrawerCartComponent {
 	private _router: Router = inject(Router);
 
 	public isVisible: InputSignal<boolean> = input<boolean>(false);
-
 	public close: OutputEmitterRef<boolean> = output();
 
-	public productItemList: WritableSignal<ProductToCartResponse[]> = signal<ProductToCartResponse[]>([]);
+	private refreshCartDatasTrigger = signal(0);
+	private removeProductTrigger = signal<string | null>(null);
+
+	private cartDetails$ = toObservable(this.refreshCartDatasTrigger).pipe(
+		switchMap(() =>
+			this._cartService.findByUserId().pipe(
+				switchMap((response: SuccessResponse<CartDetailsResponse>) =>
+					this._cartService.update(response.result.id).pipe(
+						map((updatedCart: SuccessResponse<CartResponse>) => ({
+							...updatedCart.result,
+							products: response.result.products,
+							profile: response.result.profile,
+						})),
+					),
+				),
+			),
+		),
+		shareReplay(1),
+	);
+
+	public cart = toSignal(this.cartDetails$, { initialValue: null });
+	public productList = computed<ProductToCartResponse[]>(() => {
+		return this.cart()?.products?.results ?? [];
+	});
+
+	public subTotalPrice = computed(() => this.cart()?.subTotalPrice ?? 0);
+	public totalPrice = computed(() => this.cart()?.totalPrice ?? 0);
 
 	constructor() {
-		this._loadProductList();
+		effect(() => {
+			this.refreshCartDatasTrigger();
+		});
+
+		effect(() => {
+			const productId = this.removeProductTrigger();
+			if (!productId) return;
+			this._cartService
+				.removeProductFromCart(productId)
+				.pipe(
+					tap(() => {
+						this.refreshCart();
+						this.removeProductTrigger.set(null);
+					}),
+				)
+				.subscribe();
+		});
+	}
+
+	public refreshCart(): void {
+		this.refreshCartDatasTrigger.update(v => v + 1);
 	}
 
 	public onClose(): void {
@@ -51,20 +109,6 @@ export class DrawerCartComponent {
 	}
 
 	public removeFromCart(productCartId: string): void {
-		this._cartService.removeProductFromCart(productCartId).subscribe(() => {
-			const updatedList = this.productItemList().filter(product => product.id !== productCartId);
-			this.productItemList.set(updatedList);
-		});
-	}
-
-	private _loadProductList(): void {
-		this._cartService
-			.findByUserId()
-			.pipe(
-				map((cartDetailsResponse: SuccessResponse<CartDetailsResponse>) => {
-					this.productItemList.set(cartDetailsResponse.result.products.results);
-				}),
-			)
-			.subscribe();
+		this.removeProductTrigger.set(productCartId);
 	}
 }
