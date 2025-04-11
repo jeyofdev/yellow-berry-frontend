@@ -14,10 +14,11 @@
       </h2>
 
       <div class="flex flex-col gap-6">
-        @for (product of productItemList(); track $index) {
+        @for (product of productList(); track $index) {
         <app-card-product-cart
           [product]="product"
-          (sendProductIdToParent)="removeFromCart($event)"
+          (sendProductIdAndDeleteProduct)="removeFromCart($event)"
+          (sendUpdatedQuantityProduct)="refreshCart()"
         ></app-card-product-cart>
         }
       </div>
@@ -26,9 +27,9 @@
 
       <div class="flex w-full">
         <app-cart-total
-          [subTotal]="300"
+          [subTotal]="subTotalPrice()"
           [amountTVA]="20"
-          [totalPrice]="400"
+          [totalPrice]="totalPrice()"
           class="w-full"
         ></app-cart-total>
       </div>

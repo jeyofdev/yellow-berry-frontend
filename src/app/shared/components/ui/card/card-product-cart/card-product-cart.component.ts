@@ -20,7 +20,7 @@ import { ButtonIconSmallComponent } from '@shared/components/ui/buttons/button-i
 import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
 import { ImageModule } from 'primeng/image';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 
 @Component({
 	selector: 'app-card-product-cart',
@@ -48,7 +48,8 @@ export class CardProductCartComponent
 
 	price: WritableSignal<number> = signal<number>(0);
 
-	sendProductIdToParent: OutputEmitterRef<string> = output<string>();
+	sendProductIdAndDeleteProduct: OutputEmitterRef<string> = output<string>();
+	sendUpdatedQuantityProduct: OutputEmitterRef<void> = output<void>();
 
 	private quantityValueChangesSubscription!: Subscription;
 
@@ -64,11 +65,14 @@ export class CardProductCartComponent
 	}
 
 	public onQuantityChange(quantity: number): void {
-		this._cartService.updateProductFromCart(this.product().id, { quantity }).subscribe();
+		this._cartService
+			.updateProductFromCart(this.product().id, { quantity })
+			.pipe(tap(() => this.sendUpdatedQuantityProduct.emit()))
+			.subscribe();
 	}
 
 	public onDelete(): void {
-		this.sendProductIdToParent.emit(this.product().id);
+		this.sendProductIdAndDeleteProduct.emit(this.product().id);
 	}
 
 	protected override initMainForm() {
