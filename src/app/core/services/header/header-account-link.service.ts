@@ -15,29 +15,33 @@ export class HeaderAccountLinkService {
 	private _wishlistProductComponentService: WishlistProductComponentService = inject(WishlistProductComponentService);
 
 	constructor() {
+		this._wishlistProductComponentService.loadWishlist();
+
 		effect(() => {
 			this.setAuthAccountLinks();
 		});
 	}
 
-	private _headerAccountLinks = computed<HeaderAccountLink[]>(() => [
-		{
-			label: 'Login',
-			sublabel: 'Account',
-			icon: 'account',
-		},
-		{
-			label: 'Wishlist',
-			sublabel: this._wishlistProductComponentService.getProductCountInWishlist() + ' items',
-			icon: 'wishlist',
-			redirectTo: '/' + RouteEnum.ACCOUNT_WISHLIST,
-		},
-		{
-			label: 'cart',
-			sublabel: '4 items',
-			icon: 'cart',
-		},
-	]);
+	private _headerAccountLinks = computed<HeaderAccountLink[]>(() => {
+		return [
+			{
+				label: 'Login',
+				sublabel: 'Account',
+				icon: 'account',
+			},
+			{
+				label: 'Wishlist',
+				sublabel: this._wishlistProductComponentService.getProductCountInWishlist() + ' items',
+				icon: 'wishlist',
+				redirectTo: '/' + RouteEnum.ACCOUNT_WISHLIST,
+			},
+			{
+				label: 'cart',
+				sublabel: '4 items',
+				icon: 'cart',
+			},
+		];
+	});
 
 	private _authAccountLinksChildren: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([]);
 

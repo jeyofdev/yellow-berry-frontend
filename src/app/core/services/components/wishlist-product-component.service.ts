@@ -5,7 +5,7 @@ import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
 import { ProductService } from '@services/product.service';
 import { WishlistService } from '@services/wishlist.service';
-import { Subscription, map, switchMap } from 'rxjs';
+import { Observable, Subscription, map, switchMap, take } from 'rxjs';
 import { WishlistComponentService } from './wishlist-component.service';
 
 @Injectable({
@@ -22,44 +22,26 @@ export class WishlistProductComponentService {
 
 	private _productSubscription: Subscription | null = null;
 
-	addOrRemoveProductToWishlistAndUpdateSignal(productId: string): void {
+	public addOrRemoveProductToWishlistAndUpdateSignal(productId: string): void {
 		this._unsubscribe();
 
-		if (!this._wishlistComponentService.getWishlistId()) {
-			this._wishlistService
-				.findByUserId()
-				.pipe(
-					map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => {
-						this._wishlistComponentService.setWishlistId(wishlistResponse.result.id);
-					}),
-					switchMap(() => {
-						return this._productService
-							.addOrRemoveProductToWishlist({
-								productId,
-								wishlistId: this._wishlistComponentService.getWishlistId(),
-							})
-							.pipe(
-								map((response: SuccessResponse<ProductDetailsResponse>) => {
-									this._productListInWishlist.update(currentWishlist => {
-										return this._updateCurrentProductList(currentWishlist, productId, response);
-									});
-								}),
-							);
-					}),
-				)
-				.subscribe();
-		} else {
-			this._productSubscription = this._productService
-				.addOrRemoveProductToWishlist({ productId, wishlistId: this._wishlistComponentService.getWishlistId() })
-				.pipe(
-					map((response: SuccessResponse<ProductDetailsResponse>) => {
-						this._productListInWishlist.update(currentWishlist => {
-							return this._updateCurrentProductList(currentWishlist, productId, response);
-						});
-					}),
-				)
-				.subscribe();
+		const wishlistId = this._wishlistComponentService.getWishlistId();
+
+		if (wishlistId) {
+			this._productSubscription = this._handleAddOrRemove(productId).subscribe();
+			return;
 		}
+
+		this._wishlistService
+			.findByUserId()
+			.pipe(
+				take(1),
+				map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => {
+					this._wishlistComponentService.setWishlistId(wishlistResponse.result.id);
+				}),
+				switchMap(() => this._handleAddOrRemove(productId)),
+			)
+			.subscribe();
 	}
 
 	public setProductListInWishlist(products: ProductResponse[]): void {
@@ -68,6 +50,37 @@ export class WishlistProductComponentService {
 
 	public getProductListInWishlist(): ProductResponse[] {
 		return this._productListInWishlist();
+	}
+
+	public getProductCountInWishlist(): number {
+		return this._productCountInWishlist();
+	}
+
+	public loadWishlist(): void {
+		this._wishlistService
+			.findByUserId()
+			.pipe(
+				map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => {
+					this._wishlistComponentService.setWishlistId(wishlistResponse.result.id);
+					this.setProductListInWishlist(wishlistResponse.result.products.results);
+				}),
+			)
+			.subscribe();
+	}
+
+	private _handleAddOrRemove(productId: string): Observable<void> {
+		return this._productService
+			.addOrRemoveProductToWishlist({
+				productId,
+				wishlistId: this._wishlistComponentService.getWishlistId(),
+			})
+			.pipe(
+				map((response: SuccessResponse<ProductDetailsResponse>) => {
+					this._productListInWishlist.update(currentWishlist =>
+						this._updateCurrentProductList(currentWishlist, productId, response),
+					);
+				}),
+			);
 	}
 
 	private _updateCurrentProductList(
@@ -86,9 +99,5 @@ export class WishlistProductComponentService {
 		if (this._productSubscription) {
 			this._productSubscription.unsubscribe();
 		}
-	}
-
-	public getProductCountInWishlist(): number {
-		return this._productCountInWishlist();
 	}
 }
