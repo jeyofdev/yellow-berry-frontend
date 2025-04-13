@@ -25,7 +25,7 @@ export class HeaderAccountLinkService {
 	private _headerAccountLinks = computed<HeaderAccountLink[]>(() => {
 		return [
 			{
-				label: 'Login',
+				label: this._authService.getLoggedIn() ? 'Account' : 'Login',
 				sublabel: 'Account',
 				icon: 'account',
 			},
