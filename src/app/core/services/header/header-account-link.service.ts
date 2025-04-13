@@ -1,9 +1,10 @@
 import { Injectable, WritableSignal, computed, effect, inject } from '@angular/core';
 import { signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouteEnum } from '@enum/route.enum';
 import { HeaderAccountLink } from '@models/header/header-account-link.model';
 import { AuthService } from '@services/auth/auth.service';
+import { CartComponentService } from '@services/components/cart-component.service';
 import { WishlistProductComponentService } from '@services/components/wishlist-product-component.service';
 
 @Injectable({
@@ -13,6 +14,7 @@ export class HeaderAccountLinkService {
 	private _router: Router = inject(Router);
 	private _authService: AuthService = inject(AuthService);
 	private _wishlistProductComponentService: WishlistProductComponentService = inject(WishlistProductComponentService);
+	private _cartComponentService: CartComponentService = inject(CartComponentService);
 
 	constructor() {
 		this._wishlistProductComponentService.loadWishlist();
@@ -37,7 +39,7 @@ export class HeaderAccountLinkService {
 			},
 			{
 				label: 'cart',
-				sublabel: '4 items',
+				sublabel: this._cartComponentService.productCountInCart() + ' items',
 				icon: 'cart',
 			},
 		];

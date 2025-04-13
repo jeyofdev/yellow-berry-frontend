@@ -20,6 +20,7 @@ import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
 import { AuthService } from '@services/auth/auth.service';
 import { CartService } from '@services/cart.service';
+import { CartComponentService } from '@services/components/cart-component.service';
 import { WishlistProductComponentService } from '@services/components/wishlist-product-component.service';
 import { ProductService } from '@services/product.service';
 import { WishlistService } from '@services/wishlist.service';
@@ -53,11 +54,11 @@ import { catchError, map, tap } from 'rxjs';
 })
 export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<FormAddToCart>> implements OnInit {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
-	private _productService: ProductService = inject(ProductService);
 	private _wishlistService: WishlistService = inject(WishlistService);
 	private _authService: AuthService = inject(AuthService);
 	private _cartService: CartService = inject(CartService);
 	private _wishlistProductComponentService: WishlistProductComponentService = inject(WishlistProductComponentService);
+	private _cartComponentService = inject(CartComponentService);
 
 	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
 	public wishlistId: Signal<string> = this._getWishlistId();
@@ -96,7 +97,9 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 					quantity: this.mainForm.value.quantity as number,
 				})
 				.subscribe({
-					next: () => {},
+					next: () => {
+						this._cartComponentService.refreshCart();
+					},
 					error: err => {
 						this.mainFormError = err.error.message;
 					},
