@@ -1,17 +1,18 @@
-import { Injectable, WritableSignal, effect, inject } from '@angular/core';
+import { Injectable, WritableSignal, computed, effect, inject } from '@angular/core';
 import { signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouteEnum } from '@enum/route.enum';
 import { HeaderAccountLink } from '@models/header/header-account-link.model';
 import { AuthService } from '@services/auth/auth.service';
+import { WishlistProductComponentService } from '@services/components/wishlist-product-component.service';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class HeaderAccountLinkService {
 	private _router: Router = inject(Router);
-	private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 	private _authService: AuthService = inject(AuthService);
+	private _wishlistProductComponentService: WishlistProductComponentService = inject(WishlistProductComponentService);
 
 	constructor() {
 		effect(() => {
@@ -19,7 +20,7 @@ export class HeaderAccountLinkService {
 		});
 	}
 
-	private _headerAccountLinks: WritableSignal<HeaderAccountLink[]> = signal<HeaderAccountLink[]>([
+	private _headerAccountLinks = computed<HeaderAccountLink[]>(() => [
 		{
 			label: 'Login',
 			sublabel: 'Account',
@@ -27,7 +28,7 @@ export class HeaderAccountLinkService {
 		},
 		{
 			label: 'Wishlist',
-			sublabel: '3 items',
+			sublabel: this._wishlistProductComponentService.getProductCountInWishlist() + ' items',
 			icon: 'wishlist',
 			redirectTo: '/' + RouteEnum.ACCOUNT_WISHLIST,
 		},

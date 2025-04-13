@@ -2,8 +2,8 @@ import { Component, OnDestroy, WritableSignal, effect, inject, signal } from '@a
 import { ProductResponse } from '@models/product/product-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
-import { ProductComponentService } from '@services/components/product-component.service';
 import { WishlistComponentService } from '@services/components/wishlist-component.service';
+import { WishlistProductComponentService } from '@services/components/wishlist-product-component.service';
 import { WishlistService } from '@services/wishlist.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
@@ -19,7 +19,7 @@ import { Subject, map } from 'rxjs';
 })
 export class WishlistPageComponent implements OnDestroy {
 	private _wishlistService: WishlistService = inject(WishlistService);
-	private _productComponentService: ProductComponentService = inject(ProductComponentService);
+	private _wishlistProductComponentService: WishlistProductComponentService = inject(WishlistProductComponentService);
 	private _wishlistComponentService: WishlistComponentService = inject(WishlistComponentService);
 
 	public wishlistId: WritableSignal<string> = signal<string>('');
@@ -31,7 +31,7 @@ export class WishlistPageComponent implements OnDestroy {
 		this._loadWishlist();
 
 		effect(() => {
-			this.productItemList.set(this._productComponentService.getProductListInWishlist());
+			this.productItemList.set(this._wishlistProductComponentService.getProductListInWishlist());
 		});
 	}
 
@@ -41,7 +41,7 @@ export class WishlistPageComponent implements OnDestroy {
 			.pipe(
 				map((wishlistResponse: SuccessResponse<WishlistDetailsResponse>) => {
 					this._wishlistComponentService.setWishlistId(wishlistResponse.result.id);
-					this._productComponentService.setProductListInWishlist(wishlistResponse.result.products.results);
+					this._wishlistProductComponentService.setProductListInWishlist(wishlistResponse.result.products.results);
 				}),
 			)
 			.subscribe();

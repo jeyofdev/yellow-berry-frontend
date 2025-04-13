@@ -20,6 +20,7 @@ import { SuccessResponse } from '@models/response/success-response.model';
 import { WishlistDetailsResponse } from '@models/wishlist/wishlist-details-response.model';
 import { AuthService } from '@services/auth/auth.service';
 import { CartService } from '@services/cart.service';
+import { WishlistProductComponentService } from '@services/components/wishlist-product-component.service';
 import { ProductService } from '@services/product.service';
 import { WishlistService } from '@services/wishlist.service';
 import { ButtonCtaLargeComponent } from '@shared/components/ui/buttons/button-cta-large/button-cta-large.component';
@@ -56,6 +57,7 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 	private _wishlistService: WishlistService = inject(WishlistService);
 	private _authService: AuthService = inject(AuthService);
 	private _cartService: CartService = inject(CartService);
+	private _wishlistProductComponentService: WishlistProductComponentService = inject(WishlistProductComponentService);
 
 	public product: InputSignal<ProductDetailsResponse | null> = input.required<ProductDetailsResponse | null>();
 	public wishlistId: Signal<string> = this._getWishlistId();
@@ -110,22 +112,17 @@ export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<Form
 	public addOrRemoveToWishlist(): void {
 		const productId = this.product()?.id as string;
 
-		this._productService
-			.addOrRemoveProductToWishlist({ productId, wishlistId: this.wishlistId() })
-			.pipe(
-				tap(() => {
-					const updatedProducts = new Set(this.wishlistProducts());
+		this._wishlistProductComponentService.addOrRemoveProductToWishlistAndUpdateSignal(productId);
 
-					if (updatedProducts.has(productId)) {
-						updatedProducts.delete(productId);
-					} else {
-						updatedProducts.add(productId);
-					}
+		const updatedProducts = new Set(this.wishlistProducts());
 
-					this.wishlistProducts.set(updatedProducts);
-				}),
-			)
-			.subscribe();
+		if (updatedProducts.has(productId)) {
+			updatedProducts.delete(productId);
+		} else {
+			updatedProducts.add(productId);
+		}
+
+		this.wishlistProducts.set(updatedProducts);
 	}
 
 	private _getWishlistId(): Signal<string> {
