@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, WritableSignal, effect, inject, signal } from '@angular/core';
+import { Component, OnInit, Signal, ViewChild, WritableSignal, effect, inject, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { RouteEnum } from '@enum/route.enum';
 import { HeaderAccountLink } from '@models/header/header-account-link.model';
@@ -37,7 +37,7 @@ export class HeaderNavigationComponent implements OnInit {
 	private _authService: AuthService = inject(AuthService);
 	private _router: Router = inject(Router);
 
-	protected headerAccountLinks!: WritableSignal<HeaderAccountLink[]>;
+	protected headerAccountLinks!: Signal<HeaderAccountLink[]>;
 	protected accountLinksChildren!: WritableSignal<HeaderAccountLink[]>;
 
 	@ViewChild('accountMenu', { static: false }) public accountMenu!: Menu;
