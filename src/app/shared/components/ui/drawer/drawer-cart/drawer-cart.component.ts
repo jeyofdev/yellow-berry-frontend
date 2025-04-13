@@ -19,6 +19,7 @@ import { CartResponse } from '@models/cart/cart-response.model';
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { CartService } from '@services/cart.service';
+import { CartComponentService } from '@services/components/cart-component.service';
 import { ButtonCtaLargeComponent } from '@shared/components/ui/buttons/button-cta-large/button-cta-large.component';
 import { CardProductCartComponent } from '@shared/components/ui/card/card-product-cart/card-product-cart.component';
 import { CartTotalComponent } from '@shared/components/ui/cart/cart-total/cart-total.component';
@@ -43,44 +44,20 @@ import { map, shareReplay, switchMap, tap } from 'rxjs';
 })
 export class DrawerCartComponent {
 	private _cartService: CartService = inject(CartService);
+	protected _cartComponentService = inject(CartComponentService);
 	private _router: Router = inject(Router);
 
 	public isVisible: InputSignal<boolean> = input<boolean>(false);
 	public close: OutputEmitterRef<boolean> = output();
 
-	private refreshCartDatasTrigger = signal(0);
 	private removeProductTrigger = signal<string | null>(null);
 
-	private cartDetails$ = toObservable(this.refreshCartDatasTrigger).pipe(
-		switchMap(() =>
-			this._cartService.findByUserId().pipe(
-				switchMap((response: SuccessResponse<CartDetailsResponse>) =>
-					this._cartService.update(response.result.id).pipe(
-						map((updatedCart: SuccessResponse<CartResponse>) => ({
-							...updatedCart.result,
-							products: response.result.products,
-							profile: response.result.profile,
-						})),
-					),
-				),
-			),
-		),
-		shareReplay(1),
-	);
-
-	public cart = toSignal(this.cartDetails$, { initialValue: null });
-	public productList = computed<ProductToCartResponse[]>(() => {
-		return this.cart()?.products?.results ?? [];
-	});
-
-	public subTotalPrice = computed(() => this.cart()?.subTotalPrice ?? 0);
-	public totalPrice = computed(() => this.cart()?.totalPrice ?? 0);
+	public cart = this._cartComponentService.cart;
+	public productList = this._cartComponentService.productList;
+	public subTotalPrice = this._cartComponentService.subTotalPrice;
+	public totalPrice = this._cartComponentService.totalPrice;
 
 	constructor() {
-		effect(() => {
-			this.refreshCartDatasTrigger();
-		});
-
 		effect(() => {
 			const productId = this.removeProductTrigger();
 			if (!productId) return;
@@ -97,7 +74,7 @@ export class DrawerCartComponent {
 	}
 
 	public refreshCart(): void {
-		this.refreshCartDatasTrigger.update(v => v + 1);
+		this._cartComponentService.refreshCart();
 	}
 
 	public onClose(): void {
