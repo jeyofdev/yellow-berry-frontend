@@ -1,23 +1,7 @@
 import { CommonModule } from '@angular/common';
-import {
-	Component,
-	InputSignal,
-	OutputEmitterRef,
-	WritableSignal,
-	computed,
-	effect,
-	inject,
-	input,
-	output,
-	signal,
-} from '@angular/core';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Component, InputSignal, OutputEmitterRef, effect, inject, input, output, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouteEnum } from '@enum/route.enum';
-import { CartDetailsResponse } from '@models/cart/cart-details-response.model';
-import { CartResponse } from '@models/cart/cart-response.model';
-import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
-import { SuccessResponse } from '@models/response/success-response.model';
 import { CartService } from '@services/cart.service';
 import { CartComponentService } from '@services/components/cart-component.service';
 import { ButtonCtaLargeComponent } from '@shared/components/ui/buttons/button-cta-large/button-cta-large.component';
@@ -26,7 +10,7 @@ import { CartTotalComponent } from '@shared/components/ui/cart/cart-total/cart-t
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { DrawerModule } from 'primeng/drawer';
-import { map, shareReplay, switchMap, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
 @Component({
 	selector: 'app-drawer-cart',
