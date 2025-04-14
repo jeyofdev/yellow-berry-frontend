@@ -1,0 +1,16 @@
+<app-header></app-header>
+
+<app-breadcrumb></app-breadcrumb>
+
+<app-layout-content containerMarginTop="mt-0" containerMarginBottom="mb-10">
+  <div class="w-full max-w-[500px]">
+    <app-not-found
+      title="404, Product not found."
+      content="Oops! It looks like the product you're trying to view no longer exists or has been moved. You can browse our catalog to find a similar product."
+      imgSrc="images/not-found.svg"
+      imgAlt="product not found"
+      [primaryLink]="routeEnum.PRODUCT"
+      labelPrimaryLink="Go to products"
+    ></app-not-found>
+  </div>
+</app-layout-content>

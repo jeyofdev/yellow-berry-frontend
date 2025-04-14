@@ -1,0 +1,17 @@
+<app-header></app-header>
+
+<app-breadcrumb></app-breadcrumb>
+
+<app-layout-content containerMarginTop="mt-0" containerMarginBottom="mb-10">
+  <div class="w-full max-w-[500px]">
+    <app-not-found
+      title="404, Page not found."
+      content="Something went wrong. It’s look that your requested could not be found. It’s look like the link is broken or the page is removed."
+      imgSrc="images/not-found.svg"
+      imgAlt="page not found"
+      [primaryLink]="routeEnum.HOME"
+      labelPrimaryLink="Go to home"
+      showBtnGoBack
+    ></app-not-found>
+  </div>
+</app-layout-content>
