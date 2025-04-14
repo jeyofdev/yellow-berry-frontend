@@ -5,6 +5,25 @@
     @apply text-sm text-white leading-7 tracking-[0.03rem] font-poppins font-light;
   }
 
+  .p-button-icon {
+    @apply text-sm leading-4 mb-0.5;
+  }
+
+  &.p-button-outlined {
+    .p-button-label {
+      @apply text-primary;
+    }
+
+    &:hover {
+      @apply bg-primary-500 border-primary-500;
+
+      .p-button-label,
+      .p-button-icon {
+        @apply text-white;
+      }
+    }
+  }
+
   &.p-button-secondary {
     @apply border-gray-200;
 
@@ -16,7 +35,8 @@
   &:hover {
     @apply bg-transparent border-primary-500;
 
-    .p-button-label {
+    .p-button-label,
+    .p-button-icon {
       @apply text-primary-500;
     }
   }

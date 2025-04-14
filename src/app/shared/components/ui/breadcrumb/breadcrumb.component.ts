@@ -24,6 +24,10 @@ export class BreadcrumbComponent implements OnInit {
 	});
 
 	ngOnInit() {
-		this.items = [{ label: 'home' }, ...this._activatedRoute.snapshot.url.map(el => ({ label: el.path }))];
+		const isPageNotFound = this._activatedRoute.snapshot.routeConfig?.path === '**';
+
+		this.items = isPageNotFound
+			? [{ label: 'home' }, { label: '404 - not found' }]
+			: [{ label: 'home' }, ...this._activatedRoute.snapshot.url.map(el => ({ label: el.path }))];
 	}
 }

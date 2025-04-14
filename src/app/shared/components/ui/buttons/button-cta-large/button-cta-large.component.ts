@@ -1,5 +1,5 @@
 import { Component, InputSignal, input } from '@angular/core';
-import { ButtonFormTypeInput } from '@type/button-input.type';
+import { ButtonFormTypeInput, ButtonVariantTypeInput } from '@type/button-input.type';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -10,5 +10,7 @@ import { ButtonModule } from 'primeng/button';
 })
 export class ButtonCtaLargeComponent {
 	public label: InputSignal<string> = input<string>('');
+	public icon: InputSignal<string> = input<string>('');
+	public variant: InputSignal<ButtonVariantTypeInput> = input<ButtonVariantTypeInput>();
 	public type: InputSignal<ButtonFormTypeInput> = input<ButtonFormTypeInput>('submit');
 }
