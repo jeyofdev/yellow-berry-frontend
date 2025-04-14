@@ -6,6 +6,7 @@ import { HeaderAccountLink } from '@models/header/header-account-link.model';
 import { AuthService } from '@services/auth/auth.service';
 import { CartComponentService } from '@services/components/cart-component.service';
 import { WishlistProductComponentService } from '@services/components/wishlist-product-component.service';
+import { pluralizeText } from 'app/core/utils/text.utils';
 
 @Injectable({
 	providedIn: 'root',
@@ -33,13 +34,13 @@ export class HeaderAccountLinkService {
 			},
 			{
 				label: 'Wishlist',
-				sublabel: this._wishlistProductComponentService.getProductCountInWishlist() + ' items',
+				sublabel: pluralizeText(this._wishlistProductComponentService.getProductCountInWishlist(), 'item'),
 				icon: 'wishlist',
 				redirectTo: '/' + RouteEnum.ACCOUNT_WISHLIST,
 			},
 			{
 				label: 'cart',
-				sublabel: this._cartComponentService.productCountInCart() + ' items',
+				sublabel: pluralizeText(this._cartComponentService.productCountInCart(), 'item'),
 				icon: 'cart',
 			},
 		];
