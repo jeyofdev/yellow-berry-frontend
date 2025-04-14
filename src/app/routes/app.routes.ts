@@ -13,5 +13,5 @@ export const routes: Routes = [
 	{ path: RouteEnum.AUTH, loadChildren: () => import('./auth.routes').then(m => m.routes) },
 	{ path: RouteEnum.ACCOUNT, loadChildren: () => import('./account.routes').then(m => m.routes) },
 	{ path: RouteEnum.PRODUCT, loadChildren: () => import('./product.routes').then(m => m.routes) },
-	{ path: '**', component: NotFoundComponent },
+	{ path: '**', component: NotFoundComponent, data: { title: '404 - Not found' } },
 ];
