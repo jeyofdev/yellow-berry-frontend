@@ -5,7 +5,7 @@
   .p-breadcrumb-list
   .p-breadcrumb-item {
   .p-breadcrumb-item-label {
-    @apply text-sm text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-normal capitalize;
+    @apply text-sm text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-normal;
   }
 
   &:first-child .p-breadcrumb-item-label {

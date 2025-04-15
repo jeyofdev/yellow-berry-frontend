@@ -18,7 +18,7 @@ export class HeaderAccountLinkService {
 	private _cartComponentService: CartComponentService = inject(CartComponentService);
 
 	constructor() {
-		this._wishlistProductComponentService.loadWishlist();
+		// this._wishlistProductComponentService.loadWishlist();
 
 		effect(() => {
 			this.setAuthAccountLinks();
@@ -27,22 +27,22 @@ export class HeaderAccountLinkService {
 
 	private _headerAccountLinks = computed<HeaderAccountLink[]>(() => {
 		return [
-			{
-				label: this._authService.getLoggedIn() ? 'Account' : 'Login',
-				sublabel: 'Account',
-				icon: 'account',
-			},
-			{
-				label: 'Wishlist',
-				sublabel: pluralizeText(this._wishlistProductComponentService.getProductCountInWishlist(), 'item'),
-				icon: 'wishlist',
-				redirectTo: '/' + RouteEnum.ACCOUNT_WISHLIST,
-			},
-			{
-				label: 'cart',
-				sublabel: pluralizeText(this._cartComponentService.productCountInCart(), 'item'),
-				icon: 'cart',
-			},
+			// {
+			// 	label: this._authService.getLoggedIn() ? 'Account' : 'Login',
+			// 	sublabel: 'Account',
+			// 	icon: 'account',
+			// },
+			// {
+			// 	label: 'Wishlist',
+			// 	sublabel: pluralizeText(this._wishlistProductComponentService.getProductCountInWishlist(), 'item'),
+			// 	icon: 'wishlist',
+			// 	redirectTo: '/' + RouteEnum.ACCOUNT_WISHLIST,
+			// },
+			// {
+			// 	label: 'cart',
+			// 	sublabel: pluralizeText(this._cartComponentService.productCountInCart(), 'item'),
+			// 	icon: 'cart',
+			// },
 		];
 	});
 
