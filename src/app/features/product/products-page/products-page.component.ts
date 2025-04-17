@@ -9,6 +9,7 @@ import { SuccessResponse } from '@models/response/success-response.model';
 import { BrandService } from '@services/brand.service';
 import { ProductService } from '@services/product.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
+import { ButtonFilterComponent } from '@shared/components/ui/buttons/button-filter/button-filter.component';
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
 import { CheckboxColorFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-color-field/checkbox-color-field.component';
 import { CheckboxFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-field/checkbox-field.component';
@@ -17,7 +18,6 @@ import { LayoutContentComponent } from '@shared/components/ui/layout/layout-cont
 import { ListProductComponent } from '@shared/components/ui/list/list-product/list-product.component';
 import { DividerModule } from 'primeng/divider';
 import { map } from 'rxjs';
-
 @Component({
 	selector: 'app-products-page',
 	imports: [
@@ -31,6 +31,7 @@ import { map } from 'rxjs';
 		CheckboxFieldComponent,
 		CheckboxColorFieldComponent,
 		DividerModule,
+		ButtonFilterComponent,
 	],
 	templateUrl: './products-page.component.html',
 	styleUrl: './products-page.component.scss',
@@ -42,6 +43,7 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 
 	public categoryCtrl!: FormControl<string[]>;
 	public colorCtrl!: FormControl<string[]>;
+	public tagCtrl!: FormControl<string[]>;
 
 	public brandItemList: Signal<BrandResponse[]> = this._getBrandItemList();
 	public productItemList: Signal<ProductResponse[]> = this._getProductItemList();
@@ -54,6 +56,7 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 		this.mainForm = this._formBuilder.group({
 			category: this.categoryCtrl,
 			color: this.colorCtrl,
+			tag: this.tagCtrl,
 		});
 	}
 
@@ -63,6 +66,10 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 		});
 
 		this.colorCtrl = this._formBuilder.control<string[]>([], {
+			nonNullable: true,
+		});
+
+		this.tagCtrl = this._formBuilder.control<string[]>([], {
 			nonNullable: true,
 		});
 	}
@@ -81,5 +88,18 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 				.pipe(map((productResponse: SuccessResponse<ProductResponse[]>) => productResponse.result)),
 			{ initialValue: [] },
 		);
+	}
+
+	public toggleTag(tag: string): void {
+		const currentTags = this.tagCtrl.value;
+
+		if (currentTags.includes(tag)) {
+			this.tagCtrl.setValue(currentTags.filter((t: string) => t !== tag));
+		} else {
+			this.tagCtrl.setValue([...currentTags, tag]);
+		}
+
+		this.tagCtrl.updateValueAndValidity();
+		this.onSubmit();
 	}
 }

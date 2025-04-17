@@ -93,6 +93,32 @@
             ></app-checkbox-color-field>
           </form>
         </div>
+
+        <div class="border-t-2 border-t-gray-200 h-[2px] w-full"></div>
+
+        <div class="flex flex-col gap-y-6 px-5">
+          <h6
+            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
+          >
+            Tag
+          </h6>
+
+          <form
+            #filterForm="ngForm"
+            [formGroup]="mainForm"
+            class="flex gap-4 w-full"
+          >
+            <app-button-filter
+              label="snacks"
+              (clicked)="toggleTag('snacks')"
+            ></app-button-filter>
+
+            <app-button-filter
+              label="fruits"
+              (clicked)="toggleTag('fruits')"
+            ></app-button-filter>
+          </form>
+        </div>
       </div>
 
       <div class="flex-1">
