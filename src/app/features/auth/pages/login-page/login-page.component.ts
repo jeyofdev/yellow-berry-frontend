@@ -81,12 +81,12 @@ export class LoginPageComponent extends AuthPageAbstract<FormGroup<FormAuthLogin
 	}
 
 	protected override initFormControls(): void {
-		this.emailCtrl = this._formBuilder.control<string>('', {
+		this.emailCtrl = this._formBuilder.control<string>('admin@test.fr', {
 			validators: [Validators.required, Validators.pattern(Regex.EMAIL_PATTERN)],
 			nonNullable: true,
 		});
 
-		this.passwordCtrl = this._formBuilder.control<string>('', {
+		this.passwordCtrl = this._formBuilder.control<string>('adMin12345*4', {
 			validators: [Validators.required, LengthValidator(8, 16), Validators.pattern(Regex.PASSWORD_PATTERN)],
 			nonNullable: true,
 		});
