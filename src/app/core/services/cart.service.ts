@@ -39,10 +39,10 @@ export class CartService {
 		});
 	}
 
-	public update(cartId: string): Observable<SuccessResponse<CartResponse>> {
+	public update(cartId: string): Observable<SuccessResponse<CartDetailsResponse>> {
 		const { headers } = this._authTokenService.getAuthQueryInfos();
 
-		return this._httpClient.put<SuccessResponse<CartResponse>>(`${this._BASE_URL}/${cartId}`, {}, { headers });
+		return this._httpClient.put<SuccessResponse<CartDetailsResponse>>(`${this._BASE_URL}/${cartId}`, {}, { headers });
 	}
 
 	public addProductToCart(
