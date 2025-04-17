@@ -1,0 +1,7 @@
+:host ::ng-deep p-checkbox .p-checkbox {
+  @apply w-[18px] h-[18px];
+
+  .p-checkbox-box {
+    @apply w-[18px] h-[18px] border-gray-200 rounded-[6px];
+  }
+}

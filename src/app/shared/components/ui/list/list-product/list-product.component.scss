@@ -1,3 +1,7 @@
+:host ::ng-deep p-dataview .p-dataview-header {
+  @apply pt-0 pb-6;
+}
+
 :host ::ng-deep p-dataview p-paginator {
   @apply hidden;
 }
