@@ -1,0 +1,12 @@
+<p-checkbox
+  [inputId]="id()"
+  [name]="name()"
+  [disabled]="disabled"
+  [value]="checkboxValue()"
+  [binary]="true"
+  [ngModel]="isChecked()"
+  (onChange)="onInputChange($event)"
+  (onFocus)="markAsTouched()"
+  class="-mt-[0.3125rem]"
+  [class]="colorClassCss()"
+></p-checkbox>

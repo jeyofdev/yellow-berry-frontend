@@ -1,0 +1,25 @@
+:host ::ng-deep p-checkbox {
+  .p-checkbox {
+    @apply w-[22px] h-[22px];
+
+    .p-checkbox-box {
+      @apply w-[22px] h-[22px] border-0 rounded-full;
+
+      &:before {
+        @apply top-[12px] left-[5px];
+      }
+
+      .p-iconwrapper {
+        @apply hidden;
+      }
+    }
+  }
+
+  &.item-blue .p-checkbox-box {
+    background: blue;
+  }
+
+  &.item-red .p-checkbox-box {
+    background: red;
+  }
+}

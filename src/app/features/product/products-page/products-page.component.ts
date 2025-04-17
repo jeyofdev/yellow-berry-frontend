@@ -10,12 +10,14 @@ import { BrandService } from '@services/brand.service';
 import { ProductService } from '@services/product.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
-import { CheckboxFieldComponent } from '@shared/components/ui/form/checkbox-field/checkbox-field.component';
+import { CheckboxColorFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-color-field/checkbox-color-field.component';
+import { CheckboxFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-field/checkbox-field.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
 import { ListProductComponent } from '@shared/components/ui/list/list-product/list-product.component';
-import { CheckboxModule } from 'primeng/checkbox';
+import { DividerModule } from 'primeng/divider';
 import { map } from 'rxjs';
+
 @Component({
 	selector: 'app-products-page',
 	imports: [
@@ -27,7 +29,8 @@ import { map } from 'rxjs';
 		CarouselBrandComponent,
 		ListProductComponent,
 		CheckboxFieldComponent,
-		CheckboxModule,
+		CheckboxColorFieldComponent,
+		DividerModule,
 	],
 	templateUrl: './products-page.component.html',
 	styleUrl: './products-page.component.scss',
@@ -37,7 +40,8 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 	private _productService: ProductService = inject(ProductService);
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 
-	public catCtrl!: FormControl<string[]>;
+	public categoryCtrl!: FormControl<string[]>;
+	public colorCtrl!: FormControl<string[]>;
 
 	public brandItemList: Signal<BrandResponse[]> = this._getBrandItemList();
 	public productItemList: Signal<ProductResponse[]> = this._getProductItemList();
@@ -48,12 +52,17 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 
 	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({
-			cat: this.catCtrl,
+			category: this.categoryCtrl,
+			color: this.colorCtrl,
 		});
 	}
 
 	protected override initFormControls(): void {
-		this.catCtrl = this._formBuilder.control<string[]>([], {
+		this.categoryCtrl = this._formBuilder.control<string[]>([], {
+			nonNullable: true,
+		});
+
+		this.colorCtrl = this._formBuilder.control<string[]>([], {
 			nonNullable: true,
 		});
 	}

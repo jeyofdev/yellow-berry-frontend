@@ -1,5 +1,8 @@
 import { FormControl } from '@angular/forms';
 
 export class FormProductFilters {
-	constructor(public cat: FormControl<string[]>) {}
+	constructor(
+		public category: FormControl<string[]>,
+		public color: FormControl<string[]>,
+	) {}
 }
