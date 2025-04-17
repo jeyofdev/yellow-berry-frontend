@@ -1,5 +1,6 @@
 import { Directive, InputSignal, OnInit, booleanAttribute, input } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormGroup, FormGroupDirective } from '@angular/forms';
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 import { InputNumberInputEvent } from 'primeng/inputnumber';
 import { RatingRateEvent } from 'primeng/rating';
 
@@ -32,7 +33,7 @@ export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccess
 		this.fullLabel = this.isRequired() ? `${this.label()}*` : this.label();
 	}
 
-	public abstract onInputChange(event: Event | RatingRateEvent | InputNumberInputEvent): void;
+	public abstract onInputChange(event: Event | RatingRateEvent | InputNumberInputEvent | CheckboxChangeEvent): void;
 
 	public writeValue(value: T): void {
 		this.value = value;

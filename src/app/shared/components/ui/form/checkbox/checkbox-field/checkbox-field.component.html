@@ -1,0 +1,20 @@
+<div class="flex items-start gap-x-3 w-full">
+  <p-checkbox
+    [inputId]="id()"
+    [name]="name()"
+    [disabled]="disabled"
+    [value]="checkboxValue()"
+    [binary]="true"
+    [ngModel]="isChecked()"
+    (onChange)="onInputChange($event)"
+    (onFocus)="markAsTouched()"
+    class="-mt-[0.3125rem]"
+  ></p-checkbox>
+
+  <label
+    [for]="labelFor()"
+    class="text-sm text-zinc-700 leading-5 tracking-[0.02rem] font-poppins font-normal capitalize"
+  >
+    {{ fullLabel }}
+  </label>
+</div>

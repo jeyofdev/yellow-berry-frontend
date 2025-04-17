@@ -6,8 +6,120 @@
   <div class="flex flex-col gap-y-6 w-full overflow-hidden">
     <app-carousel-brand [items]="brandItemList()"></app-carousel-brand>
 
-    <div class="flex">
-      <div class="flex w-1/4">filter</div>
+    <div class="flex items-start gap-x-6">
+      <div
+        class="flex flex-col justify-start gap-y-8 border border-gray-200 bg-gray-100 rounded-[1.25rem] py-[1.1875rem] w-1/4"
+      >
+        <div class="flex flex-col gap-y-6 px-5">
+          <h6
+            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
+          >
+            Category
+          </h6>
+
+          <form
+            #filterForm="ngForm"
+            [formGroup]="mainForm"
+            class="flex flex-col gap-4 w-full"
+          >
+            <app-checkbox-field
+              labelFor="bag"
+              label="bag"
+              id="bag"
+              name="category"
+              checkboxValue="bag"
+              [parentForm]="mainForm"
+              formControlName="category"
+              controlName="category"
+              [form]="filterForm"
+              (changed)="onSubmit()"
+            ></app-checkbox-field>
+
+            <app-checkbox-field
+              labelFor="shoes"
+              label="shoes"
+              id="shoes"
+              name="category"
+              checkboxValue="shoes"
+              [parentForm]="mainForm"
+              formControlName="category"
+              controlName="category"
+              [form]="filterForm"
+              (changed)="onSubmit()"
+            ></app-checkbox-field>
+          </form>
+        </div>
+
+        <div class="border-t-2 border-t-gray-200 h-[2px] w-full"></div>
+
+        <div class="flex flex-col gap-y-6 px-5">
+          <h6
+            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
+          >
+            Color
+          </h6>
+
+          <form
+            #filterForm="ngForm"
+            [formGroup]="mainForm"
+            class="flex gap-4 w-full"
+          >
+            <app-checkbox-color-field
+              labelFor="blue"
+              label="blue"
+              id="blue"
+              name="color"
+              colorClassCss="item-blue"
+              checkboxValue="blue"
+              [parentForm]="mainForm"
+              formControlName="color"
+              controlName="color"
+              [form]="filterForm"
+              (changed)="onSubmit()"
+            ></app-checkbox-color-field>
+
+            <app-checkbox-color-field
+              labelFor="red"
+              label="red"
+              id="red"
+              name="color"
+              colorClassCss="item-red"
+              checkboxValue="red"
+              [parentForm]="mainForm"
+              formControlName="color"
+              controlName="color"
+              [form]="filterForm"
+              (changed)="onSubmit()"
+            ></app-checkbox-color-field>
+          </form>
+        </div>
+
+        <div class="border-t-2 border-t-gray-200 h-[2px] w-full"></div>
+
+        <div class="flex flex-col gap-y-6 px-5">
+          <h6
+            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
+          >
+            Tag
+          </h6>
+
+          <form
+            #filterForm="ngForm"
+            [formGroup]="mainForm"
+            class="flex gap-4 w-full"
+          >
+            <app-button-filter
+              label="snacks"
+              (clicked)="toggleTag('snacks')"
+            ></app-button-filter>
+
+            <app-button-filter
+              label="fruits"
+              (clicked)="toggleTag('fruits')"
+            ></app-button-filter>
+          </form>
+        </div>
+      </div>
 
       <div class="flex-1">
         <app-list-product
