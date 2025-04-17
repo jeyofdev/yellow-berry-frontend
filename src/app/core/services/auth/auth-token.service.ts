@@ -24,6 +24,13 @@ export class AuthTokenService {
 		return { authToken, authUserId, headers };
 	}
 
+	public isTokenExpired(authToken: string): boolean {
+		const payload = JSON.parse(atob(authToken.split('.')[1]));
+		const now = Math.floor(Date.now() / 1000);
+
+		return payload.exp < now;
+	}
+
 	private _getDecodedTokenResponse(token: string): AuthTokenResponse {
 		return jwtDecode(token);
 	}

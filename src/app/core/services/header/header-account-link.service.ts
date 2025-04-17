@@ -18,31 +18,38 @@ export class HeaderAccountLinkService {
 	private _cartComponentService: CartComponentService = inject(CartComponentService);
 
 	constructor() {
-		// this._wishlistProductComponentService.loadWishlist();
-
 		effect(() => {
+			if (this._authService.getLoggedIn()) {
+				this._wishlistProductComponentService.loadWishlist();
+				this._cartComponentService.loadCart();
+			}
+
 			this.setAuthAccountLinks();
 		});
 	}
 
 	private _headerAccountLinks = computed<HeaderAccountLink[]>(() => {
 		return [
-			// {
-			// 	label: this._authService.getLoggedIn() ? 'Account' : 'Login',
-			// 	sublabel: 'Account',
-			// 	icon: 'account',
-			// },
-			// {
-			// 	label: 'Wishlist',
-			// 	sublabel: pluralizeText(this._wishlistProductComponentService.getProductCountInWishlist(), 'item'),
-			// 	icon: 'wishlist',
-			// 	redirectTo: '/' + RouteEnum.ACCOUNT_WISHLIST,
-			// },
-			// {
-			// 	label: 'cart',
-			// 	sublabel: pluralizeText(this._cartComponentService.productCountInCart(), 'item'),
-			// 	icon: 'cart',
-			// },
+			{
+				label: this._authService.getLoggedIn() ? 'Account' : 'Login',
+				sublabel: 'Account',
+				icon: 'account',
+			},
+			{
+				label: 'Wishlist',
+				sublabel: this._authService.getLoggedIn()
+					? pluralizeText(this._wishlistProductComponentService.getProductCountInWishlist(), 'item')
+					: 'item',
+				icon: 'wishlist',
+				redirectTo: '/' + RouteEnum.ACCOUNT_WISHLIST,
+			},
+			{
+				label: 'cart',
+				sublabel: this._authService.getLoggedIn()
+					? pluralizeText(this._cartComponentService.productCountInCart(), 'item')
+					: 'item',
+				icon: 'cart',
+			},
 		];
 	});
 
