@@ -22,11 +22,16 @@ export const parseWeightStringToEnumKey = (weightStr: string): keyof typeof Weig
 	return undefined;
 };
 
-export const enumToArray = <T extends Record<string, string | number>>(enumObj: T): Enum[] => {
+export const enumToArray = <T extends Record<string, string | number>>(
+	enumObj: T,
+	type: 'key' | 'value' = 'key',
+): Enum[] => {
 	return Object.keys(enumObj)
 		.filter(key => isNaN(Number(key)))
-		.map(key => ({
-			id: key.toLowerCase(),
-			value: key.toLowerCase(),
-		}));
+		.map(key => {
+			return {
+				id: key.toLowerCase(),
+				value: type === key ? key.toLowerCase() : enumObj[key],
+			};
+		});
 };

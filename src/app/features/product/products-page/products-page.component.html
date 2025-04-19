@@ -45,6 +45,37 @@
           <h6
             class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
           >
+            Weight
+          </h6>
+
+          <form
+            #filterForm="ngForm"
+            [formGroup]="mainForm"
+            class="flex flex-col gap-4 w-full"
+          >
+            @for (weight of weightList(); track $index) {
+            <app-checkbox-field
+              [labelFor]="weight.value.toString().toLowerCase()"
+              [label]="weight.value.toString()"
+              [id]="weight.value.toString().toLowerCase()"
+              name="weight"
+              [checkboxValue]="weight.value.toString().toLowerCase()"
+              [parentForm]="mainForm"
+              formControlName="weight"
+              controlName="weight"
+              [form]="filterForm"
+              (changed)="onSubmit()"
+            ></app-checkbox-field>
+            }
+          </form>
+        </div>
+
+        <div class="border-t-2 border-t-gray-200 h-[2px] w-full"></div>
+
+        <div class="flex flex-col gap-y-6 px-5">
+          <h6
+            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
+          >
             Color
           </h6>
 
