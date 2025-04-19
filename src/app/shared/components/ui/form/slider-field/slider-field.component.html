@@ -1,0 +1,15 @@
+<div class="flex items-center gap-x-4 w-full min-w-0">
+  <div class="flex-1 min-w-0">
+    <input type="text" pInputText [(ngModel)]="formattedValue" />
+    <p-slider
+      [id]="id()"
+      [min]="min()"
+      [max]="max()"
+      [range]="range()"
+      [disabled]="disabled"
+      [(ngModel)]="value"
+      (onSlideEnd)="onInputChange($event)"
+      styleClass="w-[300px]"
+    ></p-slider>
+  </div>
+</div>

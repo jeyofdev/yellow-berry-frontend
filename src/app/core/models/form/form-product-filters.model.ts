@@ -5,5 +5,6 @@ export class FormProductFilters {
 		public category: FormControl<string[]>,
 		public color: FormControl<string[]>,
 		public tag: FormControl<string[]>,
+		public price: FormControl<number[]>,
 	) {}
 }
