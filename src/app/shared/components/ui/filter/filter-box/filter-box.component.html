@@ -1,0 +1,13 @@
+<div class="flex flex-col gap-y-6 px-5">
+  <h6
+    class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
+  >
+    {{ title() }}
+  </h6>
+
+  <ng-content></ng-content>
+</div>
+
+@if (hasDivider()) {
+<app-divider class="flex mt-8"></app-divider>
+}
