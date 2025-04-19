@@ -81,17 +81,14 @@
           <form
             #filterForm="ngForm"
             [formGroup]="mainForm"
-            class="flex gap-4 w-full"
+            class="flex flex-wrap gap-4 w-full"
           >
+            @for (brand of brandList(); track $index) {
             <app-button-filter
-              label="snacks"
-              (clicked)="toggleTag('snacks')"
+              [label]="brand.name"
+              (clicked)="toggleTag(brand.name)"
             ></app-button-filter>
-
-            <app-button-filter
-              label="fruits"
-              (clicked)="toggleTag('fruits')"
-            ></app-button-filter>
+            }
           </form>
         </div>
 
