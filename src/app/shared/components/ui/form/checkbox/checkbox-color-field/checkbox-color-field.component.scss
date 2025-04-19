@@ -15,11 +15,51 @@
     }
   }
 
-  &.item-blue .p-checkbox-box {
+  &.color-black .p-checkbox-box {
+    background: black;
+  }
+
+  &.color-white .p-checkbox-box {
+    background: white;
+  }
+
+  &.color-red .p-checkbox-box {
+    background: red;
+  }
+
+  &.color-blue .p-checkbox-box {
     background: blue;
   }
 
-  &.item-red .p-checkbox-box {
-    background: red;
+  &.color-green .p-checkbox-box {
+    background: green;
+  }
+
+  &.color-yellow .p-checkbox-box {
+    background: rgba(255, 255, 0, 0.912);
+  }
+
+  &.color-orange .p-checkbox-box {
+    background: orange;
+  }
+
+  &.color-pink .p-checkbox-box {
+    background: pink;
+  }
+
+  &.color-purple .p-checkbox-box {
+    background: purple;
+  }
+
+  &.color-brown .p-checkbox-box {
+    background: brown;
+  }
+
+  &.color-silver .p-checkbox-box {
+    background: silver;
+  }
+
+  &.color-gold .p-checkbox-box {
+    background: gold;
   }
 }

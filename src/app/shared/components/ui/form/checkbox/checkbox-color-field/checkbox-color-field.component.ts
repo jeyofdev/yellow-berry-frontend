@@ -17,7 +17,9 @@ import { CheckboxChangeEvent, CheckboxModule } from 'primeng/checkbox';
 	],
 })
 export class CheckboxColorFieldComponent extends FormInputAbstract<string[]> {
-	public checkboxValue: InputSignal<string> = input.required<string>();
+	public override labelFor: InputSignal<string> = input<string>('');
+	public override label: InputSignal<string> = input<string>('');
+	public checkboxValue: InputSignal<string | number> = input.required<string | number>();
 	public colorClassCss: InputSignal<string> = input.required<string>();
 	public changed: OutputEmitterRef<void> = output();
 

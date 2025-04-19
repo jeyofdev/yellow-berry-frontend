@@ -1,9 +1,11 @@
 import { AuthPageAbstract } from '@abstract/auth-page.abstract';
-import { Component, Signal, inject } from '@angular/core';
+import { Component, Signal, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ColorEnum } from '@enum/color.enum';
 import { BrandResponse } from '@models/brand/brand-response.model';
 import { CategoryResponse } from '@models/category/category-response.model';
+import { Enum } from '@models/enum/enum.model';
 import { FormProductFilters } from '@models/form/form-product-filters.model';
 import { ProductResponse } from '@models/product/product-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
@@ -19,6 +21,7 @@ import { SliderFieldComponent } from '@shared/components/ui/form/slider-field/sl
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
 import { ListProductComponent } from '@shared/components/ui/list/list-product/list-product.component';
+import { enumToArray } from 'app/core/utils/enum.utils';
 import { DividerModule } from 'primeng/divider';
 import { map } from 'rxjs';
 
@@ -55,6 +58,7 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 	public brandList: Signal<BrandResponse[]> = this._getBrandList();
 	public productList: Signal<ProductResponse[]> = this._getProductList();
 	public categoryList: Signal<CategoryResponse[]> = this._getCategoryList();
+	public colorList: Signal<Enum[]> = this._getColorList();
 
 	public override onSubmit(): void {
 		console.log(this.mainForm.value);
@@ -103,6 +107,10 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 		);
 	}
 
+	private _getColorList(): Signal<Enum[]> {
+		return signal<Enum[]>(enumToArray(ColorEnum));
+	}
+
 	private _getProductList(): Signal<ProductResponse[]> {
 		return toSignal(
 			this._productService
@@ -123,5 +131,9 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 
 		this.tagCtrl.updateValueAndValidity();
 		this.onSubmit();
+	}
+
+	public getColorClass(color: string | number): string {
+		return `color-${color}`;
 	}
 }
