@@ -7,153 +7,17 @@
     <app-carousel-brand [items]="brandList()"></app-carousel-brand>
 
     <div class="flex items-start gap-x-6">
-      <div
-        class="flex flex-col justify-start gap-y-8 border border-gray-200 bg-gray-100 rounded-[1.25rem] py-[1.1875rem] w-1/4"
-      >
-        <div class="flex flex-col gap-y-6 px-5">
-          <h6
-            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
-          >
-            Category
-          </h6>
-
-          <form
-            #filterForm="ngForm"
-            [formGroup]="mainForm"
-            class="flex flex-col gap-4 w-full"
-          >
-            @for (category of categoryList(); track $index) {
-            <app-checkbox-field
-              [labelFor]="category.name.toLowerCase()"
-              [label]="category.name"
-              [id]="category.name.toLowerCase()"
-              name="category"
-              [checkboxValue]="category.name.toLowerCase()"
-              [parentForm]="mainForm"
-              formControlName="category"
-              controlName="category"
-              [form]="filterForm"
-              (changed)="onSubmit()"
-            ></app-checkbox-field>
-            }
-          </form>
-        </div>
-
-        <div class="border-t-2 border-t-gray-200 h-[2px] w-full"></div>
-
-        <div class="flex flex-col gap-y-6 px-5">
-          <h6
-            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
-          >
-            Weight
-          </h6>
-
-          <form
-            #filterForm="ngForm"
-            [formGroup]="mainForm"
-            class="flex flex-col gap-4 w-full"
-          >
-            @for (weight of weightList(); track $index) {
-            <app-checkbox-field
-              [labelFor]="weight.value.toString().toLowerCase()"
-              [label]="weight.value.toString()"
-              [id]="weight.value.toString().toLowerCase()"
-              name="weight"
-              [checkboxValue]="weight.value.toString().toLowerCase()"
-              [parentForm]="mainForm"
-              formControlName="weight"
-              controlName="weight"
-              [form]="filterForm"
-              (changed)="onSubmit()"
-            ></app-checkbox-field>
-            }
-          </form>
-        </div>
-
-        <div class="border-t-2 border-t-gray-200 h-[2px] w-full"></div>
-
-        <div class="flex flex-col gap-y-6 px-5">
-          <h6
-            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
-          >
-            Color
-          </h6>
-
-          <form
-            #filterForm="ngForm"
-            [formGroup]="mainForm"
-            class="flex flex-wrap gap-4 w-full max-w-[275px]"
-          >
-            @for (color of colorList(); track $index) {
-            <app-checkbox-color-field
-              [id]="color.id"
-              name="color"
-              [colorClassCss]="getColorClass(color.value)"
-              [checkboxValue]="color.value"
-              [parentForm]="mainForm"
-              formControlName="color"
-              controlName="color"
-              [form]="filterForm"
-              (changed)="onSubmit()"
-            ></app-checkbox-color-field>
-            }
-          </form>
-        </div>
-
-        <div class="border-t-2 border-t-gray-200 h-[2px] w-full"></div>
-
-        <div class="flex flex-col gap-y-6 px-5">
-          <h6
-            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
-          >
-            Tag
-          </h6>
-
-          <form
-            #filterForm="ngForm"
-            [formGroup]="mainForm"
-            class="flex flex-wrap gap-4 w-full"
-          >
-            @for (brand of brandList(); track $index) {
-            <app-button-filter
-              [label]="brand.name"
-              (clicked)="toggleTag(brand.name)"
-            ></app-button-filter>
-            }
-          </form>
-        </div>
-
-        <div class="border-t-2 border-t-gray-200 h-[2px] w-full"></div>
-
-        <div class="flex flex-col gap-y-6 px-5 w-full">
-          <h6
-            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
-          >
-            Price
-          </h6>
-
-          <form
-            #filterForm="ngForm"
-            [formGroup]="mainForm"
-            class="flex gap-4 w-full h-20 relative"
-          >
-            <app-slider-field
-              labelFor="price"
-              label="Price Range"
-              id="price"
-              name="price"
-              [min]="0"
-              [max]="1000"
-              [range]="true"
-              [parentForm]="mainForm"
-              formControlName="price"
-              controlName="price"
-              [form]="filterForm"
-              (changed)="onSubmit()"
-            ></app-slider-field>
-          </form>
-        </div>
-      </div>
+      <app-filter-product
+        [brandList]="brandList()"
+        [categoryList]="categoryList()"
+        [weightList]="weightList()"
+        [colorList]="colorList()"
+        [productList]="productList()"
+        [form]="mainForm"
+        class="w-1/4"
+        (changed)="onChanged()"
+        (toggleTag)="toggleTag($event)"
+      ></app-filter-product>
 
       <div class="flex-1">
         <app-list-product

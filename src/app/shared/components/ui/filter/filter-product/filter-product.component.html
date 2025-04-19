@@ -1,0 +1,109 @@
+<div
+  class="flex flex-col justify-start gap-y-8 border border-gray-200 bg-gray-100 rounded-[1.25rem] py-[1.1875rem] w-full"
+>
+  <app-filter-box title="Category" hasDivider>
+    <form
+      #filterForm="ngForm"
+      [formGroup]="form()"
+      class="flex flex-col gap-4 w-full"
+    >
+      @for (category of categoryList(); track $index) {
+      <app-checkbox-field
+        [labelFor]="category.name.toLowerCase()"
+        [label]="category.name"
+        [id]="category.name.toLowerCase()"
+        name="category"
+        [checkboxValue]="category.name.toLowerCase()"
+        [parentForm]="form()"
+        formControlName="category"
+        controlName="category"
+        [form]="filterForm"
+        (changed)="onChanged()"
+      ></app-checkbox-field>
+      }
+    </form>
+  </app-filter-box>
+
+  <app-filter-box title="Weight" hasDivider>
+    <form
+      #filterForm="ngForm"
+      [formGroup]="form()"
+      class="flex flex-col gap-4 w-full"
+    >
+      @for (weight of weightList(); track $index) {
+      <app-checkbox-field
+        [labelFor]="weight.value.toString().toLowerCase()"
+        [label]="weight.value.toString()"
+        [id]="weight.value.toString().toLowerCase()"
+        name="weight"
+        [checkboxValue]="weight.value.toString().toLowerCase()"
+        [parentForm]="form()"
+        formControlName="weight"
+        controlName="weight"
+        [form]="filterForm"
+        (changed)="onChanged()"
+      ></app-checkbox-field>
+      }
+    </form>
+  </app-filter-box>
+
+  <app-filter-box title="Color" hasDivider>
+    <form
+      #filterForm="ngForm"
+      [formGroup]="form()"
+      class="flex flex-wrap gap-4 w-full max-w-[275px]"
+    >
+      @for (color of colorList(); track $index) {
+      <app-checkbox-color-field
+        [id]="color.id"
+        name="color"
+        [colorClassCss]="getColorClass(color.value)"
+        [checkboxValue]="color.value"
+        [parentForm]="form()"
+        formControlName="color"
+        controlName="color"
+        [form]="filterForm"
+        (changed)="onChanged()"
+      ></app-checkbox-color-field>
+      }
+    </form>
+  </app-filter-box>
+
+  <app-filter-box title="Price" hasDivider>
+    <form
+      #filterForm="ngForm"
+      [formGroup]="form()"
+      class="flex gap-4 w-full h-20 relative"
+    >
+      <app-slider-field
+        labelFor="price"
+        label="Price Range"
+        id="price"
+        name="price"
+        [min]="0"
+        [max]="1000"
+        [range]="true"
+        [parentForm]="form()"
+        formControlName="price"
+        controlName="price"
+        [form]="filterForm"
+        (changed)="onChanged()"
+      ></app-slider-field>
+    </form>
+  </app-filter-box>
+
+  <app-filter-box title="Tag">
+    <form
+      #filterForm="ngForm"
+      [formGroup]="form()"
+      class="flex flex-wrap gap-4 w-full"
+    >
+      @for (brand of brandList(); track $index) {
+      <app-button-filter
+        [label]="brand.name"
+        (clicked)="onToggleTag(brand.name)"
+      ></app-button-filter>
+      }
+    </form>
+  </app-filter-box>
+</div>

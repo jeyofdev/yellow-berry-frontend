@@ -14,16 +14,12 @@ import { BrandService } from '@services/brand.service';
 import { CategoryService } from '@services/category.service';
 import { ProductService } from '@services/product.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
-import { ButtonFilterComponent } from '@shared/components/ui/buttons/button-filter/button-filter.component';
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
-import { CheckboxColorFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-color-field/checkbox-color-field.component';
-import { CheckboxFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-field/checkbox-field.component';
-import { SliderFieldComponent } from '@shared/components/ui/form/slider-field/slider-field.component';
+import { FilterProductComponent } from '@shared/components/ui/filter/filter-product/filter-product.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
 import { ListProductComponent } from '@shared/components/ui/list/list-product/list-product.component';
-import { enumToArray, parseWeightStringToEnumKey } from '@utils/enum.utils';
-import { DividerModule } from 'primeng/divider';
+import { enumToArray } from '@utils/enum.utils';
 import { map } from 'rxjs';
 
 @Component({
@@ -36,11 +32,7 @@ import { map } from 'rxjs';
 		LayoutContentComponent,
 		CarouselBrandComponent,
 		ListProductComponent,
-		CheckboxFieldComponent,
-		CheckboxColorFieldComponent,
-		DividerModule,
-		ButtonFilterComponent,
-		SliderFieldComponent,
+		FilterProductComponent,
 	],
 	templateUrl: './products-page.component.html',
 	styleUrl: './products-page.component.scss',
@@ -63,7 +55,9 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 	public colorList: Signal<Enum[]> = this._getColorList();
 	public weightList: Signal<Enum[]> = this._getWeightList();
 
-	public override onSubmit(): void {
+	public override onSubmit(): void {}
+
+	public onChanged(): void {
 		console.log(this.mainForm.value);
 	}
 
@@ -150,10 +144,6 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 		}
 
 		this.tagCtrl.updateValueAndValidity();
-		this.onSubmit();
-	}
-
-	public getColorClass(color: string | number): string {
-		return `color-${color}`;
+		this.onChanged();
 	}
 }
