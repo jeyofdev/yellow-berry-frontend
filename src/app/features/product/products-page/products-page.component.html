@@ -4,7 +4,7 @@
 
 <app-layout-content containerMarginTop="mt-10" containerMarginBottom="mb-10">
   <div class="flex flex-col gap-y-6 w-full overflow-hidden">
-    <app-carousel-brand [items]="brandItemList()"></app-carousel-brand>
+    <app-carousel-brand [items]="brandList()"></app-carousel-brand>
 
     <div class="flex items-start gap-x-6">
       <div
@@ -22,31 +22,51 @@
             [formGroup]="mainForm"
             class="flex flex-col gap-4 w-full"
           >
+            @for (category of categoryList(); track $index) {
             <app-checkbox-field
-              labelFor="bag"
-              label="bag"
-              id="bag"
+              [labelFor]="category.name.toLowerCase()"
+              [label]="category.name"
+              [id]="category.name.toLowerCase()"
               name="category"
-              checkboxValue="bag"
+              [checkboxValue]="category.name.toLowerCase()"
               [parentForm]="mainForm"
               formControlName="category"
               controlName="category"
               [form]="filterForm"
               (changed)="onSubmit()"
             ></app-checkbox-field>
+            }
+          </form>
+        </div>
 
+        <div class="border-t-2 border-t-gray-200 h-[2px] w-full"></div>
+
+        <div class="flex flex-col gap-y-6 px-5">
+          <h6
+            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
+          >
+            Weight
+          </h6>
+
+          <form
+            #filterForm="ngForm"
+            [formGroup]="mainForm"
+            class="flex flex-col gap-4 w-full"
+          >
+            @for (weight of weightList(); track $index) {
             <app-checkbox-field
-              labelFor="shoes"
-              label="shoes"
-              id="shoes"
-              name="category"
-              checkboxValue="shoes"
+              [labelFor]="weight.value.toString().toLowerCase()"
+              [label]="weight.value.toString()"
+              [id]="weight.value.toString().toLowerCase()"
+              name="weight"
+              [checkboxValue]="weight.value.toString().toLowerCase()"
               [parentForm]="mainForm"
-              formControlName="category"
-              controlName="category"
+              formControlName="weight"
+              controlName="weight"
               [form]="filterForm"
               (changed)="onSubmit()"
             ></app-checkbox-field>
+            }
           </form>
         </div>
 
@@ -62,35 +82,21 @@
           <form
             #filterForm="ngForm"
             [formGroup]="mainForm"
-            class="flex gap-4 w-full"
+            class="flex flex-wrap gap-4 w-full max-w-[275px]"
           >
+            @for (color of colorList(); track $index) {
             <app-checkbox-color-field
-              labelFor="blue"
-              label="blue"
-              id="blue"
+              [id]="color.id"
               name="color"
-              colorClassCss="item-blue"
-              checkboxValue="blue"
+              [colorClassCss]="getColorClass(color.value)"
+              [checkboxValue]="color.value"
               [parentForm]="mainForm"
               formControlName="color"
               controlName="color"
               [form]="filterForm"
               (changed)="onSubmit()"
             ></app-checkbox-color-field>
-
-            <app-checkbox-color-field
-              labelFor="red"
-              label="red"
-              id="red"
-              name="color"
-              colorClassCss="item-red"
-              checkboxValue="red"
-              [parentForm]="mainForm"
-              formControlName="color"
-              controlName="color"
-              [form]="filterForm"
-              (changed)="onSubmit()"
-            ></app-checkbox-color-field>
+            }
           </form>
         </div>
 
@@ -106,17 +112,14 @@
           <form
             #filterForm="ngForm"
             [formGroup]="mainForm"
-            class="flex gap-4 w-full"
+            class="flex flex-wrap gap-4 w-full"
           >
+            @for (brand of brandList(); track $index) {
             <app-button-filter
-              label="snacks"
-              (clicked)="toggleTag('snacks')"
+              [label]="brand.name"
+              (clicked)="toggleTag(brand.name)"
             ></app-button-filter>
-
-            <app-button-filter
-              label="fruits"
-              (clicked)="toggleTag('fruits')"
-            ></app-button-filter>
+            }
           </form>
         </div>
 
@@ -154,7 +157,7 @@
 
       <div class="flex-1">
         <app-list-product
-          [productItemList]="productItemList()"
+          [productItemList]="productList()"
           hasPagination
         ></app-list-product>
       </div>
