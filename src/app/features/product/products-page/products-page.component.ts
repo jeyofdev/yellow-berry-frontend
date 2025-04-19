@@ -3,10 +3,12 @@ import { Component, Signal, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrandResponse } from '@models/brand/brand-response.model';
+import { CategoryResponse } from '@models/category/category-response.model';
 import { FormProductFilters } from '@models/form/form-product-filters.model';
 import { ProductResponse } from '@models/product/product-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { BrandService } from '@services/brand.service';
+import { CategoryService } from '@services/category.service';
 import { ProductService } from '@services/product.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFilterComponent } from '@shared/components/ui/buttons/button-filter/button-filter.component';
@@ -41,6 +43,7 @@ import { map } from 'rxjs';
 })
 export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProductFilters>> {
 	private _brandService: BrandService = inject(BrandService);
+	private _categoryService: CategoryService = inject(CategoryService);
 	private _productService: ProductService = inject(ProductService);
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 
@@ -49,8 +52,9 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 	public tagCtrl!: FormControl<string[]>;
 	public priceCtrl!: FormControl<number[]>;
 
-	public brandItemList: Signal<BrandResponse[]> = this._getBrandItemList();
-	public productItemList: Signal<ProductResponse[]> = this._getProductItemList();
+	public brandList: Signal<BrandResponse[]> = this._getBrandList();
+	public productList: Signal<ProductResponse[]> = this._getProductList();
+	public categoryList: Signal<CategoryResponse[]> = this._getCategoryList();
 
 	public override onSubmit(): void {
 		console.log(this.mainForm.value);
@@ -83,14 +87,23 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 		});
 	}
 
-	private _getBrandItemList(): Signal<BrandResponse[]> {
+	private _getBrandList(): Signal<BrandResponse[]> {
 		return toSignal(
 			this._brandService.findAll().pipe(map((brandResponse: SuccessResponse<BrandResponse[]>) => brandResponse.result)),
 			{ initialValue: [] },
 		);
 	}
 
-	private _getProductItemList(): Signal<ProductResponse[]> {
+	private _getCategoryList(): Signal<CategoryResponse[]> {
+		return toSignal(
+			this._categoryService
+				.findAll()
+				.pipe(map((categoryResponse: SuccessResponse<CategoryResponse[]>) => categoryResponse.result)),
+			{ initialValue: [] },
+		);
+	}
+
+	private _getProductList(): Signal<ProductResponse[]> {
 		return toSignal(
 			this._productService
 				.findAll()

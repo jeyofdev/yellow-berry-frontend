@@ -4,7 +4,7 @@
 
 <app-layout-content containerMarginTop="mt-10" containerMarginBottom="mb-10">
   <div class="flex flex-col gap-y-6 w-full overflow-hidden">
-    <app-carousel-brand [items]="brandItemList()"></app-carousel-brand>
+    <app-carousel-brand [items]="brandList()"></app-carousel-brand>
 
     <div class="flex items-start gap-x-6">
       <div
@@ -22,31 +22,20 @@
             [formGroup]="mainForm"
             class="flex flex-col gap-4 w-full"
           >
+            @for (category of categoryList(); track $index) {
             <app-checkbox-field
-              labelFor="bag"
-              label="bag"
-              id="bag"
+              [labelFor]="category.name.toLowerCase()"
+              [label]="category.name"
+              [id]="category.name.toLowerCase()"
               name="category"
-              checkboxValue="bag"
+              [checkboxValue]="category.name.toLowerCase()"
               [parentForm]="mainForm"
               formControlName="category"
               controlName="category"
               [form]="filterForm"
               (changed)="onSubmit()"
             ></app-checkbox-field>
-
-            <app-checkbox-field
-              labelFor="shoes"
-              label="shoes"
-              id="shoes"
-              name="category"
-              checkboxValue="shoes"
-              [parentForm]="mainForm"
-              formControlName="category"
-              controlName="category"
-              [form]="filterForm"
-              (changed)="onSubmit()"
-            ></app-checkbox-field>
+            }
           </form>
         </div>
 
@@ -154,7 +143,7 @@
 
       <div class="flex-1">
         <app-list-product
-          [productItemList]="productItemList()"
+          [productItemList]="productList()"
           hasPagination
         ></app-list-product>
       </div>
