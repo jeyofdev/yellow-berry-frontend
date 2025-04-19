@@ -3,6 +3,7 @@ import { AbstractControl, ControlValueAccessor, FormGroup, FormGroupDirective } 
 import { CheckboxChangeEvent } from 'primeng/checkbox';
 import { InputNumberInputEvent } from 'primeng/inputnumber';
 import { RatingRateEvent } from 'primeng/rating';
+import { SliderSlideEndEvent } from 'primeng/slider';
 
 @Directive()
 export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccessor {
@@ -33,7 +34,9 @@ export abstract class FormInputAbstract<T> implements OnInit, ControlValueAccess
 		this.fullLabel = this.isRequired() ? `${this.label()}*` : this.label();
 	}
 
-	public abstract onInputChange(event: Event | RatingRateEvent | InputNumberInputEvent | CheckboxChangeEvent): void;
+	public abstract onInputChange(
+		event: Event | RatingRateEvent | InputNumberInputEvent | CheckboxChangeEvent | SliderSlideEndEvent,
+	): void;
 
 	public writeValue(value: T): void {
 		this.value = value;

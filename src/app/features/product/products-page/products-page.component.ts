@@ -13,11 +13,13 @@ import { ButtonFilterComponent } from '@shared/components/ui/buttons/button-filt
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
 import { CheckboxColorFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-color-field/checkbox-color-field.component';
 import { CheckboxFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-field/checkbox-field.component';
+import { SliderFieldComponent } from '@shared/components/ui/form/slider-field/slider-field.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
 import { ListProductComponent } from '@shared/components/ui/list/list-product/list-product.component';
 import { DividerModule } from 'primeng/divider';
 import { map } from 'rxjs';
+
 @Component({
 	selector: 'app-products-page',
 	imports: [
@@ -32,6 +34,7 @@ import { map } from 'rxjs';
 		CheckboxColorFieldComponent,
 		DividerModule,
 		ButtonFilterComponent,
+		SliderFieldComponent,
 	],
 	templateUrl: './products-page.component.html',
 	styleUrl: './products-page.component.scss',
@@ -44,6 +47,7 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 	public categoryCtrl!: FormControl<string[]>;
 	public colorCtrl!: FormControl<string[]>;
 	public tagCtrl!: FormControl<string[]>;
+	public priceCtrl!: FormControl<number[]>;
 
 	public brandItemList: Signal<BrandResponse[]> = this._getBrandItemList();
 	public productItemList: Signal<ProductResponse[]> = this._getProductItemList();
@@ -57,6 +61,7 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 			category: this.categoryCtrl,
 			color: this.colorCtrl,
 			tag: this.tagCtrl,
+			price: this.priceCtrl,
 		});
 	}
 
@@ -70,6 +75,10 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 		});
 
 		this.tagCtrl = this._formBuilder.control<string[]>([], {
+			nonNullable: true,
+		});
+
+		this.priceCtrl = this._formBuilder.control<number[]>([0, 1000], {
 			nonNullable: true,
 		});
 	}

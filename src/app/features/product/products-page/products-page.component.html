@@ -119,6 +119,37 @@
             ></app-button-filter>
           </form>
         </div>
+
+        <div class="border-t-2 border-t-gray-200 h-[2px] w-full"></div>
+
+        <div class="flex flex-col gap-y-6 px-5 w-full">
+          <h6
+            class="text-lg text-gray-700 leading-[1.35rem] tracking-[0.03rem] font-quicksand font-bold"
+          >
+            Price
+          </h6>
+
+          <form
+            #filterForm="ngForm"
+            [formGroup]="mainForm"
+            class="flex gap-4 w-full h-20 relative"
+          >
+            <app-slider-field
+              labelFor="price"
+              label="Price Range"
+              id="price"
+              name="price"
+              [min]="0"
+              [max]="1000"
+              [range]="true"
+              [parentForm]="mainForm"
+              formControlName="price"
+              controlName="price"
+              [form]="filterForm"
+              (changed)="onSubmit()"
+            ></app-slider-field>
+          </form>
+        </div>
       </div>
 
       <div class="flex-1">
