@@ -1,10 +1,10 @@
 import { Component, InputSignal, OutputEmitterRef, input, output } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrandResponse } from '@models/brand/brand-response.model';
 import { CategoryResponse } from '@models/category/category-response.model';
 import { Enum } from '@models/enum/enum.model';
 import { FormProductFilters } from '@models/form/form-product-filters.model';
 import { ProductResponse } from '@models/product/product-response.model';
+import { TagResponse } from '@models/tag/tag-response.model copy';
 import { ButtonFilterComponent } from '@shared/components/ui/buttons/button-filter/button-filter.component';
 import { FilterBoxComponent } from '@shared/components/ui/filter/filter-box/filter-box.component';
 import { CheckboxColorFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-color-field/checkbox-color-field.component';
@@ -28,7 +28,7 @@ import { DividerModule } from 'primeng/divider';
 	styleUrl: './filter-product.component.scss',
 })
 export class FilterProductComponent {
-	public brandList: InputSignal<BrandResponse[]> = input.required<BrandResponse[]>();
+	public tagList: InputSignal<TagResponse[]> = input.required<TagResponse[]>();
 	public productList: InputSignal<ProductResponse[]> = input.required<ProductResponse[]>();
 	public categoryList: InputSignal<CategoryResponse[]> = input.required<CategoryResponse[]>();
 	public colorList: InputSignal<Enum[]> = input.required<Enum[]>();

@@ -8,20 +8,19 @@
 
     <div class="flex items-start gap-x-6">
       <app-filter-product
-        [brandList]="brandList()"
+        [tagList]="tagList()"
         [categoryList]="categoryList()"
         [weightList]="weightList()"
         [colorList]="colorList()"
         [productList]="productList()"
         [form]="mainForm"
         class="w-1/4"
-        (changed)="onChanged()"
         (toggleTag)="toggleTag($event)"
       ></app-filter-product>
 
       <div class="flex-1">
         <app-list-product
-          [productItemList]="productList()"
+          [productItemList]="filteredProductList()"
           hasPagination
         ></app-list-product>
       </div>

@@ -98,10 +98,10 @@
       [formGroup]="form()"
       class="flex flex-wrap gap-4 w-full"
     >
-      @for (brand of brandList(); track $index) {
+      @for (tag of tagList(); track $index) {
       <app-button-filter
-        [label]="brand.name"
-        (clicked)="onToggleTag(brand.name)"
+        [label]="tag.name"
+        (clicked)="onToggleTag(tag.name)"
       ></app-button-filter>
       }
     </form>
