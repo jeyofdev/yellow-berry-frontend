@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, InputSignal, WritableSignal, booleanAttribute, input, signal } from '@angular/core';
+import { Component, InputSignal, OnInit, WritableSignal, booleanAttribute, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductResponse } from '@models/product/product-response.model';
 import { CardProductComponent } from '@shared/components/ui/card/card-product/card-product.component';
+import { NotResultComponent } from '@shared/components/ui/error/no-result/no-result.component';
 import { LayoutTypeInput } from '@type/list-product-input.type';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -23,6 +24,7 @@ import { SelectButton } from 'primeng/selectbutton';
 		CardProductComponent,
 		PaginatorModule,
 		ButtonModule,
+		NotResultComponent,
 	],
 	templateUrl: './list-product.component.html',
 	styleUrl: './list-product.component.scss',
@@ -43,5 +45,9 @@ export class ListProductComponent {
 	public onPageChange(event: PaginatorState) {
 		this.first.set(event.first as number);
 		this.rows.set(event.rows as number);
+	}
+
+	get productList(): ProductResponse[] {
+		return this.productItemList();
 	}
 }
