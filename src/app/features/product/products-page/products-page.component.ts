@@ -79,6 +79,8 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 				product.categories?.results.map((category: Category) => category.name.toLowerCase()) || [];
 
 			const productTagsName = product.tags?.results.map((tag: Tag) => tag.name.toLowerCase()) || [];
+			const productColorName = product.informations?.colorList.map(color => color.toLowerCase()) || [];
+			const productWeightName = product.informations?.weightList.map(weight => weight.toLowerCase()) || [];
 
 			const isCategoryMatch =
 				formValues.category?.length === 0 ||
@@ -87,7 +89,15 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 			const isTagMatch =
 				formValues.tag?.length === 0 || formValues.tag?.some(tag => productTagsName.includes(tag.toLowerCase()));
 
-			return isCategoryMatch && isTagMatch;
+			const isColorMatch =
+				formValues.color?.length === 0 ||
+				formValues.color?.some(color => productColorName.includes(color.toLowerCase()));
+
+			const isWeightMatch =
+				formValues.weight?.length === 0 ||
+				formValues.weight?.some(weight => productWeightName.includes(weight.toLowerCase()));
+
+			return isCategoryMatch && isTagMatch && isColorMatch && isWeightMatch;
 		});
 
 		this.filteredProductList.set(filteredProducts);
