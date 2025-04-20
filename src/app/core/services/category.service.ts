@@ -13,6 +13,6 @@ export class CategoryService {
 	_BASE_URL = 'http://localhost:8080/api/v1/category';
 
 	public findAll(): Observable<SuccessResponse<CategoryResponse[]>> {
-		return this._httpClient.get<SuccessResponse<CategoryResponse[]>>(this._BASE_URL).pipe();
+		return this._httpClient.get<SuccessResponse<CategoryResponse[]>>(this._BASE_URL);
 	}
 }
