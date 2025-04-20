@@ -5,6 +5,7 @@
   [first]="first()"
   [rows]="rows()"
   [paginator]="true"
+  emptyMessage=""
 >
   <ng-template #header>
     <div
@@ -29,7 +30,15 @@
   </ng-template>
 
   <ng-template #grid let-items>
-    @for (product of items; track product.id) {
+    @if(items && items.length === 0) {
+    <div class="w-full max-w-[500px] mx-auto mt-8">
+      <app-no-result
+        title="No result found."
+        imgSrc="images/no-result.svg"
+        imgAlt="product not found"
+      ></app-no-result>
+    </div>
+    } @for (product of items; track product.id) {
     <app-card-product
       [product]="product"
       [isShowCloseBtn]="isShowCloseBtn()"
@@ -39,7 +48,15 @@
   </ng-template>
 
   <ng-template #list let-items>
-    @for (product of items; track product.id) {
+    @if(items && items.length === 0) {
+    <div class="w-full max-w-[500px] mx-auto mt-8">
+      <app-no-result
+        title="No result found."
+        imgSrc="images/no-result.svg"
+        imgAlt="product not found"
+      ></app-no-result>
+    </div>
+    } @for (product of items; track product.id) {
     <app-card-product
       [product]="product"
       [isShowCloseBtn]="isShowCloseBtn()"
@@ -50,7 +67,7 @@
   </ng-template>
 </p-dataview>
 
-@if (hasPagination()) {
+@if (hasPagination() && productItemList().length > 0) {
 <div class="flex justify-between items-center p-0 mt-8">
   <p-paginator
     [rows]="rows()"

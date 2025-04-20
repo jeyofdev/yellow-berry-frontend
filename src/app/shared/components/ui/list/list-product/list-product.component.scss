@@ -2,6 +2,10 @@
   @apply pt-0 pb-6;
 }
 
+:host ::ng-deep p-dataview .p-dataview-emptymessage {
+  @apply hidden;
+}
+
 :host ::ng-deep p-dataview p-paginator {
   @apply hidden;
 }
