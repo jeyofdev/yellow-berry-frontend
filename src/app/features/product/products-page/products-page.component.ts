@@ -97,7 +97,12 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 				formValues.weight?.length === 0 ||
 				formValues.weight?.some(weight => productWeightName.includes(weight.toLowerCase()));
 
-			return isCategoryMatch && isTagMatch && isColorMatch && isWeightMatch;
+			const isPriceMatch =
+				formValues.price?.length === 2 &&
+				product.priceDetails.priceDiscount >= formValues.price[0] &&
+				product.priceDetails.priceDiscount <= formValues.price[1];
+
+			return isCategoryMatch && isTagMatch && isColorMatch && isWeightMatch && isPriceMatch;
 		});
 
 		this.filteredProductList.set(filteredProducts);
