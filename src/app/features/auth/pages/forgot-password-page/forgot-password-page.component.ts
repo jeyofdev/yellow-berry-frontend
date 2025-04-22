@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -29,14 +29,14 @@ import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-bac
 	],
 	templateUrl: './forgot-password-page.component.html',
 })
-export class ForgotPasswordPageComponent extends AuthPageAbstract<FormGroup<FormAuthForgotPassword>> {
+export class ForgotPasswordPageComponent extends FormAbstract<FormGroup<FormAuthForgotPassword>> {
 	public emailCtrl!: FormControl<string>;
 
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 	private _router: Router = inject(Router);
 
-	public override onSubmit(): void {
+	public onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError.set('');
 

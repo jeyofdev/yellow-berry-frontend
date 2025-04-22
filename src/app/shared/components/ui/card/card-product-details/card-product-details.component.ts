@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { CommonModule } from '@angular/common';
 import {
 	Component,
@@ -52,7 +52,7 @@ import { catchError, map, tap } from 'rxjs';
 	templateUrl: './card-product-details.component.html',
 	styleUrl: './card-product-details.component.scss',
 })
-export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<FormAddToCart>> implements OnInit {
+export class CardProductDetailsComponent extends FormAbstract<FormGroup<FormAddToCart>> implements OnInit {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _wishlistService: WishlistService = inject(WishlistService);
 	private _authService: AuthService = inject(AuthService);

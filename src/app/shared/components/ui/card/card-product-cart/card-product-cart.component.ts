@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { CommonModule } from '@angular/common';
 import {
 	Component,
@@ -37,7 +37,7 @@ import { Subscription, tap } from 'rxjs';
 	styleUrl: './card-product-cart.component.scss',
 })
 export class CardProductCartComponent
-	extends AuthPageAbstract<FormGroup<FormProductFromCart>>
+	extends FormAbstract<FormGroup<FormProductFromCart>>
 	implements OnInit, OnDestroy
 {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
@@ -53,7 +53,7 @@ export class CardProductCartComponent
 
 	private quantityValueChangesSubscription!: Subscription;
 
-	public override onSubmit(): void {}
+	public onSubmit(): void {}
 
 	override ngOnInit(): void {
 		super.ngOnInit();

@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { Component, InputSignal, WritableSignal, inject, input, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -35,7 +35,7 @@ import { TabsModule } from 'primeng/tabs';
 	templateUrl: './tabs.component.html',
 	styleUrl: './tabs.component.scss',
 })
-export class TabsComponent extends AuthPageAbstract<FormGroup<FormComment>> {
+export class TabsComponent extends FormAbstract<FormGroup<FormComment>> {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 	private _router: Router = inject(Router);
@@ -94,7 +94,7 @@ export class TabsComponent extends AuthPageAbstract<FormGroup<FormComment>> {
 		});
 	}
 
-	public override onSubmit(): void {
+	public onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError.set('');
 

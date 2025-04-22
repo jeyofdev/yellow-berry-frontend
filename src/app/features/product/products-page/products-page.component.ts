@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { Component, Signal, WritableSignal, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -41,7 +41,7 @@ import { map, tap } from 'rxjs';
 	templateUrl: './products-page.component.html',
 	styleUrl: './products-page.component.scss',
 })
-export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProductFilters>> {
+export class ProductsPageComponent extends FormAbstract<FormGroup<FormProductFilters>> {
 	private _brandService: BrandService = inject(BrandService);
 	private _categoryService: CategoryService = inject(CategoryService);
 	private _tagService: TagService = inject(TagService);
@@ -108,7 +108,7 @@ export class ProductsPageComponent extends AuthPageAbstract<FormGroup<FormProduc
 		this.filteredProductList.set(filteredProducts);
 	}
 
-	public override onSubmit(): void {}
+	public onSubmit(): void {}
 
 	protected override initMainForm() {
 		this.mainForm = this._formBuilder.group({

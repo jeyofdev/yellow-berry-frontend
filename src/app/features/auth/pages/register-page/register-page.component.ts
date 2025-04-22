@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Regex } from '@constants/regex.constant';
@@ -40,7 +40,7 @@ import { PasswordMatchValidator } from '@shared/validators/password-match.valida
 	],
 	templateUrl: './register-page.component.html',
 })
-export class RegisterPageComponent extends AuthPageAbstract<FormGroup<FormAuthRegister>> {
+export class RegisterPageComponent extends FormAbstract<FormGroup<FormAuthRegister>> {
 	public userInfoGroup!: FormGroup<FormAuthRegisterInfo>;
 	public userContactGroup!: FormGroup<FormAuthRegisterContact>;
 	public userAddressGroup!: FormGroup<FormAuthRegisterAddress>;
@@ -67,7 +67,7 @@ export class RegisterPageComponent extends AuthPageAbstract<FormGroup<FormAuthRe
 		this.initMainForm();
 	}
 
-	public override onSubmit(): void {
+	public onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError.set('');
 

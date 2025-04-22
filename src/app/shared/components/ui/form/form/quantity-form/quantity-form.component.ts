@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { Component, InputSignal, OnDestroy, OnInit, OutputEmitterRef, inject, input, output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { QuantityChangedEvent } from '@models/changed/quantity-changed-event.model';
@@ -14,10 +14,7 @@ import { Subscription } from 'rxjs';
 	templateUrl: './quantity-form.component.html',
 	styleUrl: './quantity-form.component.scss',
 })
-export class QuantityFormComponent
-	extends AuthPageAbstract<FormGroup<FormProductFromCart>>
-	implements OnInit, OnDestroy
-{
+export class QuantityFormComponent extends FormAbstract<FormGroup<FormProductFromCart>> implements OnInit, OnDestroy {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _cartService: CartService = inject(CartService);
 
@@ -29,7 +26,7 @@ export class QuantityFormComponent
 
 	private quantityValueChangesSubscription!: Subscription;
 
-	public override onSubmit(): void {}
+	public onSubmit(): void {}
 
 	override ngOnInit(): void {
 		super.ngOnInit();

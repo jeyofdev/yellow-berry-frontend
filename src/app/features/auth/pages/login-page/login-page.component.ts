@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -39,7 +39,7 @@ import { PasswordModule } from 'primeng/password';
 	],
 	templateUrl: './login-page.component.html',
 })
-export class LoginPageComponent extends AuthPageAbstract<FormGroup<FormAuthLogin>> {
+export class LoginPageComponent extends FormAbstract<FormGroup<FormAuthLogin>> {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 	private _activatedRouteService: ActivatedRoute = inject(ActivatedRoute);
@@ -50,7 +50,7 @@ export class LoginPageComponent extends AuthPageAbstract<FormGroup<FormAuthLogin
 
 	public loginResponse = signal<LoginResponse | null>(null);
 
-	public override onSubmit(): void {
+	public onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError.set('');
 
