@@ -1,6 +1,46 @@
 :host ::ng-deep p-carousel {
   .p-carousel-item {
     @apply flex flex-col items-center px-3;
+
+    .color-red {
+      background: rgb(255, 0, 0, 0.1);
+    }
+
+    .color-blue {
+      background: rgb(0, 0, 255, 0.1);
+    }
+
+    .color-green {
+      background: rgb(0, 128, 0, 0.1);
+    }
+
+    .color-yellow {
+      background: rgba(255, 255, 0, 0.1);
+    }
+
+    .color-orange {
+      background: rgb(255, 165, 0, 0.1);
+    }
+
+    .color-pink {
+      background: rgb(255, 192, 203, 0.1);
+    }
+
+    .color-purple {
+      background: rgb(128, 0, 128, 0.1);
+    }
+
+    .color-brown {
+      background: rgb(165, 42, 42, 0.1);
+    }
+
+    .color-silver {
+      background: rgb(192, 192, 192, 0.1);
+    }
+
+    .color-gold {
+      background: rgb(255, 215, 0, 0.1);
+    }
   }
 
   .p-image {
