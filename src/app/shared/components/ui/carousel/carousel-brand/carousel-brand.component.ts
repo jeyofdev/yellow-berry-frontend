@@ -1,5 +1,6 @@
 import { Component, InputSignal, OnInit, input } from '@angular/core';
 import { BrandResponse } from '@models/brand/brand-response.model';
+import { pluralizeText } from '@utils/text.utils';
 import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { ImageModule } from 'primeng/image';
 
@@ -47,5 +48,9 @@ export class CarouselBrandComponent implements OnInit {
 				numScroll: 1,
 			},
 		];
+	}
+
+	public formatProductCountText(size: number): string {
+		return pluralizeText(size, 'item');
 	}
 }
