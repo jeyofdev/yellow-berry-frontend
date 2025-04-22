@@ -1,0 +1,43 @@
+<p-carousel
+  [value]="items()"
+  [numVisible]="1"
+  [numScroll]="1"
+  [circular]="false"
+  [showIndicators]="false"
+  [showNavigators]="false"
+  [autoplayInterval]="false"
+  [circular]="true"
+  [responsiveOptions]="responsiveOptions"
+>
+  <ng-template let-hero #item>
+    <div class="flex items-center w-full bg-transparent h-[calc(100vh-184px)]">
+      <div class="flex flex-col">
+        <h6
+          class="text-lg text-zinc-700 leading-7 tracking-[0.03rem] font-poppins font-light"
+        >
+          {{ hero.subtitle }}
+        </h6>
+
+        <h5
+          class="text-[50px] text-gray-700 leading-[60px] tracking-[0.03rem] font-quicksand font-bold mt-6 mb-5"
+        >
+          {{ hero.title.first }}
+
+          <span
+            class="text-[50px] text-primary-500 leading-[60px] tracking-[0.03rem] font-quicksand font-bold"
+            >{{ hero.title.second }}</span
+          >
+
+          <br />
+
+          {{ hero.title.third }}
+        </h5>
+
+        <app-button-cta-large
+          type="submit"
+          label="Checkout"
+        ></app-button-cta-large>
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>

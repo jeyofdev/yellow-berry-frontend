@@ -17,6 +17,7 @@ export class LayoutContentComponent {
 	public pageTitleInfo: InputSignal<string> = input<string>('');
 	public containerMarginTop: InputSignal<string> = input<string>('mt-0');
 	public containerMarginBottom: InputSignal<string> = input<string>('mb-0');
+	public containerHeight: InputSignal<string> = input<string>('h-auto');
 	public childrenContainerMarginTop: InputSignal<string> = input<string>('mt-0');
 	public childrenContainerMarginBottom: InputSignal<string> = input<string>('mb-0');
 }

@@ -62,7 +62,7 @@ export class ProductsPageComponent extends FormAbstract<FormGroup<FormProductFil
 
 	private _updateFilteredProductList() {
 		const formValues: Partial<FormProductFilter> = this.formValueSignal();
-		this.filteredProductList.set(this._filterService._updateFilteredProductList(formValues));
+		this.filteredProductList.set(this._filterService.updateFilteredProductList(formValues));
 	}
 
 	protected override initMainForm() {
