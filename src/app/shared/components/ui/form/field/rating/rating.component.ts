@@ -1,4 +1,4 @@
-import { FormInputAbstract } from '@abstract/form-input.abstract';
+import { FormInputAbstract } from '@abstract/form-input/form-input.abstract';
 import { CommonModule } from '@angular/common';
 import { Component, forwardRef } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -17,7 +17,7 @@ import { Rating, RatingRateEvent } from 'primeng/rating';
 		},
 	],
 })
-export class RatingComponent extends FormInputAbstract<number> {
+export class RatingComponent extends FormInputAbstract<number, RatingRateEvent> {
 	public override onInputChange(event: RatingRateEvent): void {
 		if (this.disabled) {
 			return;

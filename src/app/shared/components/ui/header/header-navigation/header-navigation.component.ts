@@ -7,7 +7,7 @@ import { HeaderAccountLinkService } from '@services/header/header-account-link.s
 import { ButtonCtaSearchComponent } from '@shared/components/ui/buttons/button-cta-search/button-cta-search.component';
 import { ButtonHeaderAccountComponent } from '@shared/components/ui/buttons/button-header-account/button-header-account.component';
 import { DrawerCartComponent } from '@shared/components/ui/drawer/drawer-cart/drawer-cart.component';
-import { SearchFieldComponent } from '@shared/components/ui/form/search-field/search-field.component';
+import { SearchFieldComponent } from '@shared/components/ui/form/field/search-field/search-field.component';
 import { LogoComponent } from '@shared/components/ui/logo/logo.component';
 import { NavComponent } from '@shared/components/ui/nav/nav.component';
 import { MenuItem } from 'primeng/api';

@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Regex } from '@constants/regex.constant';
@@ -14,9 +14,9 @@ import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
 import { AlertFormErrorComponent } from '@shared/components/ui/form/alert-form-error/alert-form-error.component';
-import { MaskFieldComponent } from '@shared/components/ui/form/mask-field/mask-field.component';
-import { PasswordFieldComponent } from '@shared/components/ui/form/password-field/password-field.component';
-import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-field.component';
+import { MaskFieldComponent } from '@shared/components/ui/form/field/mask-field/mask-field.component';
+import { PasswordFieldComponent } from '@shared/components/ui/form/field/password-field/password-field.component';
+import { TextFieldComponent } from '@shared/components/ui/form/field/text-field/text-field.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LinkFormComponent } from '@shared/components/ui/link/link-form/link-form.component';
@@ -40,7 +40,7 @@ import { PasswordMatchValidator } from '@shared/validators/password-match.valida
 	],
 	templateUrl: './register-page.component.html',
 })
-export class RegisterPageComponent extends AuthPageAbstract<FormGroup<FormAuthRegister>> {
+export class RegisterPageComponent extends FormAbstract<FormGroup<FormAuthRegister>> {
 	public userInfoGroup!: FormGroup<FormAuthRegisterInfo>;
 	public userContactGroup!: FormGroup<FormAuthRegisterContact>;
 	public userAddressGroup!: FormGroup<FormAuthRegisterAddress>;
@@ -67,7 +67,7 @@ export class RegisterPageComponent extends AuthPageAbstract<FormGroup<FormAuthRe
 		this.initMainForm();
 	}
 
-	public override onSubmit(): void {
+	public onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError.set('');
 

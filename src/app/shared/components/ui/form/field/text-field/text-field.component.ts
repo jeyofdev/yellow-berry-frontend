@@ -1,4 +1,4 @@
-import { FormInputAbstract } from '@abstract/form-input.abstract';
+import { FormInputWithLabelAbstract } from '@abstract/form-input/form-input-with-label.abstract';
 import { Component, InputSignal, forwardRef, input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ErrorFieldComponent } from '@shared/components/ui/form/error-field/error-field.component';
@@ -18,7 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
 		},
 	],
 })
-export class TextFieldComponent extends FormInputAbstract<string> {
+export class TextFieldComponent extends FormInputWithLabelAbstract<string, Event> {
 	public type: InputSignal<TextFieldTypeInput> = input<TextFieldTypeInput>('text');
 	public placeholder: InputSignal<string> = input<string>('');
 	public min: InputSignal<number> = input<number>(0);

@@ -1,11 +1,11 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { Component, InputSignal, OnDestroy, OnInit, OutputEmitterRef, inject, input, output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { QuantityChangedEvent } from '@models/changed/quantity-changed-event.model';
 import { FormProductFromCart } from '@models/form/register/form-product-from-cart.model';
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { CartService } from '@services/cart.service';
-import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
+import { NumberStepFieldComponent } from '@shared/components/ui/form/field/number-step-field/number-step-field.component';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,10 +14,7 @@ import { Subscription } from 'rxjs';
 	templateUrl: './quantity-form.component.html',
 	styleUrl: './quantity-form.component.scss',
 })
-export class QuantityFormComponent
-	extends AuthPageAbstract<FormGroup<FormProductFromCart>>
-	implements OnInit, OnDestroy
-{
+export class QuantityFormComponent extends FormAbstract<FormGroup<FormProductFromCart>> implements OnInit, OnDestroy {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _cartService: CartService = inject(CartService);
 
@@ -28,8 +25,6 @@ export class QuantityFormComponent
 	public quantityCtrl!: FormControl<number>;
 
 	private quantityValueChangesSubscription!: Subscription;
-
-	public override onSubmit(): void {}
 
 	override ngOnInit(): void {
 		super.ngOnInit();

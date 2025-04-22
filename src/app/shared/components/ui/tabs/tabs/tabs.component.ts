@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { Component, InputSignal, WritableSignal, inject, input, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,8 +12,8 @@ import { CommentService } from '@services/comment.service';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
 import { ButtonLargeComponent } from '@shared/components/ui/buttons/button-large/button-large.component';
 import { CardCommentComponent } from '@shared/components/ui/card/card-comment/card-comment.component';
-import { RatingComponent } from '@shared/components/ui/form/rating/rating.component';
-import { TextareaFieldComponent } from '@shared/components/ui/form/textarea-field/textarea-field.component';
+import { RatingComponent } from '@shared/components/ui/form/field/rating/rating.component';
+import { TextareaFieldComponent } from '@shared/components/ui/form/field/textarea-field/textarea-field.component';
 import { TabLiComponent } from '@shared/components/ui/tabs/tab-li/tab-li.component';
 import { TablistComponent } from '@shared/components/ui/tabs/tablist/tablist.component';
 import { TabsModule } from 'primeng/tabs';
@@ -35,7 +35,7 @@ import { TabsModule } from 'primeng/tabs';
 	templateUrl: './tabs.component.html',
 	styleUrl: './tabs.component.scss',
 })
-export class TabsComponent extends AuthPageAbstract<FormGroup<FormComment>> {
+export class TabsComponent extends FormAbstract<FormGroup<FormComment>> {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _authService: AuthService = inject(AuthService);
 	private _router: Router = inject(Router);
@@ -94,7 +94,7 @@ export class TabsComponent extends AuthPageAbstract<FormGroup<FormComment>> {
 		});
 	}
 
-	public override onSubmit(): void {
+	public onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError.set('');
 

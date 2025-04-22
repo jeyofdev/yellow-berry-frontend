@@ -1,4 +1,4 @@
-import { FormInputAbstract } from '@abstract/form-input.abstract';
+import { FormInputAbstract } from '@abstract/form-input/form-input.abstract';
 import { Component, InputSignal, forwardRef, input } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputNumberInputEvent, InputNumberModule } from 'primeng/inputnumber';
@@ -16,14 +16,7 @@ import { InputNumberInputEvent, InputNumberModule } from 'primeng/inputnumber';
 		},
 	],
 })
-export class NumberStepFieldComponent extends FormInputAbstract<number> {
-	public override labelFor: InputSignal<string> = input<string>('');
-	public override label: InputSignal<string> = input<string>('');
-
-	constructor() {
-		super();
-	}
-
+export class NumberStepFieldComponent extends FormInputAbstract<number, InputNumberInputEvent> {
 	public override onInputChange(event: InputNumberInputEvent): void {
 		if (this.disabled) {
 			return;

@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
 import { AlertFormErrorComponent } from '@shared/components/ui/form/alert-form-error/alert-form-error.component';
-import { PasswordFieldComponent } from '@shared/components/ui/form/password-field/password-field.component';
+import { PasswordFieldComponent } from '@shared/components/ui/form/field/password-field/password-field.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-back.component';
@@ -37,7 +37,7 @@ import { PasswordModule } from 'primeng/password';
 	],
 	templateUrl: './reset-password-page.component.html',
 })
-export class ResetPasswordPageComponent extends AuthPageAbstract<FormGroup<FormAuthResetPassword>> {
+export class ResetPasswordPageComponent extends FormAbstract<FormGroup<FormAuthResetPassword>> {
 	public passwordCtrl!: FormControl<string>;
 	public confirmPassword!: FormControl<string>;
 
@@ -46,7 +46,7 @@ export class ResetPasswordPageComponent extends AuthPageAbstract<FormGroup<FormA
 	private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 	private _router: Router = inject(Router);
 
-	public override onSubmit(): void {
+	public onSubmit(): void {
 		if (this.mainForm.valid) {
 			this.mainFormError.set('');
 

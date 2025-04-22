@@ -1,4 +1,4 @@
-import { FormInputAbstract } from '@abstract/form-input.abstract';
+import { FormInputWithLabelAbstract } from '@abstract/form-input/form-input-with-label.abstract';
 import { Component, InputSignal, booleanAttribute, forwardRef, input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ErrorFieldComponent } from '@shared/components/ui/form/error-field/error-field.component';
@@ -17,7 +17,7 @@ import { PasswordModule } from 'primeng/password';
 		},
 	],
 })
-export class PasswordFieldComponent extends FormInputAbstract<string> {
+export class PasswordFieldComponent extends FormInputWithLabelAbstract<string, Event> {
 	public placeholder: InputSignal<string> = input<string>('');
 	public feedback = input<boolean, unknown>(false, { transform: booleanAttribute });
 	public toggleMask = input<boolean, unknown>(false, { transform: booleanAttribute });

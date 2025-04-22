@@ -7,9 +7,9 @@ import { ProductResponse } from '@models/product/product-response.model';
 import { TagResponse } from '@models/tag/tag-response.model copy';
 import { ButtonFilterComponent } from '@shared/components/ui/buttons/button-filter/button-filter.component';
 import { FilterBoxComponent } from '@shared/components/ui/filter/filter-box/filter-box.component';
-import { CheckboxColorFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-color-field/checkbox-color-field.component';
-import { CheckboxFieldComponent } from '@shared/components/ui/form/checkbox/checkbox-field/checkbox-field.component';
-import { SliderFieldComponent } from '@shared/components/ui/form/slider-field/slider-field.component';
+import { CheckboxColorFieldComponent } from '@shared/components/ui/form/field/checkbox/checkbox-color-field/checkbox-color-field.component';
+import { CheckboxFieldComponent } from '@shared/components/ui/form/field/checkbox/checkbox-field/checkbox-field.component';
+import { SliderFieldComponent } from '@shared/components/ui/form/field/slider-field/slider-field.component';
 import { DividerModule } from 'primeng/divider';
 
 @Component({

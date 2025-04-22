@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { CommonModule } from '@angular/common';
 import {
 	Component,
@@ -17,7 +17,7 @@ import { FormProductFromCart } from '@models/form/register/form-product-from-car
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { CartService } from '@services/cart.service';
 import { ButtonIconSmallComponent } from '@shared/components/ui/buttons/button-icon-small/button-icon-small.component';
-import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
+import { NumberStepFieldComponent } from '@shared/components/ui/form/field/number-step-field/number-step-field.component';
 import { ImageModule } from 'primeng/image';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { Subscription, tap } from 'rxjs';
@@ -37,7 +37,7 @@ import { Subscription, tap } from 'rxjs';
 	styleUrl: './card-product-cart.component.scss',
 })
 export class CardProductCartComponent
-	extends AuthPageAbstract<FormGroup<FormProductFromCart>>
+	extends FormAbstract<FormGroup<FormProductFromCart>>
 	implements OnInit, OnDestroy
 {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
@@ -52,8 +52,6 @@ export class CardProductCartComponent
 	sendUpdatedQuantityProduct: OutputEmitterRef<void> = output<void>();
 
 	private quantityValueChangesSubscription!: Subscription;
-
-	public override onSubmit(): void {}
 
 	override ngOnInit(): void {
 		super.ngOnInit();

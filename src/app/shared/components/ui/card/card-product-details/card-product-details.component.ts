@@ -1,4 +1,4 @@
-import { AuthPageAbstract } from '@abstract/auth-page.abstract';
+import { FormAbstract } from '@abstract/form/form.abstract';
 import { CommonModule } from '@angular/common';
 import {
 	Component,
@@ -22,11 +22,10 @@ import { AuthService } from '@services/auth/auth.service';
 import { CartService } from '@services/cart.service';
 import { CartComponentService } from '@services/components/cart-component.service';
 import { WishlistProductComponentService } from '@services/components/wishlist-product-component.service';
-import { ProductService } from '@services/product.service';
 import { WishlistService } from '@services/wishlist.service';
 import { ButtonCtaLargeComponent } from '@shared/components/ui/buttons/button-cta-large/button-cta-large.component';
 import { ButtonComponent } from '@shared/components/ui/buttons/button/button.component';
-import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
+import { NumberStepFieldComponent } from '@shared/components/ui/form/field/number-step-field/number-step-field.component';
 import { PriceDiscountPercentageComponent } from '@shared/components/ui/price/price-discount-percentage/price-discount-percentage.component';
 import { PriceComponent } from '@shared/components/ui/price/price/price.component';
 import { RatingComponent } from '@shared/components/ui/rating/rating.component';
@@ -52,7 +51,7 @@ import { catchError, map, tap } from 'rxjs';
 	templateUrl: './card-product-details.component.html',
 	styleUrl: './card-product-details.component.scss',
 })
-export class CardProductDetailsComponent extends AuthPageAbstract<FormGroup<FormAddToCart>> implements OnInit {
+export class CardProductDetailsComponent extends FormAbstract<FormGroup<FormAddToCart>> implements OnInit {
 	private _formBuilder: FormBuilder = inject(FormBuilder);
 	private _wishlistService: WishlistService = inject(WishlistService);
 	private _authService: AuthService = inject(AuthService);
