@@ -9,7 +9,7 @@ import { AuthService } from '@services/auth/auth.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
 import { ButtonFormComponent } from '@shared/components/ui/buttons/button-form/button-form.component';
 import { AlertFormErrorComponent } from '@shared/components/ui/form/alert-form-error/alert-form-error.component';
-import { TextFieldComponent } from '@shared/components/ui/form/text-field/text-field.component';
+import { TextFieldComponent } from '@shared/components/ui/form/field/text-field/text-field.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutAuthContentComponent } from '@shared/components/ui/layout/layout-auth-content/layout-auth-content.component';
 import { LinkBackComponent } from '@shared/components/ui/link/link-back/link-back.component';

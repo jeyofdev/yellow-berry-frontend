@@ -17,7 +17,7 @@ import { FormProductFromCart } from '@models/form/register/form-product-from-car
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { CartService } from '@services/cart.service';
 import { ButtonIconSmallComponent } from '@shared/components/ui/buttons/button-icon-small/button-icon-small.component';
-import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
+import { NumberStepFieldComponent } from '@shared/components/ui/form/field/number-step-field/number-step-field.component';
 import { ImageModule } from 'primeng/image';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { Subscription, tap } from 'rxjs';

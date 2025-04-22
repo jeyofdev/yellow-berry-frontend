@@ -5,7 +5,7 @@ import { QuantityChangedEvent } from '@models/changed/quantity-changed-event.mod
 import { FormProductFromCart } from '@models/form/register/form-product-from-cart.model';
 import { ProductToCartResponse } from '@models/product-to-cart/product-to-cart-response';
 import { CartService } from '@services/cart.service';
-import { NumberStepFieldComponent } from '@shared/components/ui/form/number-step-field/number-step-field.component';
+import { NumberStepFieldComponent } from '@shared/components/ui/form/field/number-step-field/number-step-field.component';
 import { Subscription } from 'rxjs';
 
 @Component({

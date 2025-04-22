@@ -1,4 +1,4 @@
-import { FormInputAbstract } from '@abstract/form-input.abstract';
+import { FormInputAbstract } from '@abstract/form-input/form-input.abstract';
 import { Component, InputSignal, forwardRef, input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ErrorFieldComponent } from '@shared/components/ui/form/error-field/error-field.component';
@@ -18,9 +18,7 @@ import { TextareaModule } from 'primeng/textarea';
 		},
 	],
 })
-export class TextareaFieldComponent extends FormInputAbstract<string> {
-	public override labelFor: InputSignal<string> = input<string>('');
-	public override label: InputSignal<string> = input<string>('');
+export class TextareaFieldComponent extends FormInputAbstract<string, Event> {
 	public placeholder: InputSignal<string> = input<string>('');
 	public rows: InputSignal<number> = input.required<number>();
 	public resize: InputSignal<string> = input<string>('vertical');

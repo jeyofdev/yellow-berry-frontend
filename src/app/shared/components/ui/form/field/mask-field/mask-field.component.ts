@@ -1,4 +1,4 @@
-import { FormInputAbstract } from '@abstract/form-input.abstract';
+import { FormInputWithLabelAbstract } from '@abstract/form-input/form-input-with-label.abstract';
 import { JsonPipe } from '@angular/common';
 import { Component, InputSignal, booleanAttribute, forwardRef, input } from '@angular/core';
 import { FormGroupDirective, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -20,7 +20,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 		},
 	],
 })
-export class MaskFieldComponent extends FormInputAbstract<string> {
+export class MaskFieldComponent extends FormInputWithLabelAbstract<string, Event> {
 	public type: InputSignal<MaskFieldTypeInput> = input.required<MaskFieldTypeInput>();
 	public autoClear = input<boolean, unknown>(false, {
 		transform: booleanAttribute,

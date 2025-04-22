@@ -1,4 +1,4 @@
-import { FormInputAbstract } from '@abstract/form-input.abstract';
+import { FormInputAbstract } from '@abstract/form-input/form-input.abstract';
 import { Component, InputSignal, OutputEmitterRef, forwardRef, input, output } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -17,7 +17,7 @@ import { SliderModule } from 'primeng/slider';
 		},
 	],
 })
-export class SliderFieldComponent extends FormInputAbstract<number[]> {
+export class SliderFieldComponent extends FormInputAbstract<number[], SliderSlideEndEvent> {
 	public min: InputSignal<number> = input<number>(0);
 	public max: InputSignal<number> = input<number>(100);
 	public range: InputSignal<boolean> = input<boolean>(false);
