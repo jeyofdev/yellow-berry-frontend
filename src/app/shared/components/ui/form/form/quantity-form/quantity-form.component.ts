@@ -26,8 +26,6 @@ export class QuantityFormComponent extends FormAbstract<FormGroup<FormProductFro
 
 	private quantityValueChangesSubscription!: Subscription;
 
-	public onSubmit(): void {}
-
 	override ngOnInit(): void {
 		super.ngOnInit();
 		if (this.quantityCtrl) {

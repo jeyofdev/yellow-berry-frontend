@@ -1,4 +1,5 @@
 import { Component, InputSignal, WritableSignal, effect, inject, input, signal } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { RouteEnum } from '@enum/route.enum';
 import { ProductDetailsResponse } from '@models/product/product-details-response.model';
@@ -9,7 +10,7 @@ import { CardProductDetailsComponent } from '@shared/components/ui/card/card-pro
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
 import { TabsComponent } from '@shared/components/ui/tabs/tabs/tabs.component';
-import { catchError, tap } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 
 @Component({
 	selector: 'app-products-details-page',
@@ -22,29 +23,25 @@ export class ProductsDetailsPageComponent {
 	private _productService: ProductService = inject(ProductService);
 
 	public id: InputSignal<string> = input.required<string>();
-	public product: WritableSignal<ProductDetailsResponse | null> = signal<ProductDetailsResponse | null>(null);
 
-	constructor() {
-		effect(() => {
-			const productId = this.id();
+	public product = this._loadProductSignal();
 
-			if (productId) {
-				this._productService
-					.findById({ productId })
-					.pipe(
-						tap((response: SuccessResponse<ProductDetailsResponse>) => {
-							this.product.set(response.result);
-						}),
+	private _loadProductSignal() {
+		return toSignal(
+			toObservable(this.id).pipe(
+				switchMap(productId =>
+					this._productService.findById({ productId }).pipe(
+						map((response: SuccessResponse<ProductDetailsResponse>) => response.result),
 						catchError(error => {
 							if (error.status === 400 || error.status === 404) {
 								this._router.navigateByUrl(RouteEnum.PRODUCT_NOT_FOUND);
 							}
-
-							return [];
+							return of(null);
 						}),
-					)
-					.subscribe();
-			}
-		});
+					),
+				),
+			),
+			{ initialValue: null },
+		);
 	}
 }

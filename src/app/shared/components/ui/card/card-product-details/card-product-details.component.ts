@@ -22,7 +22,6 @@ import { AuthService } from '@services/auth/auth.service';
 import { CartService } from '@services/cart.service';
 import { CartComponentService } from '@services/components/cart-component.service';
 import { WishlistProductComponentService } from '@services/components/wishlist-product-component.service';
-import { ProductService } from '@services/product.service';
 import { WishlistService } from '@services/wishlist.service';
 import { ButtonCtaLargeComponent } from '@shared/components/ui/buttons/button-cta-large/button-cta-large.component';
 import { ButtonComponent } from '@shared/components/ui/buttons/button/button.component';

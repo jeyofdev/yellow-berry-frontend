@@ -53,8 +53,6 @@ export class CardProductCartComponent
 
 	private quantityValueChangesSubscription!: Subscription;
 
-	public onSubmit(): void {}
-
 	override ngOnInit(): void {
 		super.ngOnInit();
 		if (this.quantityCtrl) {
