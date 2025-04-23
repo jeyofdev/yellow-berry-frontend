@@ -12,4 +12,28 @@
       }
     }
   }
+
+  .p-carousel-content-container {
+    @apply relative;
+
+    .p-carousel-indicator-list {
+      @apply absolute bottom-4 left-4 gap-1;
+
+      .p-carousel-indicator {
+        .p-carousel-indicator-button {
+          @apply bg-gray-600 w-[0.9375rem] h-[0.9375rem] rounded-none skew-x-[340deg] transition-all duration-300 ease-linear;
+
+          &:hover {
+            @apply shadow-none;
+          }
+        }
+
+        &.p-carousel-indicator-active {
+          .p-carousel-indicator-button {
+            @apply bg-primary-500 w-[1.875rem];
+          }
+        }
+      }
+    }
+  }
 }

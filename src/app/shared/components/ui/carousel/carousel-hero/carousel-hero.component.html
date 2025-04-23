@@ -3,7 +3,7 @@
   [numVisible]="1"
   [numScroll]="1"
   [circular]="false"
-  [showIndicators]="false"
+  [showIndicators]="true"
   [showNavigators]="false"
   [autoplayInterval]="false"
   [circular]="true"
@@ -11,7 +11,7 @@
 >
   <ng-template let-hero #item>
     <div class="flex items-center w-full bg-transparent h-[calc(100vh-184px)]">
-      <div class="flex flex-col">
+      <div class="flex flex-col w-1/2">
         <h6
           class="text-lg text-zinc-700 leading-7 tracking-[0.03rem] font-poppins font-light"
         >
@@ -36,8 +36,15 @@
         <app-button-cta-large
           type="submit"
           label="Checkout"
+          variant="outlined"
         ></app-button-cta-large>
       </div>
+
+      <p-image
+        src="images/about.png"
+        [alt]="hero.title.second"
+        class="flex-1 max-w-[700px]"
+      />
     </div>
   </ng-template>
 </p-carousel>
