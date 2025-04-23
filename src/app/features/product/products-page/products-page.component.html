@@ -4,7 +4,11 @@
 
 <app-layout-content containerMarginTop="mt-10" containerMarginBottom="mb-10">
   <div class="flex flex-col gap-y-6 w-full overflow-hidden">
-    <app-carousel-brand [items]="brandList()"></app-carousel-brand>
+    <app-carousel-brand
+      [items]="brandList()"
+      [numVisible]="6"
+      [responsiveOptions]="carouselBrandResponsiveOptions"
+    ></app-carousel-brand>
 
     <div class="flex items-start gap-x-6">
       <app-filter-product

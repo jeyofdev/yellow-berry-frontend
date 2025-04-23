@@ -52,6 +52,39 @@ export class ProductsPageComponent extends FormAbstract<FormGroup<FormProductFil
 	public formValueSignal = signal(this.mainForm?.value || {});
 	public filteredProductList: WritableSignal<ProductResponse[]> = signal<ProductResponse[]>([]);
 
+	public carouselBrandResponsiveOptions = [
+		{
+			breakpoint: '1400px',
+			numVisible: 6,
+			numScroll: 1,
+		},
+		{
+			breakpoint: '1280px',
+			numVisible: 5,
+			numScroll: 1,
+		},
+		{
+			breakpoint: '1100px',
+			numVisible: 4,
+			numScroll: 1,
+		},
+		{
+			breakpoint: '960px',
+			numVisible: 3,
+			numScroll: 1,
+		},
+		{
+			breakpoint: '768px',
+			numVisible: 2,
+			numScroll: 1,
+		},
+		{
+			breakpoint: '400px',
+			numVisible: 1,
+			numScroll: 1,
+		},
+	];
+
 	constructor() {
 		super();
 
@@ -62,7 +95,7 @@ export class ProductsPageComponent extends FormAbstract<FormGroup<FormProductFil
 
 	private _updateFilteredProductList() {
 		const formValues: Partial<FormProductFilter> = this.formValueSignal();
-		this.filteredProductList.set(this._filterService._updateFilteredProductList(formValues));
+		this.filteredProductList.set(this._filterService.updateFilteredProductList(formValues));
 	}
 
 	protected override initMainForm() {

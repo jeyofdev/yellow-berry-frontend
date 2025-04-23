@@ -10,45 +10,10 @@ import { ImageModule } from 'primeng/image';
 	templateUrl: './carousel-brand.component.html',
 	styleUrl: './carousel-brand.component.scss',
 })
-export class CarouselBrandComponent implements OnInit {
+export class CarouselBrandComponent {
 	public items: InputSignal<BrandResponse[]> = input.required<BrandResponse[]>();
-
-	public responsiveOptions!: CarouselResponsiveOptions[];
-
-	ngOnInit() {
-		this.responsiveOptions = [
-			{
-				breakpoint: '1400px',
-				numVisible: 6,
-				numScroll: 1,
-			},
-			{
-				breakpoint: '1280px',
-				numVisible: 5,
-				numScroll: 1,
-			},
-			{
-				breakpoint: '1100px',
-				numVisible: 4,
-				numScroll: 1,
-			},
-			{
-				breakpoint: '960px',
-				numVisible: 3,
-				numScroll: 1,
-			},
-			{
-				breakpoint: '768px',
-				numVisible: 2,
-				numScroll: 1,
-			},
-			{
-				breakpoint: '400px',
-				numVisible: 1,
-				numScroll: 1,
-			},
-		];
-	}
+	public responsiveOptions: InputSignal<CarouselResponsiveOptions[]> = input.required<CarouselResponsiveOptions[]>();
+	public numVisible: InputSignal<number> = input.required<number>();
 
 	public formatProductCountText(size: number): string {
 		return pluralizeText(size, 'item');

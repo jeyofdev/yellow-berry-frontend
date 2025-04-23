@@ -34,7 +34,7 @@ export class FilterService {
 	public colorList: Signal<Enum[]> = this._getColorList();
 	public weightList: Signal<Enum[]> = this._getWeightList();
 
-	public _updateFilteredProductList(formValues: Partial<FormProductFilter>) {
+	public updateFilteredProductList(formValues: Partial<FormProductFilter>) {
 		return this.productList().filter((product: ProductResponse) => {
 			const productCategoriesName =
 				product.categories?.results.map((category: Category) => category.name.toLowerCase()) || [];

@@ -1,0 +1,44 @@
+:host ::ng-deep p-chip {
+  @apply bg-gray-700 py-2 px-4;
+
+  .p-chip-label {
+    @apply text-sm text-white leading-[1.3125rem] tracking-[0.02rem] font-poppins font-normal;
+  }
+}
+
+.transparent-text {
+  text-shadow: 1px 1px #111a24, -1px 1px #111a24, 1px -1px #111a24,
+    -1px -1px #111a24;
+}
+
+:host ::ng-deep p-image.about-img {
+  @apply flex w-full;
+
+  .p-image {
+    @apply w-full;
+
+    img {
+      @apply w-full;
+    }
+  }
+}
+
+.rounded-box {
+  &:before,
+  &:after {
+    @apply absolute w-[30px] h-[30px];
+    content: "";
+    background: url("assets/images/border-img.png") no-repeat;
+    background-size: 100%;
+  }
+
+  &::before {
+    top: -29px;
+    left: 99px;
+  }
+
+  &::after {
+    bottom: -1px;
+    left: -29px;
+  }
+}
