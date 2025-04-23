@@ -4,11 +4,14 @@ import { Hero } from '@models/hero/hero.model';
 import { CarouselHeroComponent } from '@shared/components/ui/carousel/carousel-hero/carousel-hero.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
+import { ChipModule } from 'primeng/chip';
+import { ImageModule } from 'primeng/image';
 
 @Component({
 	selector: 'app-home-page',
-	imports: [HeaderComponent, LayoutContentComponent, CarouselHeroComponent],
+	imports: [HeaderComponent, LayoutContentComponent, CarouselHeroComponent, ImageModule, ChipModule],
 	templateUrl: './home-page.component.html',
+	styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
 	private heroItems: Hero[] = [
