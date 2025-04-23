@@ -1,14 +1,20 @@
-import { Component, Signal, inject, signal } from '@angular/core';
+import { Component, Signal, WritableSignal, inject, input, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { BrandResponse } from '@models/brand/brand-response.model';
 import { HeroWithTitleFormatted } from '@models/hero/hero-with-title-formated.model';
 import { Hero } from '@models/hero/hero.model';
+import { ProductResponse } from '@models/product/product-response.model';
+import { SuccessResponse } from '@models/response/success-response.model';
 import { FilterService } from '@services/components/filter.service';
+import { ProductService } from '@services/product.service';
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
 import { CarouselHeroComponent } from '@shared/components/ui/carousel/carousel-hero/carousel-hero.component';
+import { CarouselProductComponent } from '@shared/components/ui/carousel/carousel-product/carousel-product.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
 import { ChipModule } from 'primeng/chip';
 import { ImageModule } from 'primeng/image';
+import { map } from 'rxjs';
 
 @Component({
 	selector: 'app-home-page',
@@ -19,6 +25,7 @@ import { ImageModule } from 'primeng/image';
 		ImageModule,
 		ChipModule,
 		CarouselBrandComponent,
+		CarouselProductComponent,
 	],
 	templateUrl: './home-page.component.html',
 	styleUrl: './home-page.component.scss',
@@ -26,6 +33,9 @@ import { ImageModule } from 'primeng/image';
 export class HomePageComponent {
 	private _filterService: FilterService = inject(FilterService);
 	public brandList: Signal<BrandResponse[]> = this._filterService.brandList;
+	private _productService: ProductService = inject(ProductService);
+
+	public productList: Signal<ProductResponse[]> = this._getProductList();
 
 	private heroItems: Hero[] = [
 		{ subtitle: 'Flat 30% Off', title: 'Explore Healthy & Fresh Fruits' },
@@ -84,4 +94,13 @@ export class HomePageComponent {
 			numScroll: 1,
 		},
 	];
+
+	private _getProductList(): Signal<ProductResponse[]> {
+		return toSignal(
+			this._productService
+				.findAll()
+				.pipe(map((productResponse: SuccessResponse<ProductResponse[]>) => productResponse.result)),
+			{ initialValue: [] },
+		);
+	}
 }

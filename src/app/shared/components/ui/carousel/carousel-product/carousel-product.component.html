@@ -1,0 +1,19 @@
+<p-carousel
+  [value]="items()"
+  [numVisible]="5"
+  [numScroll]="1"
+  [circular]="false"
+  [showIndicators]="false"
+  [showNavigators]="false"
+  [autoplayInterval]="0"
+  [circular]="true"
+  [responsiveOptions]="responsiveOptions"
+>
+  <ng-template let-product #item>
+    <app-card-product
+      [product]="product"
+      [isShowCloseBtn]="isShowCloseBtn()"
+      class="w-full"
+    ></app-card-product>
+  </ng-template>
+</p-carousel>

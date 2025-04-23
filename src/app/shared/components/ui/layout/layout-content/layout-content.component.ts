@@ -20,4 +20,5 @@ export class LayoutContentComponent {
 	public containerHeight: InputSignal<string> = input<string>('h-auto');
 	public childrenContainerMarginTop: InputSignal<string> = input<string>('mt-0');
 	public childrenContainerMarginBottom: InputSignal<string> = input<string>('mb-0');
+	public titleJustifyContent: InputSignal<string> = input<string>('justify-center');
 }
