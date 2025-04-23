@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div class="bg-gray-100 h-[calc(100vh-184px)]">
+<div class="bg-gray-100">
   <app-layout-content
     containerMarginTop="mt-0"
     containerMarginBottom="mb-0"
@@ -8,37 +8,56 @@
   >
     <div class="w-full">
       <app-carousel-hero [items]="heroItemList()"></app-carousel-hero>
-
-      <div class="flex gap-8 py-12 w-full">
-        <div class="relative flex w-1/3 max-w-[573px]">
-          <p-image src="images/category.jpg" alt="about" class="about-img" />
-
-          <div class="absolute top-4 right-4">
-            <p-chip label="50% Off" />
-          </div>
-        </div>
-
-        <div class="relative flex-1 flex flex-col">
-          <div>
-            <h1
-              class="text-[110px] text-white leading-[120px] tracking-[0.03rem] font-quicksand font-bold text-outline opacity-[0.15] transparent-text flex flex-col"
-            >
-              <span> Explore </span>
-              <span>Brands</span>
-            </h1>
-          </div>
-
-          <div
-            class="absolute -left-40 bottom-0 w-[calc(100%+160px)] h-[207px] rounded-tl-4xl px-3 py-5 bg-white rounded-box"
-          >
-            <app-carousel-brand
-              [items]="brandList()"
-              [numVisible]="4"
-              [responsiveOptions]="carouselBrandResponsiveOptions"
-            ></app-carousel-brand>
-          </div>
-        </div>
-      </div>
     </div>
   </app-layout-content>
 </div>
+
+<app-layout-content containerMarginTop="mt-12" containerMarginBottom="mb-12">
+  <div class="flex gap-8 w-full">
+    <div class="relative flex w-1/3 max-w-[573px]">
+      <p-image src="images/category.jpg" alt="about" class="about-img" />
+
+      <div class="absolute top-4 right-4">
+        <p-chip label="50% Off" />
+      </div>
+    </div>
+
+    <div class="relative flex-1 flex flex-col">
+      <div>
+        <h1
+          class="text-[110px] text-white leading-[120px] tracking-[0.03rem] font-quicksand font-bold text-outline opacity-[0.15] transparent-text flex flex-col"
+        >
+          <span> Explore </span>
+          <span>Brands</span>
+        </h1>
+      </div>
+
+      <div
+        class="absolute -left-40 bottom-0 w-[calc(100%+160px)] h-[207px] rounded-tl-4xl px-3 py-5 bg-white rounded-box"
+      >
+        <app-carousel-brand
+          [items]="brandList()"
+          [numVisible]="4"
+          [responsiveOptions]="carouselBrandResponsiveOptions"
+        ></app-carousel-brand>
+      </div>
+    </div>
+  </div>
+</app-layout-content>
+
+<app-layout-content
+  subtitle="Don't wait. The time will never be just right."
+  pageTitleSecondary="Day of the"
+  pageTitleInfo="Deal"
+  titleJustifyContent="flex-start"
+  childrenContainerMarginTop="mt-6"
+  containerMarginTop="mt-12"
+  containerMarginBottom="mb-12"
+>
+  <div
+    class="flex flex-col md:flex-row items-center md:items-start justify-center w-full overflow-hidden"
+  >
+    <app-carousel-product [items]="productList()" class="w-full">
+    </app-carousel-product>
+  </div>
+</app-layout-content>

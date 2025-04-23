@@ -1,0 +1,13 @@
+:host ::ng-deep p-carousel {
+  .p-carousel-item {
+    @apply flex flex-col items-center px-4;
+
+    .p-image {
+      @apply flex w-full;
+
+      img {
+        @apply w-full;
+      }
+    }
+  }
+}

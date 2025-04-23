@@ -5,17 +5,21 @@
   <app-layout-base justifyContent="justify-center" alignItems="items-center">
     <div class="flex flex-col justify-center items-center gap-3 w-full p-0">
       @if (pageTitleSecondary() || pageTitlePrimary()|| pageTitleInfo()) {
-      <app-section-title
-        [secondaryContent]="pageTitleSecondary()"
-        [primaryContent]="pageTitlePrimary()"
-        [infoContent]="pageTitleInfo()"
-      ></app-section-title>
+      <div class="w-full flex" [class]="titleJustifyContent()">
+        <app-section-title
+          [secondaryContent]="pageTitleSecondary()"
+          [primaryContent]="pageTitlePrimary()"
+          [infoContent]="pageTitleInfo()"
+        ></app-section-title>
+      </div>
 
       } @if (subtitle()) {
-      <app-section-subtitle
-        [content]="subtitle()"
-        maxWidth="max-w-[23rem]"
-      ></app-section-subtitle>
+      <div class="w-full flex" [class]="titleJustifyContent()">
+        <app-section-subtitle
+          [content]="subtitle()"
+          maxWidth="max-w-[23rem]"
+        ></app-section-subtitle>
+      </div>
       }
 
       <div
