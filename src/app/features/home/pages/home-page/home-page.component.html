@@ -21,16 +21,22 @@
         <div class="relative flex-1 flex flex-col">
           <div>
             <h1
-              class="text-[124px] text-white leading-[140px] tracking-[0.03rem] font-quicksand font-bold text-outline opacity-[0.15] transparent-text flex flex-col"
+              class="text-[110px] text-white leading-[120px] tracking-[0.03rem] font-quicksand font-bold text-outline opacity-[0.15] transparent-text flex flex-col"
             >
               <span> Explore </span>
-              <span>Categories</span>
+              <span>Brands</span>
             </h1>
           </div>
 
           <div
-            class="absolute -left-40 bottom-0 w-[calc(100%+160px)] h-[198px] rounded-tl-4xl bg-white rounded-box"
-          ></div>
+            class="absolute -left-40 bottom-0 w-[calc(100%+160px)] h-[207px] rounded-tl-4xl px-3 py-5 bg-white rounded-box"
+          >
+            <app-carousel-brand
+              [items]="brandList()"
+              [numVisible]="4"
+              [responsiveOptions]="carouselBrandResponsiveOptions"
+            ></app-carousel-brand>
+          </div>
         </div>
       </div>
     </div>

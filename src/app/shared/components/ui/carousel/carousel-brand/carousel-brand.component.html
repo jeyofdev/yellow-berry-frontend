@@ -1,13 +1,13 @@
 <p-carousel
   [value]="items()"
-  [numVisible]="6"
+  [numVisible]="numVisible()"
   [numScroll]="1"
   [circular]="false"
   [showIndicators]="false"
   [showNavigators]="false"
-  [autoplayInterval]="0"
+  [autoplayInterval]="2000"
   [circular]="true"
-  [responsiveOptions]="responsiveOptions"
+  [responsiveOptions]="responsiveOptions()"
 >
   <ng-template let-brand #item>
     <div
