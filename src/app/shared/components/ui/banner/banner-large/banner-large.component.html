@@ -1,25 +1,29 @@
 <div
-  class="relative w-full h-[600px] bg-[url('assets/images/banner-large.jpg')] bg-no-repeat bg-cover bg-center"
+  class="w-full h-[600px] bg-[url('assets/images/banner-large.jpg')] bg-no-repeat bg-cover bg-center"
 >
   <div
-    class="absolute bottom-0 right-[15%] bg-white rounded-t-[1.875rem] w-3/12 max-w-[400px] px-10 pt-8 pb-0 rounded-box"
+    class="relative flex max-w-screen-sm sm:max-w-screen-md md:max-w-screen-lg lg:max-w-screen-xl xl:max-w-screen-2xl 2xl:max-w-screen-3xl mx-auto px-6 w-full h-full"
   >
-    <h6
-      class="text-xl text-blue-400 leading-[1.625rem] tracking-[0.02rem] font-poppins font-semibold"
+    <div
+      class="absolute bottom-0 right-[200px] bg-white rounded-t-[1.875rem] w-3/12 max-w-[400px] px-10 pt-8 pb-0 rounded-box"
     >
-      {{ subtitle() }}
-    </h6>
+      <h6
+        class="text-xl text-blue-400 leading-[1.625rem] tracking-[0.02rem] font-poppins font-semibold"
+      >
+        {{ subtitle() }}
+      </h6>
 
-    <h5
-      class="text-[40px] text-gray-700 leading-[43px] tracking-[0.03rem] font-quicksand font-bold mt-3 mb-5"
-    >
-      {{ title() }}
-    </h5>
+      <h5
+        class="text-[40px] text-gray-700 leading-[43px] tracking-[0.03rem] font-quicksand font-bold mt-3 mb-5"
+      >
+        {{ title() }}
+      </h5>
 
-    <app-button-cta-large
-      type="submit"
-      label="Shop Now"
-      variant="outlined"
-    ></app-button-cta-large>
+      <app-button-cta-large
+        type="submit"
+        label="Shop Now"
+        variant="outlined"
+      ></app-button-cta-large>
+    </div>
   </div>
 </div>
