@@ -1,0 +1,11 @@
+.banner-box {
+  @apply relative w-full rounded-[1.25rem] px-12 bg-primary-100 overflow-hidden before:content-[''] before:absolute before:-left-[200px] before:-top-[200px] before:bottom-0 before:w-[400px] before:h-[600px] before:z-0 before:rotate-[40deg] after:content-[''] after:absolute after:-right-[70px] after:-bottom-[100px] after:w-[150px] after:h-[300px] after:z-0 after:rotate-[40deg];
+
+  &.color-primary {
+    @apply bg-primary-100 before:bg-primary-200 after:bg-primary-200;
+  }
+
+  &.color-rose {
+    @apply bg-rose-50 before:bg-rose-100 after:bg-rose-100;
+  }
+}

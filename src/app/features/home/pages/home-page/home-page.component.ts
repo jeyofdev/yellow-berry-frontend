@@ -7,6 +7,7 @@ import { ProductResponse } from '@models/product/product-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { FilterService } from '@services/components/filter.service';
 import { ProductService } from '@services/product.service';
+import { BannerComponent } from '@shared/components/ui/banner/banner.component';
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
 import { CarouselHeroComponent } from '@shared/components/ui/carousel/carousel-hero/carousel-hero.component';
 import { CarouselProductComponent } from '@shared/components/ui/carousel/carousel-product/carousel-product.component';
@@ -26,6 +27,7 @@ import { map } from 'rxjs';
 		ChipModule,
 		CarouselBrandComponent,
 		CarouselProductComponent,
+		BannerComponent,
 	],
 	templateUrl: './home-page.component.html',
 	styleUrl: './home-page.component.scss',

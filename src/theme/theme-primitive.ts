@@ -209,7 +209,7 @@ export const themePrimitive = {
 	},
 	rose: {
 		50: '#FFE8EE',
-		100: '#FFB3C0',
+		100: '#FFC6CE',
 		200: '#FF8D93',
 		300: '#FF6A7C',
 		400: '#FF748B',
