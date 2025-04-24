@@ -1,4 +1,4 @@
-import { Component, Signal, WritableSignal, inject, input, signal } from '@angular/core';
+import { Component, Signal, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BrandResponse } from '@models/brand/brand-response.model';
 import { HeroWithTitleFormatted } from '@models/hero/hero-with-title-formated.model';
@@ -7,7 +7,8 @@ import { ProductResponse } from '@models/product/product-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { FilterService } from '@services/components/filter.service';
 import { ProductService } from '@services/product.service';
-import { BannerComponent } from '@shared/components/ui/banner/banner.component';
+import { BannerLargeComponent } from '@shared/components/ui/banner/banner-large/banner-large.component';
+import { BannerSmallComponent } from '@shared/components/ui/banner/banner-small/banner-small.component';
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
 import { CarouselHeroComponent } from '@shared/components/ui/carousel/carousel-hero/carousel-hero.component';
 import { CarouselProductComponent } from '@shared/components/ui/carousel/carousel-product/carousel-product.component';
@@ -27,7 +28,8 @@ import { map } from 'rxjs';
 		ChipModule,
 		CarouselBrandComponent,
 		CarouselProductComponent,
-		BannerComponent,
+		BannerSmallComponent,
+		BannerLargeComponent,
 	],
 	templateUrl: './home-page.component.html',
 	styleUrl: './home-page.component.scss',

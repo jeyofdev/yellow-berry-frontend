@@ -3,12 +3,12 @@ import { ButtonCtaLargeComponent } from '@shared/components/ui/buttons/button-ct
 import { ImageModule } from 'primeng/image';
 
 @Component({
-	selector: 'app-banner',
+	selector: 'app-banner-small',
 	imports: [ButtonCtaLargeComponent, ImageModule],
-	templateUrl: './banner.component.html',
-	styleUrl: './banner.component.scss',
+	templateUrl: './banner-small.component.html',
+	styleUrl: './banner-small.component.scss',
 })
-export class BannerComponent {
+export class BannerSmallComponent {
 	public title: InputSignal<string> = input.required<string>();
 	public subtitle: InputSignal<string> = input.required<string>();
 	public imgSrc: InputSignal<string> = input.required<string>();
