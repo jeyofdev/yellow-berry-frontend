@@ -1,0 +1,20 @@
+.rounded-box {
+  &:before,
+  &:after {
+    @apply absolute w-[30px] h-[30px];
+    content: "";
+    background: url("assets/images/border-img.png") no-repeat;
+    background-size: 100%;
+  }
+
+  &::before {
+    top: 187px;
+    left: -29px;
+  }
+
+  &::after {
+    bottom: 0px;
+    left: 399px;
+    transform: rotate(90deg);
+  }
+}
