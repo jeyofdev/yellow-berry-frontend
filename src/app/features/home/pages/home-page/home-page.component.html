@@ -15,7 +15,7 @@
 <app-layout-content containerMarginTop="mt-12" containerMarginBottom="mb-12">
   <div class="flex gap-8 w-full">
     <div class="relative flex w-1/3 max-w-[573px]">
-      <p-image src="images/category.jpg" alt="about" class="about-img" />
+      <p-image src="images/category.jpg" alt="about" class="category-img" />
 
       <div class="absolute top-4 right-4">
         <p-chip label="50% Off" />
@@ -110,59 +110,9 @@
   <div
     class="flex flex-col md:flex-row items-center md:items-start justify-center w-full md:w-[85%] max-w-[1368px] overflow-hidden pt-10 px-4"
   >
-    <div
-      class="flex flex-col md:flex-row items-center md:items-start justify-center relative overflow-hidden w-full"
-    >
-      <img
-        src="images/testimonial/img-1.png"
-        alt=""
-        class="hidden 2xl:flex absolute left-7 top-11"
-      />
-
-      <img
-        src="images/testimonial/img-2.png"
-        alt=""
-        class="hidden 2xl:flex absolute left-0 bottom-0"
-      />
-
-      <img
-        src="images/testimonial/img-3.png"
-        alt=""
-        class="hidden lg:flex absolute left-[53%] -top-2"
-      />
-
-      <img
-        src="images/testimonial/img-4.png"
-        alt=""
-        class="hidden lg:flex absolute left-[74%] top-[30%]"
-      />
-
-      <img
-        src="images/testimonial/img-5.png"
-        alt=""
-        class="hidden lg:flex absolute right-0 top-[16%]"
-      />
-
-      <img
-        src="images/testimonial/img-6.png"
-        alt=""
-        class="hidden 2xl:flex absolute right-[5.5%] bottom-[6%]"
-      />
-
-      <div
-        class="relative flex flex-col xl:flex-row justify-center items-start w-full"
-      >
-        <h1
-          class="text-[2.625rem] text-white leading-[3.15rem] tracking-[0.03rem] font-quicksand font-bold text-outline opacity-[0.15] transparent-text mb-4 xl:mb-0 xl:origin-center-top xl:-rotate-90 xl:transform xl:translate-y-[215%] xl:-translate-x-[5%]"
-        >
-          Testimonials
-        </h1>
-
-        <app-carousel-testimonial
-          [items]="testimonialItemList()"
-          class="w-full md:max-w-[850px] xl:transform xl:-translate-x-[11.5%]"
-        ></app-carousel-testimonial>
-      </div>
-    </div>
+    <app-section-testimonial
+      [testimonialItemList]="testimonialItemList()"
+      class="w-full"
+    ></app-section-testimonial>
   </div>
 </app-layout-content>

@@ -17,9 +17,9 @@ import { CardServiceComponent } from '@shared/components/ui/card/card-service/ca
 import { CarouselBrandComponent } from '@shared/components/ui/carousel/carousel-brand/carousel-brand.component';
 import { CarouselHeroComponent } from '@shared/components/ui/carousel/carousel-hero/carousel-hero.component';
 import { CarouselProductComponent } from '@shared/components/ui/carousel/carousel-product/carousel-product.component';
-import { CarouselTestimonialComponent } from '@shared/components/ui/carousel/carousel-testimonial/carousel-testimonial.component';
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
+import { SectionTestimonialComponent } from '@shared/components/ui/section/section-testimonial/section-testimonial.component';
 import { ChipModule } from 'primeng/chip';
 import { ImageModule } from 'primeng/image';
 import { map } from 'rxjs';
@@ -37,7 +37,7 @@ import { map } from 'rxjs';
 		BannerSmallComponent,
 		BannerLargeComponent,
 		CardServiceComponent,
-		CarouselTestimonialComponent,
+		SectionTestimonialComponent,
 	],
 	templateUrl: './home-page.component.html',
 	styleUrl: './home-page.component.scss',
