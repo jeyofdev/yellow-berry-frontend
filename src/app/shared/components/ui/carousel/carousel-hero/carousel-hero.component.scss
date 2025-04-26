@@ -2,7 +2,7 @@
   @apply h-[calc(100vh-184px)];
 
   .p-carousel-item {
-    @apply flex flex-col items-center h-[calc(100vh-184px)];
+    @apply flex flex-col items-center min-h-[calc(100vh-184px)];
 
     .p-image {
       @apply flex w-full;
