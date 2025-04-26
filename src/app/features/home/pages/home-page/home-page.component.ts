@@ -80,17 +80,7 @@ export class HomePageComponent {
 
 	public carouselBrandResponsiveOptions = [
 		{
-			breakpoint: '1400px',
-			numVisible: 6,
-			numScroll: 1,
-		},
-		{
 			breakpoint: '1280px',
-			numVisible: 5,
-			numScroll: 1,
-		},
-		{
-			breakpoint: '1100px',
 			numVisible: 4,
 			numScroll: 1,
 		},
