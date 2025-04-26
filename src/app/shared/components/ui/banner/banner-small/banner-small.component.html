@@ -1,20 +1,22 @@
 <div class="banner-box" [class]="'color-' + variantColor()">
-  <div class="relative flex items-center justify-between gap-x-4 w-full z-10">
+  <div
+    class="relative flex flex-col xl:flex-row items-center justify-between gap-x-4 w-full z-10"
+  >
     <p-image
       [src]="imgSrc()"
       [alt]="altSrc()"
-      class="flex-1 w-1/2 max-w-[280px]"
+      class="flex-1 w-full lg:w-1/2 max-w-[280px] min-w-[125px]"
     />
 
-    <div class="flex flex-col">
+    <div class="flex flex-col items-center py-4 lg:max-w-[280px]">
       <h3
-        class="text-[1.9375rem] text-gray-700 leading-[2.325rem] tracking-[0.03rem] font-quicksand font-bold mb-4"
+        class="text-[1.9375rem] text-gray-700 leading-[2.325rem] tracking-[0.03rem] font-quicksand font-bold text-center mb-4"
       >
         {{ title() }}
       </h3>
 
       <p
-        class="text-base text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-light mb-2"
+        class="text-base text-gray-500 leading-7 tracking-[0.03rem] font-poppins font-light text-center mb-2"
       >
         {{ subtitle() }}
       </p>
