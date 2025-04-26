@@ -8,13 +8,13 @@
   }
 
   &::before {
-    top: 187px;
+    bottom: -1px;
     left: -29px;
   }
 
   &::after {
     bottom: 0px;
-    left: 399px;
+    left: 99.7%;
     transform: rotate(90deg);
   }
 }
