@@ -8,7 +8,7 @@ import { SaveProductToCartRequest } from '@models/product-to-cart/save-product-t
 import { SuccessMessageResponse } from '@models/response/success-message-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
 import { Observable, switchMap } from 'rxjs';
-import { parseWeightStringToEnumKey } from '../utils/enum.utils';
+import { parseWeightStringToEnumKey } from '@utils/enum.utils';
 import { AuthTokenService } from './auth/auth-token.service';
 
 @Injectable({

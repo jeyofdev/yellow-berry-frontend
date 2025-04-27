@@ -40,6 +40,10 @@ export class ProductService {
 		return this._httpClient.get<SuccessResponse<ProductResponse[]>>(`${this._BASE_URL}/discount`);
 	}
 
+	public findLastNewProducts(): Observable<SuccessResponse<ProductResponse[]>> {
+		return this._httpClient.get<SuccessResponse<ProductResponse[]>>(`${this._BASE_URL}/last`);
+	}
+
 	public addOrRemoveProductToWishlist(
 		addOrRemoveProductToWishlistRequest: AddOrRemoveProductToWishlistRequest,
 	): Observable<SuccessResponse<ProductDetailsResponse>> {

@@ -1,5 +1,5 @@
 import { Component, InputSignal, booleanAttribute, input } from '@angular/core';
-import { DividerComponent } from '../../divider/divider.component';
+import { DividerComponent } from '@shared/components/ui/divider/divider.component';
 
 @Component({
 	selector: 'app-filter-box',
