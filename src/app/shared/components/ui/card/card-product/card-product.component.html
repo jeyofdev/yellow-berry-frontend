@@ -59,8 +59,9 @@
 
       <div class="flex justify-between">
         <app-price-discount
-          [price]="product().priceDetails.priceDiscount"
-          [priceDiscount]="product().priceDetails.price"
+          [price]="product().priceDetails.price"
+          [priceDiscount]="product().priceDetails.priceDiscount"
+          [discount]="product().priceDetails.discount"
         ></app-price-discount>
       </div>
     </div>

@@ -10,4 +10,5 @@ import { Component, InputSignal, input } from '@angular/core';
 export class PriceDiscountComponent {
 	public price: InputSignal<number> = input.required<number>();
 	public priceDiscount: InputSignal<number> = input.required<number>();
+	public discount: InputSignal<number> = input.required<number>();
 }

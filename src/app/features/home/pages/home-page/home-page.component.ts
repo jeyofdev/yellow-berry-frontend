@@ -104,7 +104,7 @@ export class HomePageComponent {
 	private _getProductList(): Signal<ProductResponse[]> {
 		return toSignal(
 			this._productService
-				.findAll()
+				.findTopProductsByDiscount()
 				.pipe(map((productResponse: SuccessResponse<ProductResponse[]>) => productResponse.result)),
 			{ initialValue: [] },
 		);

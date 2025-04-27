@@ -36,6 +36,10 @@ export class ProductService {
 		);
 	}
 
+	public findTopProductsByDiscount(): Observable<SuccessResponse<ProductResponse[]>> {
+		return this._httpClient.get<SuccessResponse<ProductResponse[]>>(`${this._BASE_URL}/discount`);
+	}
+
 	public addOrRemoveProductToWishlist(
 		addOrRemoveProductToWishlistRequest: AddOrRemoveProductToWishlistRequest,
 	): Observable<SuccessResponse<ProductDetailsResponse>> {
