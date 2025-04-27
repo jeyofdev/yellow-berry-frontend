@@ -15,3 +15,20 @@
     </div>
   </div>
 </app-layout-content>
+
+<app-layout-content
+  subtitle="Browse The Collection of Top Products."
+  pageTitleSecondary="Related"
+  pageTitleInfo="Product"
+  titleJustifyContent="justify-center"
+  childrenContainerMarginTop="mt-6"
+  containerMarginTop="mt-20"
+  containerMarginBottom="mb-12"
+>
+  <div
+    class="flex flex-col md:flex-row items-center md:items-start justify-center w-full overflow-hidden"
+  >
+    <app-carousel-product [items]="relatedProductList()" class="w-full">
+    </app-carousel-product>
+  </div>
+</app-layout-content>

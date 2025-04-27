@@ -9,4 +9,9 @@
   >
     {{ price() | currency : "EUR" }}
   </p>
+  <p
+    class="text-sm text-gray-500 leading-4 tracking-[0.03rem] font-poppins font-light mb-[3px]"
+  >
+    -{{ discount() / 100 | number : "1.2-2" | percent }}
+  </p>
 </div>

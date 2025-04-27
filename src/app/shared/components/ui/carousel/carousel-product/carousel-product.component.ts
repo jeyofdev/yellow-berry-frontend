@@ -1,9 +1,8 @@
 import { Component, InputSignal, OnInit, input } from '@angular/core';
 import { ProductResponse } from '@models/product/product-response.model';
-import { TeamMemberResponse } from '@models/team-member/team-member-response.model';
 import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { ImageModule } from 'primeng/image';
-import { CardProductComponent } from '../../card/card-product/card-product.component';
+import { CardProductComponent } from '@shared/components/ui/card/card-product/card-product.component';
 
 @Component({
 	selector: 'app-carousel-product',

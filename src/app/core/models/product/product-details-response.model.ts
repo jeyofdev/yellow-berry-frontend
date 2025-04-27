@@ -1,3 +1,5 @@
+import { CategoryResponse } from '@models/category/category-response.model';
+import { Category } from '@models/category/category.model';
 import { CommentResponse } from '@models/comment/comment-response.model';
 import { PriceDetailsFormat } from '@models/format/price-details-format.model';
 import { RatingDetailsFormat } from '@models/format/rating-details-format.model';
@@ -18,6 +20,7 @@ export class ProductDetailsResponse extends Product {
 		public reference: string,
 		public description: string,
 		public comments: SuccessListResponse<CommentResponse>,
+		public categories: SuccessListResponse<Category>,
 	) {
 		super(id, name, ratingDetails, priceDetails, stock);
 	}
