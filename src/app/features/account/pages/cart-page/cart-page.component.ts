@@ -2,7 +2,6 @@ import { Component, Signal, WritableSignal, inject, signal } from '@angular/core
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductResponse } from '@models/product/product-response.model';
 import { SuccessResponse } from '@models/response/success-response.model';
-
 import { CartComponentService } from '@services/components/cart-component.service';
 import { ProductService } from '@services/product.service';
 import { BreadcrumbComponent } from '@shared/components/ui/breadcrumb/breadcrumb.component';
@@ -12,6 +11,7 @@ import { CartTotalComponent } from '@shared/components/ui/cart/cart-total/cart-t
 import { HeaderComponent } from '@shared/components/ui/header/header/header.component';
 import { LayoutContentComponent } from '@shared/components/ui/layout/layout-content/layout-content.component';
 import { ListCartProductComponent } from '@shared/components/ui/list/list-cart-product/list-cart-product.component';
+import { ImageModule } from 'primeng/image';
 import { map } from 'rxjs';
 
 @Component({
@@ -24,6 +24,7 @@ import { map } from 'rxjs';
 		CartTotalComponent,
 		ButtonCtaLargeComponent,
 		CarouselProductComponent,
+		ImageModule,
 	],
 	templateUrl: './cart-page.component.html',
 	styleUrl: './cart-page.component.scss',

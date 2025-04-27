@@ -25,6 +25,7 @@
       </div>
     </div>
 
+    @if (productList().length) {
     <div class="w-full lg:flex-1">
       <app-list-cart-product
         [productList]="productList()"
@@ -37,6 +38,23 @@
         class="mt-4 block"
       ></app-button-cta-large>
     </div>
+    } @else {
+    <div class="flex flex-col items-center w-full">
+      <div class="w-full flex-col items-center">
+        <h5
+          class="text-2xl text-gray-700 leading-8 tracking-[0.03rem] font-poppins font-semibold mb-9 text-center"
+        >
+          Your Cart is empty.
+        </h5>
+      </div>
+      <p-image
+        src="images/not-found.svg"
+        alt="product not found"
+        class="-mt-20"
+      />
+    </div>
+
+    }
   </div>
 </app-layout-content>
 
