@@ -14,12 +14,15 @@
       </h2>
 
       <div class="flex flex-col gap-6">
-        @for (product of productList(); track $index) {
+        @if (productList().length) { @for (product of productList(); track
+        $index) {
         <app-card-product-cart
           [product]="product"
           (sendProductIdAndDeleteProduct)="removeFromCart($event)"
           (sendUpdatedQuantityProduct)="refreshCart()"
         ></app-card-product-cart>
+        } } @else {
+        <app-alert content="Your Cart is empty." severity="success"></app-alert>
         }
       </div>
 

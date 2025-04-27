@@ -7,6 +7,7 @@ import { CartComponentService } from '@services/components/cart-component.servic
 import { ButtonCtaLargeComponent } from '@shared/components/ui/buttons/button-cta-large/button-cta-large.component';
 import { CardProductCartComponent } from '@shared/components/ui/card/card-product-cart/card-product-cart.component';
 import { CartTotalComponent } from '@shared/components/ui/cart/cart-total/cart-total.component';
+import { AlertComponent } from '@shared/components/ui/messages/alert/alert.component';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { DrawerModule } from 'primeng/drawer';
@@ -22,6 +23,7 @@ import { tap } from 'rxjs';
 		CardProductCartComponent,
 		CartTotalComponent,
 		ButtonCtaLargeComponent,
+		AlertComponent,
 	],
 	templateUrl: './drawer-cart.component.html',
 	styleUrl: './drawer-cart.component.scss',
